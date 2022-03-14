@@ -1,0 +1,47 @@
+image: atlassian/default-image:3
+
+definitions:
+  steps:
+    - step: &deploy
+        name: deploy
+        script:
+          - pipe: atlassian/ssh-run:0.2.8
+            variables:
+              SSH_USER: $USER
+              SERVER: $SERVER
+              COMMAND:
+                >-
+                cd /var/www/das &&
+                git fetch --prune &&
+                git checkout $BITBUCKET_BRANCH &&
+                git pull &&
+                docker-compose exec -T app composer install &&
+                docker-compose exec -T app php artisan down &&
+                docker-compose exec -T app php artisan cache:clear &&
+                docker-compose exec -T app php artisan config:cache &&
+                docker-compose exec -T app php artisan route:cache &&
+                docker-compose exec -T app php artisan migrate &&
+                docker-compose exec -T app php artisan up
+pipelines:
+  custom:
+    deploy-to-dev:
+      - step:
+          <<: *deploy
+          deployment: development
+          name: deploy to development
+  branches:
+    develop:
+      - step:
+          <<: *deploy
+          deployment: development
+          name: deploy to development
+    master:
+      - step:
+          <<: *deploy
+          deployment: stage
+          name: deploy to stage server
+    '{release/*}':
+      - step:
+          <<: *deploy
+          deployment: test
+          name: deploy release to test

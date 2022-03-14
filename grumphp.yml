@@ -1,0 +1,28 @@
+grumphp:
+  process_timeout: null
+  tasks:
+    git_commit_message:
+      enforce_capitalized_subject: false
+      max_subject_width: 100
+      type_scope_conventions:
+        types:
+          - build
+          - ci
+          - chore
+          - docs
+          - feat
+          - fix
+          - perf
+          - refactor
+          - revert
+          - style
+          - test
+        scopes:
+          - DAS-\d+
+    git_blacklist:
+      keywords:
+        - 'dump('
+        - 'die('
+    phpcsfixer:
+      config: ./.php_cs.php
+      verbose: true
