@@ -11,7 +11,7 @@ definitions:
               SERVER: $SERVER
               COMMAND:
                 >-
-                cd /var/www/das &&
+                cd /var/www/dfs/das &&
                 git fetch --prune &&
                 git checkout $BITBUCKET_BRANCH &&
                 git pull &&
