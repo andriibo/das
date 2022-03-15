@@ -34,14 +34,14 @@ pipelines:
       - step:
           <<: *deploy
           deployment: development
-          name: deploy to development
+          name: deploy to dev server
     master:
       - step:
           <<: *deploy
-          deployment: stage
-          name: deploy to stage server
+          deployment: development
+          name: deploy to dev server
     '{release/*}':
       - step:
           <<: *deploy
-          deployment: test
-          name: deploy release to test
+          deployment: development
+          name: deploy to dev server
