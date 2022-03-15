@@ -21,7 +21,8 @@ definitions:
                 docker-compose exec -T app php artisan config:cache &&
                 docker-compose exec -T app php artisan route:cache &&
                 docker-compose exec -T app php artisan migrate &&
-                docker-compose exec -T app php artisan up
+                docker-compose exec -T app php artisan up &&
+                docker-compose exec -T app php artisan test
 pipelines:
   custom:
     deploy-to-dev:
