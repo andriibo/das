@@ -4,7 +4,7 @@ namespace App\Repositories;
 
 use App\Models\CricketTeam;
 
-class CricketTeamReapository
+class CricketTeamRepository
 {
     public function updateOrCreate(array $attributes, array $values = []): CricketTeam
     {
