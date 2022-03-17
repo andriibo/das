@@ -5,7 +5,7 @@ namespace App\Services;
 use App\Clients\GoalserveClient;
 use App\Enums\LeagueSportIdEnum;
 use App\Mappers\CricketTeamMapper;
-use App\Repositories\CricketTeamReapository;
+use App\Repositories\CricketTeamRepository;
 use App\Repositories\LeagueRepository;
 
 class CricketService
@@ -13,7 +13,7 @@ class CricketService
     public function __construct(
         private readonly GoalserveClient $goalserveClient,
         private readonly LeagueRepository $leagueRepository,
-        private readonly CricketTeamReapository $cricketTeamReapository,
+        private readonly CricketTeamRepository $cricketTeamRepository,
         private readonly CricketTeamMapper $cricketTeamMapper
     ) {
     }
@@ -27,7 +27,7 @@ class CricketService
                 $teams = $this->goalserveClient->getCricketTeams($leagueId);
                 foreach ($teams as $team) {
                     $cricketTeamDto = $this->cricketTeamMapper->map($team, $leagueId);
-                    $cricketTeam = $this->cricketTeamReapository->updateOrCreate([
+                    $cricketTeam = $this->cricketTeamRepository->updateOrCreate([
                         'feed_id' => $cricketTeamDto->feedId,
                         'league_id' => $cricketTeamDto->leagueId,
                         'name' => $cricketTeamDto->name,
