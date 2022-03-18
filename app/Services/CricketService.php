@@ -67,11 +67,7 @@ class CricketService
                         if ($cricketPlayer) {
                             CricketPlayerSavedEvent::dispatch($cricketPlayer);
                         }
-
-                        exit;
                     }
-
-                    exit;
                 }
             }
         }
