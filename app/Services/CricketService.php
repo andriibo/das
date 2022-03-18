@@ -32,7 +32,7 @@ class CricketService
         }
     }
 
-    private function parseTeam(array $data, int $leagueId)
+    private function parseTeam(array $data, int $leagueId): void
     {
         $cricketTeamDto = $this->cricketTeamMapper->map($data, $leagueId);
         $cricketTeam = $this->cricketTeamRepository->updateOrCreate([
