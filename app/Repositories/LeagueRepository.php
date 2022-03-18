@@ -13,7 +13,7 @@ class LeagueRepository
     {
         return League::query()
             ->where('sport_id', $sportIdEnum)
-            ->where('is_enabled', LeagueIsEnabledEnum::IsEnabled)
+            ->where('is_enabled', LeagueIsEnabledEnum::isEnabled)
             ->get()
         ;
     }

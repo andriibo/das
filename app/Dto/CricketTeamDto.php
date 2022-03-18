@@ -12,8 +12,8 @@ class CricketTeamDto
     public string $name;
     public string $nickname;
     public string $alias;
-    public int $countryId;
-    public int $logoId;
+    public ?int $countryId;
+    public ?string $logo;
     public CricketTeamFeedTypeEnum $feedType;
 
     /**

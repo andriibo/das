@@ -2,9 +2,11 @@
 
 namespace App\Console\Commands;
 
+use App\Events\CricketTeamSavedEvent;
 use App\Services\CricketService;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Event;
 
 class CricketTeamCommand extends Command
 {
@@ -29,6 +31,9 @@ class CricketTeamCommand extends Command
      */
     public function handle(CricketService $cricketService)
     {
+        Event::listen(function (CricketTeamSavedEvent $event) {
+            $this->info('Team: ' . $event->cricketTeam->name . ', Info added!');
+        });
         $this->info(Carbon::now() . ": Command {$this->signature} started");
         $cricketService->parseTeams();
         $this->info(Carbon::now() . ": Command {$this->signature} finished");

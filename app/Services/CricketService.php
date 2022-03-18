@@ -5,9 +5,11 @@ namespace App\Services;
 use App\Clients\GoalserveClient;
 use App\Enums\LeagueSportIdEnum;
 use App\Events\CricketPlayerSavedEvent;
+use App\Events\CricketTeamSavedEvent;
 use App\Mappers\CricketPlayerMapper;
 use App\Mappers\CricketTeamMapper;
 use App\Models\CricketPlayer;
+use App\Models\CricketTeam;
 use App\Repositories\CricketPlayerRepository;
 use App\Repositories\CricketTeamRepository;
 use App\Repositories\LeagueRepository;
@@ -29,25 +31,16 @@ class CricketService
 
     public function parseTeams(): void
     {
-        $leagues = $this->leagueRepository->getListBySportId(LeagueSportIdEnum::Cricket);
+        $leagues = $this->leagueRepository->getListBySportId(LeagueSportIdEnum::cricket);
         foreach ($leagues as $league) {
             if (isset($league->params['league_id'])) {
                 $leagueId = $league->params['league_id'];
                 $teams = $this->goalserveClient->getCricketTeams($leagueId);
                 foreach ($teams as $team) {
-                    $cricketTeamDto = $this->cricketTeamMapper->map($team, $leagueId);
-                    $cricketTeam = $this->cricketTeamRepository->updateOrCreate([
-                        'feed_id' => $cricketTeamDto->feedId,
-                        'league_id' => $cricketTeamDto->leagueId,
-                        'name' => $cricketTeamDto->name,
-                    ], [
-                        'nickname' => $cricketTeamDto->nickname,
-                        'alias' => $cricketTeamDto->alias,
-                        'country_id' => $cricketTeamDto->countryId,
-                        'logo_id' => $cricketTeamDto->logoId,
-                        'feed_type' => $cricketTeamDto->feedType->name,
-                    ]);
-                    echo 'Team: ' . $cricketTeam->name . ', Info added!' . PHP_EOL;
+                    $cricketTeam = $this->parseTeam($team, $league->id);
+                    if ($cricketTeam) {
+                        CricketTeamSavedEvent::dispatch($cricketTeam);
+                    }
                 }
             }
         }
@@ -55,7 +48,7 @@ class CricketService
 
     public function parsePlayers(): void
     {
-        $leagues = $this->leagueRepository->getListBySportId(LeagueSportIdEnum::Cricket);
+        $leagues = $this->leagueRepository->getListBySportId(LeagueSportIdEnum::cricket);
         foreach ($leagues as $league) {
             if (isset($league->params['league_id'])) {
                 $leagueId = $league->params['league_id'];
@@ -85,7 +78,7 @@ class CricketService
             'first_name' => $cricketPlayerDto->firstName,
         ], [
             'last_name' => $cricketPlayerDto->lastName,
-            'sport_id' => $cricketPlayerDto->sportId->value,
+            'sport_id' => $cricketPlayerDto->sport->name,
             'injury_status' => $cricketPlayerDto->injuryStatus->name,
             'salary' => $cricketPlayerDto->salary,
             'auto_salary' => $cricketPlayerDto->autoSalary,
@@ -95,18 +88,35 @@ class CricketService
 
         if ($cricketPlayer && $data['image']) {
             $storage = $this->cricketPlayerPhotoStorage->storage();
-            if ($cricketPlayer->image_name && $storage->exists($cricketPlayer->image_name)) {
-                $storage->delete($cricketPlayer->image_name);
+            if ($cricketPlayer->photo && $storage->exists($cricketPlayer->photo)) {
+                $storage->delete($cricketPlayer->photo);
             }
             $name = Str::random(40);
             $content = base64_decode($data['image']);
-            $imageName = $name . 'jpg';
-            if ($storage->put($imageName, $content)) {
-                $cricketPlayer->image_name = $imageName;
+            $photo = $name . 'jpg';
+            if ($storage->put($photo, $content)) {
+                $cricketPlayer->photo = $photo;
                 $cricketPlayer->save();
             }
         }
 
         return $cricketPlayer;
+    }
+
+    private function parseTeam(array $data, int $leagueId): CricketTeam
+    {
+        $cricketTeamDto = $this->cricketTeamMapper->map($data, $leagueId);
+
+        return $this->cricketTeamRepository->updateOrCreate([
+            'feed_id' => $cricketTeamDto->feedId,
+            'league_id' => $cricketTeamDto->leagueId,
+            'name' => $cricketTeamDto->name,
+        ], [
+            'nickname' => $cricketTeamDto->nickname,
+            'alias' => $cricketTeamDto->alias,
+            'country_id' => $cricketTeamDto->countryId,
+            'logo' => $cricketTeamDto->logo,
+            'feed_type' => $cricketTeamDto->feedType->name,
+        ]);
     }
 }
