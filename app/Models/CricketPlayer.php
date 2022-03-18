@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Barryvdh\LaravelIdeHelper\Eloquent;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -14,7 +15,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int         $sport_id
  * @property string      $first_name
  * @property string      $last_name
- * @property int         $photo_id
+ * @property null|string $image_name
  * @property string      $injury_status
  * @property null|string $salary
  * @property null|string $auto_salary
@@ -29,6 +30,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|CricketPlayer whereFeedType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CricketPlayer whereFirstName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CricketPlayer whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CricketPlayer whereImageName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CricketPlayer whereInjuryStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CricketPlayer whereLastName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CricketPlayer wherePhotoId($value)
@@ -36,7 +38,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|CricketPlayer whereSportId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CricketPlayer whereTotalFantasyPoints($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CricketPlayer whereTotalFantasyPointsPerGame($value)
- * @mixin \Eloquent
+ * @mixin Eloquent
  */
 class CricketPlayer extends Model
 {
@@ -52,7 +54,7 @@ class CricketPlayer extends Model
         'sport_id',
         'first_name',
         'last_name',
-        'photo_id',
+        'image_name',
         'injury_status',
         'salary',
         'auto_salary',
