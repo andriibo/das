@@ -4,7 +4,7 @@ namespace App\Enums;
 
 enum LeagueIsEnabledEnum: int
 {
-    case IsNotEnabled = 0;
+    case isNotEnabled = 0;
 
-    case IsEnabled = 1;
+    case isEnabled = 1;
 }

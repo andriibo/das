@@ -21,7 +21,7 @@ class CricketService
 
     public function parseTeams(): void
     {
-        $leagues = $this->leagueRepository->getListBySportId(LeagueSportIdEnum::Cricket);
+        $leagues = $this->leagueRepository->getListBySportId(LeagueSportIdEnum::cricket);
         foreach ($leagues as $league) {
             if (isset($league->params['league_id'])) {
                 $leagueId = $league->params['league_id'];

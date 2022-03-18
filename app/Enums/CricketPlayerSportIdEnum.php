@@ -4,9 +4,9 @@ namespace App\Enums;
 
 enum CricketPlayerSportIdEnum: int
 {
-    case Soccer = 1;
+    case soccer = 1;
 
-    case Football = 2;
+    case football = 2;
 
-    case Cricket = 3;
+    case cricket = 3;
 }
