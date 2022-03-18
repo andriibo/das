@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Clients\GoalserveClient;
 use App\Enums\LeagueSportIdEnum;
 use App\Mappers\CricketTeamMapper;
+use App\Models\CricketTeam;
 use App\Repositories\CricketTeamRepository;
 use App\Repositories\LeagueRepository;
 
@@ -26,16 +27,18 @@ class CricketService
                 $leagueId = $league->params['league_id'];
                 $teams = $this->goalserveClient->getCricketTeams($leagueId);
                 foreach ($teams as $team) {
-                    $this->parseTeam($team, $leagueId);
+                    $cricketTeam = $this->parseTeam($team, $leagueId);
+                    echo 'Team: ' . $cricketTeam->name . ', Info added!' . PHP_EOL;
                 }
             }
         }
     }
 
-    private function parseTeam(array $data, int $leagueId): void
+    private function parseTeam(array $data, int $leagueId): CricketTeam
     {
         $cricketTeamDto = $this->cricketTeamMapper->map($data, $leagueId);
-        $cricketTeam = $this->cricketTeamRepository->updateOrCreate([
+
+        return $this->cricketTeamRepository->updateOrCreate([
             'feed_id' => $cricketTeamDto->feedId,
             'league_id' => $cricketTeamDto->leagueId,
             'name' => $cricketTeamDto->name,
@@ -46,6 +49,5 @@ class CricketService
             'logo_id' => $cricketTeamDto->logoId,
             'feed_type' => $cricketTeamDto->feedType->name,
         ]);
-        echo 'Team: ' . $cricketTeam->name . ', Info added!' . PHP_EOL;
     }
 }
