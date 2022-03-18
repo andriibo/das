@@ -28,7 +28,7 @@ class CricketService
                 $leagueId = $league->params['league_id'];
                 $teams = $this->goalserveClient->getCricketTeams($leagueId);
                 foreach ($teams as $team) {
-                    $cricketTeam = $this->parseTeam($team, $leagueId);
+                    $cricketTeam = $this->parseTeam($team, $league->id);
                     if ($cricketTeam) {
                         CricketTeamSavedEvent::dispatch($cricketTeam);
                     }
