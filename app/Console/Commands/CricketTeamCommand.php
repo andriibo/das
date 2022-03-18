@@ -32,7 +32,7 @@ class CricketTeamCommand extends Command
     public function handle(CricketService $cricketService)
     {
         Event::listen(function (CricketTeamSavedEvent $event) {
-            $this->info('Team: ' . $event->cricketTeam->name . ', Info added!');
+            $this->info("Team: {$event->cricketTeam->name}, Info added!");
         });
         $this->info(Carbon::now() . ": Command {$this->signature} started");
         $cricketService->parseTeams();
