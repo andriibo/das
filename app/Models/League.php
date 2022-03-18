@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Barryvdh\LaravelIdeHelper\Eloquent;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -34,7 +35,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|League newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|League newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|League query()
- * @mixin \Eloquent
+ * @mixin Eloquent
  */
 class League extends Model
 {
