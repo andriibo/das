@@ -14,7 +14,7 @@ class CricketPlayerDto
     public CricketPlayerSportEnum $sport;
     public string $firstName;
     public string $lastName;
-    public ?string $imageName;
+    public ?string $photo;
     public CricketPlayerInjuryStatusEnum $injuryStatus;
     public float $salary;
     public float $autoSalary;
