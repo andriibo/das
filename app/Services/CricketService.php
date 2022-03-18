@@ -18,7 +18,7 @@ class CricketService
     ) {
     }
 
-    public function parseTeams()
+    public function parseTeams(): void
     {
         $leagues = $this->leagueRepository->getListBySportId(LeagueSportIdEnum::Cricket);
         foreach ($leagues as $league) {
@@ -26,21 +26,26 @@ class CricketService
                 $leagueId = $league->params['league_id'];
                 $teams = $this->goalserveClient->getCricketTeams($leagueId);
                 foreach ($teams as $team) {
-                    $cricketTeamDto = $this->cricketTeamMapper->map($team, $leagueId);
-                    $cricketTeam = $this->cricketTeamRepository->updateOrCreate([
-                        'feed_id' => $cricketTeamDto->feedId,
-                        'league_id' => $cricketTeamDto->leagueId,
-                        'name' => $cricketTeamDto->name,
-                    ], [
-                        'nickname' => $cricketTeamDto->nickname,
-                        'alias' => $cricketTeamDto->alias,
-                        'country_id' => $cricketTeamDto->countryId,
-                        'logo_id' => $cricketTeamDto->logoId,
-                        'feed_type' => $cricketTeamDto->feedType->name,
-                    ]);
-                    echo 'Team: ' . $cricketTeam->name . ', Info added!' . PHP_EOL;
+                    $this->parseTeam($team, $leagueId);
                 }
             }
         }
+    }
+
+    private function parseTeam(array $data, int $leagueId)
+    {
+        $cricketTeamDto = $this->cricketTeamMapper->map($data, $leagueId);
+        $cricketTeam = $this->cricketTeamRepository->updateOrCreate([
+            'feed_id' => $cricketTeamDto->feedId,
+            'league_id' => $cricketTeamDto->leagueId,
+            'name' => $cricketTeamDto->name,
+        ], [
+            'nickname' => $cricketTeamDto->nickname,
+            'alias' => $cricketTeamDto->alias,
+            'country_id' => $cricketTeamDto->countryId,
+            'logo_id' => $cricketTeamDto->logoId,
+            'feed_type' => $cricketTeamDto->feedType->name,
+        ]);
+        echo 'Team: ' . $cricketTeam->name . ', Info added!' . PHP_EOL;
     }
 }
