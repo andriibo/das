@@ -11,10 +11,10 @@ use Illuminate\Database\Eloquent\Model;
  * @property int         $id
  * @property string      $feed_type
  * @property string      $feed_id
- * @property int         $sport_id
+ * @property string      $sport
  * @property string      $first_name
  * @property string      $last_name
- * @property int         $photo_id
+ * @property null|string $photo
  * @property string      $injury_status
  * @property null|string $salary
  * @property null|string $auto_salary
@@ -31,9 +31,9 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|CricketPlayer whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CricketPlayer whereInjuryStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CricketPlayer whereLastName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|CricketPlayer wherePhotoId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CricketPlayer wherePhoto($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CricketPlayer whereSalary($value)
- * @method static \Illuminate\Database\Eloquent\Builder|CricketPlayer whereSportId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CricketPlayer whereSport($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CricketPlayer whereTotalFantasyPoints($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CricketPlayer whereTotalFantasyPointsPerGame($value)
  * @mixin \Eloquent
@@ -49,10 +49,10 @@ class CricketPlayer extends Model
     protected $fillable = [
         'feed_type',
         'feed_id',
-        'sport_id',
+        'sport',
         'first_name',
         'last_name',
-        'photo_id',
+        'photo',
         'injury_status',
         'salary',
         'auto_salary',

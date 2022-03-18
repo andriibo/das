@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Clients\GoalserveClient;
 use App\Enums\LeagueSportIdEnum;
+use App\Events\CricketTeamSavedEvent;
 use App\Mappers\CricketTeamMapper;
 use App\Models\CricketTeam;
 use App\Repositories\CricketTeamRepository;
@@ -28,7 +29,9 @@ class CricketService
                 $teams = $this->goalserveClient->getCricketTeams($leagueId);
                 foreach ($teams as $team) {
                     $cricketTeam = $this->parseTeam($team, $leagueId);
-                    echo 'Team: ' . $cricketTeam->name . ', Info added!' . PHP_EOL;
+                    if ($cricketTeam) {
+                        CricketTeamSavedEvent::dispatch($cricketTeam);
+                    }
                 }
             }
         }
@@ -46,7 +49,7 @@ class CricketService
             'nickname' => $cricketTeamDto->nickname,
             'alias' => $cricketTeamDto->alias,
             'country_id' => $cricketTeamDto->countryId,
-            'logo_id' => $cricketTeamDto->logoId,
+            'logo' => $cricketTeamDto->logo,
             'feed_type' => $cricketTeamDto->feedType->name,
         ]);
     }
