@@ -5,19 +5,22 @@ namespace App\Models;
 use Barryvdh\LaravelIdeHelper\Eloquent;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
  * App\Models\CricketTeam.
  *
- * @property int         $id
- * @property string      $feed_id
- * @property int         $league_id
- * @property string      $name
- * @property string      $nickname
- * @property string      $alias
- * @property int         $country_id
- * @property null|string $logo
- * @property string      $feed_type
+ * @property int                                                      $id
+ * @property string                                                   $feed_id
+ * @property int                                                      $league_id
+ * @property string                                                   $name
+ * @property string                                                   $nickname
+ * @property string                                                   $alias
+ * @property int                                                      $country_id
+ * @property null|string                                              $logo
+ * @property string                                                   $feed_type
+ * @property CricketPlayer[]|\Illuminate\Database\Eloquent\Collection $cricketPlayers
+ * @property null|int                                                 $cricket_players_count
  *
  * @method static \Illuminate\Database\Eloquent\Builder|CricketTeam whereAlias($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CricketTeam whereCountryId($value)
@@ -25,7 +28,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|CricketTeam whereFeedType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CricketTeam whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CricketTeam whereLeagueId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|CricketTeam whereLogoId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|CricketTeam whereLogo($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CricketTeam whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CricketTeam whereNickname($value)
  * @method static \Illuminate\Database\Eloquent\Builder|CricketTeam newModelQuery()
@@ -48,7 +51,12 @@ class CricketTeam extends Model
         'nickname',
         'alias',
         'country_id',
-        'logo_id',
+        'logo',
         'feed_type',
     ];
+
+    public function cricketPlayers(): BelongsToMany
+    {
+        return $this->belongsToMany(CricketPlayer::class, 'cricket_team_player');
+    }
 }

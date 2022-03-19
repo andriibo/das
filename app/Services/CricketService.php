@@ -40,6 +40,14 @@ class CricketService
                     $cricketTeam = $this->parseTeam($team, $league->id);
                     if ($cricketTeam) {
                         CricketTeamSavedEvent::dispatch($cricketTeam);
+                        foreach ($team['player'] as $player) {
+                            $playerId = $player['name'];
+                            $cricketPlayer = $this->parsePlayer($playerId);
+                            if ($cricketPlayer) {
+                                CricketPlayerSavedEvent::dispatch($cricketPlayer);
+                                $cricketTeam->cricketPlayers()->attach($cricketPlayer->id);
+                            }
+                        }
                     }
                 }
             }
@@ -75,7 +83,8 @@ class CricketService
         $cricketPlayerDto = $this->cricketPlayerMapper->map($data);
         $cricketPlayer = $this->cricketPlayerRepository->updateOrCreate([
             'feed_id' => $cricketPlayerDto->feedId,
-            'first_name' => $cricketPlayerDto->firstName,
+            'feed_type' => $cricketPlayerDto->feedType,
+            'sport' => $cricketPlayerDto->sport->name,
         ], [
             'last_name' => $cricketPlayerDto->lastName,
             'sport_id' => $cricketPlayerDto->sport->name,
