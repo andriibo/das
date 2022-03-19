@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Barryvdh\LaravelIdeHelper\Eloquent;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -22,18 +23,18 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @property CricketPlayer[]|\Illuminate\Database\Eloquent\Collection $cricketPlayers
  * @property null|int                                                 $cricket_players_count
  *
- * @method static \Illuminate\Database\Eloquent\Builder|CricketTeam whereAlias($value)
- * @method static \Illuminate\Database\Eloquent\Builder|CricketTeam whereCountryId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|CricketTeam whereFeedId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|CricketTeam whereFeedType($value)
- * @method static \Illuminate\Database\Eloquent\Builder|CricketTeam whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|CricketTeam whereLeagueId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|CricketTeam whereLogo($value)
- * @method static \Illuminate\Database\Eloquent\Builder|CricketTeam whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|CricketTeam whereNickname($value)
- * @method static \Illuminate\Database\Eloquent\Builder|CricketTeam newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|CricketTeam newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|CricketTeam query()
+ * @method static Builder|CricketTeam whereAlias($value)
+ * @method static Builder|CricketTeam whereCountryId($value)
+ * @method static Builder|CricketTeam whereFeedId($value)
+ * @method static Builder|CricketTeam whereFeedType($value)
+ * @method static Builder|CricketTeam whereId($value)
+ * @method static Builder|CricketTeam whereLeagueId($value)
+ * @method static Builder|CricketTeam whereLogo($value)
+ * @method static Builder|CricketTeam whereName($value)
+ * @method static Builder|CricketTeam whereNickname($value)
+ * @method static Builder|CricketTeam newModelQuery()
+ * @method static Builder|CricketTeam newQuery()
+ * @method static Builder|CricketTeam query()
  * @mixin Eloquent
  */
 class CricketTeam extends Model
