@@ -9,6 +9,9 @@ use Illuminate\Support\Collection;
 
 class LeagueRepository
 {
+    /**
+     * @return Collection|League[]
+     */
     public function getListBySportId(LeagueSportIdEnum $sportIdEnum): Collection
     {
         return League::query()

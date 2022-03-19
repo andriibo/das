@@ -58,16 +58,11 @@ class CricketService
     {
         $leagues = $this->leagueRepository->getListBySportId(LeagueSportIdEnum::cricket);
         foreach ($leagues as $league) {
-            if (isset($league->params['league_id'])) {
-                $leagueId = $league->params['league_id'];
-                $teams = $this->goalserveClient->getCricketTeams($leagueId);
-                foreach ($teams as $team) {
-                    foreach ($team['player'] as $player) {
-                        $playerId = $player['name'];
-                        $cricketPlayer = $this->parsePlayer($playerId);
-                        if ($cricketPlayer) {
-                            CricketPlayerSavedEvent::dispatch($cricketPlayer);
-                        }
+            foreach ($league->cricketTeams as $cricketTeam) {
+                foreach ($cricketTeam->cricketPlayers as $cricketPlayer) {
+                    $cricketPlayer = $this->parsePlayer($cricketPlayer->feed_id);
+                    if ($cricketPlayer) {
+                        CricketPlayerSavedEvent::dispatch($cricketPlayer);
                     }
                 }
             }
@@ -83,9 +78,10 @@ class CricketService
         $cricketPlayerDto = $this->cricketPlayerMapper->map($data);
         $cricketPlayer = $this->cricketPlayerRepository->updateOrCreate([
             'feed_id' => $cricketPlayerDto->feedId,
-            'feed_type' => $cricketPlayerDto->feedType,
+            'feed_type' => $cricketPlayerDto->feedType->name,
             'sport' => $cricketPlayerDto->sport->name,
         ], [
+            'first_name' => $cricketPlayerDto->firstName,
             'last_name' => $cricketPlayerDto->lastName,
             'sport_id' => $cricketPlayerDto->sport->name,
             'injury_status' => $cricketPlayerDto->injuryStatus->name,
@@ -119,13 +115,13 @@ class CricketService
         return $this->cricketTeamRepository->updateOrCreate([
             'feed_id' => $cricketTeamDto->feedId,
             'league_id' => $cricketTeamDto->leagueId,
-            'name' => $cricketTeamDto->name,
+            'feed_type' => $cricketTeamDto->feedType->name,
         ], [
+            'name' => $cricketTeamDto->name,
             'nickname' => $cricketTeamDto->nickname,
             'alias' => $cricketTeamDto->alias,
             'country_id' => $cricketTeamDto->countryId,
             'logo' => $cricketTeamDto->logo,
-            'feed_type' => $cricketTeamDto->feedType->name,
         ]);
     }
 }
