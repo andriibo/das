@@ -27,7 +27,7 @@ class CricketGoalserveService
     /**
      * @throws CricketGoalserveServiceException
      */
-    public function getGoalserveCricketPlayer(int $playerId): ?array
+    public function getGoalserveCricketPlayer(int $playerId): array
     {
         try {
             return $this->goalserveClient->getCricketPlayer($playerId);

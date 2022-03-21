@@ -40,7 +40,7 @@ class CricketPlayerCommand extends Command
             foreach ($cricketTeam->cricketPlayers as $cricketPlayer) {
                 try {
                     $data = $cricketService->getGoalserveCricketPlayer($cricketPlayer->feed_id);
-                    if ($data) {
+                    if (!empty($data)) {
                         $cricketPlayerDto = $cricketPlayerMapper->map($data);
                         $cricketPlayer = $cricketPlayerService->storeCricketPlayer($cricketPlayerDto);
                         if ($cricketPlayer) {

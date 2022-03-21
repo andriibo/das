@@ -53,11 +53,6 @@ return [
             'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
             'throw' => false,
         ],
-
-        'cricket-player-photos' => [
-            'driver' => 'local',
-            'root' => storage_path('app/cricket/player/photos'),
-        ],
     ],
 
     /*
