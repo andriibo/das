@@ -2,9 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Mappers\CricketPlayerMapper;
 use App\Services\CricketGoalserveService;
-use App\Services\CricketPlayerService;
 use App\Services\CricketTeamService;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
@@ -30,9 +28,7 @@ class CricketPlayerCommand extends Command
      */
     public function handle(
         CricketGoalserveService $cricketService,
-        CricketTeamService $cricketTeamService,
-        CricketPlayerService $cricketPlayerService,
-        CricketPlayerMapper $cricketPlayerMapper
+        CricketTeamService $cricketTeamService
     ) {
         $this->info(Carbon::now() . ": Command {$this->signature} started");
         $cricketTeams = $cricketTeamService->getCricketTeams();
