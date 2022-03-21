@@ -2,11 +2,12 @@
 
 namespace App\Console\Commands;
 
-use App\Events\CricketPlayerSavedEvent;
-use App\Services\CricketService;
+use App\Mappers\CricketPlayerMapper;
+use App\Services\CricketGoalserveService;
+use App\Services\CricketPlayerService;
+use App\Services\CricketTeamService;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Event;
 
 class CricketPlayerCommand extends Command
 {
@@ -27,13 +28,32 @@ class CricketPlayerCommand extends Command
     /**
      * Execute the console command.
      */
-    public function handle(CricketService $cricketService)
-    {
-        Event::listen(function (CricketPlayerSavedEvent $event) {
-            $this->info("Player: {$event->cricketPlayer->first_name}, Info added!");
-        });
+    public function handle(
+        CricketGoalserveService $cricketService,
+        CricketTeamService $cricketTeamService,
+        CricketPlayerService $cricketPlayerService,
+        CricketPlayerMapper $cricketPlayerMapper
+    ) {
         $this->info(Carbon::now() . ": Command {$this->signature} started");
-        $cricketService->parsePlayers();
+        $cricketTeams = $cricketTeamService->getCricketTeams();
+        foreach ($cricketTeams as $cricketTeam) {
+            foreach ($cricketTeam->cricketPlayers as $cricketPlayer) {
+                try {
+                    $data = $cricketService->getGoalserveCricketPlayer($cricketPlayer->feed_id);
+                    if ($data) {
+                        $cricketPlayerDto = $cricketPlayerMapper->map($data);
+                        $cricketPlayer = $cricketPlayerService->storeCricketPlayer($cricketPlayerDto);
+                        if ($cricketPlayer) {
+                            $this->info("Player: {$cricketPlayer->first_name}, Info added!");
+                        }
+                    } else {
+                        $this->error("No data for player with feed_id {$cricketPlayer->feed_id}");
+                    }
+                } catch (\Throwable $exception) {
+                    $this->error($exception->getMessage());
+                }
+            }
+        }
         $this->info(Carbon::now() . ": Command {$this->signature} finished");
     }
 }

@@ -5,7 +5,6 @@ namespace App\Clients;
 use App\Exceptions\GoalserveClientException;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
-use Illuminate\Support\Facades\Log;
 
 class GoalserveClient
 {
@@ -19,7 +18,7 @@ class GoalserveClient
         $this->apiKey = config('goalserve.api_key');
     }
 
-    public function getCricketTeams(int $leagueId): array
+    public function getCricketLeague(int $leagueId): array
     {
         $endpoint = "{$this->apiUrl}/getfeed/{$this->apiKey}/cricketfixtures/intl/{$leagueId}_squads?json=1";
 
@@ -28,10 +27,10 @@ class GoalserveClient
             $data = json_decode($response->getBody()->getContents(), true);
 
             if (json_last_error() !== JSON_ERROR_NONE) {
-                Log::error("League ID: {$leagueId}. Can't parse json - " . json_last_error_msg());
+                throw new GoalserveClientException('Can\'t parse json - ' . json_last_error_msg());
             }
 
-            return $data['squads']['category']['team'] ?? [];
+            return $data;
         } catch (ClientException $clientException) {
             throw new GoalserveClientException($clientException->getMessage(), $clientException->getCode());
         }
@@ -46,7 +45,7 @@ class GoalserveClient
             $data = json_decode($response->getBody()->getContents(), true);
 
             if (json_last_error() !== JSON_ERROR_NONE) {
-                Log::error("Player ID: {$playerId}. Can't parse json - " . json_last_error_msg());
+                throw new GoalserveClientException('Can\'t parse json - ' . json_last_error_msg());
             }
 
             return $data['players']['player'] ?? null;
