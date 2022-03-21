@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Barryvdh\LaravelIdeHelper\Eloquent;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -11,19 +12,19 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 /**
  * App\Models\League.
  *
- * @property int                                                                $id
- * @property string                                                             $alias
- * @property string                                                             $name
- * @property string                                                             $season
- * @property int                                                                $sport_id
- * @property int                                                                $is_enabled
- * @property string                                                             $date_updated
- * @property int                                                                $order
- * @property int                                                                $config_id
- * @property null|array                                                         $params
- * @property null|int                                                           $recently_enabled
- * @property \App\Models\CricketTeam[]|\Illuminate\Database\Eloquent\Collection $cricketTeams
- * @property null|int                                                           $cricket_teams_count
+ * @property int                      $id
+ * @property string                   $alias
+ * @property string                   $name
+ * @property string                   $season
+ * @property int                      $sport_id
+ * @property int                      $is_enabled
+ * @property string                   $date_updated
+ * @property int                      $order
+ * @property int                      $config_id
+ * @property null|array               $params
+ * @property null|int                 $recently_enabled
+ * @property Collection|CricketTeam[] $cricketTeams
+ * @property null|int                 $cricket_teams_count
  *
  * @method static Builder|League whereAlias($value)
  * @method static Builder|League whereConfigId($value)

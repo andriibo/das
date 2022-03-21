@@ -4,24 +4,28 @@ namespace App\Models;
 
 use Barryvdh\LaravelIdeHelper\Eloquent;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * App\Models\CricketPlayer.
  *
- * @property int         $id
- * @property string      $feed_type
- * @property string      $feed_id
- * @property string      $sport
- * @property string      $first_name
- * @property string      $last_name
- * @property null|string $photo
- * @property string      $injury_status
- * @property null|string $salary
- * @property null|string $auto_salary
- * @property null|string $total_fantasy_points
- * @property null|string $total_fantasy_points_per_game
+ * @property int                            $id
+ * @property string                         $feed_type
+ * @property string                         $feed_id
+ * @property string                         $sport
+ * @property string                         $first_name
+ * @property string                         $last_name
+ * @property null|string                    $photo
+ * @property string                         $injury_status
+ * @property null|string                    $salary
+ * @property null|string                    $auto_salary
+ * @property null|string                    $total_fantasy_points
+ * @property null|string                    $total_fantasy_points_per_game
+ * @property Collection|CricketTeamPlayer[] $cricketTeamPlayers
+ * @property null|int                       $cricket_team_players_count
  *
  * @method static Builder|CricketPlayer newModelQuery()
  * @method static Builder|CricketPlayer newQuery()
@@ -61,4 +65,9 @@ class CricketPlayer extends Model
         'total_fantasy_points',
         'total_fantasy_points_per_game',
     ];
+
+    public function cricketTeamPlayers(): HasMany
+    {
+        return $this->hasMany(CricketTeamPlayer::class);
+    }
 }

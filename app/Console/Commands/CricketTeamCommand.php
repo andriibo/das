@@ -50,6 +50,7 @@ class CricketTeamCommand extends Command
                     foreach ($cricketLeague['squads']['category']['team'] as $team) {
                         $cricketTeamDto = $cricketTeamMapper->map($team, $league->id);
                         $cricketTeam = $cricketTeamService->storeCricketTeam($cricketTeamDto);
+                        $cricketPlayerIds = [];
                         if ($cricketTeam) {
                             $this->info("Team: {$cricketTeam->name}, Info added!");
                             foreach ($team['player'] as $player) {
@@ -59,11 +60,12 @@ class CricketTeamCommand extends Command
                                 ]);
                                 $cricketPlayer = $cricketPlayerService->storeCricketPlayer($cricketPlayerDto);
                                 if ($cricketPlayer) {
+                                    $cricketPlayerIds[] = $cricketPlayer->id;
                                     $this->info("Player: {$cricketPlayer->first_name}, Info added!");
-                                    $cricketTeam->cricketPlayers()->attach($cricketPlayer->id);
                                 }
                             }
                         }
+                        $cricketTeam->cricketPlayers()->sync($cricketPlayerIds);
                     }
                 } catch (\Throwable $exception) {
                     $this->error($exception->getMessage());

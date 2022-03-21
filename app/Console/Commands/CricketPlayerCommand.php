@@ -41,9 +41,10 @@ class CricketPlayerCommand extends Command
                 try {
                     $data = $cricketService->getGoalserveCricketPlayer($cricketPlayer->feed_id);
                     if (!empty($data)) {
-                        $cricketPlayerDto = $cricketPlayerMapper->map($data);
-                        $cricketPlayer = $cricketPlayerService->storeCricketPlayer($cricketPlayerDto);
-                        if ($cricketPlayer) {
+                        $cricketTeamPlayer = $cricketPlayer->cricketTeamPlayers()->where('cricket_team_id', $cricketTeam->id)->firstOrFail();
+                        if ($cricketTeamPlayer) {
+                            $cricketTeamPlayer->playing_role = $data['playing_role'] ?? null;
+                            $cricketTeamPlayer->save();
                             $this->info("Player: {$cricketPlayer->first_name}, Info added!");
                         }
                     } else {
