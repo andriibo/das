@@ -2,14 +2,14 @@
 
 namespace App\Dto;
 
-use App\Enums\CricketPlayerFeedTypeEnum;
+use App\Enums\CricketFeedTypeEnum;
 use App\Enums\CricketPlayerInjuryStatusEnum;
 use App\Enums\CricketPlayerSportEnum;
 
 class CricketPlayerDto
 {
     public int $id;
-    public CricketPlayerFeedTypeEnum $feedType;
+    public CricketFeedTypeEnum $feedType;
     public int $feedId;
     public CricketPlayerSportEnum $sport;
     public string $firstName;

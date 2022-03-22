@@ -2,7 +2,7 @@
 
 namespace App\Enums;
 
-enum CricketPlayerFeedTypeEnum
+enum CricketFeedTypeEnum
 {
     case fantasydata;
 

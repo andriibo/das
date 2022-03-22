@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\CricketTeam;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Collection;
 
 class CricketTeamRepository
@@ -13,6 +14,14 @@ class CricketTeamRepository
     public function getList(): Collection
     {
         return CricketTeam::all();
+    }
+
+    /**
+     * @throws ModelNotFoundException<CricketTeam>
+     */
+    public function getByFeedId(string $feedId): CricketTeam
+    {
+        return CricketTeam::whereFeedId($feedId)->firstOrFail();
     }
 
     public function updateOrCreate(array $attributes, array $values = []): CricketTeam

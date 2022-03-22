@@ -22,6 +22,11 @@ class CricketTeamService
         return $this->cricketTeamRepository->getList();
     }
 
+    public function getCricketTeamByFeedId(string $feedId): CricketTeam
+    {
+        return $this->cricketTeamRepository->getByFeedId($feedId);
+    }
+
     public function storeCricketTeam(CricketTeamDto $cricketTeamDto): CricketTeam
     {
         return $this->cricketTeamRepository->updateOrCreate([

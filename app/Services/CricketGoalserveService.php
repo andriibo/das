@@ -35,4 +35,16 @@ class CricketGoalserveService
             throw new CricketGoalserveServiceException($exception->getMessage(), $exception->getCode());
         }
     }
+
+    /**
+     * @throws CricketGoalserveServiceException
+     */
+    public function getGoalserveMatches(int $leagueId): array
+    {
+        try {
+            return $this->goalserveClient->getMatches($leagueId);
+        } catch (\Throwable $exception) {
+            throw new CricketGoalserveServiceException($exception->getMessage(), $exception->getCode());
+        }
+    }
 }
