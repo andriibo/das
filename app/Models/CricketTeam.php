@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Support\Carbon;
 
 /**
  * App\Models\CricketTeam.
@@ -22,11 +23,15 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @property int                        $country_id
  * @property null|string                $logo
  * @property string                     $feed_type
+ * @property null|Carbon                $created_at
+ * @property null|Carbon                $updated_at
  * @property Collection|CricketPlayer[] $cricketPlayers
  * @property null|int                   $cricket_players_count
+ * @property \App\Models\League         $league
  *
  * @method static Builder|CricketTeam whereAlias($value)
  * @method static Builder|CricketTeam whereCountryId($value)
+ * @method static Builder|CricketTeam whereCreatedAt($value)
  * @method static Builder|CricketTeam whereFeedId($value)
  * @method static Builder|CricketTeam whereFeedType($value)
  * @method static Builder|CricketTeam whereId($value)
@@ -34,18 +39,15 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @method static Builder|CricketTeam whereLogo($value)
  * @method static Builder|CricketTeam whereName($value)
  * @method static Builder|CricketTeam whereNickname($value)
+ * @method static Builder|CricketTeam whereUpdatedAt($value)
  * @method static Builder|CricketTeam newModelQuery()
  * @method static Builder|CricketTeam newQuery()
  * @method static Builder|CricketTeam query()
  * @mixin Eloquent
- *
- * @property \App\Models\League $league
  */
 class CricketTeam extends Model
 {
     use HasFactory;
-
-    public $timestamps = false;
 
     protected $table = 'cricket_team';
 
