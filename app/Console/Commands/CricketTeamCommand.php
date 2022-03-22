@@ -34,7 +34,7 @@ class CricketTeamCommand extends Command
      * Execute the console command.
      */
     public function handle(
-        CricketGoalserveService $cricketService,
+        CricketGoalserveService $cricketGoalserveService,
         CricketTeamService $cricketTeamService,
         CricketPlayerService $cricketPlayerService,
         CricketTeamPlayerService $cricketTeamPlayerService,
@@ -50,7 +50,7 @@ class CricketTeamCommand extends Command
                 $leagueId = $league->params['league_id'];
 
                 try {
-                    $cricketLeague = $cricketService->getGoalserveCricketLeague($leagueId);
+                    $cricketLeague = $cricketGoalserveService->getGoalserveCricketLeague($leagueId);
                     foreach ($cricketLeague['squads']['category']['team'] as $team) {
                         $cricketTeamDto = $cricketTeamMapper->map($team, $league->id);
                         $cricketTeam = $cricketTeamService->storeCricketTeam($cricketTeamDto);

@@ -29,7 +29,7 @@ class CricketPlayerCommand extends Command
      * Execute the console command.
      */
     public function handle(
-        CricketGoalserveService $cricketService,
+        CricketGoalserveService $cricketGoalserveService,
         CricketTeamService $cricketTeamService,
         CricketPlayerService $cricketPlayerService,
         CricketPlayerMapper $cricketPlayerMapper
@@ -39,7 +39,7 @@ class CricketPlayerCommand extends Command
         foreach ($cricketTeams as $cricketTeam) {
             foreach ($cricketTeam->cricketPlayers as $cricketPlayer) {
                 try {
-                    $data = $cricketService->getGoalserveCricketPlayer($cricketPlayer->feed_id);
+                    $data = $cricketGoalserveService->getGoalserveCricketPlayer($cricketPlayer->feed_id);
                     if (!empty($data)) {
                         $cricketPlayerDto = $cricketPlayerMapper->map($data);
                         $cricketPlayer = $cricketPlayerService->storeCricketPlayer($cricketPlayerDto);
