@@ -2,7 +2,9 @@
 
 namespace App\Console\Commands;
 
+use App\Mappers\CricketPlayerMapper;
 use App\Services\CricketGoalserveService;
+use App\Services\CricketPlayerService;
 use App\Services\CricketTeamService;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
@@ -28,7 +30,9 @@ class CricketPlayerCommand extends Command
      */
     public function handle(
         CricketGoalserveService $cricketService,
-        CricketTeamService $cricketTeamService
+        CricketTeamService $cricketTeamService,
+        CricketPlayerService $cricketPlayerService,
+        CricketPlayerMapper $cricketPlayerMapper
     ) {
         $this->info(Carbon::now() . ": Command {$this->signature} started");
         $cricketTeams = $cricketTeamService->getCricketTeams();
@@ -37,16 +41,9 @@ class CricketPlayerCommand extends Command
                 try {
                     $data = $cricketService->getGoalserveCricketPlayer($cricketPlayer->feed_id);
                     if (!empty($data)) {
-                        $cricketTeamPlayer = $cricketPlayer
-                            ->cricketTeamPlayers()
-                            ->where('cricket_team_id', $cricketTeam->id)
-                            ->firstOrFail()
-                        ;
-                        if ($cricketTeamPlayer) {
-                            $cricketTeamPlayer->playing_role = $data['playing_role'] ?? null;
-                            $cricketTeamPlayer->save();
-                            $this->info("Player: {$cricketPlayer->first_name}, Info added!");
-                        }
+                        $cricketPlayerDto = $cricketPlayerMapper->map($data);
+                        $cricketPlayer = $cricketPlayerService->storeCricketPlayer($cricketPlayerDto);
+                        $this->info("Player: {$cricketPlayer->first_name}, Info added!");
                     } else {
                         $this->error("No data for player with feed_id {$cricketPlayer->feed_id}");
                     }

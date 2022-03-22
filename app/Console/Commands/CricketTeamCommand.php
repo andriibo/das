@@ -5,8 +5,10 @@ namespace App\Console\Commands;
 use App\Enums\LeagueSportIdEnum;
 use App\Mappers\CricketPlayerMapper;
 use App\Mappers\CricketTeamMapper;
+use App\Mappers\CricketTeamPlayerMapper;
 use App\Services\CricketGoalserveService;
 use App\Services\CricketPlayerService;
+use App\Services\CricketTeamPlayerService;
 use App\Services\CricketTeamService;
 use App\Services\LeagueService;
 use Carbon\Carbon;
@@ -35,9 +37,11 @@ class CricketTeamCommand extends Command
         CricketGoalserveService $cricketService,
         CricketTeamService $cricketTeamService,
         CricketPlayerService $cricketPlayerService,
+        CricketTeamPlayerService $cricketTeamPlayerService,
         LeagueService $leagueService,
         CricketTeamMapper $cricketTeamMapper,
-        CricketPlayerMapper $cricketPlayerMapper
+        CricketPlayerMapper $cricketPlayerMapper,
+        CricketTeamPlayerMapper $cricketTeamPlayerMapper
     ) {
         $this->info(Carbon::now() . ": Command {$this->signature} started");
         $leagues = $leagueService->getListBySportId(LeagueSportIdEnum::cricket);
@@ -50,7 +54,6 @@ class CricketTeamCommand extends Command
                     foreach ($cricketLeague['squads']['category']['team'] as $team) {
                         $cricketTeamDto = $cricketTeamMapper->map($team, $league->id);
                         $cricketTeam = $cricketTeamService->storeCricketTeam($cricketTeamDto);
-                        $cricketPlayerIds = [];
                         if ($cricketTeam) {
                             $this->info("Team: {$cricketTeam->name}, Info added!");
                             foreach ($team['player'] as $player) {
@@ -60,12 +63,16 @@ class CricketTeamCommand extends Command
                                 ]);
                                 $cricketPlayer = $cricketPlayerService->storeCricketPlayer($cricketPlayerDto);
                                 if ($cricketPlayer) {
-                                    $cricketPlayerIds[] = $cricketPlayer->id;
+                                    $cricketTeamPlayerDto = $cricketTeamPlayerMapper->map([
+                                        'player_id' => $cricketPlayer->id,
+                                        'team_id' => $cricketTeam->id,
+                                        'role' => $player['role'],
+                                    ]);
+                                    $cricketTeamPlayerService->storeCricketTeamPlayer($cricketTeamPlayerDto);
                                     $this->info("Player: {$cricketPlayer->first_name}, Info added!");
                                 }
                             }
                         }
-                        $cricketTeam->cricketPlayers()->sync($cricketPlayerIds);
                     }
                 } catch (\Throwable $exception) {
                     $this->error($exception->getMessage());

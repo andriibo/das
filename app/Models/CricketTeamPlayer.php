@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property int           $id
  * @property int           $cricket_team_id
  * @property int           $cricket_player_id
- * @property null|string   $playing_role
+ * @property string        $playing_role
  * @property CricketPlayer $cricketPlayer
  * @property CricketTeam   $cricketTeam
  *
@@ -38,7 +38,7 @@ class CricketTeamPlayer extends Model
     protected $fillable = [
         'cricket_team_id',
         'cricket_player_id',
-        'player_role',
+        'playing_role',
     ];
 
     public function cricketTeam(): BelongsTo
