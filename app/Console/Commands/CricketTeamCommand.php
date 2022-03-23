@@ -6,6 +6,8 @@ use App\Enums\LeagueSportIdEnum;
 use App\Mappers\CricketPlayerMapper;
 use App\Mappers\CricketTeamMapper;
 use App\Mappers\CricketTeamPlayerMapper;
+use App\Models\CricketPlayer;
+use App\Models\League;
 use App\Services\CricketGoalserveService;
 use App\Services\CricketPlayerService;
 use App\Services\CricketTeamPlayerService;
@@ -33,52 +35,81 @@ class CricketTeamCommand extends Command
     /**
      * Execute the console command.
      */
-    public function handle(
-        CricketGoalserveService $cricketGoalserveService,
-        CricketTeamService $cricketTeamService,
-        CricketPlayerService $cricketPlayerService,
-        CricketTeamPlayerService $cricketTeamPlayerService,
-        LeagueService $leagueService,
-        CricketTeamMapper $cricketTeamMapper,
-        CricketPlayerMapper $cricketPlayerMapper,
-        CricketTeamPlayerMapper $cricketTeamPlayerMapper
-    ) {
+    public function handle(LeagueService $leagueService)
+    {
         $this->info(Carbon::now() . ": Command {$this->signature} started");
         $leagues = $leagueService->getListBySportId(LeagueSportIdEnum::cricket);
         foreach ($leagues as $league) {
-            if (isset($league->params['league_id'])) {
-                $leagueId = $league->params['league_id'];
-
-                try {
-                    $cricketLeague = $cricketGoalserveService->getGoalserveCricketLeague($leagueId);
-                    foreach ($cricketLeague['squads']['category']['team'] as $team) {
-                        $cricketTeamDto = $cricketTeamMapper->map($team, $league->id);
-                        $cricketTeam = $cricketTeamService->storeCricketTeam($cricketTeamDto);
-                        if ($cricketTeam) {
-                            $this->info("Team: {$cricketTeam->name}, Info added!");
-                            foreach ($team['player'] as $player) {
-                                $cricketPlayerDto = $cricketPlayerMapper->map([
-                                    'id' => $player['name'],
-                                    'name' => $player['id'],
-                                ]);
-                                $cricketPlayer = $cricketPlayerService->storeCricketPlayer($cricketPlayerDto);
-                                if ($cricketPlayer) {
-                                    $cricketTeamPlayerDto = $cricketTeamPlayerMapper->map([
-                                        'player_id' => $cricketPlayer->id,
-                                        'team_id' => $cricketTeam->id,
-                                        'role' => $player['role'],
-                                    ]);
-                                    $cricketTeamPlayerService->storeCricketTeamPlayer($cricketTeamPlayerDto);
-                                    $this->info("Player: {$cricketPlayer->first_name}, Info added!");
-                                }
-                            }
-                        }
-                    }
-                } catch (\Throwable $exception) {
-                    $this->error($exception->getMessage());
-                }
-            }
+            $this->parseCricketTeams($league);
         }
         $this->info(Carbon::now() . ": Command {$this->signature} finished");
+    }
+
+    public function parseCricketTeam(array $data, int $leagueId): void
+    {
+        $cricketTeamService = resolve(CricketTeamService::class);
+        $cricketTeamMapper = new CricketTeamMapper();
+        $cricketTeamDto = $cricketTeamMapper->map($data, $leagueId);
+        $cricketTeam = $cricketTeamService->storeCricketTeam($cricketTeamDto);
+
+        if (!$cricketTeam) {
+            return;
+        }
+
+        foreach ($data['player'] as $player) {
+            $cricketPlayer = $this->parseCricketPlayer($player);
+            if (!$cricketPlayer) {
+                continue;
+            }
+
+            $this->attachPlayerToTeam($cricketPlayer, $cricketTeam->id, $player['role']);
+        }
+    }
+
+    public function parseCricketPlayer(array $data): CricketPlayer
+    {
+        $cricketPlayerService = resolve(CricketPlayerService::class);
+        $cricketPlayerMapper = new CricketPlayerMapper();
+        $cricketPlayerDto = $cricketPlayerMapper->map([
+            'id' => $data['name'],
+            'name' => $data['id'],
+        ]);
+
+        return $cricketPlayerService->storeCricketPlayer($cricketPlayerDto);
+    }
+
+    private function parseCricketTeams(League $league): void
+    {
+        if (!isset($league->params['league_id'])) {
+            $this->error('There is no params.league_id');
+
+            return;
+        }
+
+        $leagueId = $league->params['league_id'];
+        $cricketGoalserveService = resolve(CricketGoalserveService::class);
+
+        try {
+            $cricketLeague = $cricketGoalserveService->getGoalserveCricketLeague($leagueId);
+            foreach ($cricketLeague['squads']['category']['team'] as $team) {
+                $this->parseCricketTeam($team, $league->id);
+            }
+        } catch (\Throwable $exception) {
+            $this->error($exception->getMessage());
+        }
+    }
+
+    private function attachPlayerToTeam(CricketPlayer $cricketPlayer, int $teamId, string $role): void
+    {
+        $cricketTeamPlayerMapper = new CricketTeamPlayerMapper();
+        $cricketTeamPlayerService = resolve(CricketTeamPlayerService::class);
+
+        $cricketTeamPlayerDto = $cricketTeamPlayerMapper->map([
+            'player_id' => $cricketPlayer->id,
+            'team_id' => $teamId,
+            'role' => $role,
+        ]);
+
+        $cricketTeamPlayerService->storeCricketTeamPlayer($cricketTeamPlayerDto);
     }
 }
