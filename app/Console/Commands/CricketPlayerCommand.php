@@ -28,32 +28,37 @@ class CricketPlayerCommand extends Command
     /**
      * Execute the console command.
      */
-    public function handle(
-        CricketGoalserveService $cricketService,
-        CricketTeamService $cricketTeamService,
-        CricketPlayerService $cricketPlayerService,
-        CricketPlayerMapper $cricketPlayerMapper
-    ) {
+    public function handle(CricketTeamService $cricketTeamService)
+    {
         $this->info(Carbon::now() . ": Command {$this->signature} started");
         $cricketTeams = $cricketTeamService->getCricketTeams();
         foreach ($cricketTeams as $cricketTeam) {
             foreach ($cricketTeam->cricketPlayers as $cricketPlayer) {
-                try {
-                    $data = $cricketService->getGoalserveCricketPlayer($cricketPlayer->feed_id);
-                    if (!empty($data)) {
-                        $cricketPlayerDto = $cricketPlayerMapper->map($data);
-                        $cricketPlayer = $cricketPlayerService->storeCricketPlayer($cricketPlayerDto);
-                        if ($cricketPlayer) {
-                            $this->info("Player: {$cricketPlayer->first_name}, Info added!");
-                        }
-                    } else {
-                        $this->error("No data for player with feed_id {$cricketPlayer->feed_id}");
-                    }
-                } catch (\Throwable $exception) {
-                    $this->error($exception->getMessage());
-                }
+                $this->parseCricketPlayer($cricketPlayer->feed_id);
             }
         }
         $this->info(Carbon::now() . ": Command {$this->signature} finished");
+    }
+
+    private function parseCricketPlayer(int $feedId)
+    {
+        $cricketGoalserveService = resolve(CricketGoalserveService::class);
+        $cricketPlayerService = resolve(CricketPlayerService::class);
+        $cricketPlayerMapper = new CricketPlayerMapper();
+
+        try {
+            $data = $cricketGoalserveService->getGoalserveCricketPlayer($feedId);
+            if (!empty($data)) {
+                $cricketPlayerDto = $cricketPlayerMapper->map($data);
+                $cricketPlayer = $cricketPlayerService->storeCricketPlayer($cricketPlayerDto);
+                if ($cricketPlayer) {
+                    $this->info("Player: {$cricketPlayer->first_name}, Info added!");
+                }
+            } else {
+                $this->error("No data for player with feed_id {$feedId}");
+            }
+        } catch (\Throwable $exception) {
+            $this->error($exception->getMessage());
+        }
     }
 }

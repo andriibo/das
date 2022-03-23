@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Enums\LeagueSportIdEnum;
 use App\Mappers\CricketPlayerMapper;
 use App\Mappers\CricketTeamMapper;
+use App\Models\CricketPlayer;
 use App\Models\League;
 use App\Services\CricketGoalserveService;
 use App\Services\CricketPlayerService;
@@ -42,7 +43,7 @@ class CricketTeamCommand extends Command
         $this->info(Carbon::now() . ": Command {$this->signature} finished");
     }
 
-    public function parseCricketTeam(array $data, int $leagueId)
+    public function parseCricketTeam(array $data, int $leagueId): void
     {
         $cricketTeamService = resolve(CricketTeamService::class);
         $cricketTeamMapper = new CricketTeamMapper();
@@ -51,12 +52,16 @@ class CricketTeamCommand extends Command
         if ($cricketTeam) {
             $this->info("Team: {$cricketTeam->name}, Info added!");
             foreach ($data['player'] as $player) {
-                $this->parseCricketPlayer($player);
+                $cricketPlayer = $this->parseCricketPlayer($player);
+                if ($cricketPlayer) {
+                    $this->info("Player: {$cricketPlayer->first_name}, Info added!");
+                    $cricketTeam->cricketPlayers()->attach($cricketPlayer->id);
+                }
             }
         }
     }
 
-    public function parseCricketPlayer(array $data): void
+    public function parseCricketPlayer(array $data): CricketPlayer
     {
         $cricketPlayerService = resolve(CricketPlayerService::class);
         $cricketPlayerMapper = new CricketPlayerMapper();
@@ -64,10 +69,8 @@ class CricketTeamCommand extends Command
             'id' => $data['name'],
             'name' => $data['id'],
         ]);
-        $cricketPlayer = $cricketPlayerService->storeCricketPlayer($cricketPlayerDto);
-        if ($cricketPlayer) {
-            $this->info("Player: {$cricketPlayer->first_name}, Info added!");
-        }
+
+        return $cricketPlayerService->storeCricketPlayer($cricketPlayerDto);
     }
 
     private function parseCricketTeams(League $league): void
