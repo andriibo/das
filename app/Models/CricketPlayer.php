@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Events\CricketPlayerSavedEvent;
 use Barryvdh\LaravelIdeHelper\Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -61,4 +62,6 @@ class CricketPlayer extends Model
         'total_fantasy_points',
         'total_fantasy_points_per_game',
     ];
+
+    protected $dispatchesEvents = ['saved' => CricketPlayerSavedEvent::class];
 }

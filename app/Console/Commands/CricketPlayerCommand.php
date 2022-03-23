@@ -5,7 +5,6 @@ namespace App\Console\Commands;
 use App\Mappers\CricketPlayerMapper;
 use App\Services\CricketGoalserveService;
 use App\Services\CricketPlayerService;
-use App\Services\CricketTeamService;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 
@@ -28,14 +27,12 @@ class CricketPlayerCommand extends Command
     /**
      * Execute the console command.
      */
-    public function handle(CricketTeamService $cricketTeamService)
+    public function handle(CricketPlayerService $cricketPlayerService)
     {
         $this->info(Carbon::now() . ": Command {$this->signature} started");
-        $cricketTeams = $cricketTeamService->getCricketTeams();
-        foreach ($cricketTeams as $cricketTeam) {
-            foreach ($cricketTeam->cricketPlayers as $cricketPlayer) {
-                $this->parseCricketPlayer($cricketPlayer->feed_id);
-            }
+        $cricketPlayers = $cricketPlayerService->getCricketPlayers();
+        foreach ($cricketPlayers as $cricketPlayer) {
+            $this->parseCricketPlayer($cricketPlayer->feed_id);
         }
         $this->info(Carbon::now() . ": Command {$this->signature} finished");
     }
@@ -50,10 +47,7 @@ class CricketPlayerCommand extends Command
             $data = $cricketGoalserveService->getGoalserveCricketPlayer($feedId);
             if (!empty($data)) {
                 $cricketPlayerDto = $cricketPlayerMapper->map($data);
-                $cricketPlayer = $cricketPlayerService->storeCricketPlayer($cricketPlayerDto);
-                if ($cricketPlayer) {
-                    $this->info("Player: {$cricketPlayer->first_name}, Info added!");
-                }
+                $cricketPlayerService->storeCricketPlayer($cricketPlayerDto);
             } else {
                 $this->error("No data for player with feed_id {$feedId}");
             }

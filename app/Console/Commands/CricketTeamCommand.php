@@ -54,13 +54,12 @@ class CricketTeamCommand extends Command
             return;
         }
 
-        $this->info("Team: {$cricketTeam->name}, Info added!");
         foreach ($data['player'] as $player) {
             $cricketPlayer = $this->parseCricketPlayer($player);
-            if ($cricketPlayer) {
-                $this->info("Player: {$cricketPlayer->first_name}, Info added!");
-                $cricketTeam->cricketPlayers()->attach($cricketPlayer->id);
+            if (!$cricketPlayer) {
+                continue;
             }
+            $cricketTeam->cricketPlayers()->attach($cricketPlayer->id);
         }
     }
 
@@ -80,6 +79,8 @@ class CricketTeamCommand extends Command
     {
         if (!isset($league->params['league_id'])) {
             $this->error('There is no params.league_id');
+
+            return;
         }
 
         $leagueId = $league->params['league_id'];
