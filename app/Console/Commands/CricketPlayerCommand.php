@@ -37,7 +37,7 @@ class CricketPlayerCommand extends Command
         $this->info(Carbon::now() . ": Command {$this->signature} finished");
     }
 
-    private function parseCricketPlayer(int $feedId)
+    private function parseCricketPlayer(int $feedId): void
     {
         $cricketGoalserveService = resolve(CricketGoalserveService::class);
         $cricketPlayerService = resolve(CricketPlayerService::class);
@@ -45,12 +45,14 @@ class CricketPlayerCommand extends Command
 
         try {
             $data = $cricketGoalserveService->getGoalserveCricketPlayer($feedId);
-            if (!empty($data)) {
-                $cricketPlayerDto = $cricketPlayerMapper->map($data);
-                $cricketPlayerService->storeCricketPlayer($cricketPlayerDto);
-            } else {
+            if (empty($data)) {
                 $this->error("No data for player with feed_id {$feedId}");
+
+                return;
             }
+
+            $cricketPlayerDto = $cricketPlayerMapper->map($data);
+            $cricketPlayerService->storeCricketPlayer($cricketPlayerDto);
         } catch (\Throwable $exception) {
             $this->error($exception->getMessage());
         }
