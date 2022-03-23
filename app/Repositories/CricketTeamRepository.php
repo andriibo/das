@@ -3,7 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\CricketTeam;
-use Illuminate\Support\Collection;
+use Illuminate\Database\Eloquent\Collection;
 
 class CricketTeamRepository
 {

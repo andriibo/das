@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Events\CricketTeamSavedEvent;
 use Barryvdh\LaravelIdeHelper\Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -61,6 +62,8 @@ class CricketTeam extends Model
         'logo',
         'feed_type',
     ];
+
+    protected $dispatchesEvents = ['saved' => CricketTeamSavedEvent::class];
 
     public function cricketPlayers(): BelongsToMany
     {

@@ -5,7 +5,7 @@ namespace App\Services;
 use App\Dto\CricketTeamDto;
 use App\Models\CricketTeam;
 use App\Repositories\CricketTeamRepository;
-use Illuminate\Support\Collection;
+use Illuminate\Database\Eloquent\Collection;
 
 class CricketTeamService
 {
