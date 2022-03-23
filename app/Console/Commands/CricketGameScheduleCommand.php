@@ -31,30 +31,34 @@ class CricketGameScheduleCommand extends Command
      */
     public function handle(
         CricketGoalserveService $cricketGoalserveService,
-        CricketGameScheduleService $cricketGameScheduleService,
         LeagueService $leagueService,
-        CricketGameScheduleMapper $cricketGameScheduleMapper,
     ) {
         $this->info(Carbon::now() . ": Command {$this->signature} started");
         $leagues = $leagueService->getListBySportId(LeagueSportIdEnum::cricket);
         foreach ($leagues as $league) {
-            if (isset($league->params['league_id'])) {
+            try {
                 $leagueId = $league->params['league_id'];
-
-                try {
-                    $matches = $cricketGoalserveService->getGoalserveMatches($leagueId);
-                    foreach ($matches as $match) {
-                        $cricketGameScheduleDto = $cricketGameScheduleMapper->map($match, $league->id);
-                        $cricketGameSchedule = $cricketGameScheduleService->storeCricketGameSchedule($cricketGameScheduleDto);
-                        if ($cricketGameSchedule) {
-                            $this->info("Game Schedule: {$cricketGameSchedule->game_date}, Info added!");
-                        }
-                    }
-                } catch (\Throwable $exception) {
-                    $this->error($exception->getMessage());
+                $matches = $cricketGoalserveService->getGoalserveMatches($leagueId);
+                foreach ($matches as $match) {
+                    $this->parseMatch($match, $league->id);
                 }
+            } catch (\Throwable $exception) {
+                $this->error($exception->getMessage());
             }
         }
         $this->info(Carbon::now() . ": Command {$this->signature} finished");
+    }
+
+    private function parseMatch(array $data, int $leagueId): void
+    {
+        $cricketGameScheduleService = resolve(CricketGameScheduleService::class);
+        $cricketGameScheduleMapper = resolve(CricketGameScheduleMapper::class);
+
+        try {
+            $cricketGameScheduleDto = $cricketGameScheduleMapper->map($data, $leagueId);
+            $cricketGameScheduleService->storeCricketGameSchedule($cricketGameScheduleDto);
+        } catch (\Throwable $exception) {
+            $this->error($exception->getMessage());
+        }
     }
 }

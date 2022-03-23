@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Events\CricketGameScheduleSavedEvent;
 use Barryvdh\LaravelIdeHelper\Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -20,8 +21,8 @@ use Illuminate\Support\Carbon;
  * @property string      $game_date
  * @property int         $has_final_box
  * @property int         $is_data_confirmed
- * @property int         $home_cricket_team_score
- * @property int         $away_cricket_team_score
+ * @property string      $home_cricket_team_score
+ * @property string      $away_cricket_team_score
  * @property null|Carbon $date_updated
  * @property int         $is_fake
  * @property int         $is_salary_available
@@ -74,6 +75,8 @@ class CricketGameSchedule extends Model
         'is_salary_available',
         'feed_type',
     ];
+
+    protected $dispatchesEvents = ['saved' => CricketGameScheduleSavedEvent::class];
 
     public function league(): BelongsTo
     {
