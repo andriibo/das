@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use App\Events\CricketPlayerSavedEvent;
 use Barryvdh\LaravelIdeHelper\Eloquent;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -22,21 +24,21 @@ use Illuminate\Database\Eloquent\Model;
  * @property null|string $total_fantasy_points
  * @property null|string $total_fantasy_points_per_game
  *
- * @method static \Illuminate\Database\Eloquent\Builder|CricketPlayer newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|CricketPlayer newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|CricketPlayer query()
- * @method static \Illuminate\Database\Eloquent\Builder|CricketPlayer whereAutoSalary($value)
- * @method static \Illuminate\Database\Eloquent\Builder|CricketPlayer whereFeedId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|CricketPlayer whereFeedType($value)
- * @method static \Illuminate\Database\Eloquent\Builder|CricketPlayer whereFirstName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|CricketPlayer whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|CricketPlayer whereInjuryStatus($value)
- * @method static \Illuminate\Database\Eloquent\Builder|CricketPlayer whereLastName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|CricketPlayer wherePhoto($value)
- * @method static \Illuminate\Database\Eloquent\Builder|CricketPlayer whereSalary($value)
- * @method static \Illuminate\Database\Eloquent\Builder|CricketPlayer whereSport($value)
- * @method static \Illuminate\Database\Eloquent\Builder|CricketPlayer whereTotalFantasyPoints($value)
- * @method static \Illuminate\Database\Eloquent\Builder|CricketPlayer whereTotalFantasyPointsPerGame($value)
+ * @method static Builder|CricketPlayer newModelQuery()
+ * @method static Builder|CricketPlayer newQuery()
+ * @method static Builder|CricketPlayer query()
+ * @method static Builder|CricketPlayer whereAutoSalary($value)
+ * @method static Builder|CricketPlayer whereFeedId($value)
+ * @method static Builder|CricketPlayer whereFeedType($value)
+ * @method static Builder|CricketPlayer whereFirstName($value)
+ * @method static Builder|CricketPlayer whereId($value)
+ * @method static Builder|CricketPlayer whereInjuryStatus($value)
+ * @method static Builder|CricketPlayer whereLastName($value)
+ * @method static Builder|CricketPlayer wherePhoto($value)
+ * @method static Builder|CricketPlayer whereSalary($value)
+ * @method static Builder|CricketPlayer whereSport($value)
+ * @method static Builder|CricketPlayer whereTotalFantasyPoints($value)
+ * @method static Builder|CricketPlayer whereTotalFantasyPointsPerGame($value)
  * @mixin Eloquent
  */
 class CricketPlayer extends Model
@@ -60,4 +62,6 @@ class CricketPlayer extends Model
         'total_fantasy_points',
         'total_fantasy_points_per_game',
     ];
+
+    protected $dispatchesEvents = ['saved' => CricketPlayerSavedEvent::class];
 }

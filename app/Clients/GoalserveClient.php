@@ -18,7 +18,7 @@ class GoalserveClient
         $this->apiKey = config('goalserve.api_key');
     }
 
-    public function getCricketTeams(int $leagueId): array
+    public function getCricketLeague(int $leagueId): array
     {
         $endpoint = "{$this->apiUrl}/getfeed/{$this->apiKey}/cricketfixtures/intl/{$leagueId}_squads?json=1";
 
@@ -30,7 +30,25 @@ class GoalserveClient
                 throw new GoalserveClientException('Can\'t parse json - ' . json_last_error_msg());
             }
 
-            return $data['squads']['category']['team'] ?? [];
+            return $data;
+        } catch (ClientException $clientException) {
+            throw new GoalserveClientException($clientException->getMessage(), $clientException->getCode());
+        }
+    }
+
+    public function getCricketPlayer(int $playerId): array
+    {
+        $endpoint = "{$this->apiUrl}/getfeed/{$this->apiKey}/cricket/profile?id={$playerId}&json=1";
+
+        try {
+            $response = $this->client->get($endpoint);
+            $data = json_decode($response->getBody()->getContents(), true);
+
+            if (json_last_error() !== JSON_ERROR_NONE) {
+                throw new GoalserveClientException('Can\'t parse json - ' . json_last_error_msg());
+            }
+
+            return $data['players']['player'] ?? [];
         } catch (ClientException $clientException) {
             throw new GoalserveClientException($clientException->getMessage(), $clientException->getCode());
         }

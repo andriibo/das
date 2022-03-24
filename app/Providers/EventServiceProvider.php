@@ -2,10 +2,13 @@
 
 namespace App\Providers;
 
+use App\Events\CricketPlayerSavedEvent;
+use App\Events\CricketTeamSavedEvent;
+use App\Listeners\CricketPlayerSavedListener;
+use App\Listeners\CricketTeamSavedListener;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Event;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -17,6 +20,12 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         Registered::class => [
             SendEmailVerificationNotification::class,
+        ],
+        CricketTeamSavedEvent::class => [
+            CricketTeamSavedListener::class,
+        ],
+        CricketPlayerSavedEvent::class => [
+            CricketPlayerSavedListener::class,
         ],
     ];
 

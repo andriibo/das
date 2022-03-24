@@ -11,7 +11,7 @@ class CricketTeamMapper
     {
         $cricketTeamDto = new CricketTeamDto();
 
-        $cricketTeamDto->feedId = $data['id'] ?? null;
+        $cricketTeamDto->feedId = $data['id'];
         $cricketTeamDto->leagueId = $leagueId;
         $cricketTeamDto->name = $data['name'] ?? '';
         $cricketTeamDto->nickname = $data['nickname'] ?? '';
