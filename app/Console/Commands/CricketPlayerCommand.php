@@ -34,6 +34,7 @@ class CricketPlayerCommand extends Command
         foreach ($cricketPlayers as $cricketPlayer) {
             $this->parseCricketPlayer($cricketPlayer->feed_id);
         }
+        $this->info(Carbon::now() . ": Command {$this->signature} finished");
     }
 
     private function parseCricketPlayer(int $feedId): void
