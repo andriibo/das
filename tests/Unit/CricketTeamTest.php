@@ -32,6 +32,7 @@ class CricketTeamTest extends TestCase
         $firstTeamPlayer = $firstTeam['player'][0];
         $this->assertArrayHasKey('id', $firstTeamPlayer);
         $this->assertArrayHasKey('name', $firstTeamPlayer);
+        $this->assertArrayHasKey('role', $firstTeamPlayer);
     }
 
     public function testGoalserveCricketPlayer(): void
@@ -44,7 +45,6 @@ class CricketTeamTest extends TestCase
         $this->assertNotEmpty($response);
         $this->assertArrayHasKey('name', $response);
         $this->assertArrayHasKey('image', $response);
-        $this->assertArrayHasKey('playing_role', $response);
     }
 
     public function testGoalserveMatches(): void
