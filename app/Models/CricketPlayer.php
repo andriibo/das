@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Carbon;
 
 /**
  * App\Models\CricketPlayer.
@@ -25,6 +26,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property null|string                    $auto_salary
  * @property null|string                    $total_fantasy_points
  * @property null|string                    $total_fantasy_points_per_game
+ * @property null|Carbon                    $created_at
+ * @property null|Carbon                    $updated_at
  * @property Collection|CricketTeamPlayer[] $cricketTeamPlayers
  * @property null|int                       $cricket_team_players_count
  *
@@ -32,6 +35,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static Builder|CricketPlayer newQuery()
  * @method static Builder|CricketPlayer query()
  * @method static Builder|CricketPlayer whereAutoSalary($value)
+ * @method static Builder|CricketPlayer whereCreatedAt($value)
  * @method static Builder|CricketPlayer whereFeedId($value)
  * @method static Builder|CricketPlayer whereFeedType($value)
  * @method static Builder|CricketPlayer whereFirstName($value)
@@ -43,13 +47,12 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static Builder|CricketPlayer whereSport($value)
  * @method static Builder|CricketPlayer whereTotalFantasyPoints($value)
  * @method static Builder|CricketPlayer whereTotalFantasyPointsPerGame($value)
+ * @method static Builder|CricketPlayer whereUpdatedAt($value)
  * @mixin Eloquent
  */
 class CricketPlayer extends Model
 {
     use HasFactory;
-
-    public $timestamps = false;
 
     protected $table = 'cricket_player';
 
