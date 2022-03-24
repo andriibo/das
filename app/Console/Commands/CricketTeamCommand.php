@@ -5,10 +5,12 @@ namespace App\Console\Commands;
 use App\Enums\LeagueSportIdEnum;
 use App\Mappers\CricketPlayerMapper;
 use App\Mappers\CricketTeamMapper;
+use App\Mappers\CricketTeamPlayerMapper;
 use App\Models\CricketPlayer;
 use App\Models\League;
 use App\Services\CricketGoalserveService;
 use App\Services\CricketPlayerService;
+use App\Services\CricketTeamPlayerService;
 use App\Services\CricketTeamService;
 use App\Services\LeagueService;
 use Carbon\Carbon;
@@ -59,7 +61,8 @@ class CricketTeamCommand extends Command
             if (!$cricketPlayer) {
                 continue;
             }
-            $cricketTeam->cricketPlayers()->attach($cricketPlayer->id);
+
+            $this->attachPlayerToTeam($cricketPlayer, $cricketTeam->id, $player['role']);
         }
     }
 
@@ -94,5 +97,19 @@ class CricketTeamCommand extends Command
         } catch (\Throwable $exception) {
             $this->error($exception->getMessage());
         }
+    }
+
+    private function attachPlayerToTeam(CricketPlayer $cricketPlayer, int $teamId, string $role): void
+    {
+        $cricketTeamPlayerMapper = new CricketTeamPlayerMapper();
+        $cricketTeamPlayerService = resolve(CricketTeamPlayerService::class);
+
+        $cricketTeamPlayerDto = $cricketTeamPlayerMapper->map([
+            'player_id' => $cricketPlayer->id,
+            'team_id' => $teamId,
+            'role' => $role,
+        ]);
+
+        $cricketTeamPlayerService->storeCricketTeamPlayer($cricketTeamPlayerDto);
     }
 }

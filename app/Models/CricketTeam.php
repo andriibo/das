@@ -5,24 +5,26 @@ namespace App\Models;
 use App\Events\CricketTeamSavedEvent;
 use Barryvdh\LaravelIdeHelper\Eloquent;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
  * App\Models\CricketTeam.
  *
- * @property int                                                      $id
- * @property string                                                   $feed_id
- * @property int                                                      $league_id
- * @property string                                                   $name
- * @property string                                                   $nickname
- * @property string                                                   $alias
- * @property int                                                      $country_id
- * @property null|string                                              $logo
- * @property string                                                   $feed_type
- * @property CricketPlayer[]|\Illuminate\Database\Eloquent\Collection $cricketPlayers
- * @property null|int                                                 $cricket_players_count
+ * @property int                        $id
+ * @property string                     $feed_id
+ * @property int                        $league_id
+ * @property string                     $name
+ * @property string                     $nickname
+ * @property string                     $alias
+ * @property int                        $country_id
+ * @property null|string                $logo
+ * @property string                     $feed_type
+ * @property Collection|CricketPlayer[] $cricketPlayers
+ * @property null|int                   $cricket_players_count
  *
  * @method static Builder|CricketTeam whereAlias($value)
  * @method static Builder|CricketTeam whereCountryId($value)
@@ -37,6 +39,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @method static Builder|CricketTeam newQuery()
  * @method static Builder|CricketTeam query()
  * @mixin Eloquent
+ *
+ * @property \App\Models\League $league
  */
 class CricketTeam extends Model
 {
@@ -62,5 +66,10 @@ class CricketTeam extends Model
     public function cricketPlayers(): BelongsToMany
     {
         return $this->belongsToMany(CricketPlayer::class, 'cricket_team_player');
+    }
+
+    public function league(): BelongsTo
+    {
+        return $this->belongsTo(League::class);
     }
 }

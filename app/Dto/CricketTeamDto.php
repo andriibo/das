@@ -15,9 +15,4 @@ class CricketTeamDto
     public ?int $countryId;
     public ?string $logo;
     public CricketTeamFeedTypeEnum $feedType;
-
-    /**
-     * @var CricketPlayerDto[]
-     */
-    public array $players;
 }
