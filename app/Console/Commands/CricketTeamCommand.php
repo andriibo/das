@@ -84,8 +84,8 @@ class CricketTeamCommand extends Command
 
         try {
             $leagueId = $league->params['league_id'];
-            $cricketLeague = $cricketGoalserveService->getGoalserveCricketLeague($leagueId);
-            foreach ($cricketLeague['squads']['category']['team'] as $team) {
+            $teams = $cricketGoalserveService->getGoalserveCricketTeams($leagueId);
+            foreach ($teams as $team) {
                 $this->parseCricketTeam($team, $league->id);
             }
         } catch (\Throwable $exception) {

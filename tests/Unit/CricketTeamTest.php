@@ -18,14 +18,20 @@ class CricketTeamTest extends TestCase
     public function testGoalserveCricketLeague(): void
     {
         $cricketGoalserveService = resolve(CricketGoalserveService::class);
-        $response = $cricketGoalserveService->getGoalserveCricketLeague($this->leagueId);
+        $response = $cricketGoalserveService->getGoalserveCricketTeams($this->leagueId);
 
         $this->assertIsNotObject($response);
         $this->assertIsArray($response);
         $this->assertNotEmpty($response);
-        $this->assertArrayHasKey('squads', $response);
-        $this->assertArrayHasKey('category', $response['squads']);
-        $this->assertArrayHasKey('team', $response['squads']['category']);
+
+        $firstTeam = $response[0];
+        $this->assertArrayHasKey('id', $firstTeam);
+        $this->assertArrayHasKey('name', $firstTeam);
+        $this->assertArrayHasKey('player', $firstTeam);
+
+        $firstTeamPlayer = $firstTeam['player'][0];
+        $this->assertArrayHasKey('id', $firstTeamPlayer);
+        $this->assertArrayHasKey('name', $firstTeamPlayer);
     }
 
     public function testGoalserveCricketPlayer(): void
@@ -36,8 +42,9 @@ class CricketTeamTest extends TestCase
         $this->assertIsNotObject($response);
         $this->assertIsArray($response);
         $this->assertNotEmpty($response);
-        $this->assertArrayHasKey('players', $response);
-        $this->assertArrayHasKey('player', $response['players']);
+        $this->assertArrayHasKey('name', $response);
+        $this->assertArrayHasKey('image', $response);
+        $this->assertArrayHasKey('playing_role', $response);
     }
 
     public function testGoalserveMatches(): void
@@ -48,8 +55,19 @@ class CricketTeamTest extends TestCase
         $this->assertIsNotObject($response);
         $this->assertIsArray($response);
         $this->assertNotEmpty($response);
-        $this->assertArrayHasKey('fixtures', $response);
-        $this->assertArrayHasKey('category', $response['fixtures']);
-        $this->assertArrayHasKey('match', $response['fixtures']['category']);
+
+        $firstMatch = $response[0];
+        $this->assertArrayHasKey('id', $firstMatch);
+        $this->assertArrayHasKey('date', $firstMatch);
+        $this->assertArrayHasKey('time', $firstMatch);
+        $this->assertArrayHasKey('localteam', $firstMatch);
+        $this->assertArrayHasKey('visitorteam', $firstMatch);
+
+        $firstMatchLocalTeam = $firstMatch['localteam'];
+        $firstMatchVisitorTeam = $firstMatch['visitorteam'];
+        $this->assertArrayHasKey('id', $firstMatchLocalTeam);
+        $this->assertArrayHasKey('id', $firstMatchVisitorTeam);
+        $this->assertArrayHasKey('totalscore', $firstMatchLocalTeam);
+        $this->assertArrayHasKey('totalscore', $firstMatchVisitorTeam);
     }
 }
