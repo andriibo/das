@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Events\CricketPlayerSavedEvent;
+use App\Events\CricketUnitStatSavedEvent;
 use Barryvdh\LaravelIdeHelper\Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -70,7 +70,7 @@ class CricketPlayer extends Model
         'total_fantasy_points_per_game',
     ];
 
-    protected $dispatchesEvents = ['saved' => CricketPlayerSavedEvent::class];
+    protected $dispatchesEvents = ['saved' => CricketUnitStatSavedEvent::class];
 
     public function cricketTeamPlayers(): HasMany
     {

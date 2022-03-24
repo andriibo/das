@@ -47,4 +47,16 @@ class CricketGoalserveService
             throw new CricketGoalserveServiceException($exception->getMessage(), $exception->getCode());
         }
     }
+
+    /**
+     * @throws CricketGoalserveServiceException
+     */
+    public function getGoalserveUnitStats(string $date): array
+    {
+        try {
+            return $this->goalserveClient->getUnitStats($date);
+        } catch (\Throwable $exception) {
+            throw new CricketGoalserveServiceException($exception->getMessage(), $exception->getCode());
+        }
+    }
 }
