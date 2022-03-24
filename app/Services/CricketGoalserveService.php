@@ -15,10 +15,10 @@ class CricketGoalserveService
     /**
      * @throws CricketGoalserveServiceException
      */
-    public function getGoalserveCricketLeague(int $leagueId): array
+    public function getGoalserveCricketTeams(int $leagueId): array
     {
         try {
-            return $this->goalserveClient->getCricketLeague($leagueId);
+            return $this->goalserveClient->getCricketTeams($leagueId);
         } catch (\Throwable $exception) {
             throw new CricketGoalserveServiceException($exception->getMessage(), $exception->getCode());
         }
