@@ -3,7 +3,7 @@
 namespace App\Mappers;
 
 use App\Dto\CricketPlayerDto;
-use App\Enums\CricketPlayerFeedTypeEnum;
+use App\Enums\CricketFeedTypeEnum;
 use App\Enums\CricketPlayerInjuryStatusEnum;
 use App\Enums\CricketPlayerSportEnum;
 
@@ -13,7 +13,7 @@ class CricketPlayerMapper
     {
         $cricketPlayerDto = new CricketPlayerDto();
 
-        $cricketPlayerDto->feedType = CricketPlayerFeedTypeEnum::goalserve;
+        $cricketPlayerDto->feedType = CricketFeedTypeEnum::goalserve;
         $cricketPlayerDto->feedId = $data['id'];
         $cricketPlayerDto->sport = CricketPlayerSportEnum::cricket;
         $cricketPlayerDto->firstName = $data['name'] ?? '';

@@ -2,13 +2,13 @@
 
 ***Branch prefixes***
 
-Bugfix ``bugfix/DAS-****``
+Bugfix ``bugfix/FS-****``
 
-Feature ``feature/DAS-****``
+Feature ``feature/FS-****``
 
-Hotfix ``hotfix/DAS-****``
+Hotfix ``hotfix/FS-****``
 
-Release ``release/DAS-****``
+Release ``release/FS-****``
 
 ***Commit Message Header***
 
@@ -16,13 +16,13 @@ Release ``release/DAS-****``
 
 Commit Type: build|ci|docs|feat|fix|perf|refactor|test
 
-Commit Scope: issue name `DAS-****` or `hotfix`
+Commit Scope: issue name `FS-****` or `hotfix`
 
 Summary in present tense. Not capitalized. No period at the end.
 
 The `<type>` and (`<scope>`) fields are mandatory.
 
-Example: `fix(DAS-0000): some text`
+Example: `fix(FS-0000): some text`
 
 ### Automatic PHPDoc generation for Laravel Facades
 

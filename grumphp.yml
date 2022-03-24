@@ -18,7 +18,7 @@ grumphp:
           - style
           - test
         scopes:
-          - DAS-\d+
+          - FS-\d+
     git_blacklist:
       keywords:
         - 'dump('

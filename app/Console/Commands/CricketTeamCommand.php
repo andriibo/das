@@ -80,16 +80,10 @@ class CricketTeamCommand extends Command
 
     private function parseCricketTeams(League $league): void
     {
-        if (!isset($league->params['league_id'])) {
-            $this->error('There is no params.league_id');
-
-            return;
-        }
-
-        $leagueId = $league->params['league_id'];
         $cricketGoalserveService = resolve(CricketGoalserveService::class);
 
         try {
+            $leagueId = $league->params['league_id'];
             $cricketLeague = $cricketGoalserveService->getGoalserveCricketLeague($leagueId);
             foreach ($cricketLeague['squads']['category']['team'] as $team) {
                 $this->parseCricketTeam($team, $league->id);

@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use App\Events\CricketGameScheduleSavedEvent;
 use App\Events\CricketPlayerSavedEvent;
 use App\Events\CricketTeamSavedEvent;
+use App\Listeners\CricketGameScheduleSavedListener;
 use App\Listeners\CricketPlayerSavedListener;
 use App\Listeners\CricketTeamSavedListener;
 use Illuminate\Auth\Events\Registered;
@@ -26,6 +28,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         CricketPlayerSavedEvent::class => [
             CricketPlayerSavedListener::class,
+        ],
+        CricketGameScheduleSavedEvent::class => [
+            CricketGameScheduleSavedListener::class,
         ],
     ];
 
