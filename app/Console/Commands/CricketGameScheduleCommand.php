@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Enums\LeagueSportIdEnum;
 use App\Mappers\CricketGameScheduleMapper;
+use App\Models\League;
 use App\Services\CricketGameScheduleService;
 use App\Services\CricketGoalserveService;
 use App\Services\LeagueService;
@@ -29,24 +30,29 @@ class CricketGameScheduleCommand extends Command
     /**
      * Execute the console command.
      */
-    public function handle(
-        CricketGoalserveService $cricketGoalserveService,
-        LeagueService $leagueService,
-    ) {
+    public function handle(LeagueService $leagueService)
+    {
         $this->info(Carbon::now() . ": Command {$this->signature} started");
         $leagues = $leagueService->getListBySportId(LeagueSportIdEnum::cricket);
         foreach ($leagues as $league) {
-            try {
-                $leagueId = $league->params['league_id'];
-                $matches = $cricketGoalserveService->getGoalserveMatches($leagueId);
-                foreach ($matches as $match) {
-                    $this->parseMatch($match, $league->id);
-                }
-            } catch (\Throwable $exception) {
-                $this->error($exception->getMessage());
-            }
+            $this->parseMatches($league);
         }
         $this->info(Carbon::now() . ": Command {$this->signature} finished");
+    }
+
+    private function parseMatches(League $league): void
+    {
+        $cricketGoalserveService = resolve(CricketGoalserveService::class);
+
+        try {
+            $leagueId = $league->params['league_id'];
+            $matches = $cricketGoalserveService->getGoalserveMatches($leagueId);
+            foreach ($matches as $match) {
+                $this->parseMatch($match, $league->id);
+            }
+        } catch (\Throwable $exception) {
+            $this->error($exception->getMessage());
+        }
     }
 
     private function parseMatch(array $data, int $leagueId): void
