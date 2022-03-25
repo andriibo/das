@@ -2,7 +2,7 @@
 
 namespace App\Enums;
 
-enum CricketTeamPlayerPlayingRoleEnum: string
+enum CricketUnitPositionEnum: string
 {
     case bowler = 'Bowler';
 

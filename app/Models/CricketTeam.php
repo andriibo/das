@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
 
 /**
@@ -29,6 +30,8 @@ use Illuminate\Support\Carbon;
  * @property Collection|CricketPlayer[] $cricketPlayers
  * @property null|int                   $cricket_players_count
  * @property \App\Models\League         $league
+ * @property Collection|CricketUnit[]   $cricketUnits
+ * @property null|int                   $cricket_units_count
  *
  * @method static Builder|CricketTeam whereAlias($value)
  * @method static Builder|CricketTeam whereCountryId($value)
@@ -73,5 +76,10 @@ class CricketTeam extends Model
     public function league(): BelongsTo
     {
         return $this->belongsTo(League::class);
+    }
+
+    public function cricketUnits(): HasMany
+    {
+        return $this->hasMany(CricketUnit::class);
     }
 }
