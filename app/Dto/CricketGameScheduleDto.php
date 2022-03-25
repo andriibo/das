@@ -3,6 +3,8 @@
 namespace App\Dto;
 
 use App\Enums\CricketFeedTypeEnum;
+use App\Enums\CricketGameScheduleStatusEnum;
+use App\Enums\CricketGameScheduleTypeEnum;
 
 class CricketGameScheduleDto
 {
@@ -20,4 +22,6 @@ class CricketGameScheduleDto
     public bool $isFake;
     public bool $isSalaryAvailable;
     public CricketFeedTypeEnum $feedType;
+    public CricketGameScheduleStatusEnum $status;
+    public CricketGameScheduleTypeEnum $type;
 }
