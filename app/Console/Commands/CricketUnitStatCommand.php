@@ -44,10 +44,16 @@ class CricketUnitStatCommand extends Command
         try {
             $formattedDate = $this->getFormattedDate($cricketGameSchedule->game_date);
             $unitStats = $cricketGoalserveService->getGoalserveUnitStats($formattedDate);
-            foreach ($unitStats as $unitStat);
+            foreach ($unitStats as $unitStat) {
+                $this->parseUnitStat($unitStat);
+            }
         } catch (\Throwable $exception) {
             $this->error($exception->getMessage());
         }
+    }
+
+    private function parseUnitStat(array $data)
+    {
     }
 
     private function getFormattedDate(string $dateTime): string

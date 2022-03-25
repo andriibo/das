@@ -14,6 +14,11 @@ class CricketGameScheduleService
     ) {
     }
 
+    public function getCricketGameScheduleByFeedId(string $feedId): CricketGameSchedule
+    {
+        return $this->cricketGameScheduleRepository->getByFeedId($feedId);
+    }
+
     /**
      * @return Collection|CricketGameSchedule[]
      */

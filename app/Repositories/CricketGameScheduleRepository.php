@@ -4,9 +4,18 @@ namespace App\Repositories;
 
 use App\Models\CricketGameSchedule;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class CricketGameScheduleRepository
 {
+    /**
+     * @throws ModelNotFoundException<CricketGameSchedule>
+     */
+    public function getByFeedId(string $feedId): CricketGameSchedule
+    {
+        return CricketGameSchedule::whereFeedId($feedId)->firstOrFail();
+    }
+
     /**
      * @return Collection|CricketGameSchedule[]
      */

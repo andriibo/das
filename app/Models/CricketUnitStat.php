@@ -17,7 +17,7 @@ use Illuminate\Support\Carbon;
  * @property int                 $cricket_game_schedule_id
  * @property int                 $cricket_player_id
  * @property int                 $cricket_team_id
- * @property string              $stats
+ * @property string              $stat
  * @property string              $date_updated
  * @property null|Carbon         $created_at
  * @property null|Carbon         $updated_at
@@ -34,7 +34,7 @@ use Illuminate\Support\Carbon;
  * @method static Builder|CricketUnitStat whereCricketTeamId($value)
  * @method static Builder|CricketUnitStat whereDateUpdated($value)
  * @method static Builder|CricketUnitStat whereId($value)
- * @method static Builder|CricketUnitStat whereStats($value)
+ * @method static Builder|CricketUnitStat whereStat($value)
  * @method static Builder|CricketUnitStat whereUpdatedAt($value)
  * @mixin Eloquent
  */
@@ -48,7 +48,7 @@ class CricketUnitStat extends Model
         'cricket_game_schedule_id',
         'cricket_player_id',
         'cricket_team_id',
-        'stats',
+        'stat',
         'date_updated',
     ];
 
