@@ -60,7 +60,7 @@
         },
         "hooks": {
             "pre-commit": [
-                "php-cs-fixer --config=.php_cs.php",
+                "php-cs-fixer fix --dry-run --verbose --config=.php_cs.php",
                 "psalm"
             ]
         },
