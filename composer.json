@@ -51,7 +51,7 @@
         ],
         "check-build": [
             "psalm",
-            "php-cs-fixer fix --dry-run --verbose --config=.php_cs.php"
+            "php-cs-fixer fix --dry-run --verbose --using-cache=no --config=.php_cs.php"
         ]
     },
     "extra": {
