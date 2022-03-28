@@ -59,6 +59,9 @@
                 "php-cs-fixer",
                 "psalm"
             ]
+        },
+        "grumphp": {
+            "config-default-path": "./grumphp.yml"
         }
     },
     "config": {

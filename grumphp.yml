@@ -23,15 +23,15 @@ grumphp:
       keywords:
         - 'dump('
         - 'die('
+    phpcsfixer:
+      config: ./.php_cs.php
+      verbose: true
     psalm:
       config: ./psalm.xml
       ignore_patterns: [ ]
       no_cache: false
       report: ~
       output_format: null
-      threads: 1
+      threads: 7
       triggered_by: [ 'php' ]
       show_info: false
-    phpcsfixer:
-      config: ./.php_cs.php
-      verbose: true
