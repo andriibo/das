@@ -51,7 +51,7 @@
         ],
         "check-build": [
             "psalm",
-            "php-cs-fixer fix --config=.php_cs.php"
+            "php-cs-fixer fix --dry-run --verbose --config=.php_cs.php"
         ]
     },
     "extra": {
@@ -60,7 +60,7 @@
         },
         "hooks": {
             "pre-commit": [
-                "php-cs-fixer fix --dry-run --verbose --config=.php_cs.php",
+                "php-cs-fixer fix --verbose --config=.php_cs.php",
                 "psalm"
             ]
         },
