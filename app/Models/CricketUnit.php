@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Barryvdh\LaravelIdeHelper\Eloquent;
+use Database\Factories\CricketUnitFactory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -22,6 +23,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property CricketPlayer $cricketPlayer
  * @property CricketTeam   $cricketTeam
  *
+ * @method static CricketUnitFactory factory(...$parameters)
  * @method static Builder|CricketUnit newModelQuery()
  * @method static Builder|CricketUnit newQuery()
  * @method static Builder|CricketUnit query()

@@ -25,7 +25,7 @@ class LeagueFactory extends Factory
      *
      * @var null|int
      */
-    protected $count = 3;
+    protected $count = 1;
 
     /**
      * Define the model's default state.
@@ -43,7 +43,6 @@ class LeagueFactory extends Factory
             'date_updated' => $this->faker->dateTime(),
             'order' => 0,
             'config_id' => 1,
-            'params' => ['league_id' => 1015],
             'recently_enabled' => $this->faker->randomElement(LeagueRecentlyEnabledEnum::values()),
         ];
     }
