@@ -38,8 +38,8 @@ class CricketPlayerFactory extends Factory
             'feed_type' => $this->faker->randomElement(CricketFeedTypeEnum::names()),
             'feed_id' => $this->faker->text(100),
             'sport' => $this->faker->randomElement(CricketPlayerSportEnum::names()),
-            'first_name' => $this->faker->text(50),
-            'last_name' => $this->faker->text(50),
+            'first_name' => $this->faker->name('male'),
+            'last_name' => $this->faker->name('male'),
             'injury_status' => $this->faker->randomElement(CricketPlayerInjuryStatusEnum::names()),
         ];
     }

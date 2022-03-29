@@ -35,7 +35,7 @@ class LeagueFactory extends Factory
     public function definition()
     {
         return [
-            'alias' => $this->faker->unique()->text(20),
+            'alias' => $this->faker->unique()->text(5),
             'name' => $this->faker->title,
             'season' => $this->faker->year(),
             'sport_id' => $this->faker->randomElement(LeagueSportIdEnum::values()),

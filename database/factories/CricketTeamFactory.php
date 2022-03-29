@@ -34,7 +34,7 @@ class CricketTeamFactory extends Factory
     {
         return [
             'feed_id' => $this->faker->text(100),
-            'name' => $this->faker->title,
+            'name' => $this->faker->company,
             'nickname' => $this->faker->text(50),
             'alias' => $this->faker->text(30),
             'feed_type' => $this->faker->randomElement(CricketFeedTypeEnum::names()),
