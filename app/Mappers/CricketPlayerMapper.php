@@ -20,10 +20,6 @@ class CricketPlayerMapper
         $cricketPlayerDto->lastName = $data['name'] ?? '';
         $cricketPlayerDto->photo = $data['photo'] ?? null;
         $cricketPlayerDto->injuryStatus = CricketPlayerInjuryStatusEnum::normal;
-        $cricketPlayerDto->salary = 0;
-        $cricketPlayerDto->autoSalary = 0;
-        $cricketPlayerDto->totalFantasyPoints = 0;
-        $cricketPlayerDto->totalFantasyPointsPerGame = 0;
 
         return $cricketPlayerDto;
     }

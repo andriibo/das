@@ -33,10 +33,6 @@ class CricketPlayerService
             'last_name' => $cricketPlayerDto->lastName,
             'sport_id' => $cricketPlayerDto->sport->name,
             'injury_status' => $cricketPlayerDto->injuryStatus->name,
-            'salary' => $cricketPlayerDto->salary,
-            'auto_salary' => $cricketPlayerDto->autoSalary,
-            'total_fantasy_points' => $cricketPlayerDto->totalFantasyPoints,
-            'total_fantasy_points_per_game' => $cricketPlayerDto->totalFantasyPointsPerGame,
         ]);
     }
 }

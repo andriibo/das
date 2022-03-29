@@ -17,7 +17,7 @@ class CricketTeamRepository
     }
 
     /**
-     * @throws ModelNotFoundException<CricketTeam>
+     * @throws ModelNotFoundException
      */
     public function getByFeedId(string $feedId): CricketTeam
     {

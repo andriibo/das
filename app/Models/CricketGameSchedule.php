@@ -27,6 +27,8 @@ use Illuminate\Support\Carbon;
  * @property int         $is_fake
  * @property int         $is_salary_available
  * @property string      $feed_type
+ * @property string      $status
+ * @property string      $type
  * @property null|Carbon $created_at
  * @property null|Carbon $updated_at
  * @property League      $league
@@ -51,6 +53,8 @@ use Illuminate\Support\Carbon;
  * @method static Builder|CricketGameSchedule whereIsFake($value)
  * @method static Builder|CricketGameSchedule whereIsSalaryAvailable($value)
  * @method static Builder|CricketGameSchedule whereLeagueId($value)
+ * @method static Builder|CricketGameSchedule whereStatus($value)
+ * @method static Builder|CricketGameSchedule whereType($value)
  * @method static Builder|CricketGameSchedule whereUpdatedAt($value)
  * @mixin Eloquent
  */
@@ -74,6 +78,8 @@ class CricketGameSchedule extends Model
         'is_fake',
         'is_salary_available',
         'feed_type',
+        'status',
+        'type',
     ];
 
     protected $dispatchesEvents = ['saved' => CricketGameScheduleSavedEvent::class];

@@ -16,8 +16,8 @@ class CricketPlayerDto
     public string $lastName;
     public ?string $photo;
     public CricketPlayerInjuryStatusEnum $injuryStatus;
-    public float $salary;
-    public float $autoSalary;
-    public float $totalFantasyPoints;
-    public float $totalFantasyPointsPerGame;
+    public ?float $salary;
+    public ?float $autoSalary;
+    public ?float $totalFantasyPoints;
+    public ?float $totalFantasyPointsPerGame;
 }
