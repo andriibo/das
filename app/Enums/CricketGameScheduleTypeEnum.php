@@ -8,7 +8,7 @@ enum CricketGameScheduleTypeEnum: string
 
     case odi = 'ODI';
 
-    case test = 'TEST';
+    case test = 'Test';
 
     case firstClass = 'First-class';
 }
