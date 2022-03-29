@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Events\CricketGameScheduleSavedEvent;
 use Barryvdh\LaravelIdeHelper\Eloquent;
+use Database\Factories\CricketGameScheduleFactory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -35,6 +36,7 @@ use Illuminate\Support\Carbon;
  * @property CricketTeam $homeCricketTeam
  * @property CricketTeam $awayCricketTeam
  *
+ * @method static CricketGameScheduleFactory factory(...$parameters)
  * @method static Builder|CricketGameSchedule newModelQuery()
  * @method static Builder|CricketGameSchedule newQuery()
  * @method static Builder|CricketGameSchedule query()

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Events\CricketTeamSavedEvent;
 use Barryvdh\LaravelIdeHelper\Eloquent;
+use Database\Factories\CricketTeamFactory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -33,6 +34,7 @@ use Illuminate\Support\Carbon;
  * @property Collection|CricketUnit[]   $cricketUnits
  * @property null|int                   $cricket_units_count
  *
+ * @method static CricketTeamFactory factory(...$parameters)
  * @method static Builder|CricketTeam whereAlias($value)
  * @method static Builder|CricketTeam whereCountryId($value)
  * @method static Builder|CricketTeam whereCreatedAt($value)

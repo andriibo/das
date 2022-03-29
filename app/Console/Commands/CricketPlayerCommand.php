@@ -39,6 +39,8 @@ class CricketPlayerCommand extends Command
 
     private function parseCricketPlayer(int $feedId): void
     {
+        /* @var $cricketGoalserveService CricketGoalserveService
+         * @var $cricketPlayerService CricketPlayerService */
         $cricketGoalserveService = resolve(CricketGoalserveService::class);
         $cricketPlayerService = resolve(CricketPlayerService::class);
         $cricketPlayerMapper = new CricketPlayerMapper();
