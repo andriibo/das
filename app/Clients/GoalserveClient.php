@@ -30,7 +30,7 @@ class GoalserveClient
                 throw new GoalserveClientException('Can\'t parse json - ' . json_last_error_msg());
             }
 
-            return $data['squads']['category']['team'] ?? [];
+            return $data;
         } catch (ClientException $clientException) {
             throw new GoalserveClientException($clientException->getMessage(), $clientException->getCode());
         }
@@ -48,7 +48,7 @@ class GoalserveClient
                 throw new GoalserveClientException('Can\'t parse json - ' . json_last_error_msg());
             }
 
-            return $data['players']['player'] ?? [];
+            return $data;
         } catch (ClientException $clientException) {
             throw new GoalserveClientException($clientException->getMessage(), $clientException->getCode());
         }
@@ -66,7 +66,7 @@ class GoalserveClient
                 throw new GoalserveClientException('Can\'t parse json - ' . json_last_error_msg());
             }
 
-            return $data['fixtures']['category']['match'] ?? [];
+            return $data;
         } catch (ClientException $clientException) {
             throw new GoalserveClientException($clientException->getMessage(), $clientException->getCode());
         }
