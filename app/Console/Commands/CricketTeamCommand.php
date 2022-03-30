@@ -47,6 +47,7 @@ class CricketTeamCommand extends Command
 
     public function parseCricketTeam(array $data, int $leagueId): void
     {
+        /* @var $cricketTeamService CricketTeamService */
         $cricketTeamService = resolve(CricketTeamService::class);
         $cricketTeamMapper = new CricketTeamMapper();
         $cricketTeamDto = $cricketTeamMapper->map($data, $leagueId);
@@ -68,6 +69,7 @@ class CricketTeamCommand extends Command
 
     public function parseCricketPlayer(array $data): CricketPlayer
     {
+        /* @var $cricketPlayerService CricketPlayerService */
         $cricketPlayerService = resolve(CricketPlayerService::class);
         $cricketPlayerMapper = new CricketPlayerMapper();
         $cricketPlayerDto = $cricketPlayerMapper->map([
@@ -80,6 +82,7 @@ class CricketTeamCommand extends Command
 
     private function parseCricketTeams(League $league): void
     {
+        /* @var $cricketGoalserveService CricketGoalserveService */
         $cricketGoalserveService = resolve(CricketGoalserveService::class);
 
         try {
@@ -96,6 +99,7 @@ class CricketTeamCommand extends Command
     private function attachPlayerToTeam(CricketPlayer $cricketPlayer, int $teamId, string $position): void
     {
         $cricketUnitMapper = new CricketUnitMapper();
+        /* @var $cricketUnitService CricketUnitService */
         $cricketUnitService = resolve(CricketUnitService::class);
 
         $cricketUnitDto = $cricketUnitMapper->map([

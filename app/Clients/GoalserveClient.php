@@ -54,7 +54,7 @@ class GoalserveClient
         }
     }
 
-    public function getMatches(int $leagueId): array
+    public function getCricketMatches(int $leagueId): array
     {
         $endpoint = "{$this->apiUrl}/getfeed/{$this->apiKey}/cricketfixtures/intl/{$leagueId}?json=1";
 

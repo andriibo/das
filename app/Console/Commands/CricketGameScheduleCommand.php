@@ -42,11 +42,12 @@ class CricketGameScheduleCommand extends Command
 
     private function parseMatches(League $league): void
     {
+        /* @var $cricketGoalserveService CricketGoalserveService */
         $cricketGoalserveService = resolve(CricketGoalserveService::class);
 
         try {
             $leagueId = $league->params['league_id'];
-            $matches = $cricketGoalserveService->getGoalserveMatches($leagueId);
+            $matches = $cricketGoalserveService->getGoalserveCricketMatches($leagueId);
             foreach ($matches as $match) {
                 $this->parseMatch($match, $league->id);
             }
@@ -57,6 +58,8 @@ class CricketGameScheduleCommand extends Command
 
     private function parseMatch(array $data, int $leagueId): void
     {
+        /* @var $cricketGameScheduleService CricketGameScheduleService
+        * @var $cricketGameScheduleMapper CricketGameScheduleMapper */
         $cricketGameScheduleService = resolve(CricketGameScheduleService::class);
         $cricketGameScheduleMapper = resolve(CricketGameScheduleMapper::class);
 

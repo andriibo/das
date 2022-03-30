@@ -3,6 +3,7 @@
 namespace Tests\Unit;
 
 use App\Clients\GoalserveClient;
+use App\Services\CricketGoalserveService;
 use Illuminate\Support\Facades\File;
 use Tests\TestCase;
 
@@ -24,18 +25,17 @@ class GoalserveClientTest extends TestCase
             ->andReturn($mockResponse)
         ;
 
-        /* @var $mockGoalserveClient GoalserveClient */
-        $response = $mockGoalserveClient->getCricketTeams($this->leagueId);
+        $this->assertInstanceOf(GoalserveClient::class, $mockGoalserveClient);
+
+        /* @var $cricketGoalserveService CricketGoalserveService */
+        $cricketGoalserveService = new CricketGoalserveService($mockGoalserveClient);
+        $response = $cricketGoalserveService->getGoalserveCricketTeams($this->leagueId);
 
         $this->assertIsNotObject($response);
         $this->assertIsArray($response);
         $this->assertNotEmpty($response);
-        $this->assertArrayHasKey('squads', $response);
-        $this->assertArrayHasKey('category', $response['squads']);
-        $this->assertArrayHasKey('team', $response['squads']['category']);
-        $this->assertNotEmpty($response['squads']['category']['team']);
 
-        $firstTeam = $response['squads']['category']['team'][0];
+        $firstTeam = $response[0];
         $this->assertArrayHasKey('id', $firstTeam);
         $this->assertArrayHasKey('name', $firstTeam);
         $this->assertArrayHasKey('player', $firstTeam);
@@ -55,41 +55,39 @@ class GoalserveClientTest extends TestCase
             ->andReturn($mockResponse)
         ;
 
-        /* @var $mockGoalserveClient GoalserveClient */
-        $response = $mockGoalserveClient->getCricketPlayer($this->playerId);
+        $this->assertInstanceOf(GoalserveClient::class, $mockGoalserveClient);
+
+        /* @var $cricketGoalserveService CricketGoalserveService */
+        $cricketGoalserveService = new CricketGoalserveService($mockGoalserveClient);
+        $response = $cricketGoalserveService->getGoalserveCricketPlayer($this->playerId);
 
         $this->assertIsNotObject($response);
         $this->assertIsArray($response);
         $this->assertNotEmpty($response);
-        $this->assertArrayHasKey('players', $response);
-        $this->assertArrayHasKey('player', $response['players']);
-        $player = $response['players']['player'];
-
-        $this->assertArrayHasKey('name', $player);
-        $this->assertArrayHasKey('image', $player);
+        $this->assertArrayHasKey('name', $response);
+        $this->assertArrayHasKey('image', $response);
     }
 
     public function testGoalserveGetCricketMatches(): void
     {
         $mockGoalserveClient = $this->mock(GoalserveClient::class);
         $mockResponse = json_decode(File::get(base_path('tests/stubs/cricket.matches.json')), true);
-        $mockGoalserveClient->shouldReceive('getMatches')
+        $mockGoalserveClient->shouldReceive('getCricketMatches')
             ->with($this->leagueId)
             ->andReturn($mockResponse)
         ;
 
-        /* @var $mockGoalserveClient GoalserveClient */
-        $response = $mockGoalserveClient->getMatches($this->leagueId);
+        $this->assertInstanceOf(GoalserveClient::class, $mockGoalserveClient);
+
+        /* @var $cricketGoalserveService CricketGoalserveService */
+        $cricketGoalserveService = new CricketGoalserveService($mockGoalserveClient);
+        $response = $cricketGoalserveService->getGoalserveCricketMatches($this->leagueId);
 
         $this->assertIsNotObject($response);
         $this->assertIsArray($response);
         $this->assertNotEmpty($response);
-        $this->assertArrayHasKey('fixtures', $response);
-        $this->assertArrayHasKey('category', $response['fixtures']);
-        $this->assertArrayHasKey('match', $response['fixtures']['category']);
-        $this->assertNotEmpty($response['fixtures']['category']['match']);
 
-        $firstMatch = $response['fixtures']['category']['match'][0];
+        $firstMatch = $response[0];
         $this->assertArrayHasKey('id', $firstMatch);
         $this->assertArrayHasKey('date', $firstMatch);
         $this->assertArrayHasKey('time', $firstMatch);

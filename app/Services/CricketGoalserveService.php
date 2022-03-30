@@ -43,10 +43,10 @@ class CricketGoalserveService
     /**
      * @throws CricketGoalserveServiceException
      */
-    public function getGoalserveMatches(int $leagueId): array
+    public function getGoalserveCricketMatches(int $leagueId): array
     {
         try {
-            $data = $this->goalserveClient->getMatches($leagueId);
+            $data = $this->goalserveClient->getCricketMatches($leagueId);
 
             return $data['fixtures']['category']['match'] ?? [];
         } catch (\Throwable $exception) {
