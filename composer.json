@@ -6,6 +6,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.1",
+        "archtechx/enums": "^0.2.0",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^9.2",
         "laravel/sanctum": "^2.14.1",
@@ -13,6 +14,7 @@
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.12",
+        "brianium/paratest": "^6.4",
         "fakerphp/faker": "^1.9.1",
         "friendsofphp/php-cs-fixer": "^3.6",
         "laravel/sail": "^1.0.1",
@@ -20,7 +22,8 @@
         "nunomaduro/collision": "^6.1",
         "phpro/grumphp": "^1.8",
         "phpunit/phpunit": "^9.5.10",
-        "spatie/laravel-ignition": "^1.0"
+        "spatie/laravel-ignition": "^1.0",
+        "vimeo/psalm": "^4.22"
     },
     "autoload": {
         "psr-4": {
@@ -47,6 +50,10 @@
         ],
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
+        ],
+        "check-build": [
+            "psalm",
+            "php-cs-fixer fix --dry-run --verbose --using-cache=no --config=.php_cs.php"
         ]
     },
     "extra": {
@@ -55,7 +62,8 @@
         },
         "hooks": {
             "pre-commit": [
-                "php-cs-fixer"
+                "php-cs-fixer fix --verbose --config=.php_cs.php",
+                "psalm"
             ]
         },
         "grumphp": {

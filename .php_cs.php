@@ -3,7 +3,7 @@
 $finder = PhpCsFixer\Finder::create()
     ->exclude('database/migrations')
     ->exclude('bootstrap/cache')
-    ->exclude('storage/framework')
+    ->exclude('storage')
     ->exclude('vendor')
     ->notPath('_ide_helper.php')
     ->notPath('_ide_helper_models.php')

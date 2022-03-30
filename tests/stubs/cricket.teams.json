@@ -1,0 +1,1976 @@
+{
+  "squads": {
+    "category": {
+      "id": "1015",
+      "name": "Indian Premier League",
+      "season": "2022",
+      "team": [
+        {
+          "id": "2412",
+          "name": "Mumbai Indians",
+          "player": [
+            {
+              "id": "Jofra Archer",
+              "name": "669855",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Rohit Sharma",
+              "name": "34102",
+              "odi": "False",
+              "role": "Batsman",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Suryakumar Yadav",
+              "name": "446507",
+              "odi": "False",
+              "role": "Batsman",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Tilak Varma",
+              "name": "1170265",
+              "odi": "False",
+              "role": "Batsman",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Ramandeep Singh",
+              "name": "1079470",
+              "odi": "False",
+              "role": "Batsman",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Anmolpreet Singh",
+              "name": "851261",
+              "odi": "False",
+              "role": "Batsman",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Dewald Brevis",
+              "name": "1070665",
+              "odi": "False",
+              "role": "Batsman",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Rahul Buddhi",
+              "name": "1212693",
+              "odi": "False",
+              "role": "Batting Allrounder",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Kieron Pollard",
+              "name": "230559",
+              "odi": "False",
+              "role": "Batting Allrounder",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Tim David",
+              "name": "892749",
+              "odi": "False",
+              "role": "Batting Allrounder",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Fabian Allen",
+              "name": "670013",
+              "odi": "False",
+              "role": "Batting Allrounder",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Hrithik Shokeen",
+              "name": "1175423",
+              "odi": "False",
+              "role": "Bowling Allrounder",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Arjun Tendulkar",
+              "name": "1148776",
+              "odi": "False",
+              "role": "Bowling Allrounder",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Sanjay Yadav",
+              "name": "1048841",
+              "odi": "False",
+              "role": "Bowling Allrounder",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Daniel Sams",
+              "name": "826901",
+              "odi": "False",
+              "role": "Bowling Allrounder",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Aryan Juyal",
+              "name": "1130300",
+              "odi": "False",
+              "role": "Wicketkeeper batsman",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Ishan Kishan",
+              "name": "720471",
+              "odi": "False",
+              "role": "Wicketkeeper batsman",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Jasprit Bumrah",
+              "name": "625383",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Jaydev Unadkat",
+              "name": "390484",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Mayank Markande",
+              "name": "1081442",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Tymal Mills",
+              "name": "459257",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Riley Meredith",
+              "name": "961713",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Murugan Ashwin",
+              "name": "528067",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Basil Thampi",
+              "name": "732291",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Arshad Khan",
+              "name": "1244751",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            }
+          ]
+        },
+        {
+          "id": "2415",
+          "name": "Chennai Super Kings",
+          "player": [
+            {
+              "id": "Ruturaj Gaikwad",
+              "name": "1060380",
+              "odi": "False",
+              "role": "Batsman",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Ambati Rayudu",
+              "name": "33141",
+              "odi": "False",
+              "role": "Batsman",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Subhranshu Senapati",
+              "name": "1059577",
+              "odi": "False",
+              "role": "Batsman",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Hari Nishaanth",
+              "name": "1048847",
+              "odi": "False",
+              "role": "Batsman",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Moeen Ali",
+              "name": "8917",
+              "odi": "False",
+              "role": "Batting Allrounder",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Dwayne Bravo",
+              "name": "51439",
+              "odi": "False",
+              "role": "Batting Allrounder",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Ravindra Jadeja",
+              "name": "234675",
+              "odi": "False",
+              "role": "Bowling Allrounder",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Shivam Dube",
+              "name": "714451",
+              "odi": "False",
+              "role": "Bowling Allrounder",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Dwaine Pretorius",
+              "name": "327830",
+              "odi": "False",
+              "role": "Bowling Allrounder",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Bhagath Varma",
+              "name": "1252050",
+              "odi": "False",
+              "role": "Bowling Allrounder",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Mitchell Santner",
+              "name": "502714",
+              "odi": "False",
+              "role": "Bowling Allrounder",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "MS Dhoni",
+              "name": "28081",
+              "odi": "False",
+              "role": "Wicketkeeper batsman",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Robin Uthappa",
+              "name": "35582",
+              "odi": "False",
+              "role": "Wicketkeeper batsman",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Devon Conway",
+              "name": "379140",
+              "odi": "False",
+              "role": "Wicketkeeper batsman",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Narayan Jagadeesan",
+              "name": "1048813",
+              "odi": "False",
+              "role": "Wicketkeeper batsman",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Deepak Chahar",
+              "name": "447261",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "KM Asif",
+              "name": "1083030",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Tushar Deshpande",
+              "name": "822553",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Maheesh Theekshana",
+              "name": "1138316",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Simarjeet Singh",
+              "name": "1159722",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Chris Jordan",
+              "name": "288992",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Adam Milne",
+              "name": "450860",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Mukesh Choudhary",
+              "name": "1125688",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Prashant Solanki",
+              "name": "1252337",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Rajvardhan Hangargekar",
+              "name": "1175429",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            }
+          ]
+        },
+        {
+          "id": "5879",
+          "name": "Delhi Capitals",
+          "player": [
+            {
+              "id": "Prithvi Shaw",
+              "name": "1070168",
+              "odi": "False",
+              "role": "Batsman",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "David Warner",
+              "name": "219889",
+              "odi": "False",
+              "role": "Batsman",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Ashwin Hebbar",
+              "name": "801019",
+              "odi": "False",
+              "role": "Batsman",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Sarfaraz Khan",
+              "name": "642525",
+              "odi": "False",
+              "role": "Batsman",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Yash Dhull",
+              "name": "1292498",
+              "odi": "False",
+              "role": "Batsman",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Mandeep Singh",
+              "name": "398506",
+              "odi": "False",
+              "role": "Batsman",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Rovman Powell",
+              "name": "820351",
+              "odi": "False",
+              "role": "Batsman",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Mitchell Marsh",
+              "name": "272450",
+              "odi": "False",
+              "role": "Batting Allrounder",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Lalit Yadav",
+              "name": "930189",
+              "odi": "False",
+              "role": "Batting Allrounder",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Ripal Patel",
+              "name": "1201520",
+              "odi": "False",
+              "role": "Batting Allrounder",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Axar Patel",
+              "name": "554691",
+              "odi": "False",
+              "role": "Bowling Allrounder",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Rishabh Pant",
+              "name": "931581",
+              "odi": "False",
+              "role": "Wicketkeeper batsman",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Srikar Bharat",
+              "name": "529436",
+              "odi": "False",
+              "role": "Wicketkeeper batsman",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Tim Seifert",
+              "name": "625964",
+              "odi": "False",
+              "role": "Wicketkeeper batsman",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Vicky Ostwal",
+              "name": "1292520",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Anrich Nortje",
+              "name": "481979",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Shardul Thakur",
+              "name": "475281",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Kamlesh Nagarkoti",
+              "name": "1070188",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Mustafizur Rahman",
+              "name": "330902",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Lungi Ngidi",
+              "name": "542023",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Khaleel Ahmed",
+              "name": "942645",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Chetan Sakariya",
+              "name": "1131754",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Praveen Dubey",
+              "name": "777515",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Kuldeep Yadav",
+              "name": "559235",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            }
+          ]
+        },
+        {
+          "id": "2543",
+          "name": "Kings XI Punjab",
+          "player": [
+            {
+              "id": "Mayank Agarwal",
+              "name": "398438",
+              "odi": "False",
+              "role": "Batsman",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Prerak Mankad",
+              "name": "956871",
+              "odi": "False",
+              "role": "Batsman",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Bhanuka Rajapaksa",
+              "name": "342619",
+              "odi": "False",
+              "role": "Batsman",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Shikhar Dhawan",
+              "name": "28235",
+              "odi": "False",
+              "role": "Batsman",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Liam Livingstone",
+              "name": "403902",
+              "odi": "False",
+              "role": "Batsman",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Atharva Taide",
+              "name": "1125958",
+              "odi": "False",
+              "role": "Batsman",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Benny Howell",
+              "name": "211748",
+              "odi": "False",
+              "role": "Batting Allrounder",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Harpreet Brar",
+              "name": "1168641",
+              "odi": "False",
+              "role": "Batting Allrounder",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "M Shahrukh Khan",
+              "name": "719719",
+              "odi": "False",
+              "role": "Bowling Allrounder",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Baltej Singh",
+              "name": "527292",
+              "odi": "False",
+              "role": "Bowling Allrounder",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Ansh Patel",
+              "name": "1216149",
+              "odi": "False",
+              "role": "Bowling Allrounder",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Rishi Dhawan",
+              "name": "290727",
+              "odi": "False",
+              "role": "Bowling Allrounder",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Prabhsimran Singh",
+              "name": "1161024",
+              "odi": "False",
+              "role": "Wicketkeeper batsman",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Jitesh Sharma",
+              "name": "721867",
+              "odi": "False",
+              "role": "Wicketkeeper batsman",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Jonny Bairstow",
+              "name": "297433",
+              "odi": "False",
+              "role": "Wicketkeeper batsman",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Arshdeep Singh",
+              "name": "1125976",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Writtick Chatterjee",
+              "name": "699493",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Odean Smith",
+              "name": "820691",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Sandeep Sharma",
+              "name": "438362",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Raj Bawa",
+              "name": "1292502",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Nathan Ellis",
+              "name": "826915",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Vaibhav Arora",
+              "name": "1209292",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Ishan Porel",
+              "name": "967603",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Rahul Chahar",
+              "name": "1064812",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Kagiso Rabada",
+              "name": "550215",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            }
+          ]
+        },
+        {
+          "id": "3058",
+          "name": "Sunrisers Hyderabad",
+          "player": [
+            {
+              "id": "Sean Abbott",
+              "name": "398666",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Abdul Samad",
+              "name": "1175485",
+              "odi": "False",
+              "role": "Batsman",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Abhishek Sharma",
+              "name": "1070183",
+              "odi": "False",
+              "role": "Bowling Allrounder",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Saurabh Dubey",
+              "name": "1206492",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Fazalhaq Farooqi",
+              "name": "974175",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Priyam Garg",
+              "name": "1070180",
+              "odi": "False",
+              "role": "Batsman",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Shreyas Gopal",
+              "name": "344580",
+              "odi": "False",
+              "role": "Bowling Allrounder",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Marco Jansen",
+              "name": "696401",
+              "odi": "False",
+              "role": "Bowling Allrounder",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Kartik Tyagi",
+              "name": "1122918",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Bhuvneshwar Kumar",
+              "name": "326016",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Aiden Markram",
+              "name": "600498",
+              "odi": "False",
+              "role": "Batsman",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "T Natarajan",
+              "name": "802575",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Glenn Phillips",
+              "name": "823509",
+              "odi": "False",
+              "role": "Wicketkeeper batsman",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Nicholas Pooran",
+              "name": "604302",
+              "odi": "False",
+              "role": "Wicketkeeper batsman",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Ravikumar Samarth",
+              "name": "474512",
+              "odi": "False",
+              "role": "Batsman",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Shashank Singh",
+              "name": "377534",
+              "odi": "False",
+              "role": "Batsman",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Romario Shepherd",
+              "name": "677077",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Jagadeesha Suchith",
+              "name": "527663",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Rahul Tripathi",
+              "name": "446763",
+              "odi": "False",
+              "role": "Batsman",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Umran Malik",
+              "name": "1246528",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Vishnu Vinod",
+              "name": "732293",
+              "odi": "False",
+              "role": "Wicketkeeper batsman",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Washington Sundar",
+              "name": "719715",
+              "odi": "False",
+              "role": "Batting Allrounder",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Kane Williamson",
+              "name": "277906",
+              "odi": "False",
+              "role": "Batsman",
+              "t20": "True",
+              "test": "False"
+            }
+          ]
+        },
+        {
+          "id": "2418",
+          "name": "Royal Challengers Bangalore",
+          "player": [
+            {
+              "id": "Virat Kohli",
+              "name": "253802",
+              "odi": "False",
+              "role": "Batsman",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Faf du Plessis",
+              "name": "44828",
+              "odi": "False",
+              "role": "Batsman",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Suyash Prabhudessai",
+              "name": "1083851",
+              "odi": "False",
+              "role": "Batsman",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Glenn Maxwell",
+              "name": "325026",
+              "odi": "False",
+              "role": "Batting Allrounder",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Mahipal Lomror",
+              "name": "853265",
+              "odi": "False",
+              "role": "Batting Allrounder",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Sherfane Rutherford",
+              "name": "914541",
+              "odi": "False",
+              "role": "Batting Allrounder",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Aneeshwar Gautam",
+              "name": "1292513",
+              "odi": "False",
+              "role": "Batting Allrounder",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Shahbaz Ahmed",
+              "name": "1159711",
+              "odi": "False",
+              "role": "Bowling Allrounder",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Wanindu Hasaranga de Silva",
+              "name": "784379",
+              "odi": "False",
+              "role": "Bowling Allrounder",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "David Willey",
+              "name": "308251",
+              "odi": "False",
+              "role": "Bowling Allrounder",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Dinesh Karthik",
+              "name": "30045",
+              "odi": "False",
+              "role": "Wicketkeeper batsman",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Anuj Rawat",
+              "name": "1123073",
+              "odi": "False",
+              "role": "Wicketkeeper batsman",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Finn Allen",
+              "name": "959759",
+              "odi": "False",
+              "role": "Wicketkeeper batsman",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Luvnith Sisodia",
+              "name": "1155253",
+              "odi": "False",
+              "role": "Wicketkeeper batsman",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Mohammed Siraj",
+              "name": "940973",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Harshal Patel",
+              "name": "390481",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Akash Deep",
+              "name": "1176959",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Josh Hazlewood",
+              "name": "288284",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Jason Behrendorff",
+              "name": "272477",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Chama Milind",
+              "name": "604616",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Karn Sharma",
+              "name": "30288",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Siddarth Kaul",
+              "name": "326017",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            }
+          ]
+        },
+        {
+          "id": "2542",
+          "name": "Rajasthan Royals",
+          "player": [
+            {
+              "id": "Karun Nair",
+              "name": "398439",
+              "odi": "False",
+              "role": "Batsman",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Rassie van der Dussen",
+              "name": "337790",
+              "odi": "False",
+              "role": "Batsman",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Devdutt Padikkal",
+              "name": "1119026",
+              "odi": "False",
+              "role": "Batsman",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Shimron Hetmyer",
+              "name": "670025",
+              "odi": "False",
+              "role": "Batsman",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Yashasvi Jaiswal",
+              "name": "1151278",
+              "odi": "False",
+              "role": "Batsman",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Riyan Parag",
+              "name": "1079434",
+              "odi": "False",
+              "role": "Batsman",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "James Neesham",
+              "name": "355269",
+              "odi": "False",
+              "role": "Batting Allrounder",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Anunay Singh",
+              "name": "1159816",
+              "odi": "False",
+              "role": "Bowling Allrounder",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Daryl Mitchell",
+              "name": "381743",
+              "odi": "False",
+              "role": "Bowling Allrounder",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Ravichandran Ashwin",
+              "name": "26421",
+              "odi": "False",
+              "role": "Bowling Allrounder",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Sanju Samson",
+              "name": "425943",
+              "odi": "False",
+              "role": "Wicketkeeper batsman",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Jos Buttler",
+              "name": "308967",
+              "odi": "False",
+              "role": "Wicketkeeper batsman",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Dhruv Jurel",
+              "name": "1175488",
+              "odi": "False",
+              "role": "Wicketkeeper batsman",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Shubham Garhwal",
+              "name": "1287019",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Kuldip Yadav",
+              "name": "1206495",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Nathan Coulter-Nile",
+              "name": "261354",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Navdeep Saini",
+              "name": "700167",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Kuldeep Sen",
+              "name": "1163695",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Obed McCoy",
+              "name": "906783",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Tejas Baroka",
+              "name": "1082859",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "KC Cariappa",
+              "name": "777537",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Yuzvendra Chahal",
+              "name": "430246",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Prasidh Krishna",
+              "name": "917159",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Trent Boult",
+              "name": "277912",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            }
+          ]
+        },
+        {
+          "id": "2541",
+          "name": "Kolkata Knight Riders",
+          "player": [
+            {
+              "id": "Baba Indrajith",
+              "name": "477069",
+              "odi": "False",
+              "role": "Batsman",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Shreyas Iyer",
+              "name": "642519",
+              "odi": "False",
+              "role": "Batsman",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Pratham Singh",
+              "name": "1083464",
+              "odi": "False",
+              "role": "Batsman",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Ajinkya Rahane",
+              "name": "277916",
+              "odi": "False",
+              "role": "Batsman",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Ramesh Kumar",
+              "name": "1299848",
+              "odi": "False",
+              "role": "Batsman",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Nitish Rana",
+              "name": "604527",
+              "odi": "False",
+              "role": "Batsman",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Rinku Singh",
+              "name": "723105",
+              "odi": "False",
+              "role": "Batsman",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Abhijeet Tomar",
+              "name": "1081183",
+              "odi": "False",
+              "role": "Batsman",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Aaron Finch",
+              "name": "5334",
+              "odi": "False",
+              "role": "Batsman",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Venkatesh Iyer",
+              "name": "851403",
+              "odi": "False",
+              "role": "Batting Allrounder",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Anukul Roy",
+              "name": "1079839",
+              "odi": "False",
+              "role": "Batting Allrounder",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Mohammad Nabi",
+              "name": "25913",
+              "odi": "False",
+              "role": "Bowling Allrounder",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Andre Russell",
+              "name": "276298",
+              "odi": "False",
+              "role": "Bowling Allrounder",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Shivam Mavi",
+              "name": "1079848",
+              "odi": "False",
+              "role": "Bowling Allrounder",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Sam Billings",
+              "name": "297628",
+              "odi": "False",
+              "role": "Wicketkeeper batsman",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Sheldon Jackson",
+              "name": "237696",
+              "odi": "False",
+              "role": "Wicketkeeper batsman",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Ashok Sharma",
+              "name": "1299879",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Pat Cummins",
+              "name": "489889",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Chamika Karunaratne",
+              "name": "623695",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Sunil Narine",
+              "name": "230558",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Rasikh Salam",
+              "name": "1161489",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Tim Southee",
+              "name": "232364",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Varun Chakaravarthy",
+              "name": "1108375",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Umesh Yadav",
+              "name": "376116",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Aman Khan",
+              "name": "1119011",
+              "odi": "False",
+              "role": "Batsman",
+              "t20": "True",
+              "test": "False"
+            }
+          ]
+        },
+        {
+          "id": "6224",
+          "name": "Gujarat Titans",
+          "player": [
+            {
+              "id": "Shubman Gill",
+              "name": "1070173",
+              "odi": "False",
+              "role": "Batsman",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Sai Sudharsan",
+              "name": "1151288",
+              "odi": "False",
+              "role": "Batsman",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Abhinav Manohar",
+              "name": "778963",
+              "odi": "False",
+              "role": "Batsman",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "David Miller",
+              "name": "321777",
+              "odi": "False",
+              "role": "Batsman",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Gurkeerat Singh Mann",
+              "name": "537124",
+              "odi": "False",
+              "role": "Batsman",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Hardik Pandya",
+              "name": "625371",
+              "odi": "False",
+              "role": "Batting Allrounder",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Vijay Shankar",
+              "name": "477021",
+              "odi": "False",
+              "role": "Batting Allrounder",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Rahul Tewatia",
+              "name": "423838",
+              "odi": "False",
+              "role": "Batting Allrounder",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Matthew Wade",
+              "name": "230193",
+              "odi": "False",
+              "role": "Wicketkeeper batsman",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Wriddhiman Saha",
+              "name": "279810",
+              "odi": "False",
+              "role": "Wicketkeeper batsman",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Rahmanullah Gurbaz",
+              "name": "974087",
+              "odi": "False",
+              "role": "Wicketkeeper batsman",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Dominic Drakes",
+              "name": "906749",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Jayant Yadav",
+              "name": "447587",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Rashid Khan",
+              "name": "793463",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Varun Aaron",
+              "name": "360911",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Darshan Nalkande",
+              "name": "1111917",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Yash Dayal",
+              "name": "1159720",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Pradeep Sangwan",
+              "name": "279545",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Alzarri Joseph",
+              "name": "670031",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Ravisrinivasan Sai Kishore",
+              "name": "1048739",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Noor Ahmad",
+              "name": "1182529",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Lockie Ferguson",
+              "name": "493773",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Mohammed Shami",
+              "name": "481896",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            }
+          ]
+        },
+        {
+          "id": "6225",
+          "name": "Lucknow Super Giants",
+          "player": [
+            {
+              "id": "Avesh Khan",
+              "name": "694211",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Ayush Badoni",
+              "name": "1151270",
+              "odi": "False",
+              "role": "Bowling Allrounder",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Dushmantha Chameera",
+              "name": "552152",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Quinton de Kock",
+              "name": "379143",
+              "odi": "False",
+              "role": "Wicketkeeper batsman",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Krishnappa Gowtham",
+              "name": "424377",
+              "odi": "False",
+              "role": "Bowling Allrounder",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Jason Holder",
+              "name": "391485",
+              "odi": "False",
+              "role": "Bowling Allrounder",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Deepak Hooda",
+              "name": "497121",
+              "odi": "False",
+              "role": "Batting Allrounder",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Evin Lewis",
+              "name": "431901",
+              "odi": "False",
+              "role": "Batsman",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Kyle Mayers",
+              "name": "348056",
+              "odi": "False",
+              "role": "Batting Allrounder",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Shahbaz Nadeem",
+              "name": "31872",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Manish Pandey",
+              "name": "290630",
+              "odi": "False",
+              "role": "Batsman",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Krunal Pandya",
+              "name": "471342",
+              "odi": "False",
+              "role": "Batting Allrounder",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "KL Rahul",
+              "name": "422108",
+              "odi": "False",
+              "role": "Wicketkeeper batsman",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Ankit Rajpoot",
+              "name": "591650",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Ravi Bishnoi",
+              "name": "1175441",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Marcus Stoinis",
+              "name": "325012",
+              "odi": "False",
+              "role": "Batting Allrounder",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Manan Vohra",
+              "name": "532856",
+              "odi": "False",
+              "role": "Batsman",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Mark Wood",
+              "name": "351588",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Mayank Yadav",
+              "name": "1292563",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Karan Sharma",
+              "name": "1246518",
+              "odi": "False",
+              "role": "Batting Allrounder",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Mohsin Khan",
+              "name": "1132005",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            },
+            {
+              "id": "Andrew Tye",
+              "name": "459508",
+              "odi": "False",
+              "role": "Bowler",
+              "t20": "True",
+              "test": "False"
+            }
+          ]
+        }
+      ]
+    },
+    "sport": "cricket"
+  }
+}
