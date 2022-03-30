@@ -18,7 +18,9 @@ class CricketGoalserveService
     public function getGoalserveCricketTeams(int $leagueId): array
     {
         try {
-            return $this->goalserveClient->getCricketTeams($leagueId);
+            $data = $this->goalserveClient->getCricketTeams($leagueId);
+
+            return $data['squads']['category']['team'] ?? [];
         } catch (\Throwable $exception) {
             throw new CricketGoalserveServiceException($exception->getMessage(), $exception->getCode());
         }
@@ -30,7 +32,9 @@ class CricketGoalserveService
     public function getGoalserveCricketPlayer(int $playerId): array
     {
         try {
-            return $this->goalserveClient->getCricketPlayer($playerId);
+            $data = $this->goalserveClient->getCricketPlayer($playerId);
+
+            return $data['players']['player'] ?? [];
         } catch (\Throwable $exception) {
             throw new CricketGoalserveServiceException($exception->getMessage(), $exception->getCode());
         }
@@ -42,7 +46,9 @@ class CricketGoalserveService
     public function getGoalserveMatches(int $leagueId): array
     {
         try {
-            return $this->goalserveClient->getMatches($leagueId);
+            $data = $this->goalserveClient->getMatches($leagueId);
+
+            return $data['fixtures']['category']['match'] ?? [];
         } catch (\Throwable $exception) {
             throw new CricketGoalserveServiceException($exception->getMessage(), $exception->getCode());
         }

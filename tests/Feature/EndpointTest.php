@@ -8,7 +8,7 @@ use Tests\TestCase;
  * @internal
  * @coversNothing
  */
-class ExampleTest extends TestCase
+class EndpointTest extends TestCase
 {
     /**
      * A basic test example.
