@@ -46,9 +46,17 @@ Note: You do need CodeComplice for Sublime Text: https://github.com/spectacles/C
 ### Phpcsfixer
 
 ```console
-$ vendor/bin/php-cs-fixer fix --config=.php_cs.php
+$ ./vendor/bin/php-cs-fixer fix --config=.php_cs.php
 ```
 
 See [usage](https://github.com/FriendsOfPHP/PHP-CS-Fixer/blob/3.0/doc/config.rst), list of [built-in rules](https://github.com/FriendsOfPHP/PHP-CS-Fixer/blob/3.0/doc/rules/index.rst), list of [rule sets](https://github.com/FriendsOfPHP/PHP-CS-Fixer/blob/3.0/doc/ruleSets/index.rst)
 
 and [configuration file](https://github.com/FriendsOfPHP/PHP-CS-Fixer/blob/3.0/doc/config.rst) documentation for more details.
+
+### Psalm
+
+```console
+$ ./vendor/bin/psalm
+```
+
+See [usage](https://github.com/vimeo/psalm/blob/4.x/docs/running_psalm/command_line_usage.md)
