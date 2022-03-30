@@ -2,7 +2,7 @@ version: "3.7"
 services:
   app:
     build: ./docker/php
-    container_name: das-app
+    container_name: fantasysports-das
     restart: always
     working_dir: /var/www/html
     volumes:
@@ -15,4 +15,4 @@ services:
 networks:
   default:
     external:
-      name: dfs-network
+      name: fantasysports-network
