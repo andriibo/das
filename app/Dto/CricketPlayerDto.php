@@ -8,7 +8,7 @@ use App\Enums\CricketPlayerSportEnum;
 
 class CricketPlayerDto
 {
-    public int $id;
+    public ?int $id;
     public CricketFeedTypeEnum $feedType;
     public int $feedId;
     public CricketPlayerSportEnum $sport;
