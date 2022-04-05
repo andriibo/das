@@ -22,28 +22,28 @@ class GoalserveClient
     {
         $url = "/cricketfixtures/intl/{$leagueId}_squads?json=1";
 
-        $this->sendRequest($url);
+        return $this->sendRequest($url);
     }
 
     public function getCricketPlayer(int $playerId): array
     {
         $url = "/cricket/profile?id={$playerId}&json=1";
 
-        $this->sendRequest($url);
+        return $this->sendRequest($url);
     }
 
     public function getCricketMatches(int $leagueId): array
     {
         $url = "/cricketfixtures/intl/{$leagueId}?json=1";
 
-        $this->sendRequest($url);
+        return $this->sendRequest($url);
     }
 
     public function getGameStats(string $date): array
     {
         $url = "/cricket/livescore?date={$date}&json=1";
 
-        $this->sendRequest($url);
+        return $this->sendRequest($url);
     }
 
     private function sendRequest(string $url, string $method = 'GET', array $options = []): array
