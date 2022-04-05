@@ -71,4 +71,22 @@ class GoalserveClient
             throw new GoalserveClientException($clientException->getMessage(), $clientException->getCode());
         }
     }
+
+    public function getGameStats(string $date): array
+    {
+        $endpoint = "{$this->apiUrl}/getfeed/{$this->apiKey}/cricket/livescore?date={$date}&json=1";
+
+        try {
+            $response = $this->client->get($endpoint);
+            $data = json_decode($response->getBody()->getContents(), true);
+
+            if (json_last_error() !== JSON_ERROR_NONE) {
+                throw new GoalserveClientException('Can\'t parse json - ' . json_last_error_msg());
+            }
+
+            return $data;
+        } catch (ClientException $clientException) {
+            throw new GoalserveClientException($clientException->getMessage(), $clientException->getCode());
+        }
+    }
 }

@@ -5,12 +5,26 @@ namespace App\Services;
 use App\Dto\CricketGameScheduleDto;
 use App\Models\CricketGameSchedule;
 use App\Repositories\CricketGameScheduleRepository;
+use Illuminate\Database\Eloquent\Collection;
 
 class CricketGameScheduleService
 {
     public function __construct(
         private readonly CricketGameScheduleRepository $cricketGameScheduleRepository
     ) {
+    }
+
+    public function getCricketGameScheduleByFeedId(string $feedId): CricketGameSchedule
+    {
+        return $this->cricketGameScheduleRepository->getByFeedId($feedId);
+    }
+
+    /**
+     * @return Collection|CricketGameSchedule[]
+     */
+    public function getCricketGameSchedules(): Collection
+    {
+        return $this->cricketGameScheduleRepository->getList();
     }
 
     public function storeCricketGameSchedule(CricketGameScheduleDto $cricketGameScheduleDto): CricketGameSchedule

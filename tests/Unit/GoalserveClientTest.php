@@ -15,6 +15,8 @@ class GoalserveClientTest extends TestCase
 {
     private int $leagueId = 1015;
     private int $playerId = 669855;
+    private string $gameDate = '01.04.2022';
+    private string $gameFeedId = '13071977374';
 
     public function testGoalserveGetCricketTeams(): void
     {
@@ -100,5 +102,26 @@ class GoalserveClientTest extends TestCase
         $this->assertArrayHasKey('id', $firstMatchVisitorTeam);
         $this->assertArrayHasKey('totalscore', $firstMatchLocalTeam);
         $this->assertArrayHasKey('totalscore', $firstMatchVisitorTeam);
+    }
+
+    public function testGoalserveGetGameStat(): void
+    {
+        $mockGoalserveClient = $this->mock(GoalserveClient::class);
+        $mockResponse = json_decode(File::get(base_path('tests/stubs/cricket.game.stats.json')), true);
+        $mockGoalserveClient->shouldReceive('getGameStats')
+            ->with($this->gameDate)
+            ->andReturn($mockResponse)
+        ;
+
+        $this->assertInstanceOf(GoalserveClient::class, $mockGoalserveClient);
+
+        /* @var $cricketGoalserveService CricketGoalserveService */
+        $cricketGoalserveService = new CricketGoalserveService($mockGoalserveClient);
+        $response = $cricketGoalserveService->getGoalserveGameStat($this->gameDate, $this->gameFeedId);
+
+        $this->assertIsNotObject($response);
+        $this->assertIsArray($response);
+        $this->assertNotEmpty($response);
+        $this->assertArrayHasKey('match', $response);
     }
 }

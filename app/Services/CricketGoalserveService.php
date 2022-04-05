@@ -53,4 +53,26 @@ class CricketGoalserveService
             throw new CricketGoalserveServiceException($exception->getMessage(), $exception->getCode());
         }
     }
+
+    /**
+     * @throws CricketGoalserveServiceException
+     */
+    public function getGoalserveGameStat(string $date, string $feedId): array
+    {
+        try {
+            $data = $this->goalserveClient->getGameStats($date);
+
+            if (isset($data['scores']['category']) && is_array($data['scores']['category'])) {
+                foreach ($data['scores']['category'] as $gameStat) {
+                    if ($gameStat['match']['id'] === $feedId) {
+                        return $gameStat;
+                    }
+                }
+            }
+
+            return [];
+        } catch (\Throwable $exception) {
+            throw new CricketGoalserveServiceException($exception->getMessage(), $exception->getCode());
+        }
+    }
 }
