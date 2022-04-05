@@ -25,6 +25,12 @@ definitions:
                 docker-compose exec -T app php artisan up &&
                 docker-compose exec -T app php artisan test
 pipelines:
+  pull-requests:
+    '**':
+      - step:
+          <<: *deploy
+          deployment: development
+          name: deploy to development
   custom:
     deploy-to-dev:
       - step:
