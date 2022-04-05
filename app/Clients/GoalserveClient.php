@@ -22,36 +22,36 @@ class GoalserveClient
     {
         $url = "/cricketfixtures/intl/{$leagueId}_squads?json=1";
 
-        $this->sendRequestGet($url);
+        $this->sendRequest($url);
     }
 
     public function getCricketPlayer(int $playerId): array
     {
         $url = "/cricket/profile?id={$playerId}&json=1";
 
-        $this->sendRequestGet($url);
+        $this->sendRequest($url);
     }
 
     public function getCricketMatches(int $leagueId): array
     {
         $url = "/cricketfixtures/intl/{$leagueId}?json=1";
 
-        $this->sendRequestGet($url);
+        $this->sendRequest($url);
     }
 
     public function getGameStats(string $date): array
     {
         $url = "/cricket/livescore?date={$date}&json=1";
 
-        $this->sendRequestGet($url);
+        $this->sendRequest($url);
     }
 
-    private function sendRequestGet(string $url): array
+    private function sendRequest(string $url, string $method = 'GET', array $options = []): array
     {
         $endpoint = "{$this->apiUrl}/getfeed/{$this->apiKey}/{$url}";
 
         try {
-            $response = $this->client->get($endpoint);
+            $response = $this->client->request($method, $endpoint, $options);
             $data = json_decode($response->getBody()->getContents(), true);
 
             if (json_last_error() !== JSON_ERROR_NONE) {
