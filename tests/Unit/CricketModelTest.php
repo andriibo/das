@@ -59,7 +59,7 @@ class CricketModelTest extends TestCase
 
         $cricketGameSchedule = CricketGameSchedule::factory()
             ->for($league)
-            ->for($homeCricketTeam, 'homeCricketTeam')
+            ->for($homeCricketTeam, 'homeTeam')
             ->for($awayCricketTeam, 'awayCricketTeam')
             ->create()
         ;
@@ -75,7 +75,7 @@ class CricketModelTest extends TestCase
 
         $cricketGameSchedule = CricketGameSchedule::factory()
             ->for($league)
-            ->for($homeCricketTeam, 'homeCricketTeam')
+            ->for($homeCricketTeam, 'homeTeam')
             ->for($awayCricketTeam, 'awayCricketTeam')
             ->create()
         ;
