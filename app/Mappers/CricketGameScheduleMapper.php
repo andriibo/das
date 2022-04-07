@@ -26,8 +26,8 @@ class CricketGameScheduleMapper
         $cricketGameScheduleDto->gameDate = $this->generateGameDate($data['date'], $data['time']);
         $cricketGameScheduleDto->hasFinalBox = CricketGameScheduleConst::HAS_FINAL_BOX;
         $cricketGameScheduleDto->isDataConfirmed = CricketGameScheduleConst::IS_DATA_CONFIRMED;
-        $cricketGameScheduleDto->homeTeamScore = $data['localteam']['totalscore'];
-        $cricketGameScheduleDto->awayTeamScore = $data['visitorteam']['totalscore'];
+        $cricketGameScheduleDto->homeCricketTeamScore = $data['localteam']['totalscore'];
+        $cricketGameScheduleDto->awayCricketTeamScore = $data['visitorteam']['totalscore'];
         $cricketGameScheduleDto->dateUpdated = null;
         $cricketGameScheduleDto->isFake = CricketGameScheduleConst::IS_NOT_FAKE;
         $cricketGameScheduleDto->isSalaryAvailable = CricketGameScheduleConst::IS_NOT_SALARY_AVAILABLE;

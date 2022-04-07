@@ -16,8 +16,8 @@ class CricketGameScheduleDto
     public string $gameDate;
     public bool $hasFinalBox;
     public int $isDataConfirmed;
-    public string $homeTeamScore;
-    public string $awayTeamScore;
+    public string $homeCricketTeamScore;
+    public string $awayCricketTeamScore;
     public ?string $dateUpdated;
     public bool $isFake;
     public bool $isSalaryAvailable;
