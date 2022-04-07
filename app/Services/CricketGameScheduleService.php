@@ -33,18 +33,18 @@ class CricketGameScheduleService
             'feed_id' => $cricketGameScheduleDto->feedId,
             'league_id' => $cricketGameScheduleDto->leagueId,
         ], [
-            'home_cricket_team_id' => $cricketGameScheduleDto->homeCricketTeamId,
-            'away_cricket_team_id' => $cricketGameScheduleDto->awayCricketTeamId,
+            'home_team_id' => $cricketGameScheduleDto->homeTeamId,
+            'away_team_id' => $cricketGameScheduleDto->awayTeamId,
             'game_date' => $cricketGameScheduleDto->gameDate,
             'has_final_box' => $cricketGameScheduleDto->hasFinalBox,
             'is_data_confirmed' => $cricketGameScheduleDto->isDataConfirmed,
-            'home_cricket_team_score' => $cricketGameScheduleDto->homeCricketTeamScore,
-            'away_cricket_team_score' => $cricketGameScheduleDto->awayCricketTeamScore,
+            'home_team_score' => $cricketGameScheduleDto->homeTeamScore,
+            'away_team_score' => $cricketGameScheduleDto->awayTeamScore,
             'date_updated' => $cricketGameScheduleDto->dateUpdated,
             'is_fake' => $cricketGameScheduleDto->isFake,
             'is_salary_available' => $cricketGameScheduleDto->isSalaryAvailable,
             'feed_type' => $cricketGameScheduleDto->feedType->name,
-            'status' => $cricketGameScheduleDto->status->value,
+            'status' => $cricketGameScheduleDto->status?->value,
             'type' => $cricketGameScheduleDto->type->value,
         ]);
     }

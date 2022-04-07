@@ -17,39 +17,39 @@ use Illuminate\Support\Carbon;
  * @property int         $id
  * @property string      $feed_id
  * @property int         $league_id
- * @property int         $home_cricket_team_id
- * @property int         $away_cricket_team_id
+ * @property int         $home_team_id
+ * @property int         $away_team_id
  * @property string      $game_date
  * @property int         $has_final_box
  * @property int         $is_data_confirmed
- * @property string      $home_cricket_team_score
- * @property string      $away_cricket_team_score
+ * @property string      $home_team_score
+ * @property string      $away_team_score
  * @property null|Carbon $date_updated
  * @property int         $is_fake
  * @property int         $is_salary_available
  * @property string      $feed_type
- * @property string      $status
+ * @property null|string $status
  * @property string      $type
  * @property null|Carbon $created_at
  * @property null|Carbon $updated_at
  * @property League      $league
- * @property CricketTeam $homeCricketTeam
- * @property CricketTeam $awayCricketTeam
+ * @property CricketTeam $homeTeam
+ * @property CricketTeam $awayTeam
  *
  * @method static CricketGameScheduleFactory factory(...$parameters)
  * @method static Builder|CricketGameSchedule newModelQuery()
  * @method static Builder|CricketGameSchedule newQuery()
  * @method static Builder|CricketGameSchedule query()
- * @method static Builder|CricketGameSchedule whereAwayCricketTeamId($value)
- * @method static Builder|CricketGameSchedule whereAwayCricketTeamScore($value)
+ * @method static Builder|CricketGameSchedule whereAwayTeamId($value)
+ * @method static Builder|CricketGameSchedule whereAwayTeamScore($value)
  * @method static Builder|CricketGameSchedule whereCreatedAt($value)
  * @method static Builder|CricketGameSchedule whereDateUpdated($value)
  * @method static Builder|CricketGameSchedule whereFeedId($value)
  * @method static Builder|CricketGameSchedule whereFeedType($value)
  * @method static Builder|CricketGameSchedule whereGameDate($value)
  * @method static Builder|CricketGameSchedule whereHasFinalBox($value)
- * @method static Builder|CricketGameSchedule whereHomeCricketTeamId($value)
- * @method static Builder|CricketGameSchedule whereHomeCricketTeamScore($value)
+ * @method static Builder|CricketGameSchedule whereHomeTeamId($value)
+ * @method static Builder|CricketGameSchedule whereHomeTeamScore($value)
  * @method static Builder|CricketGameSchedule whereId($value)
  * @method static Builder|CricketGameSchedule whereIsDataConfirmed($value)
  * @method static Builder|CricketGameSchedule whereIsFake($value)
@@ -69,13 +69,13 @@ class CricketGameSchedule extends Model
     protected $fillable = [
         'feed_id',
         'league_id',
-        'home_cricket_team_id',
-        'away_cricket_team_id',
+        'home_team_id',
+        'away_team_id',
         'game_date',
         'has_final_box',
         'is_data_confirmed',
-        'home_cricket_team_score',
-        'away_cricket_team_score',
+        'home_team_score',
+        'away_team_score',
         'date_updated',
         'is_fake',
         'is_salary_available',
@@ -91,12 +91,12 @@ class CricketGameSchedule extends Model
         return $this->belongsTo(League::class);
     }
 
-    public function homeCricketTeam(): BelongsTo
+    public function homeTeam(): BelongsTo
     {
         return $this->belongsTo(CricketTeam::class);
     }
 
-    public function awayCricketTeam(): BelongsTo
+    public function awayTeam(): BelongsTo
     {
         return $this->belongsTo(CricketTeam::class);
     }
