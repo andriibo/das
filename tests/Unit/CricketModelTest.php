@@ -54,13 +54,13 @@ class CricketModelTest extends TestCase
     public function testCreateCricketGameSchedule()
     {
         $league = $this->createCricketLeague();
-        $homeTeam = $this->createCricketTeam();
-        $awayTeam = $this->createCricketTeam();
+        $homeCricketTeam = $this->createCricketTeam();
+        $awayCricketTeam = $this->createCricketTeam();
 
         $cricketGameSchedule = CricketGameSchedule::factory()
             ->for($league)
-            ->for($homeTeam, 'homeTeam')
-            ->for($awayTeam, 'awayTeam')
+            ->for($homeCricketTeam, 'homeCricketTeam')
+            ->for($awayCricketTeam, 'awayCricketTeam')
             ->create()
         ;
 
@@ -70,13 +70,13 @@ class CricketModelTest extends TestCase
     public function testCreateCricketGameStat()
     {
         $league = $this->createCricketLeague();
-        $homeTeam = $this->createCricketTeam();
-        $awayTeam = $this->createCricketTeam();
+        $homeCricketTeam = $this->createCricketTeam();
+        $awayCricketTeam = $this->createCricketTeam();
 
         $cricketGameSchedule = CricketGameSchedule::factory()
             ->for($league)
-            ->for($homeTeam, 'homeTeam')
-            ->for($awayTeam, 'awayTeam')
+            ->for($homeCricketTeam, 'homeCricketTeam')
+            ->for($awayCricketTeam, 'awayCricketTeam')
             ->create()
         ;
 
@@ -92,7 +92,7 @@ class CricketModelTest extends TestCase
     {
         return League::factory()
             ->create()
-        ;
+            ;
     }
 
     private function createCricketTeam(): CricketTeam
@@ -102,13 +102,13 @@ class CricketModelTest extends TestCase
         return CricketTeam::factory()
             ->for($league)
             ->create()
-        ;
+            ;
     }
 
     private function createCricketPlayer(): CricketPlayer
     {
         return CricketPlayer::factory()
             ->create()
-        ;
+            ;
     }
 }
