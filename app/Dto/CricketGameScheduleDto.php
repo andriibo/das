@@ -22,6 +22,6 @@ class CricketGameScheduleDto
     public bool $isFake;
     public bool $isSalaryAvailable;
     public CricketFeedTypeEnum $feedType;
-    public ?CricketGameScheduleStatusEnum $status;
+    public CricketGameScheduleStatusEnum $status;
     public CricketGameScheduleTypeEnum $type;
 }

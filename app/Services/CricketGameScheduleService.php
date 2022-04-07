@@ -44,7 +44,7 @@ class CricketGameScheduleService
             'is_fake' => $cricketGameScheduleDto->isFake,
             'is_salary_available' => $cricketGameScheduleDto->isSalaryAvailable,
             'feed_type' => $cricketGameScheduleDto->feedType->name,
-            'status' => $cricketGameScheduleDto->status?->value,
+            'status' => $cricketGameScheduleDto->status->value,
             'type' => $cricketGameScheduleDto->type->value,
         ]);
     }
