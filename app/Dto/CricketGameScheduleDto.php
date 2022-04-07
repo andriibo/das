@@ -12,16 +12,16 @@ class CricketGameScheduleDto
     public int $feedId;
     public int $leagueId;
     public int $homeTeamId;
-    public int $awayCricketTeamId;
+    public int $awayTeamId;
     public string $gameDate;
     public bool $hasFinalBox;
     public int $isDataConfirmed;
-    public string $homeCricketTeamScore;
-    public string $awayCricketTeamScore;
+    public string $homeTeamScore;
+    public string $awayTeamScore;
     public ?string $dateUpdated;
     public bool $isFake;
     public bool $isSalaryAvailable;
     public CricketFeedTypeEnum $feedType;
-    public CricketGameScheduleStatusEnum $status;
+    public ?CricketGameScheduleStatusEnum $status;
     public CricketGameScheduleTypeEnum $type;
 }

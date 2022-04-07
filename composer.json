@@ -63,7 +63,7 @@
         "hooks": {
             "pre-commit": [
                 "php-cs-fixer fix --verbose --config=.php_cs.php",
-                "psalm"
+                "psalm --no-cache"
             ]
         },
         "grumphp": {
