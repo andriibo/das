@@ -11,8 +11,8 @@ class CricketGameScheduleDto
     public ?int $id;
     public int $feedId;
     public int $leagueId;
-    public int $homeCricketTeamId;
-    public int $awayTeamId;
+    public int $homeTeamId;
+    public int $awayCricketTeamId;
     public string $gameDate;
     public bool $hasFinalBox;
     public int $isDataConfirmed;
