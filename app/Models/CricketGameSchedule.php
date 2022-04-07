@@ -28,7 +28,7 @@ use Illuminate\Support\Carbon;
  * @property int         $is_fake
  * @property int         $is_salary_available
  * @property string      $feed_type
- * @property string      $status
+ * @property null|string $status
  * @property string      $type
  * @property null|Carbon $created_at
  * @property null|Carbon $updated_at
