@@ -104,7 +104,7 @@ class GoalserveClientTest extends TestCase
         $this->assertArrayHasKey('totalscore', $firstMatchVisitorTeam);
     }
 
-    public function testGoalserveGetGameStat(): void
+    public function testGoalserveGetGameStats(): void
     {
         $mockGoalserveClient = $this->mock(GoalserveClient::class);
         $mockResponse = json_decode(File::get(base_path('tests/stubs/cricket.game.stats.json')), true);
@@ -117,7 +117,7 @@ class GoalserveClientTest extends TestCase
 
         /* @var $cricketGoalserveService CricketGoalserveService */
         $cricketGoalserveService = new CricketGoalserveService($mockGoalserveClient);
-        $response = $cricketGoalserveService->getGoalserveGameStat($this->gameDate, $this->gameFeedId);
+        $response = $cricketGoalserveService->getGoalserveGameStats($this->gameDate, $this->gameFeedId);
 
         $this->assertIsNotObject($response);
         $this->assertIsArray($response);

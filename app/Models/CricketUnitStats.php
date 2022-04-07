@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\Events\CricketUnitStatsSavedEvent;
 use Barryvdh\LaravelIdeHelper\Eloquent;
-use Database\Factories\CricketGameStatFactory;
+use Database\Factories\CricketUnitStatsFactory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -25,7 +25,7 @@ use Illuminate\Support\Carbon;
  * @property CricketPlayer       $player
  * @property CricketTeam         $team
  *
- * @method static CricketGameStatFactory factory(...$parameters)
+ * @method static CricketUnitStatsFactory factory(...$parameters)
  * @method static Builder|CricketUnitStats newModelQuery()
  * @method static Builder|CricketUnitStats newQuery()
  * @method static Builder|CricketUnitStats query()

@@ -2,22 +2,22 @@
 
 namespace App\Console\Commands;
 
-use App\Mappers\CricketGameStatMapper;
+use App\Mappers\CricketGameStatsMapper;
 use App\Models\CricketGameSchedule;
 use App\Services\CricketGameScheduleService;
-use App\Services\CricketGameStatService;
+use App\Services\CricketGameStatsService;
 use App\Services\CricketGoalserveService;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 
-class CricketGameStatCommand extends Command
+class CricketGameStatsCommand extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'cricket:game-stat';
+    protected $signature = 'cricket:game-stats';
 
     /**
      * The console command description.
@@ -42,15 +42,15 @@ class CricketGameStatCommand extends Command
     private function parseGameStats(CricketGameSchedule $cricketGameSchedule): void
     {
         /* @var $cricketGoalserveService CricketGoalserveService */
-        /* @var $cricketGameStatMapper CricketGameStatMapper */
-        /* @var $cricketGameStatService CricketGameStatService */
+        /* @var $cricketGameStatsMapper CricketGameStatsMapper */
+        /* @var $cricketGameStatsService CricketGameStatsService */
         $cricketGoalserveService = resolve(CricketGoalserveService::class);
-        $cricketGameStatService = resolve(CricketGameStatService::class);
-        $cricketGameStatMapper = resolve(CricketGameStatMapper::class);
+        $cricketGameStatsService = resolve(CricketGameStatsService::class);
+        $cricketGameStatsMapper = resolve(CricketGameStatsMapper::class);
 
         try {
             $formattedDate = $this->getFormattedDate($cricketGameSchedule->game_date);
-            $data = $cricketGoalserveService->getGoalserveGameStat($formattedDate, $cricketGameSchedule->feed_id);
+            $data = $cricketGoalserveService->getGoalserveGameStats($formattedDate, $cricketGameSchedule->feed_id);
 
             if (empty($data)) {
                 $this->error("No data for date {$formattedDate} and feed_id {$cricketGameSchedule->feed_id}");
@@ -58,8 +58,8 @@ class CricketGameStatCommand extends Command
                 return;
             }
 
-            $cricketGameStatDto = $cricketGameStatMapper->map($data);
-            $cricketGameStatService->storeCricketGameStat($cricketGameStatDto);
+            $cricketGameStatsDto = $cricketGameStatsMapper->map($data);
+            $cricketGameStatsService->storeCricketGameStats($cricketGameStatsDto);
         } catch (\Throwable $exception) {
             $this->error($exception->getMessage());
         }

@@ -3,8 +3,8 @@
 namespace App\Console\Commands;
 
 use App\Mappers\CricketUnitStatsMapper;
-use App\Models\CricketGameStat;
-use App\Services\CricketGameStatService;
+use App\Models\CricketGameStats;
+use App\Services\CricketGameStatsService;
 use App\Services\CricketTeamService;
 use App\Services\CricketUnitStatsService;
 use Carbon\Carbon;
@@ -29,37 +29,37 @@ class CricketUnitStatsCommand extends Command
     /**
      * Execute the console command.
      */
-    public function handle(CricketGameStatService $cricketGameStatService): void
+    public function handle(CricketGameStatsService $cricketGameStatsService): void
     {
         $this->info(Carbon::now() . ": Command {$this->signature} started");
-        $gameStats = $cricketGameStatService->getCricketGameStats();
+        $gameStats = $cricketGameStatsService->getCricketGameStats();
         foreach ($gameStats as $gameStat) {
             $this->parseGameStat($gameStat);
         }
         $this->info(Carbon::now() . ": Command {$this->signature} finished");
     }
 
-    private function parseGameStat(CricketGameStat $cricketGameStat): void
+    private function parseGameStat(CricketGameStats $cricketGameStats): void
     {
         /* @var $cricketTeamService CricketTeamService */
         $cricketTeamService = resolve(CricketTeamService::class);
 
         try {
-            $match = $cricketGameStat->raw_stat['match'];
+            $match = $cricketGameStats->raw_stats['match'];
             $homeTeamId = $cricketTeamService->getCricketTeamByFeedId($match['localteam']['id'])->id;
             $awayTeamId = $cricketTeamService->getCricketTeamByFeedId($match['visitorteam']['id'])->id;
 
             $innings = $match['inning'];
             if (array_key_exists('batsmanstats', $innings) && array_key_exists('bowlers', $innings)) {
                 $teamId = $this->getTeamId($innings['team'], $homeTeamId, $awayTeamId);
-                $this->parseInning($innings, $cricketGameStat->cricket_game_schedule_id, $teamId);
+                $this->parseInning($innings, $cricketGameStats->cricket_game_schedule_id, $teamId);
 
                 return;
             }
 
             foreach ($innings as $inning) {
                 $teamId = $this->getTeamId($inning['team'], $homeTeamId, $awayTeamId);
-                $this->parseInning($inning, $cricketGameStat->cricket_game_schedule_id, $teamId);
+                $this->parseInning($inning, $cricketGameStats->cricket_game_schedule_id, $teamId);
             }
         } catch (\Throwable $exception) {
             $this->error($exception->getMessage());
