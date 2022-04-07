@@ -6,12 +6,12 @@ use App\Events\CricketGameScheduleSavedEvent;
 use App\Events\CricketGameStatSavedEvent;
 use App\Events\CricketPlayerSavedEvent;
 use App\Events\CricketTeamSavedEvent;
-use App\Events\CricketUnitStatSavedEvent;
+use App\Events\CricketUnitStatsSavedEvent;
 use App\Listeners\CricketGameScheduleSavedListener;
 use App\Listeners\CricketGameStatSavedListener;
 use App\Listeners\CricketPlayerSavedListener;
 use App\Listeners\CricketTeamSavedListener;
-use App\Listeners\CricketUnitStatSavedListener;
+use App\Listeners\CricketUnitStatsSavedListener;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider
@@ -34,8 +34,8 @@ class EventServiceProvider extends ServiceProvider
         CricketGameStatSavedEvent::class => [
             CricketGameStatSavedListener::class,
         ],
-        CricketUnitStatSavedEvent::class => [
-            CricketUnitStatSavedListener::class,
+        CricketUnitStatsSavedEvent::class => [
+            CricketUnitStatsSavedListener::class,
         ],
     ];
 

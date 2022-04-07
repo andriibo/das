@@ -2,20 +2,20 @@
 
 namespace Database\Factories;
 
-use App\Models\CricketUnitStat;
+use App\Models\CricketUnitStats;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\CricketTeam>
  */
-class CricketUnitStatFactory extends Factory
+class CricketUnitStatsFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = CricketUnitStat::class;
+    protected $model = CricketUnitStats::class;
 
     /**
      * The number of models that should be generated.
@@ -32,7 +32,7 @@ class CricketUnitStatFactory extends Factory
     public function definition()
     {
         return [
-            'raw_stat' => [],
+            'raw_stats' => [],
         ];
     }
 }

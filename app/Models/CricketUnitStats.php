@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Events\CricketUnitStatSavedEvent;
+use App\Events\CricketUnitStatsSavedEvent;
 use Barryvdh\LaravelIdeHelper\Eloquent;
 use Database\Factories\CricketGameStatFactory;
 use Illuminate\Database\Eloquent\Builder;
@@ -12,13 +12,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
 
 /**
- * App\Models\CricketUnitStat.
+ * App\Models\CricketUnitStats.
  *
  * @property int                 $id
  * @property int                 $game_schedule_id
  * @property int                 $player_id
  * @property int                 $team_id
- * @property mixed               $raw_stat
+ * @property mixed               $raw_stats
  * @property null|Carbon         $created_at
  * @property null|Carbon         $updated_at
  * @property CricketGameSchedule $gameSchedule
@@ -26,36 +26,36 @@ use Illuminate\Support\Carbon;
  * @property CricketTeam         $team
  *
  * @method static CricketGameStatFactory factory(...$parameters)
- * @method static Builder|CricketUnitStat newModelQuery()
- * @method static Builder|CricketUnitStat newQuery()
- * @method static Builder|CricketUnitStat query()
- * @method static Builder|CricketUnitStat whereCreatedAt($value)
- * @method static Builder|CricketUnitStat whereGameScheduleId($value)
- * @method static Builder|CricketUnitStat whereId($value)
- * @method static Builder|CricketUnitStat wherePlayerId($value)
- * @method static Builder|CricketUnitStat whereRawStat($value)
- * @method static Builder|CricketUnitStat whereTeamId($value)
- * @method static Builder|CricketUnitStat whereUpdatedAt($value)
+ * @method static Builder|CricketUnitStats newModelQuery()
+ * @method static Builder|CricketUnitStats newQuery()
+ * @method static Builder|CricketUnitStats query()
+ * @method static Builder|CricketUnitStats whereCreatedAt($value)
+ * @method static Builder|CricketUnitStats whereGameScheduleId($value)
+ * @method static Builder|CricketUnitStats whereId($value)
+ * @method static Builder|CricketUnitStats wherePlayerId($value)
+ * @method static Builder|CricketUnitStats whereRawStat($value)
+ * @method static Builder|CricketUnitStats whereTeamId($value)
+ * @method static Builder|CricketUnitStats whereUpdatedAt($value)
  * @mixin Eloquent
  */
-class CricketUnitStat extends Model
+class CricketUnitStats extends Model
 {
     use HasFactory;
 
-    protected $table = 'cricket_unit_stat';
+    protected $table = 'cricket_unit_stats';
 
     protected $casts = [
-        'raw_stat' => 'array',
+        'raw_stats' => 'array',
     ];
 
     protected $fillable = [
         'game_schedule_id',
         'player_id',
         'team_id',
-        'raw_stat',
+        'raw_stats',
     ];
 
-    protected $dispatchesEvents = ['saved' => CricketUnitStatSavedEvent::class];
+    protected $dispatchesEvents = ['saved' => CricketUnitStatsSavedEvent::class];
 
     public function gameSchedule(): BelongsTo
     {

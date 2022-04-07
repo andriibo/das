@@ -2,29 +2,29 @@
 
 namespace App\Console\Commands;
 
-use App\Mappers\CricketUnitStatMapper;
+use App\Mappers\CricketUnitStatsMapper;
 use App\Models\CricketGameStat;
 use App\Services\CricketGameStatService;
 use App\Services\CricketTeamService;
-use App\Services\CricketUnitStatService;
+use App\Services\CricketUnitStatsService;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 
-class CricketUnitStatCommand extends Command
+class CricketUnitStatsCommand extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'cricket:unit-stat';
+    protected $signature = 'cricket:unit-stats';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Get unit stats from game stat';
+    protected $description = 'Get unit stats from game stats';
 
     /**
      * Execute the console command.
@@ -74,18 +74,18 @@ class CricketUnitStatCommand extends Command
 
     private function parseUnitStats(array $players, int $teamId, int $gameScheduleId): void
     {
-        /* @var $cricketUnitStatService CricketUnitStatService */
-        /* @var $cricketUnitStatMapper CricketUnitStatMapper */
-        $cricketUnitStatService = resolve(CricketUnitStatService::class);
-        $cricketUnitStatMapper = resolve(CricketUnitStatMapper::class);
+        /* @var $cricketUnitStatsService CricketUnitStatsService */
+        /* @var $cricketUnitStatsMapper CricketUnitStatsMapper */
+        $cricketUnitStatsService = resolve(CricketUnitStatsService::class);
+        $cricketUnitStatsMapper = resolve(CricketUnitStatsMapper::class);
         foreach ($players as $player) {
-            $cricketUnitStatDto = $cricketUnitStatMapper->map([
+            $cricketUnitStatsDto = $cricketUnitStatsMapper->map([
                 'game_id' => $gameScheduleId,
                 'profile_id' => $player['profileid'],
                 'team_id' => $teamId,
-                'stat' => $player,
+                'stats' => $player,
             ]);
-            $cricketUnitStatService->storeCricketUnitStat($cricketUnitStatDto);
+            $cricketUnitStatsService->storeCricketUnitStats($cricketUnitStatsDto);
         }
     }
 

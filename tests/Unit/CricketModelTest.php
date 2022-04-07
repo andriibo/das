@@ -7,7 +7,7 @@ use App\Models\CricketGameStat;
 use App\Models\CricketPlayer;
 use App\Models\CricketTeam;
 use App\Models\CricketUnit;
-use App\Models\CricketUnitStat;
+use App\Models\CricketUnitStats;
 use App\Models\League;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
@@ -80,20 +80,20 @@ class CricketModelTest extends TestCase
         $this->assertModelExists($cricketGameStat);
     }
 
-    public function testCreateCricketUnitStat()
+    public function testCreateCricketUnitStats()
     {
         $gameSchedule = $this->createCricketGameSchedule();
         $team = $this->createCricketTeam();
         $player = $this->createCricketPlayer();
 
-        $cricketUnitStat = CricketUnitStat::factory()
+        $cricketUnitStats = CricketUnitStats::factory()
             ->for($gameSchedule, 'gameSchedule')
             ->for($player, 'player')
             ->for($team, 'team')
             ->create()
         ;
 
-        $this->assertModelExists($cricketUnitStat);
+        $this->assertModelExists($cricketUnitStats);
     }
 
     private function createCricketLeague(): League
