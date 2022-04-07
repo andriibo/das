@@ -70,13 +70,13 @@ class CricketModelTest extends TestCase
     public function testCreateCricketGameStat()
     {
         $league = $this->createCricketLeague();
-        $homeCricketTeam = $this->createCricketTeam();
-        $awayCricketTeam = $this->createCricketTeam();
+        $homeTeam = $this->createCricketTeam();
+        $awayTeam = $this->createCricketTeam();
 
         $cricketGameSchedule = CricketGameSchedule::factory()
             ->for($league)
-            ->for($homeCricketTeam, 'homeCricketTeam')
-            ->for($awayCricketTeam, 'awayCricketTeam')
+            ->for($homeTeam, 'homeTeam')
+            ->for($awayTeam, 'awayTeam')
             ->create()
         ;
 
