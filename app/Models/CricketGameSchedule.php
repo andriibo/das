@@ -34,7 +34,7 @@ use Illuminate\Support\Carbon;
  * @property null|Carbon $updated_at
  * @property League      $league
  * @property CricketTeam $homeTeam
- * @property CricketTeam $awayCricketTeam
+ * @property CricketTeam $awayTeam
  *
  * @method static CricketGameScheduleFactory factory(...$parameters)
  * @method static Builder|CricketGameSchedule newModelQuery()
