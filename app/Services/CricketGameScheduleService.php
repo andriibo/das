@@ -33,7 +33,7 @@ class CricketGameScheduleService
             'feed_id' => $cricketGameScheduleDto->feedId,
             'league_id' => $cricketGameScheduleDto->leagueId,
         ], [
-            'home_cricket_team_id' => $cricketGameScheduleDto->homeTeamId,
+            'home_cricket_team_id' => $cricketGameScheduleDto->homeCricketTeamId,
             'away_cricket_team_id' => $cricketGameScheduleDto->awayTeamId,
             'game_date' => $cricketGameScheduleDto->gameDate,
             'has_final_box' => $cricketGameScheduleDto->hasFinalBox,

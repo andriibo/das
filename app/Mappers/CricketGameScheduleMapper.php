@@ -21,7 +21,7 @@ class CricketGameScheduleMapper
 
         $cricketGameScheduleDto->feedId = $data['id'];
         $cricketGameScheduleDto->leagueId = $leagueId;
-        $cricketGameScheduleDto->homeTeamId = $this->getCricketTeamIdByFeedId($data['localteam']['id']);
+        $cricketGameScheduleDto->homeCricketTeamId = $this->getCricketTeamIdByFeedId($data['localteam']['id']);
         $cricketGameScheduleDto->awayTeamId = $this->getCricketTeamIdByFeedId($data['visitorteam']['id']);
         $cricketGameScheduleDto->gameDate = $this->generateGameDate($data['date'], $data['time']);
         $cricketGameScheduleDto->hasFinalBox = CricketGameScheduleConst::HAS_FINAL_BOX;
