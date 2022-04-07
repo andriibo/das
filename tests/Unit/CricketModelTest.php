@@ -7,6 +7,7 @@ use App\Models\CricketGameStat;
 use App\Models\CricketPlayer;
 use App\Models\CricketTeam;
 use App\Models\CricketUnit;
+use App\Models\CricketUnitStat;
 use App\Models\League;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
@@ -53,16 +54,7 @@ class CricketModelTest extends TestCase
 
     public function testCreateCricketGameSchedule()
     {
-        $league = $this->createCricketLeague();
-        $homeTeam = $this->createCricketTeam();
-        $awayTeam = $this->createCricketTeam();
-
-        $cricketGameSchedule = CricketGameSchedule::factory()
-            ->for($league)
-            ->for($homeTeam, 'homeTeam')
-            ->for($awayTeam, 'awayTeam')
-            ->create()
-        ;
+        $cricketGameSchedule = $this->createCricketGameSchedule();
 
         $this->assertModelExists($cricketGameSchedule);
     }
@@ -88,6 +80,22 @@ class CricketModelTest extends TestCase
         $this->assertModelExists($cricketGameStat);
     }
 
+    public function testCreateCricketUnitStat()
+    {
+        $gameSchedule = $this->createCricketGameSchedule();
+        $team = $this->createCricketTeam();
+        $player = $this->createCricketPlayer();
+
+        $cricketUnitStat = CricketUnitStat::factory()
+            ->for($gameSchedule, 'gameSchedule')
+            ->for($player, 'player')
+            ->for($team, 'team')
+            ->create()
+        ;
+
+        $this->assertModelExists($cricketUnitStat);
+    }
+
     private function createCricketLeague(): League
     {
         return League::factory()
@@ -110,5 +118,19 @@ class CricketModelTest extends TestCase
         return CricketPlayer::factory()
             ->create()
             ;
+    }
+
+    private function createCricketGameSchedule()
+    {
+        $league = $this->createCricketLeague();
+        $homeTeam = $this->createCricketTeam();
+        $awayTeam = $this->createCricketTeam();
+
+        return CricketGameSchedule::factory()
+            ->for($league)
+            ->for($homeTeam, 'homeTeam')
+            ->for($awayTeam, 'awayTeam')
+            ->create()
+        ;
     }
 }
