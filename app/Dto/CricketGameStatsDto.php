@@ -2,11 +2,11 @@
 
 namespace App\Dto;
 
-class CricketGameStatDto
+class CricketGameStatsDto
 {
     public ?int $id;
     public int $cricketGameScheduleId;
-    public array $rawStat;
+    public array $rawStats;
     public ?string $createdAt;
     public ?string $updatedAt;
 }

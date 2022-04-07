@@ -57,7 +57,7 @@ class CricketGoalserveService
     /**
      * @throws CricketGoalserveServiceException
      */
-    public function getGoalserveGameStat(string $date, string $feedId): array
+    public function getGoalserveGameStats(string $date, string $feedId): array
     {
         try {
             $data = $this->goalserveClient->getGameStats($date);
