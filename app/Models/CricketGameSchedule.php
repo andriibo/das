@@ -33,7 +33,7 @@ use Illuminate\Support\Carbon;
  * @property null|Carbon $created_at
  * @property null|Carbon $updated_at
  * @property League      $league
- * @property CricketTeam $homeCricketTeam
+ * @property CricketTeam $homeTeam
  * @property CricketTeam $awayCricketTeam
  *
  * @method static CricketGameScheduleFactory factory(...$parameters)
@@ -48,7 +48,7 @@ use Illuminate\Support\Carbon;
  * @method static Builder|CricketGameSchedule whereFeedType($value)
  * @method static Builder|CricketGameSchedule whereGameDate($value)
  * @method static Builder|CricketGameSchedule whereHasFinalBox($value)
- * @method static Builder|CricketGameSchedule whereHomeCricketTeamId($value)
+ * @method static Builder|CricketGameSchedule whereHomeTeamId($value)
  * @method static Builder|CricketGameSchedule whereHomeCricketTeamScore($value)
  * @method static Builder|CricketGameSchedule whereId($value)
  * @method static Builder|CricketGameSchedule whereIsDataConfirmed($value)
@@ -69,7 +69,7 @@ class CricketGameSchedule extends Model
     protected $fillable = [
         'feed_id',
         'league_id',
-        'home_cricket_team_id',
+        'home_team_id',
         'away_cricket_team_id',
         'game_date',
         'has_final_box',
@@ -91,7 +91,7 @@ class CricketGameSchedule extends Model
         return $this->belongsTo(League::class);
     }
 
-    public function homeCricketTeam(): BelongsTo
+    public function homeTeam(): BelongsTo
     {
         return $this->belongsTo(CricketTeam::class);
     }
