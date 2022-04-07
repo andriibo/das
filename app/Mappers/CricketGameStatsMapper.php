@@ -2,23 +2,23 @@
 
 namespace App\Mappers;
 
-use App\Dto\CricketGameStatDto;
+use App\Dto\CricketGameStatsDto;
 use App\Services\CricketGameScheduleService;
 
-class CricketGameStatMapper
+class CricketGameStatsMapper
 {
     public function __construct(private readonly CricketGameScheduleService $cricketGameScheduleService)
     {
     }
 
-    public function map(array $data): CricketGameStatDto
+    public function map(array $data): CricketGameStatsDto
     {
-        $cricketUnitStatDto = new CricketGameStatDto();
+        $cricketUnitStatsDto = new CricketGameStatsDto();
 
-        $cricketUnitStatDto->cricketGameScheduleId = $this->getGameScheduleIdByFeedId($data['match']['id']);
-        $cricketUnitStatDto->rawStat = $data;
+        $cricketUnitStatsDto->cricketGameScheduleId = $this->getGameScheduleIdByFeedId($data['match']['id']);
+        $cricketUnitStatsDto->rawStats = $data;
 
-        return $cricketUnitStatDto;
+        return $cricketUnitStatsDto;
     }
 
     private function getGameScheduleIdByFeedId(string $feedId): int

@@ -3,7 +3,7 @@
 namespace Tests\Unit;
 
 use App\Models\CricketGameSchedule;
-use App\Models\CricketGameStat;
+use App\Models\CricketGameStats;
 use App\Models\CricketPlayer;
 use App\Models\CricketTeam;
 use App\Models\CricketUnit;
@@ -67,7 +67,7 @@ class CricketModelTest extends TestCase
         $this->assertModelExists($cricketGameSchedule);
     }
 
-    public function testCreateCricketGameStat()
+    public function testCreateCricketGameStats()
     {
         $league = $this->createCricketLeague();
         $homeTeam = $this->createCricketTeam();
@@ -80,12 +80,12 @@ class CricketModelTest extends TestCase
             ->create()
         ;
 
-        $cricketGameStat = CricketGameStat::factory()
+        $cricketGameStats = CricketGameStats::factory()
             ->for($cricketGameSchedule)
             ->create()
         ;
 
-        $this->assertModelExists($cricketGameStat);
+        $this->assertModelExists($cricketGameStats);
     }
 
     private function createCricketLeague(): League
