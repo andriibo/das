@@ -28,11 +28,9 @@ use Illuminate\Support\Carbon;
  * @method static Builder|CricketGameStats whereCreatedAt($value)
  * @method static Builder|CricketGameStats whereGameScheduleId($value)
  * @method static Builder|CricketGameStats whereId($value)
- * @method static Builder|CricketGameStats whereRawStat($value)
+ * @method static Builder|CricketGameStats whereRawStats($value)
  * @method static Builder|CricketGameStats whereUpdatedAt($value)
  * @mixin Eloquent
- *
- * @method static Builder|CricketGameStats whereRawStats($value)
  */
 class CricketGameStats extends Model
 {
