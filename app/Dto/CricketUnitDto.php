@@ -7,8 +7,8 @@ use App\Enums\CricketUnitPositionEnum;
 class CricketUnitDto
 {
     public ?int $id;
-    public int $cricketTeamId;
-    public int $cricketPlayerId;
+    public int $teamId;
+    public int $playerId;
     public ?CricketUnitPositionEnum $position;
     public float $salary;
     public float $autoSalary;

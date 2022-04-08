@@ -11,8 +11,8 @@ class CricketUnitMapper
     {
         $cricketTeamPlayerDto = new CricketUnitDto();
 
-        $cricketTeamPlayerDto->cricketTeamId = $data['team_id'];
-        $cricketTeamPlayerDto->cricketPlayerId = $data['player_id'];
+        $cricketTeamPlayerDto->teamId = $data['team_id'];
+        $cricketTeamPlayerDto->playerId = $data['player_id'];
         $cricketTeamPlayerDto->position = CricketUnitPositionEnum::tryFrom($data['position']);
 
         return $cricketTeamPlayerDto;

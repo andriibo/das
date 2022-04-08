@@ -52,14 +52,14 @@ class CricketUnitStatsCommand extends Command
             $innings = $match['inning'];
             if (array_key_exists('batsmanstats', $innings) && array_key_exists('bowlers', $innings)) {
                 $teamId = $this->getTeamId($innings['team'], $homeTeamId, $awayTeamId);
-                $this->parseInning($innings, $cricketGameStats->cricket_game_schedule_id, $teamId);
+                $this->parseInning($innings, $cricketGameStats->game_schedule_id, $teamId);
 
                 return;
             }
 
             foreach ($innings as $inning) {
                 $teamId = $this->getTeamId($inning['team'], $homeTeamId, $awayTeamId);
-                $this->parseInning($inning, $cricketGameStats->cricket_game_schedule_id, $teamId);
+                $this->parseInning($inning, $cricketGameStats->game_schedule_id, $teamId);
             }
         } catch (\Throwable $exception) {
             $this->error($exception->getMessage());
