@@ -15,7 +15,7 @@ class CricketGameStatsMapper
     {
         $cricketUnitStatsDto = new CricketGameStatsDto();
 
-        $cricketUnitStatsDto->cricketGameScheduleId = $this->getGameScheduleIdByFeedId($data['match']['id']);
+        $cricketUnitStatsDto->gameScheduleId = $this->getGameScheduleIdByFeedId($data['match']['id']);
         $cricketUnitStatsDto->rawStats = $data;
 
         return $cricketUnitStatsDto;

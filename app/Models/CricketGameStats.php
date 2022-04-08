@@ -15,18 +15,18 @@ use Illuminate\Support\Carbon;
  * App\Models\CricketGameStats.
  *
  * @property int                 $id
- * @property int                 $cricket_game_schedule_id
+ * @property int                 $game_schedule_id
  * @property string              $raw_stats
  * @property null|Carbon         $created_at
  * @property null|Carbon         $updated_at
- * @property CricketGameSchedule $cricketGameSchedule
+ * @property CricketGameSchedule $gameSchedule
  *
  * @method static CricketGameStatsFactory factory(...$parameters)
  * @method static Builder|CricketGameStats newModelQuery()
  * @method static Builder|CricketGameStats newQuery()
  * @method static Builder|CricketGameStats query()
  * @method static Builder|CricketGameStats whereCreatedAt($value)
- * @method static Builder|CricketGameStats whereCricketGameScheduleId($value)
+ * @method static Builder|CricketGameStats whereGameScheduleId($value)
  * @method static Builder|CricketGameStats whereId($value)
  * @method static Builder|CricketGameStats whereRawStat($value)
  * @method static Builder|CricketGameStats whereUpdatedAt($value)
@@ -43,13 +43,13 @@ class CricketGameStats extends Model
     ];
 
     protected $fillable = [
-        'cricket_game_schedule_id',
+        'game_schedule_id',
         'raw_stats',
     ];
 
     protected $dispatchesEvents = ['saved' => CricketGameStatsSavedEvent::class];
 
-    public function cricketGameSchedule(): BelongsTo
+    public function gameSchedule(): BelongsTo
     {
         return $this->belongsTo(CricketGameSchedule::class);
     }

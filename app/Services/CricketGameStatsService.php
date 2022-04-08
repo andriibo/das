@@ -25,7 +25,7 @@ class CricketGameStatsService
     public function storeCricketGameStats(CricketGameStatsDto $cricketGameStatsDto): CricketGameStats
     {
         return $this->cricketGameStatsRepository->updateOrCreate([
-            'cricket_game_schedule_id' => $cricketGameStatsDto->cricketGameScheduleId,
+            'game_schedule_id' => $cricketGameStatsDto->gameScheduleId,
         ], [
             'raw_stats' => $cricketGameStatsDto->rawStats,
         ]);

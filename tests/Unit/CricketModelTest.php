@@ -65,19 +65,19 @@ class CricketModelTest extends TestCase
         $homeTeam = $this->createCricketTeam();
         $awayTeam = $this->createCricketTeam();
 
-        $cricketGameSchedule = CricketGameSchedule::factory()
+        $gameSchedule = CricketGameSchedule::factory()
             ->for($league)
             ->for($homeTeam, 'homeTeam')
             ->for($awayTeam, 'awayTeam')
             ->create()
         ;
 
-        $cricketGameStats = CricketGameStats::factory()
-            ->for($cricketGameSchedule)
+        $gameStats = CricketGameStats::factory()
+            ->for($gameSchedule, 'gameSchedule')
             ->create()
         ;
 
-        $this->assertModelExists($cricketGameStats);
+        $this->assertModelExists($gameStats);
     }
 
     public function testCreateCricketUnitStats()
