@@ -22,6 +22,11 @@ class CricketPlayerService
         return $this->cricketPlayerRepository->getList();
     }
 
+    public function getCricketPlayerByFeedId(string $feedId): CricketPlayer
+    {
+        return $this->cricketPlayerRepository->getByFeedId($feedId);
+    }
+
     public function storeCricketPlayer(CricketPlayerDto $cricketPlayerDto): CricketPlayer
     {
         return $this->cricketPlayerRepository->updateOrCreate([

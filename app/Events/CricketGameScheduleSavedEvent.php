@@ -9,10 +9,7 @@ class CricketGameScheduleSavedEvent
 {
     use Dispatchable;
 
-    public CricketGameSchedule $cricketGameSchedule;
-
-    public function __construct(CricketGameSchedule $cricketGameSchedule)
+    public function __construct(public CricketGameSchedule $cricketGameSchedule)
     {
-        $this->cricketGameSchedule = $cricketGameSchedule;
     }
 }

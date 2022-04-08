@@ -117,7 +117,7 @@ class GoalserveClientTest extends TestCase
 
         /* @var $cricketGoalserveService CricketGoalserveService */
         $cricketGoalserveService = new CricketGoalserveService($mockGoalserveClient);
-        $response = $cricketGoalserveService->getGoalserveGameStat($this->gameDate, $this->gameFeedId);
+        $response = $cricketGoalserveService->getGoalserveGameStats($this->gameDate, $this->gameFeedId);
 
         $this->assertIsNotObject($response);
         $this->assertIsArray($response);
