@@ -4,7 +4,7 @@ namespace App\Enums;
 
 use ArchTech\Enums\Values;
 
-enum LeagueIsEnabledEnum: int
+enum IsEnabledEnum: int
 {
     use Values;
 

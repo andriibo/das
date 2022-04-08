@@ -37,6 +37,8 @@ use Illuminate\Support\Carbon;
  * @method static Builder|CricketUnitStats whereTeamId($value)
  * @method static Builder|CricketUnitStats whereUpdatedAt($value)
  * @mixin Eloquent
+ *
+ * @method static Builder|CricketUnitStats whereRawStats($value)
  */
 class CricketUnitStats extends Model
 {

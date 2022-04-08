@@ -2,11 +2,13 @@
 
 namespace App\Providers;
 
+use App\Events\CricketGameLogSavedEvent;
 use App\Events\CricketGameScheduleSavedEvent;
 use App\Events\CricketGameStatsSavedEvent;
 use App\Events\CricketPlayerSavedEvent;
 use App\Events\CricketTeamSavedEvent;
 use App\Events\CricketUnitStatsSavedEvent;
+use App\Listeners\CricketGameLogSavedListener;
 use App\Listeners\CricketGameScheduleSavedListener;
 use App\Listeners\CricketGameStatsSavedListener;
 use App\Listeners\CricketPlayerSavedListener;
@@ -36,6 +38,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         CricketUnitStatsSavedEvent::class => [
             CricketUnitStatsSavedListener::class,
+        ],
+        CricketGameLogSavedEvent::class => [
+            CricketGameLogSavedListener::class,
         ],
     ];
 
