@@ -4,7 +4,7 @@ namespace App\Enums;
 
 use ArchTech\Enums\Values;
 
-enum LeagueSportIdEnum: int
+enum SportIdEnum: int
 {
     use Values;
 

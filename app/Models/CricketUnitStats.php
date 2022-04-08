@@ -33,7 +33,7 @@ use Illuminate\Support\Carbon;
  * @method static Builder|CricketUnitStats whereGameScheduleId($value)
  * @method static Builder|CricketUnitStats whereId($value)
  * @method static Builder|CricketUnitStats wherePlayerId($value)
- * @method static Builder|CricketUnitStats whereRawStat($value)
+ * @method static Builder|CricketUnitStats whereRawStats($value)
  * @method static Builder|CricketUnitStats whereTeamId($value)
  * @method static Builder|CricketUnitStats whereUpdatedAt($value)
  * @mixin Eloquent

@@ -4,12 +4,12 @@ namespace App\Services;
 
 use App\Enums\SportIdEnum;
 use App\Models\League;
-use App\Repositories\LeagueRepository;
+use App\Repositories\ActionPointRepository;
 use Illuminate\Database\Eloquent\Collection;
 
-class LeagueService
+class ActionPointService
 {
-    public function __construct(private readonly LeagueRepository $leagueRepository)
+    public function __construct(private readonly ActionPointRepository $actionPointRepository)
     {
     }
 
@@ -18,6 +18,6 @@ class LeagueService
      */
     public function getListBySportId(SportIdEnum $sportIdEnum): Collection
     {
-        return $this->leagueRepository->getListBySportId($sportIdEnum);
+        return $this->actionPointRepository->getListBySportId($sportIdEnum);
     }
 }

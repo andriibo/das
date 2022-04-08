@@ -3,22 +3,21 @@
 namespace Database\Factories;
 
 use App\Enums\IsEnabledEnum;
-use App\Enums\LeagueRecentlyEnabledEnum;
 use App\Enums\SportIdEnum;
-use App\Models\League;
+use App\Models\ActionPoint;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\League>
  */
-class LeagueFactory extends Factory
+class ActionPointFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = League::class;
+    protected $model = ActionPoint::class;
 
     /**
      * The number of models that should be generated.
@@ -35,15 +34,14 @@ class LeagueFactory extends Factory
     public function definition()
     {
         return [
-            'alias' => $this->faker->unique()->text(5),
-            'name' => $this->faker->title,
-            'season' => $this->faker->year(),
+            'name' => $this->faker->word,
             'sport_id' => $this->faker->randomElement(SportIdEnum::values()),
+            'values' => '[]',
+            'sort_order' => 0,
             'is_enabled' => $this->faker->randomElement(IsEnabledEnum::values()),
-            'date_updated' => $this->faker->dateTime(),
-            'order' => 0,
-            'config_id' => 1,
-            'recently_enabled' => $this->faker->randomElement(LeagueRecentlyEnabledEnum::values()),
+            'title' => $this->faker->word,
+            'alias' => $this->faker->unique()->text(5),
+            'game_log_template' => $this->faker->word,
         ];
     }
 }
