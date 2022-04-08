@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Enums\LeagueSportIdEnum;
+use App\Enums\SportIdEnum;
 use App\Mappers\CricketGameScheduleMapper;
 use App\Models\League;
 use App\Services\CricketGameScheduleService;
@@ -33,7 +33,7 @@ class CricketGameScheduleCommand extends Command
     public function handle(LeagueService $leagueService)
     {
         $this->info(Carbon::now() . ": Command {$this->signature} started");
-        $leagues = $leagueService->getListBySportId(LeagueSportIdEnum::cricket);
+        $leagues = $leagueService->getListBySportId(SportIdEnum::cricket);
         foreach ($leagues as $league) {
             $this->parseMatches($league);
         }

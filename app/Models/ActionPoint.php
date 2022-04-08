@@ -3,7 +3,9 @@
 namespace App\Models;
 
 use Barryvdh\LaravelIdeHelper\Eloquent;
+use Database\Factories\ActionPointFactory;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -19,6 +21,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string      $alias
  * @property string      $game_log_template
  *
+ * @method static ActionPointFactory factory(...$parameters)
  * @method static Builder|ActionPoint newModelQuery()
  * @method static Builder|ActionPoint newQuery()
  * @method static Builder|ActionPoint query()
@@ -35,6 +38,10 @@ use Illuminate\Database\Eloquent\Model;
  */
 class ActionPoint extends Model
 {
+    use HasFactory;
+
+    public $timestamps = false;
+
     protected $table = 'action_points';
 
     protected $fillable = [

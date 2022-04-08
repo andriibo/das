@@ -2,6 +2,8 @@
 
 namespace Tests\Unit;
 
+use App\Models\ActionPoint;
+use App\Models\CricketGameLog;
 use App\Models\CricketGameSchedule;
 use App\Models\CricketGameStats;
 use App\Models\CricketPlayer;
@@ -22,7 +24,7 @@ class CricketModelTest extends TestCase
 
     public function testCreateLeague()
     {
-        $league = $this->createCricketLeague();
+        $league = $this->createLeague();
         $this->assertModelExists($league);
     }
 
@@ -61,7 +63,7 @@ class CricketModelTest extends TestCase
 
     public function testCreateCricketGameStats()
     {
-        $league = $this->createCricketLeague();
+        $league = $this->createLeague();
         $homeTeam = $this->createCricketTeam();
         $awayTeam = $this->createCricketTeam();
 
@@ -96,7 +98,23 @@ class CricketModelTest extends TestCase
         $this->assertModelExists($cricketUnitStats);
     }
 
-    private function createCricketLeague(): League
+    public function testCreateCricketGameLog()
+    {
+        $gameSchedule = $this->createCricketGameSchedule();
+        $player = $this->createCricketPlayer();
+        $actionPoint = $this->createActionPoint();
+
+        $cricketGameLog = CricketGameLog::factory()
+            ->for($gameSchedule, 'gameSchedule')
+            ->for($player, 'player')
+            ->for($actionPoint)
+            ->create()
+        ;
+
+        $this->assertModelExists($cricketGameLog);
+    }
+
+    private function createLeague(): League
     {
         return League::factory()
             ->create()
@@ -105,7 +123,7 @@ class CricketModelTest extends TestCase
 
     private function createCricketTeam(): CricketTeam
     {
-        $league = $this->createCricketLeague();
+        $league = $this->createLeague();
 
         return CricketTeam::factory()
             ->for($league)
@@ -122,7 +140,7 @@ class CricketModelTest extends TestCase
 
     private function createCricketGameSchedule()
     {
-        $league = $this->createCricketLeague();
+        $league = $this->createLeague();
         $homeTeam = $this->createCricketTeam();
         $awayTeam = $this->createCricketTeam();
 
@@ -132,5 +150,12 @@ class CricketModelTest extends TestCase
             ->for($awayTeam, 'awayTeam')
             ->create()
         ;
+    }
+
+    private function createActionPoint(): ActionPoint
+    {
+        return ActionPoint::factory()
+            ->create()
+            ;
     }
 }
