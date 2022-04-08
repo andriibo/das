@@ -40,12 +40,12 @@ class CricketModelTest extends TestCase
 
     public function testCreateCricketUnit()
     {
-        $cricketTeam = $this->createCricketTeam();
-        $cricketPlayer = $this->createCricketPlayer();
+        $team = $this->createCricketTeam();
+        $player = $this->createCricketPlayer();
 
         $cricketUnit = CricketUnit::factory()
-            ->for($cricketTeam)
-            ->for($cricketPlayer)
+            ->for($team, 'team')
+            ->for($player, 'player')
             ->create()
         ;
 

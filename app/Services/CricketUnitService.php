@@ -16,8 +16,8 @@ class CricketUnitService
     public function storeCricketUnit(CricketUnitDto $cricketUnitDto): CricketUnit
     {
         return $this->cricketUnitRepository->updateOrCreate([
-            'cricket_player_id' => $cricketUnitDto->cricketPlayerId,
-            'cricket_team_id' => $cricketUnitDto->cricketTeamId,
+            'player_id' => $cricketUnitDto->playerId,
+            'team_id' => $cricketUnitDto->teamId,
         ], ['position' => $cricketUnitDto->position?->value]);
     }
 }
