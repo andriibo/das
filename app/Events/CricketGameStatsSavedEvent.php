@@ -9,10 +9,7 @@ class CricketGameStatsSavedEvent
 {
     use Dispatchable;
 
-    public CricketGameStats $cricketGameStats;
-
-    public function __construct(CricketGameStats $cricketGameStats)
+    public function __construct(public CricketGameStats $cricketGameStats)
     {
-        $this->cricketGameStats = $cricketGameStats;
     }
 }
