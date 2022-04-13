@@ -32,8 +32,8 @@ class CricketGameScheduleMapper
         $cricketGameScheduleDto->isFake = CricketGameScheduleConst::IS_NOT_FAKE;
         $cricketGameScheduleDto->isSalaryAvailable = CricketGameScheduleConst::IS_NOT_SALARY_AVAILABLE;
         $cricketGameScheduleDto->feedType = CricketFeedTypeEnum::goalserve;
-        $cricketGameScheduleDto->type = CricketGameScheduleTypeEnum::tryFrom($data['type']);
         $cricketGameScheduleDto->status = CricketGameScheduleStatusEnum::tryFrom($data['status']);
+        $cricketGameScheduleDto->type = CricketGameScheduleTypeEnum::tryFrom($data['type']);
 
         return $cricketGameScheduleDto;
     }
