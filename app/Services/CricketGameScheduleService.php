@@ -50,7 +50,7 @@ class CricketGameScheduleService
 
     public function updateDataConfirmed(CricketGameSchedule $cricketGameSchedule): void
     {
-        $gameConfirmTime = strtotime($cricketGameSchedule->date_updated) + CricketGameScheduleConst::CONFIRM_STATS_DELAY;
+        $gameConfirmTime = strtotime($cricketGameSchedule->updated_at) + CricketGameScheduleConst::CONFIRM_STATS_DELAY;
         if (
             $cricketGameSchedule->has_final_box == CricketGameScheduleConst::HAS_FINAL_BOX
             && $cricketGameSchedule->is_data_confirmed == CricketGameScheduleConst::IS_NOT_DATA_CONFIRMED
