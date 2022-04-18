@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Const\CricketGameScheduleConst;
 use App\Dto\CricketGameScheduleDto;
 use App\Models\CricketGameSchedule;
 use App\Repositories\CricketGameScheduleRepository;
@@ -37,15 +38,25 @@ class CricketGameScheduleService
             'away_team_id' => $cricketGameScheduleDto->awayTeamId,
             'game_date' => $cricketGameScheduleDto->gameDate,
             'has_final_box' => $cricketGameScheduleDto->hasFinalBox,
-            'is_data_confirmed' => $cricketGameScheduleDto->isDataConfirmed,
             'home_team_score' => $cricketGameScheduleDto->homeTeamScore,
             'away_team_score' => $cricketGameScheduleDto->awayTeamScore,
-            'date_updated' => $cricketGameScheduleDto->dateUpdated,
             'is_fake' => $cricketGameScheduleDto->isFake,
             'is_salary_available' => $cricketGameScheduleDto->isSalaryAvailable,
             'feed_type' => $cricketGameScheduleDto->feedType->name,
             'status' => $cricketGameScheduleDto->status?->value,
             'type' => $cricketGameScheduleDto->type->value,
         ]);
+    }
+
+    public function updateDataConfirmed(CricketGameSchedule $cricketGameSchedule): void
+    {
+        $gameConfirmTime = strtotime($cricketGameSchedule->date_updated) + CricketGameScheduleConst::CONFIRM_STATS_DELAY;
+        if (
+            $cricketGameSchedule->has_final_box == CricketGameScheduleConst::HAS_FINAL_BOX
+            && $cricketGameSchedule->is_data_confirmed == CricketGameScheduleConst::IS_NOT_DATA_CONFIRMED
+            && $gameConfirmTime < time()
+        ) {
+            $cricketGameSchedule->save();
+        }
     }
 }

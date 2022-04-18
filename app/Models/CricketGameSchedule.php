@@ -24,7 +24,7 @@ use Illuminate\Support\Carbon;
  * @property int         $is_data_confirmed
  * @property string      $home_team_score
  * @property string      $away_team_score
- * @property null|Carbon $date_updated
+ * @property Carbon      $date_updated
  * @property int         $is_fake
  * @property int         $is_salary_available
  * @property string      $feed_type

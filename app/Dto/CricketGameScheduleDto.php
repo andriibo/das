@@ -15,10 +15,9 @@ class CricketGameScheduleDto
     public int $awayTeamId;
     public string $gameDate;
     public bool $hasFinalBox;
-    public int $isDataConfirmed;
+    public ?int $isDataConfirmed;
     public string $homeTeamScore;
     public string $awayTeamScore;
-    public ?string $dateUpdated;
     public bool $isFake;
     public bool $isSalaryAvailable;
     public CricketFeedTypeEnum $feedType;
