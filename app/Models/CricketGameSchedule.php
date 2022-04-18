@@ -24,7 +24,6 @@ use Illuminate\Support\Carbon;
  * @property int         $is_data_confirmed
  * @property string      $home_team_score
  * @property string      $away_team_score
- * @property Carbon      $date_updated
  * @property int         $is_fake
  * @property int         $is_salary_available
  * @property string      $feed_type
@@ -43,7 +42,6 @@ use Illuminate\Support\Carbon;
  * @method static Builder|CricketGameSchedule whereAwayTeamId($value)
  * @method static Builder|CricketGameSchedule whereAwayTeamScore($value)
  * @method static Builder|CricketGameSchedule whereCreatedAt($value)
- * @method static Builder|CricketGameSchedule whereDateUpdated($value)
  * @method static Builder|CricketGameSchedule whereFeedId($value)
  * @method static Builder|CricketGameSchedule whereFeedType($value)
  * @method static Builder|CricketGameSchedule whereGameDate($value)
@@ -76,7 +74,6 @@ class CricketGameSchedule extends Model
         'is_data_confirmed',
         'home_team_score',
         'away_team_score',
-        'date_updated',
         'is_fake',
         'is_salary_available',
         'feed_type',
