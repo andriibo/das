@@ -56,6 +56,7 @@ class CricketGameScheduleService
             && $cricketGameSchedule->is_data_confirmed == CricketGameScheduleConst::IS_NOT_DATA_CONFIRMED
             && $gameConfirmTime < time()
         ) {
+            $cricketGameSchedule->is_data_confirmed = CricketGameScheduleConst::IS_DATA_CONFIRMED;
             $cricketGameSchedule->save();
         }
     }
