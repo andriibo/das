@@ -2,9 +2,13 @@
 
 namespace App\Dto;
 
-use App\Enums\CricketFeedTypeEnum;
-use App\Enums\CricketGameScheduleStatusEnum;
-use App\Enums\CricketGameScheduleTypeEnum;
+use App\Enums\CricketGameSchedule\HasFinalBoxEnum;
+use App\Enums\CricketGameSchedule\IsDataConfirmedEnum;
+use App\Enums\CricketGameSchedule\IsFakeEnum;
+use App\Enums\CricketGameSchedule\IsSalaryAvailableEnum;
+use App\Enums\CricketGameSchedule\StatusEnum;
+use App\Enums\CricketGameSchedule\TypeEnum;
+use App\Enums\FeedTypeEnum;
 
 class CricketGameScheduleDto
 {
@@ -14,13 +18,15 @@ class CricketGameScheduleDto
     public int $homeTeamId;
     public int $awayTeamId;
     public string $gameDate;
-    public bool $hasFinalBox;
-    public ?int $isDataConfirmed;
+    public HasFinalBoxEnum $hasFinalBox;
+    public IsDataConfirmedEnum $isDataConfirmed;
     public string $homeTeamScore;
     public string $awayTeamScore;
-    public bool $isFake;
-    public bool $isSalaryAvailable;
-    public CricketFeedTypeEnum $feedType;
-    public ?CricketGameScheduleStatusEnum $status;
-    public CricketGameScheduleTypeEnum $type;
+    public IsFakeEnum $isFake;
+    public IsSalaryAvailableEnum $isSalaryAvailable;
+    public FeedTypeEnum $feedType;
+    public ?StatusEnum $status;
+    public TypeEnum $type;
+    public ?string $createdAt;
+    public ?string $updatedAt;
 }

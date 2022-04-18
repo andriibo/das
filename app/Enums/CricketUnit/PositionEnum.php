@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Enums;
+namespace App\Enums\CricketUnit;
 
 use ArchTech\Enums\Values;
 
-enum CricketUnitPositionEnum: string
+enum PositionEnum: string
 {
     use Values;
 

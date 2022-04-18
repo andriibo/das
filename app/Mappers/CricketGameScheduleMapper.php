@@ -2,11 +2,13 @@
 
 namespace App\Mappers;
 
-use App\Const\CricketGameScheduleConst;
 use App\Dto\CricketGameScheduleDto;
-use App\Enums\CricketFeedTypeEnum;
-use App\Enums\CricketGameScheduleStatusEnum;
-use App\Enums\CricketGameScheduleTypeEnum;
+use App\Enums\CricketGameSchedule\HasFinalBoxEnum;
+use App\Enums\CricketGameSchedule\IsFakeEnum;
+use App\Enums\CricketGameSchedule\IsSalaryAvailableEnum;
+use App\Enums\CricketGameSchedule\StatusEnum;
+use App\Enums\CricketGameSchedule\TypeEnum;
+use App\Enums\FeedTypeEnum;
 use App\Services\CricketTeamService;
 
 class CricketGameScheduleMapper
@@ -27,11 +29,11 @@ class CricketGameScheduleMapper
         $cricketGameScheduleDto->hasFinalBox = $this->hasFinalBox($data['status']);
         $cricketGameScheduleDto->homeTeamScore = $data['localteam']['totalscore'];
         $cricketGameScheduleDto->awayTeamScore = $data['visitorteam']['totalscore'];
-        $cricketGameScheduleDto->isFake = CricketGameScheduleConst::IS_NOT_FAKE;
-        $cricketGameScheduleDto->isSalaryAvailable = CricketGameScheduleConst::IS_NOT_SALARY_AVAILABLE;
-        $cricketGameScheduleDto->feedType = CricketFeedTypeEnum::goalserve;
-        $cricketGameScheduleDto->status = CricketGameScheduleStatusEnum::tryFrom($data['status']);
-        $cricketGameScheduleDto->type = CricketGameScheduleTypeEnum::tryFrom($data['type']);
+        $cricketGameScheduleDto->isFake = IsFakeEnum::no;
+        $cricketGameScheduleDto->isSalaryAvailable = IsSalaryAvailableEnum::no;
+        $cricketGameScheduleDto->feedType = FeedTypeEnum::goalserve;
+        $cricketGameScheduleDto->status = StatusEnum::tryFrom($data['status']);
+        $cricketGameScheduleDto->type = TypeEnum::tryFrom($data['type']);
 
         return $cricketGameScheduleDto;
     }
@@ -50,17 +52,10 @@ class CricketGameScheduleMapper
         return $dateTime->format('Y-m-d H:i:s');
     }
 
-    private function hasFinalBox(string $status): bool
+    private function hasFinalBox(string $status): HasFinalBoxEnum
     {
-        return CricketGameScheduleStatusEnum::finished->value === $status
-            ? CricketGameScheduleConst::HAS_FINAL_BOX
-            : CricketGameScheduleConst::HAS_NOT_FINAL_BOX;
-    }
-
-    private function isDataConfirmed(string $status): bool
-    {
-        return CricketGameScheduleStatusEnum::finished->value === $status
-            ? CricketGameScheduleConst::HAS_FINAL_BOX
-            : CricketGameScheduleConst::HAS_NOT_FINAL_BOX;
+        return StatusEnum::finished->value === $status
+            ? HasFinalBoxEnum::yes
+            : HasFinalBoxEnum::no;
     }
 }

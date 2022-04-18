@@ -4,7 +4,7 @@ namespace App\Enums;
 
 use ArchTech\Enums\Names;
 
-enum CricketFeedTypeEnum
+enum FeedTypeEnum
 {
     use Names;
 

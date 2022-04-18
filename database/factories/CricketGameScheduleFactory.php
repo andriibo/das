@@ -2,10 +2,13 @@
 
 namespace Database\Factories;
 
-use App\Const\CricketGameScheduleConst;
-use App\Enums\CricketFeedTypeEnum;
-use App\Enums\CricketGameScheduleStatusEnum;
-use App\Enums\CricketGameScheduleTypeEnum;
+use App\Enums\CricketGameSchedule\HasFinalBoxEnum;
+use App\Enums\CricketGameSchedule\IsDataConfirmedEnum;
+use App\Enums\CricketGameSchedule\IsFakeEnum;
+use App\Enums\CricketGameSchedule\IsSalaryAvailableEnum;
+use App\Enums\CricketGameSchedule\StatusEnum;
+use App\Enums\CricketGameSchedule\TypeEnum;
+use App\Enums\FeedTypeEnum;
 use App\Models\CricketGameSchedule;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -38,15 +41,15 @@ class CricketGameScheduleFactory extends Factory
         return [
             'feed_id' => $this->faker->text(100),
             'game_date' => $this->faker->dateTime()->format('Y-m-d H:i:s'),
-            'has_final_box' => $this->faker->randomElement(CricketGameScheduleConst::HAS_FINAL_BOX_OPTIONS),
-            'is_data_confirmed' => $this->faker->randomElement(CricketGameScheduleConst::IS_DATA_CONFIRMED_OPTIONS),
+            'has_final_box' => $this->faker->randomElement(HasFinalBoxEnum::values()),
+            'is_data_confirmed' => $this->faker->randomElement(IsDataConfirmedEnum::values()),
             'home_team_score' => $this->faker->text(20),
             'away_team_score' => $this->faker->text(20),
-            'is_fake' => $this->faker->randomElement(CricketGameScheduleConst::IS_FAKE_OPTIONS),
-            'is_salary_available' => $this->faker->randomElement(CricketGameScheduleConst::IS_SALARY_AVAILABLE_OPTIONS),
-            'feed_type' => $this->faker->randomElement(CricketFeedTypeEnum::names()),
-            'status' => $this->faker->randomElement(CricketGameScheduleStatusEnum::values()),
-            'type' => $this->faker->randomElement(CricketGameScheduleTypeEnum::values()),
+            'is_fake' => $this->faker->randomElement(IsFakeEnum::values()),
+            'is_salary_available' => $this->faker->randomElement(IsSalaryAvailableEnum::values()),
+            'feed_type' => $this->faker->randomElement(FeedTypeEnum::names()),
+            'status' => $this->faker->randomElement(StatusEnum::values()),
+            'type' => $this->faker->randomElement(TypeEnum::values()),
         ];
     }
 }

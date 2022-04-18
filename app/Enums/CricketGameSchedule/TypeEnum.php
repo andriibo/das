@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Enums;
+namespace App\Enums\CricketGameSchedule;
 
 use ArchTech\Enums\Values;
 
-enum CricketGameScheduleTypeEnum: string
+enum TypeEnum: string
 {
     use Values;
 
