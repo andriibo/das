@@ -3,7 +3,7 @@
 namespace App\Mappers;
 
 use App\Dto\CricketTeamDto;
-use App\Enums\CricketFeedTypeEnum;
+use App\Enums\FeedTypeEnum;
 
 class CricketTeamMapper
 {
@@ -18,7 +18,7 @@ class CricketTeamMapper
         $cricketTeamDto->alias = $data['alias'] ?? '';
         $cricketTeamDto->countryId = $data['country_id'] ?? null;
         $cricketTeamDto->logo = $data['logo'] ?? null;
-        $cricketTeamDto->feedType = CricketFeedTypeEnum::goalserve;
+        $cricketTeamDto->feedType = FeedTypeEnum::goalserve;
 
         return $cricketTeamDto;
     }

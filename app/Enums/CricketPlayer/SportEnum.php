@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Enums;
+namespace App\Enums\CricketPlayer;
 
 use ArchTech\Enums\Names;
 
-enum CricketPlayerSportEnum
+enum SportEnum
 {
     use Names;
 

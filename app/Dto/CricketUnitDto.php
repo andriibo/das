@@ -2,14 +2,14 @@
 
 namespace App\Dto;
 
-use App\Enums\CricketUnitPositionEnum;
+use App\Enums\CricketUnit\PositionEnum;
 
 class CricketUnitDto
 {
     public ?int $id;
     public int $teamId;
     public int $playerId;
-    public ?CricketUnitPositionEnum $position;
+    public ?PositionEnum $position;
     public float $salary;
     public float $autoSalary;
     public float $totalFantasyPoints;

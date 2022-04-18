@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Enums\CricketFeedTypeEnum;
+use App\Enums\FeedTypeEnum;
 use App\Models\CricketTeam;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -37,7 +37,7 @@ class CricketTeamFactory extends Factory
             'name' => $this->faker->company,
             'nickname' => $this->faker->text(50),
             'alias' => $this->faker->text(30),
-            'feed_type' => $this->faker->randomElement(CricketFeedTypeEnum::names()),
+            'feed_type' => $this->faker->randomElement(FeedTypeEnum::names()),
         ];
     }
 }

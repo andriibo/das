@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Enums\CricketUnitPositionEnum;
+use App\Enums\CricketUnit\PositionEnum;
 use App\Models\CricketUnit;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -33,7 +33,7 @@ class CricketUnitFactory extends Factory
     public function definition()
     {
         return [
-            'position' => $this->faker->randomElement(CricketUnitPositionEnum::values()),
+            'position' => $this->faker->randomElement(PositionEnum::values()),
         ];
     }
 }
