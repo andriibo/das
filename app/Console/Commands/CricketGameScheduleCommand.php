@@ -65,7 +65,8 @@ class CricketGameScheduleCommand extends Command
 
         try {
             $cricketGameScheduleDto = $cricketGameScheduleMapper->map($data, $leagueId);
-            $cricketGameScheduleService->storeCricketGameSchedule($cricketGameScheduleDto);
+            $cricketGameSchedule = $cricketGameScheduleService->storeCricketGameSchedule($cricketGameScheduleDto);
+            $cricketGameScheduleService->updateDataConfirmed($cricketGameSchedule);
         } catch (\Throwable $exception) {
             $this->error($exception->getMessage());
         }

@@ -25,10 +25,8 @@ class CricketGameScheduleMapper
         $cricketGameScheduleDto->awayTeamId = $this->getCricketTeamIdByFeedId($data['visitorteam']['id']);
         $cricketGameScheduleDto->gameDate = $this->generateGameDate($data['date'], $data['time']);
         $cricketGameScheduleDto->hasFinalBox = $this->hasFinalBox($data['status']);
-        $cricketGameScheduleDto->isDataConfirmed = CricketGameScheduleConst::IS_DATA_CONFIRMED;
         $cricketGameScheduleDto->homeTeamScore = $data['localteam']['totalscore'];
         $cricketGameScheduleDto->awayTeamScore = $data['visitorteam']['totalscore'];
-        $cricketGameScheduleDto->dateUpdated = null;
         $cricketGameScheduleDto->isFake = CricketGameScheduleConst::IS_NOT_FAKE;
         $cricketGameScheduleDto->isSalaryAvailable = CricketGameScheduleConst::IS_NOT_SALARY_AVAILABLE;
         $cricketGameScheduleDto->feedType = CricketFeedTypeEnum::goalserve;
@@ -53,6 +51,13 @@ class CricketGameScheduleMapper
     }
 
     private function hasFinalBox(string $status): bool
+    {
+        return CricketGameScheduleStatusEnum::finished->value === $status
+            ? CricketGameScheduleConst::HAS_FINAL_BOX
+            : CricketGameScheduleConst::HAS_NOT_FINAL_BOX;
+    }
+
+    private function isDataConfirmed(string $status): bool
     {
         return CricketGameScheduleStatusEnum::finished->value === $status
             ? CricketGameScheduleConst::HAS_FINAL_BOX
