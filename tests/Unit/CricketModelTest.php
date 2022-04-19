@@ -22,25 +22,25 @@ class CricketModelTest extends TestCase
 {
     use DatabaseTransactions;
 
-    public function testCreateLeague()
+    public function testCreateLeague(): void
     {
         $league = $this->createLeague();
         $this->assertModelExists($league);
     }
 
-    public function testCreateCricketTeam()
+    public function testCreateCricketTeam(): void
     {
         $cricketTeam = $this->createCricketTeam();
         $this->assertModelExists($cricketTeam);
     }
 
-    public function testCreateCricketPlayer()
+    public function testCreateCricketPlayer(): void
     {
         $cricketPlayer = $this->createCricketPlayer();
         $this->assertModelExists($cricketPlayer);
     }
 
-    public function testCreateCricketUnit()
+    public function testCreateCricketUnit(): void
     {
         $team = $this->createCricketTeam();
         $player = $this->createCricketPlayer();
@@ -54,14 +54,14 @@ class CricketModelTest extends TestCase
         $this->assertModelExists($cricketUnit);
     }
 
-    public function testCreateCricketGameSchedule()
+    public function testCreateCricketGameSchedule(): void
     {
         $cricketGameSchedule = $this->createCricketGameSchedule();
 
         $this->assertModelExists($cricketGameSchedule);
     }
 
-    public function testCreateCricketGameStats()
+    public function testCreateCricketGameStats(): void
     {
         $league = $this->createLeague();
         $homeTeam = $this->createCricketTeam();
@@ -82,7 +82,7 @@ class CricketModelTest extends TestCase
         $this->assertModelExists($gameStats);
     }
 
-    public function testCreateCricketUnitStats()
+    public function testCreateCricketUnitStats(): void
     {
         $gameSchedule = $this->createCricketGameSchedule();
         $team = $this->createCricketTeam();
@@ -98,7 +98,7 @@ class CricketModelTest extends TestCase
         $this->assertModelExists($cricketUnitStats);
     }
 
-    public function testCreateCricketGameLog()
+    public function testCreateCricketGameLog(): void
     {
         $gameSchedule = $this->createCricketGameSchedule();
         $player = $this->createCricketPlayer();
@@ -138,7 +138,7 @@ class CricketModelTest extends TestCase
             ;
     }
 
-    private function createCricketGameSchedule()
+    private function createCricketGameSchedule(): CricketGameSchedule
     {
         $league = $this->createLeague();
         $homeTeam = $this->createCricketTeam();
