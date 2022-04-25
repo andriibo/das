@@ -9,7 +9,6 @@
         "archtechx/enums": "^0.2.0",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^9.2",
-        "laravel/sanctum": "^2.14.1",
         "laravel/tinker": "^2.7"
     },
     "require-dev": {
