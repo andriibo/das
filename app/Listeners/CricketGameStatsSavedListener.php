@@ -10,6 +10,7 @@ class CricketGameStatsSavedListener
     public function handle(CricketGameStatsSavedEvent $cricketGameStatsSavedEvent)
     {
         $consoleOutput = new ConsoleOutput();
-        $consoleOutput->writeln("<info>Game Stat: {$cricketGameStatsSavedEvent->cricketGameStats->gameSchedule->game_date}, Info added!</info>");
+        $gameSchedule = $cricketGameStatsSavedEvent->cricketGameStats->gameSchedule;
+        $consoleOutput->writeln("<info>Game Stats ID: {$gameSchedule->id}, Info added!</info>");
     }
 }
