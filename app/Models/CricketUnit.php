@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Events\CricketUnitSavedEvent;
 use Barryvdh\LaravelIdeHelper\Eloquent;
 use Database\Factories\CricketUnitFactory;
 use Illuminate\Database\Eloquent\Builder;
@@ -54,6 +55,8 @@ class CricketUnit extends Model
         'total_fantasy_points',
         'total_fantasy_points_per_game',
     ];
+
+    protected $dispatchesEvents = ['saved' => CricketUnitSavedEvent::class];
 
     public function team(): BelongsTo
     {

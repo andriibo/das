@@ -16,14 +16,14 @@ use App\Services\LeagueService;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 
-class CricketTeamCommand extends Command
+class CricketTeamPlayerUnitCommand extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'cricket:team';
+    protected $signature = 'cricket:team-player-unit';
 
     /**
      * The console command description.
