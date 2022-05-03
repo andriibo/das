@@ -6,7 +6,7 @@ class CricketGameLogDto
 {
     public ?int $id;
     public int $gameScheduleId;
-    public int $playerId;
+    public int $unitId;
     public int $actionPointId;
     public float $value;
     public ?string $createdAt;

@@ -16,7 +16,7 @@ class CricketGameLogService
     {
         return $this->cricketGameLogRepository->updateOrCreate([
             'game_schedule_id' => $cricketGameLogDto->gameScheduleId,
-            'player_id' => $cricketGameLogDto->playerId,
+            'unit_id' => $cricketGameLogDto->unitId,
             'action_point_id' => $cricketGameLogDto->actionPointId,
         ], [
             'value' => $cricketGameLogDto->value,

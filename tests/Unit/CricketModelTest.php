@@ -42,15 +42,7 @@ class CricketModelTest extends TestCase
 
     public function testCreateCricketUnit(): void
     {
-        $team = $this->createCricketTeam();
-        $player = $this->createCricketPlayer();
-
-        $cricketUnit = CricketUnit::factory()
-            ->for($team, 'team')
-            ->for($player, 'player')
-            ->create()
-        ;
-
+        $cricketUnit = $this->createCricketUnit();
         $this->assertModelExists($cricketUnit);
     }
 
@@ -101,12 +93,12 @@ class CricketModelTest extends TestCase
     public function testCreateCricketGameLog(): void
     {
         $gameSchedule = $this->createCricketGameSchedule();
-        $player = $this->createCricketPlayer();
+        $unit = $this->createCricketUnit();
         $actionPoint = $this->createActionPoint();
 
         $cricketGameLog = CricketGameLog::factory()
             ->for($gameSchedule, 'gameSchedule')
-            ->for($player, 'player')
+            ->for($unit, 'unit')
             ->for($actionPoint)
             ->create()
         ;
@@ -136,6 +128,18 @@ class CricketModelTest extends TestCase
         return CricketPlayer::factory()
             ->create()
             ;
+    }
+
+    private function createCricketUnit(): CricketUnit
+    {
+        $team = $this->createCricketTeam();
+        $player = $this->createCricketPlayer();
+
+        return CricketUnit::factory()
+            ->for($team, 'team')
+            ->for($player, 'player')
+            ->create()
+        ;
     }
 
     private function createCricketGameSchedule(): CricketGameSchedule

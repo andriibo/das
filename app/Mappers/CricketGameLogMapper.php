@@ -11,7 +11,7 @@ class CricketGameLogMapper
         $cricketGameLogDto = new CricketGameLogDto();
 
         $cricketGameLogDto->gameScheduleId = $data['game_schedule_id'];
-        $cricketGameLogDto->playerId = $data['player_id'];
+        $cricketGameLogDto->unitId = $data['unit_id'];
         $cricketGameLogDto->actionPointId = $data['action_point_id'];
         $cricketGameLogDto->value = $data['value'];
 

@@ -16,7 +16,7 @@ use Illuminate\Support\Carbon;
  *
  * @property int                 $id
  * @property int                 $game_schedule_id
- * @property string              $raw_stats
+ * @property array               $raw_stats
  * @property null|Carbon         $created_at
  * @property null|Carbon         $updated_at
  * @property CricketGameSchedule $gameSchedule

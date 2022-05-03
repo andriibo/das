@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Enums\SportIdEnum;
 use App\Mappers\CricketGameLogMapper;
 use App\Models\CricketUnitStats;
+use App\Repositories\CricketUnitRepository;
 use App\Services\ActionPointService;
 use App\Services\CricketGameLogService;
 use App\Services\CricketUnitStatsService;
@@ -43,6 +44,7 @@ class CricketGameLogCommand extends Command
 
     private function handleUnitStats(CricketUnitStats $cricketUnitStats, array $actionPoints): void
     {
+        $cricketUnitRepository = new CricketUnitRepository();
         foreach ($cricketUnitStats->raw_stats as $key => $value) {
             if ($value === '') {
                 continue;
@@ -53,15 +55,16 @@ class CricketGameLogCommand extends Command
             }
 
             try {
+                $cricketUnit = $cricketUnitRepository->getByParams($cricketUnitStats->team_id, $cricketUnitStats->player_id);
                 $actionPointId = $actionPoints[$foundKey]['id'];
-                $this->parseGameLog($cricketUnitStats->game_schedule_id, $cricketUnitStats->player_id, $actionPointId, $value);
+                $this->parseGameLog($cricketUnitStats->game_schedule_id, $cricketUnit->id, $actionPointId, $value);
             } catch (\Throwable $exception) {
                 $this->error($exception->getMessage());
             }
         }
     }
 
-    private function parseGameLog(int $gameScheduleId, int $playerId, int $actionPointId, float $value): void
+    private function parseGameLog(int $gameScheduleId, int $unitId, int $actionPointId, float $value): void
     {
         /* @var $cricketGameLogService CricketGameLogService */
         $cricketGameLogService = resolve(CricketGameLogService::class);
@@ -69,10 +72,11 @@ class CricketGameLogCommand extends Command
 
         $cricketGameLogDto = $cricketGameLogMapper->map([
             'game_schedule_id' => $gameScheduleId,
-            'player_id' => $playerId,
+            'unit_id' => $unitId,
             'action_point_id' => $actionPointId,
             'value' => $value,
         ]);
+
         $cricketGameLogService->storeCricketGameLog($cricketGameLogDto);
     }
 }
