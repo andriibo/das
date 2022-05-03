@@ -32,7 +32,6 @@ class CricketPlayerService
         return $this->cricketPlayerRepository->updateOrCreate([
             'feed_id' => $cricketPlayerDto->feedId,
             'feed_type' => $cricketPlayerDto->feedType->name,
-            'sport' => $cricketPlayerDto->sport->name,
         ], [
             'first_name' => $cricketPlayerDto->firstName,
             'last_name' => $cricketPlayerDto->lastName,
