@@ -16,14 +16,14 @@ use Illuminate\Support\Carbon;
  *
  * @property int                 $id
  * @property int                 $game_schedule_id
- * @property int                 $player_id
+ * @property int                 $unit_id
  * @property int                 $action_point_id
  * @property string              $value
  * @property null|Carbon         $created_at
  * @property null|Carbon         $updated_at
  * @property ActionPoint         $actionPoint
  * @property CricketGameSchedule $gameSchedule
- * @property CricketPlayer       $player
+ * @property CricketUnit         $unit
  *
  * @method static CricketGameLogFactory factory(...$parameters)
  * @method static Builder|CricketGameLog newModelQuery()
@@ -33,8 +33,8 @@ use Illuminate\Support\Carbon;
  * @method static Builder|CricketGameLog whereCreatedAt($value)
  * @method static Builder|CricketGameLog whereGameScheduleId($value)
  * @method static Builder|CricketGameLog whereId($value)
- * @method static Builder|CricketGameLog wherePlayerId($value)
  * @method static Builder|CricketGameLog whereUpdatedAt($value)
+ * @method static Builder|CricketGameLog whereUnitId($value)
  * @method static Builder|CricketGameLog whereValue($value)
  * @mixin Eloquent
  */
@@ -46,7 +46,7 @@ class CricketGameLog extends Model
 
     protected $fillable = [
         'game_schedule_id',
-        'player_id',
+        'unit_id',
         'action_point_id',
         'value',
     ];
@@ -58,9 +58,9 @@ class CricketGameLog extends Model
         return $this->belongsTo(CricketGameSchedule::class);
     }
 
-    public function player(): BelongsTo
+    public function unit(): BelongsTo
     {
-        return $this->belongsTo(CricketPlayer::class);
+        return $this->belongsTo(CricketUnit::class);
     }
 
     public function actionPoint(): BelongsTo
