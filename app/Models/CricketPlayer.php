@@ -18,7 +18,6 @@ use Illuminate\Support\Carbon;
  * @property int                      $id
  * @property string                   $feed_type
  * @property string                   $feed_id
- * @property string                   $sport
  * @property string                   $first_name
  * @property string                   $last_name
  * @property null|string              $photo
@@ -46,7 +45,6 @@ use Illuminate\Support\Carbon;
  * @method static Builder|CricketPlayer whereLastName($value)
  * @method static Builder|CricketPlayer wherePhoto($value)
  * @method static Builder|CricketPlayer whereSalary($value)
- * @method static Builder|CricketPlayer whereSport($value)
  * @method static Builder|CricketPlayer whereTotalFantasyPoints($value)
  * @method static Builder|CricketPlayer whereTotalFantasyPointsPerGame($value)
  * @method static Builder|CricketPlayer whereUpdatedAt($value)
@@ -61,7 +59,6 @@ class CricketPlayer extends Model
     protected $fillable = [
         'feed_type',
         'feed_id',
-        'sport',
         'first_name',
         'last_name',
         'photo',

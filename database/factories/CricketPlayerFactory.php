@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use App\Enums\CricketPlayer\InjuryStatusEnum;
-use App\Enums\CricketPlayer\SportEnum;
 use App\Enums\FeedTypeEnum;
 use App\Models\CricketPlayer;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -37,7 +36,6 @@ class CricketPlayerFactory extends Factory
         return [
             'feed_type' => $this->faker->randomElement(FeedTypeEnum::names()),
             'feed_id' => $this->faker->text(100),
-            'sport' => $this->faker->randomElement(SportEnum::names()),
             'first_name' => $this->faker->name('male'),
             'last_name' => $this->faker->name('male'),
             'injury_status' => $this->faker->randomElement(InjuryStatusEnum::names()),
