@@ -30,7 +30,7 @@ use Illuminate\Support\Carbon;
  * @property null|Carbon                $updated_at
  * @property Collection|CricketPlayer[] $cricketPlayers
  * @property null|int                   $cricket_players_count
- * @property \App\Models\League         $league
+ * @property League                     $league
  * @property Collection|CricketUnit[]   $cricketUnits
  * @property null|int                   $cricket_units_count
  *

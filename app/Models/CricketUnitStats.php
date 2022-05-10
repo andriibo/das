@@ -14,16 +14,16 @@ use Illuminate\Support\Carbon;
 /**
  * App\Models\CricketUnitStats.
  *
- * @property int                 $id
- * @property int                 $game_schedule_id
- * @property int                 $player_id
- * @property int                 $team_id
- * @property mixed               $raw_stats
- * @property null|Carbon         $created_at
- * @property null|Carbon         $updated_at
- * @property CricketGameSchedule $gameSchedule
- * @property CricketPlayer       $player
- * @property CricketTeam         $team
+ * @property int                      $id
+ * @property null|int                 $game_schedule_id
+ * @property int                      $player_id
+ * @property null|int                 $team_id
+ * @property mixed                    $raw_stats
+ * @property null|Carbon              $created_at
+ * @property null|Carbon              $updated_at
+ * @property CricketPlayer            $player
+ * @property null|CricketGameSchedule $gameSchedule
+ * @property null|CricketTeam         $team
  *
  * @method static CricketUnitStatsFactory factory(...$parameters)
  * @method static Builder|CricketUnitStats newModelQuery()
