@@ -46,6 +46,28 @@ definitions:
                 docker-compose exec -T app php artisan migrate &&
                 docker-compose exec -T app php artisan up &&
                 docker-compose exec -T app php artisan test
+    - step: &deploy_aws_stage
+        name: deploy_aws_stage
+        script:
+          - pipe: atlassian/ssh-run:0.2.8
+            variables:
+              SSH_USER: $USER
+              SERVER: $AWS_SERVER
+              COMMAND:
+                >-
+                cd /var/www/dfs-stage/das &&
+                git fetch --prune &&
+                git checkout $BITBUCKET_BRANCH &&
+                git pull &&
+                docker-compose exec -T app composer install &&
+                docker-compose exec -T app composer check-build &&
+                docker-compose exec -T app php artisan down &&
+                docker-compose exec -T app php artisan cache:clear &&
+                docker-compose exec -T app php artisan config:cache &&
+                docker-compose exec -T app php artisan route:cache &&
+                docker-compose exec -T app php artisan migrate &&
+                docker-compose exec -T app php artisan up &&
+                docker-compose exec -T app php artisan test
 pipelines:
   custom:
     deploy-to-dev:
@@ -58,6 +80,11 @@ pipelines:
           <<: *deploy_aws
           deployment: aws_development
           name: deploy to development in aws
+    deploy-to-stage-aws:
+      - step:
+          <<: *deploy_aws_stage
+          deployment: aws_stage
+          name: deploy to stage in aws
   branches:
     develop:
       - step:
