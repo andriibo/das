@@ -2,7 +2,7 @@ version: "3.7"
 services:
   app:
     build: ./docker/php
-    container_name: fantasysports-das
+    container_name: ${FANTASYSPORTS_DAS_NAME:-fantasysports-das}
     restart: always
     working_dir: /var/www/html
     volumes:
