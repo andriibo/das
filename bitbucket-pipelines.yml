@@ -61,16 +61,16 @@ pipelines:
   branches:
     develop:
       - step:
-          <<: *deploy
+          <<: *deploy_aws
           deployment: development
           name: deploy to dev server
     master:
       - step:
-          <<: *deploy
+          <<: *deploy_aws
           deployment: development
           name: deploy to dev server
     '{release/*}':
       - step:
-          <<: *deploy
+          <<: *deploy_aws
           deployment: development
           name: deploy to dev server
