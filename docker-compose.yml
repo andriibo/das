@@ -14,5 +14,4 @@ services:
 
 networks:
   default:
-    external:
-      name: fantasysports-network
+    name: fantasysports-network
