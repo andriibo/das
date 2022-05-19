@@ -35,7 +35,6 @@ class CricketPlayerService
         ], [
             'first_name' => $cricketPlayerDto->firstName,
             'last_name' => $cricketPlayerDto->lastName,
-            'sport_id' => $cricketPlayerDto->sport->name,
             'injury_status' => $cricketPlayerDto->injuryStatus->name,
         ]);
     }
