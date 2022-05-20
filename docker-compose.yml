@@ -13,5 +13,6 @@ services:
       - db
 
 networks:
-  default:
-    name: fantasysports-network
+ default:
+  name: ${FANTASYSPORTS_NETWORK_NAME:-fantasysports-network}
+  external: true
