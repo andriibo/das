@@ -9,11 +9,11 @@ use App\Enums\CricketGameSchedule\IsSalaryAvailableEnum;
 use App\Enums\CricketGameSchedule\StatusEnum;
 use App\Enums\CricketGameSchedule\TypeEnum;
 use App\Enums\FeedTypeEnum;
-use App\Services\CricketTeamService;
+use App\Repositories\CricketTeamRepository;
 
 class CricketGameScheduleMapper
 {
-    public function __construct(private readonly CricketTeamService $cricketTeamService)
+    public function __construct(private readonly CricketTeamRepository $cricketTeamRepository)
     {
     }
 
@@ -40,7 +40,7 @@ class CricketGameScheduleMapper
 
     private function getCricketTeamIdByFeedId(string $feedId): int
     {
-        return $this->cricketTeamService->getCricketTeamByFeedId($feedId)->id;
+        return $this->cricketTeamRepository->getByFeedId($feedId)->id;
     }
 
     private function generateGameDate(string $date, string $time): string

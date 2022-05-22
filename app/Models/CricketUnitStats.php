@@ -16,12 +16,12 @@ use Illuminate\Support\Carbon;
  *
  * @property int                      $id
  * @property null|int                 $game_schedule_id
- * @property int                      $player_id
+ * @property int                      $unit_id
  * @property null|int                 $team_id
  * @property mixed                    $raw_stats
  * @property null|Carbon              $created_at
  * @property null|Carbon              $updated_at
- * @property CricketPlayer            $player
+ * @property CricketUnit              $unit
  * @property null|CricketGameSchedule $gameSchedule
  * @property null|CricketTeam         $team
  *
@@ -32,9 +32,9 @@ use Illuminate\Support\Carbon;
  * @method static Builder|CricketUnitStats whereCreatedAt($value)
  * @method static Builder|CricketUnitStats whereGameScheduleId($value)
  * @method static Builder|CricketUnitStats whereId($value)
- * @method static Builder|CricketUnitStats wherePlayerId($value)
  * @method static Builder|CricketUnitStats whereRawStats($value)
  * @method static Builder|CricketUnitStats whereTeamId($value)
+ * @method static Builder|CricketUnitStats whereUnitId($value)
  * @method static Builder|CricketUnitStats whereUpdatedAt($value)
  * @mixin Eloquent
  */
@@ -50,7 +50,7 @@ class CricketUnitStats extends Model
 
     protected $fillable = [
         'game_schedule_id',
-        'player_id',
+        'unit_id',
         'team_id',
         'raw_stats',
     ];
@@ -62,9 +62,9 @@ class CricketUnitStats extends Model
         return $this->belongsTo(CricketGameSchedule::class);
     }
 
-    public function player(): BelongsTo
+    public function unit(): BelongsTo
     {
-        return $this->belongsTo(CricketPlayer::class);
+        return $this->belongsTo(CricketUnit::class);
     }
 
     public function team(): BelongsTo

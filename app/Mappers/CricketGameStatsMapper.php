@@ -3,11 +3,11 @@
 namespace App\Mappers;
 
 use App\Dto\CricketGameStatsDto;
-use App\Services\CricketGameScheduleService;
+use App\Repositories\CricketGameScheduleRepository;
 
 class CricketGameStatsMapper
 {
-    public function __construct(private readonly CricketGameScheduleService $cricketGameScheduleService)
+    public function __construct(private readonly CricketGameScheduleRepository $cricketGameScheduleRepository)
     {
     }
 
@@ -23,6 +23,6 @@ class CricketGameStatsMapper
 
     private function getGameScheduleIdByFeedId(string $feedId): int
     {
-        return $this->cricketGameScheduleService->getCricketGameScheduleByFeedId($feedId)->id;
+        return $this->cricketGameScheduleRepository->getByFeedId($feedId)->id;
     }
 }

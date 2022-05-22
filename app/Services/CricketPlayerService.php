@@ -5,26 +5,12 @@ namespace App\Services;
 use App\Dto\CricketPlayerDto;
 use App\Models\CricketPlayer;
 use App\Repositories\CricketPlayerRepository;
-use Illuminate\Database\Eloquent\Collection;
 
 class CricketPlayerService
 {
     public function __construct(
         private readonly CricketPlayerRepository $cricketPlayerRepository
     ) {
-    }
-
-    /**
-     * @return Collection|CricketPlayer[]
-     */
-    public function getCricketPlayers(): Collection
-    {
-        return $this->cricketPlayerRepository->getList();
-    }
-
-    public function getCricketPlayerByFeedId(string $feedId): CricketPlayer
-    {
-        return $this->cricketPlayerRepository->getByFeedId($feedId);
     }
 
     public function storeCricketPlayer(CricketPlayerDto $cricketPlayerDto): CricketPlayer

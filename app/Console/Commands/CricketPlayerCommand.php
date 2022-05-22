@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Mappers\CricketPlayerMapper;
+use App\Repositories\CricketPlayerRepository;
 use App\Services\CricketGoalserveService;
 use App\Services\CricketPlayerService;
 use Carbon\Carbon;
@@ -27,10 +28,10 @@ class CricketPlayerCommand extends Command
     /**
      * Execute the console command.
      */
-    public function handle(CricketPlayerService $cricketPlayerService)
+    public function handle(CricketPlayerRepository $cricketPlayerRepository)
     {
         $this->info(Carbon::now() . ": Command {$this->signature} started");
-        $cricketPlayers = $cricketPlayerService->getCricketPlayers();
+        $cricketPlayers = $cricketPlayerRepository->getList();
         foreach ($cricketPlayers as $cricketPlayer) {
             $this->parseCricketPlayer($cricketPlayer->feed_id);
         }

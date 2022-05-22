@@ -4,8 +4,8 @@ namespace App\Console\Commands;
 
 use App\Mappers\CricketUnitStatsMapper;
 use App\Models\CricketGameStats;
-use App\Services\CricketGameStatsService;
-use App\Services\CricketTeamService;
+use App\Repositories\CricketGameStatsRepository;
+use App\Repositories\CricketTeamRepository;
 use App\Services\CricketUnitStatsService;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
@@ -29,10 +29,10 @@ class CricketUnitStatsCommand extends Command
     /**
      * Execute the console command.
      */
-    public function handle(CricketGameStatsService $cricketGameStatsService): void
+    public function handle(CricketGameStatsRepository $cricketGameStatsRepository): void
     {
         $this->info(Carbon::now() . ": Command {$this->signature} started");
-        $gameStats = $cricketGameStatsService->getCricketGameStats();
+        $gameStats = $cricketGameStatsRepository->getList();
         foreach ($gameStats as $gameStat) {
             $this->parseGameStat($gameStat);
         }
@@ -41,13 +41,16 @@ class CricketUnitStatsCommand extends Command
 
     private function parseGameStat(CricketGameStats $cricketGameStats): void
     {
-        /* @var $cricketTeamService CricketTeamService */
-        $cricketTeamService = resolve(CricketTeamService::class);
+        $cricketTeamRepository = new CricketTeamRepository();
 
         try {
             $match = $cricketGameStats->raw_stats['match'];
-            $homeTeamId = $cricketTeamService->getCricketTeamByFeedId($match['localteam']['id'])->id;
-            $awayTeamId = $cricketTeamService->getCricketTeamByFeedId($match['visitorteam']['id'])->id;
+            $homeTeamId = $cricketTeamRepository->getByFeedId($match['localteam']['id'])->id;
+            $awayTeamId = $cricketTeamRepository->getByFeedId($match['visitorteam']['id'])->id;
+
+            if (!isset($match['inning'])) {
+                return;
+            }
 
             $innings = $match['inning'];
             if (array_key_exists('batsmanstats', $innings) && array_key_exists('bowlers', $innings)) {
@@ -74,14 +77,14 @@ class CricketUnitStatsCommand extends Command
 
     private function parseUnitStats(array $players, int $teamId, int $gameScheduleId): void
     {
-        /* @var $cricketUnitStatsService CricketUnitStatsService */
-        /* @var $cricketUnitStatsMapper CricketUnitStatsMapper */
+        /* @var $cricketUnitStatsService CricketUnitStatsService
+        * @var $cricketUnitStatsMapper CricketUnitStatsMapper */
         $cricketUnitStatsService = resolve(CricketUnitStatsService::class);
         $cricketUnitStatsMapper = resolve(CricketUnitStatsMapper::class);
         foreach ($players as $player) {
             $cricketUnitStatsDto = $cricketUnitStatsMapper->map([
                 'game_id' => $gameScheduleId,
-                'profile_id' => $player['profileid'],
+                'player_id' => $player['profileid'],
                 'team_id' => $teamId,
                 'stats' => $player,
             ]);

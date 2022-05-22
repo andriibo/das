@@ -5,10 +5,10 @@ namespace App\Console\Commands;
 use App\Enums\SportIdEnum;
 use App\Mappers\CricketGameLogMapper;
 use App\Models\CricketUnitStats;
+use App\Repositories\ActionPointRepository;
 use App\Repositories\CricketUnitRepository;
-use App\Services\ActionPointService;
+use App\Repositories\CricketUnitStatsRepository;
 use App\Services\CricketGameLogService;
-use App\Services\CricketUnitStatsService;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 
@@ -31,11 +31,11 @@ class CricketGameLogCommand extends Command
     /**
      * Execute the console command.
      */
-    public function handle(CricketUnitStatsService $cricketUnitStatsService, ActionPointService $actionPointService): void
+    public function handle(CricketUnitStatsRepository $cricketUnitStatsRepository, ActionPointRepository $actionPointRepository): void
     {
         $this->info(Carbon::now() . ": Command {$this->signature} started");
-        $items = $cricketUnitStatsService->getCricketUnitStats();
-        $actionPoints = $actionPointService->getListBySportId(SportIdEnum::cricket)->toArray();
+        $items = $cricketUnitStatsRepository->getList();
+        $actionPoints = $actionPointRepository->getListBySportId(SportIdEnum::cricket)->toArray();
         foreach ($items as $item) {
             $this->handleUnitStats($item, $actionPoints);
         }
@@ -55,9 +55,8 @@ class CricketGameLogCommand extends Command
             }
 
             try {
-                $cricketUnit = $cricketUnitRepository->getByParams($cricketUnitStats->team_id, $cricketUnitStats->player_id);
                 $actionPointId = $actionPoints[$foundKey]['id'];
-                $this->parseGameLog($cricketUnitStats->game_schedule_id, $cricketUnit->id, $actionPointId, $value);
+                $this->parseGameLog($cricketUnitStats->game_schedule_id, $cricketUnitStats->unit_id, $actionPointId, $value);
             } catch (\Throwable $exception) {
                 $this->error($exception->getMessage());
             }

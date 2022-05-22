@@ -5,7 +5,6 @@ namespace App\Services;
 use App\Dto\CricketUnitStatsDto;
 use App\Models\CricketUnitStats;
 use App\Repositories\CricketUnitStatsRepository;
-use Illuminate\Database\Eloquent\Collection;
 
 class CricketUnitStatsService
 {
@@ -14,19 +13,11 @@ class CricketUnitStatsService
     ) {
     }
 
-    /**
-     * @return Collection|CricketUnitStats[]
-     */
-    public function getCricketUnitStats(): Collection
-    {
-        return $this->cricketUnitStatsRepository->getList();
-    }
-
     public function storeCricketUnitStats(CricketUnitStatsDto $cricketUnitStatsDto): CricketUnitStats
     {
         return $this->cricketUnitStatsRepository->updateOrCreate([
             'game_schedule_id' => $cricketUnitStatsDto->gameScheduleId,
-            'player_id' => $cricketUnitStatsDto->playerId,
+            'unit_id' => $cricketUnitStatsDto->unitId,
             'team_id' => $cricketUnitStatsDto->teamId,
         ], ['raw_stats' => $cricketUnitStatsDto->rawStats]);
     }

@@ -10,6 +10,6 @@ class CricketUnitStatsSavedListener
     public function handle(CricketUnitStatsSavedEvent $cricketUnitStatsSavedEvent)
     {
         $consoleOutput = new ConsoleOutput();
-        $consoleOutput->writeln("<info>Unit Stat: {$cricketUnitStatsSavedEvent->cricketUnitStats->player->first_name}, Info added!</info>");
+        $consoleOutput->writeln("<info>Unit Stats ID: {$cricketUnitStatsSavedEvent->cricketUnitStats->id}, Info added!</info>");
     }
 }

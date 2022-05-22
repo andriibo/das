@@ -8,11 +8,11 @@ use App\Mappers\CricketTeamMapper;
 use App\Mappers\CricketUnitMapper;
 use App\Models\CricketPlayer;
 use App\Models\League;
+use App\Repositories\LeagueRepository;
 use App\Services\CricketGoalserveService;
 use App\Services\CricketPlayerService;
 use App\Services\CricketTeamService;
 use App\Services\CricketUnitService;
-use App\Services\LeagueService;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 
@@ -35,10 +35,10 @@ class CricketTeamPlayerUnitCommand extends Command
     /**
      * Execute the console command.
      */
-    public function handle(LeagueService $leagueService)
+    public function handle(LeagueRepository $leagueRepository)
     {
         $this->info(Carbon::now() . ": Command {$this->signature} started");
-        $leagues = $leagueService->getListBySportId(SportIdEnum::cricket);
+        $leagues = $leagueRepository->getListBySportId(SportIdEnum::cricket);
         foreach ($leagues as $league) {
             $this->parseCricketTeams($league);
         }
@@ -56,7 +56,6 @@ class CricketTeamPlayerUnitCommand extends Command
         if (!$cricketTeam) {
             return;
         }
-
         foreach ($data['player'] as $player) {
             $cricketPlayer = $this->parseCricketPlayer($player);
             if (!$cricketPlayer) {

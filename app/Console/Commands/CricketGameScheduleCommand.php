@@ -5,9 +5,9 @@ namespace App\Console\Commands;
 use App\Enums\SportIdEnum;
 use App\Mappers\CricketGameScheduleMapper;
 use App\Models\League;
+use App\Repositories\LeagueRepository;
 use App\Services\CricketGameScheduleService;
 use App\Services\CricketGoalserveService;
-use App\Services\LeagueService;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 
@@ -30,10 +30,10 @@ class CricketGameScheduleCommand extends Command
     /**
      * Execute the console command.
      */
-    public function handle(LeagueService $leagueService)
+    public function handle(LeagueRepository $leagueRepository)
     {
         $this->info(Carbon::now() . ": Command {$this->signature} started");
-        $leagues = $leagueService->getListBySportId(SportIdEnum::cricket);
+        $leagues = $leagueRepository->getListBySportId(SportIdEnum::cricket);
         foreach ($leagues as $league) {
             $this->parseMatches($league);
         }

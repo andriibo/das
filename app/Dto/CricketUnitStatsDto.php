@@ -6,7 +6,7 @@ class CricketUnitStatsDto
 {
     public ?int $id;
     public int $gameScheduleId;
-    public int $playerId;
+    public int $unitId;
     public int $teamId;
     public array $rawStats;
     public ?string $createdAt;
