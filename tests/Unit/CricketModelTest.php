@@ -78,11 +78,11 @@ class CricketModelTest extends TestCase
     {
         $gameSchedule = $this->createCricketGameSchedule();
         $team = $this->createCricketTeam();
-        $player = $this->createCricketPlayer();
+        $unit = $this->createCricketUnit();
 
         $cricketUnitStats = CricketUnitStats::factory()
             ->for($gameSchedule, 'gameSchedule')
-            ->for($player, 'player')
+            ->for($unit, 'unit')
             ->for($team, 'team')
             ->create()
         ;
