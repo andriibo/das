@@ -32,11 +32,12 @@ class CricketUnitStatsMapper
     private function mapStats(array $stats): array
     {
         $mappedStats = [];
-        foreach ($stats as $key => $stat){
-            if(CricketUnitStatActionEnum::tryFrom($key)){
+        foreach ($stats as $key => $stat) {
+            if (CricketUnitStatActionEnum::tryFrom($key)) {
                 $mappedStats[$key] = $stat;
             }
         }
+
         return $mappedStats;
     }
 }
