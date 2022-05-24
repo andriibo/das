@@ -17,7 +17,7 @@ class CricketUnitStatsMapper
         $cricketUnitStatDto = new CricketUnitStatsDto();
         $teamId = $data['team_id'];
         $cricketUnitStatDto->gameScheduleId = $data['game_id'];
-        $cricketUnitStatDto->unitId = $this->getUnitId($data['player_id'], $teamId);
+        $cricketUnitStatDto->unitId = $data['unit_id'] ?? $this->getUnitId($data['player_id'], $teamId);
         $cricketUnitStatDto->teamId = $teamId;
         $cricketUnitStatDto->stats = $this->mapStats($data['stats']);
 
