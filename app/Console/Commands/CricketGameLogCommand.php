@@ -45,7 +45,7 @@ class CricketGameLogCommand extends Command
     private function handleUnitStats(CricketUnitStats $cricketUnitStats, array $actionPoints): void
     {
         $cricketUnitRepository = new CricketUnitRepository();
-        foreach ($cricketUnitStats->raw_stats as $key => $value) {
+        foreach ($cricketUnitStats->stats as $key => $value) {
             if ($value === '') {
                 continue;
             }

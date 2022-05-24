@@ -19,6 +19,6 @@ class CricketUnitStatsService
             'game_schedule_id' => $cricketUnitStatsDto->gameScheduleId,
             'unit_id' => $cricketUnitStatsDto->unitId,
             'team_id' => $cricketUnitStatsDto->teamId,
-        ], ['raw_stats' => $cricketUnitStatsDto->rawStats]);
+        ], ['stats' => $cricketUnitStatsDto->stats]);
     }
 }

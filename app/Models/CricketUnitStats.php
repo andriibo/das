@@ -18,7 +18,7 @@ use Illuminate\Support\Carbon;
  * @property null|int                 $game_schedule_id
  * @property int                      $unit_id
  * @property null|int                 $team_id
- * @property mixed                    $raw_stats
+ * @property mixed                    $stats
  * @property null|Carbon              $created_at
  * @property null|Carbon              $updated_at
  * @property CricketUnit              $unit
@@ -45,14 +45,14 @@ class CricketUnitStats extends Model
     protected $table = 'cricket_unit_stats';
 
     protected $casts = [
-        'raw_stats' => 'array',
+        'stats' => 'array',
     ];
 
     protected $fillable = [
         'game_schedule_id',
         'unit_id',
         'team_id',
-        'raw_stats',
+        'stats',
     ];
 
     protected $dispatchesEvents = ['saved' => CricketUnitStatsSavedEvent::class];

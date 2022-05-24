@@ -3,6 +3,7 @@
 namespace App\Mappers;
 
 use App\Dto\CricketUnitStatsDto;
+use App\Enums\CricketUnit\CricketUnitStatActionEnum;
 use App\Repositories\CricketUnitRepository;
 
 class CricketUnitStatsMapper
@@ -18,7 +19,7 @@ class CricketUnitStatsMapper
         $cricketUnitStatDto->gameScheduleId = $data['game_id'];
         $cricketUnitStatDto->unitId = $this->getUnitId($data['player_id'], $teamId);
         $cricketUnitStatDto->teamId = $teamId;
-        $cricketUnitStatDto->rawStats = $data['stats'];
+        $cricketUnitStatDto->stats = $this->mapStats($data['stats']);
 
         return $cricketUnitStatDto;
     }
@@ -26,5 +27,17 @@ class CricketUnitStatsMapper
     private function getUnitId(int $feedId, int $teamId): int
     {
         return $this->cricketUnitRepository->getByParams($feedId, $teamId)->id;
+    }
+
+    private function mapStats(array $stats): array
+    {
+        $mappedStats = [];
+        foreach ($stats as $key => $stat) {
+            if (CricketUnitStatActionEnum::tryFrom($key)) {
+                $mappedStats[$key] = $stat;
+            }
+        }
+
+        return $mappedStats;
     }
 }
