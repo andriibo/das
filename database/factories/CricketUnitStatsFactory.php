@@ -32,7 +32,7 @@ class CricketUnitStatsFactory extends Factory
     public function definition()
     {
         return [
-            'raw_stats' => [],
+            'stats' => [],
         ];
     }
 }
