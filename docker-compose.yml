@@ -2,17 +2,9 @@ version: "3.7"
 services:
   app:
     build: ./docker/php
-    container_name: fantasysports-das
     restart: always
     working_dir: /var/www/html
     volumes:
       - ./:/var/www/html
-    ports:
-      - ${APP_PORT}:8000
     external_links:
       - db
-
-networks:
-  default:
-    name: fantasysports-network
-    external: true
