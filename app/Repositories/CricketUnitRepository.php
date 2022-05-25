@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Models\CricketUnit;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class CricketUnitRepository
@@ -20,6 +21,14 @@ class CricketUnitRepository
             ->whereTeamId($teamId)
             ->firstOrFail()
         ;
+    }
+
+    /**
+     * @return Collection|CricketUnit[]
+     */
+    public function getList(): Collection
+    {
+        return CricketUnit::all();
     }
 
     public function updateOrCreate(array $attributes, array $values = []): CricketUnit
