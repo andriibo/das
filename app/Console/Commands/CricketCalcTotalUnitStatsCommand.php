@@ -16,15 +16,9 @@ class CricketCalcTotalUnitStatsCommand extends Command
 
     protected $description = 'Calculate total unit stats';
 
-    public function __construct()
-    {
-        parent::__construct();
-
-    }
-
     public function handle(CricketUnitService $cricketUnitService): void
     {
-        $this->info(Carbon::now() . ": Command {$this->signature} started");
+        $this->info(Carbon::now().": Command {$this->signature} started");
         $cricketUnits = $cricketUnitService->getCricketUnits();
 
         /** @var CricketUnit $cricketUnit */
@@ -32,7 +26,7 @@ class CricketCalcTotalUnitStatsCommand extends Command
             $statsTotal = $this->calcCricketUnitTotalStats($cricketUnit);
             $this->saveTotalUnitStats($cricketUnit, $statsTotal);
         }
-        $this->info(Carbon::now() . ": Command {$this->signature} finished");
+        $this->info(Carbon::now().": Command {$this->signature} finished");
     }
 
     private function calcCricketUnitTotalStats(CricketUnit $cricketUnit): array
@@ -41,6 +35,7 @@ class CricketCalcTotalUnitStatsCommand extends Command
         foreach ($cricketUnit->unitStats as $unitStat) {
             $stats = ArrayHelper::sum($stats, $unitStat->stats);
         }
+
         return $stats;
     }
 

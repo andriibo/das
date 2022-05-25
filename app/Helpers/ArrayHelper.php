@@ -5,17 +5,18 @@ namespace App\Helpers;
 class ArrayHelper
 {
     /**
-     * Sum values of corresponding keys from two or more arrays, values from later arrays are added to former array
+     * Sum values of corresponding keys from two or more arrays, values from later arrays are added to former array.
      */
     public static function sum(): array
     {
         $args = func_get_args();
         if (!count($args)) {
             return [];
-        } elseif (1 == count($args)) {
+        }
+        if (1 == count($args)) {
             return $args[0];
         }
-        list ($ar1, $ar2) = $args;
+        list($ar1, $ar2) = $args;
         if (count($args) > 2) {
             $ar2 = call_user_func_array([ArrayHelper::class, 'sum'], array_slice($args, 1));
         }
@@ -26,6 +27,7 @@ class ArrayHelper
                 $ar1[$key] = $value;
             }
         }
+
         return $ar1;
     }
 }
