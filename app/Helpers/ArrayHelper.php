@@ -16,7 +16,7 @@ class ArrayHelper
         if (1 == count($args)) {
             return $args[0];
         }
-        list($ar1, $ar2) = $args;
+        [$ar1, $ar2] = $args;
         if (count($args) > 2) {
             $ar2 = call_user_func_array([ArrayHelper::class, 'sum'], array_slice($args, 1));
         }

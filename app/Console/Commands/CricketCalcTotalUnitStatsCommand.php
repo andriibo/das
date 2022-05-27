@@ -18,7 +18,7 @@ class CricketCalcTotalUnitStatsCommand extends Command
 
     public function handle(CricketUnitService $cricketUnitService): void
     {
-        $this->info(Carbon::now().": Command {$this->signature} started");
+        $this->info(Carbon::now() . ": Command {$this->signature} started");
         $cricketUnits = $cricketUnitService->getCricketUnits();
 
         /** @var CricketUnit $cricketUnit */
@@ -26,7 +26,7 @@ class CricketCalcTotalUnitStatsCommand extends Command
             $statsTotal = $this->calcCricketUnitTotalStats($cricketUnit);
             $this->saveTotalUnitStats($cricketUnit, $statsTotal);
         }
-        $this->info(Carbon::now().": Command {$this->signature} finished");
+        $this->info(Carbon::now() . ": Command {$this->signature} finished");
     }
 
     private function calcCricketUnitTotalStats(CricketUnit $cricketUnit): array
