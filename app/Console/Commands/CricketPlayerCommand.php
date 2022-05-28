@@ -56,7 +56,7 @@ class CricketPlayerCommand extends Command
                 return;
             }
 
-            if (is_null($cricketPlayer->photo) && $data['image']) {
+            if (is_null($cricketPlayer->photo)) {
                 $data['photo'] = $this->uploadPhoto($data['image']);
             }
             $cricketPlayerDto = $cricketPlayerMapper->map($data);
