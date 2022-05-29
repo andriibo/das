@@ -15,7 +15,7 @@ class CricketTeamMapper
         $cricketTeamDto->leagueId = $leagueId;
         $cricketTeamDto->name = $data['name'] ?? '';
         $cricketTeamDto->nickname = $data['nickname'] ?? '';
-        $cricketTeamDto->alias = $data['alias'] ?? '';
+        $cricketTeamDto->alias = trim(substr(strtoupper($data['name']), 0, 3));
         $cricketTeamDto->countryId = $data['country_id'] ?? null;
         $cricketTeamDto->logo = $data['logo'] ?? null;
         $cricketTeamDto->feedType = FeedTypeEnum::goalserve;
