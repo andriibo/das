@@ -26,4 +26,9 @@ class CricketUnitService
     {
         return $this->cricketUnitRepository->getList();
     }
+
+    public function updateFantasyPoints(cricketUnit $cricketUnit, CricketUnitDto $cricketUnitDto): void
+    {
+        $this->cricketUnitRepository->updateFantasyPoints($cricketUnit, $cricketUnitDto);
+    }
 }

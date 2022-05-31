@@ -73,6 +73,6 @@ class CricketPlayer extends Model
 
     public function cricketUnits(): HasMany
     {
-        return $this->hasMany(CricketUnit::class);
+        return $this->hasMany(CricketUnit::class, 'player_id', 'id');
     }
 }
