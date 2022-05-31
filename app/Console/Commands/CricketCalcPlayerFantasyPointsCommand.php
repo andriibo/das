@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Dto\CricketPlayerDto;
 use App\Dto\CricketUnitDto;
 use App\Helpers\UnitStatsHelper;
 use App\Models\CricketPlayer;
@@ -36,14 +37,37 @@ class CricketCalcPlayerFantasyPointsCommand extends Command
 
     private function updatePlayerFantasyPoints(CricketPlayer $player, array $actionPoints): void
     {
+        $cricketPlayerService = resolve(CricketPlayerService::class);
+
+        $playerDto = new CricketPlayerDto();
+        $playerDto->totalFantasyPoints = 0;
+        $playerDto->totalFantasyPointsPerGame = 0;
+        if ($player->cricketUnits) {
+            $gamesCount = 0;
+            foreach ($player->cricketUnits as $cricketUnit) {
+                $unitDto = $this->updateUnitFantasyPoints($cricketUnit, $actionPoints);
+                $playerDto->totalFantasyPoints += $unitDto->totalFantasyPoints;
+                $gamesCount += $cricketUnit->unitStats()->count();
+            }
+            if ($gamesCount > 0) {
+                $playerDto->totalFantasyPointsPerGame = $playerDto->totalFantasyPoints / $gamesCount;
+            }
+
+            $cricketPlayerService->updateFantasyPoints($player, $playerDto);
+        }
+    }
+
+    private function updateUnitFantasyPoints(CricketUnit $cricketUnit, array $actionPoints): CricketUnitDto
+    {
         $cricketUnitStatsService = resolve(CricketUnitStatsService::class);
         $cricketUnitService = resolve(CricketUnitService::class);
 
-        foreach ($player->cricketUnits as $cricketUnit) {
-            $unitStats = $cricketUnitStatsService->getRealGameUnitStatsByUnitId($cricketUnit->id);
-            $cricketUnitDto = $this->calcFantasyPoints($unitStats, $actionPoints, $cricketUnit);
-            $cricketUnitService->updateFantasyPoints($cricketUnit, $cricketUnitDto);
-        }
+        $unitStats = $cricketUnitStatsService->getRealGameUnitStatsByUnitId($cricketUnit->id);
+        $cricketUnitDto = $this->calcFantasyPoints($unitStats, $actionPoints, $cricketUnit);
+
+        $cricketUnitService->updateFantasyPoints($cricketUnit, $cricketUnitDto);
+
+        return $cricketUnitDto;
     }
 
     private function calcFantasyPoints(

@@ -31,4 +31,9 @@ class CricketPlayerService
     {
         return $this->cricketPlayerRepository->getList();
     }
+
+    public function updateFantasyPoints(cricketPlayer $cricketPlayer, CricketPlayerDto $cricketPlayerDto): void
+    {
+        $this->cricketPlayerRepository->updateFantasyPoints($cricketPlayer, $cricketPlayerDto);
+    }
 }

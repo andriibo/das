@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Dto\CricketPlayerDto;
 use App\Models\CricketPlayer;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -27,5 +28,15 @@ class CricketPlayerRepository
     public function updateOrCreate(array $attributes, array $values = []): CricketPlayer
     {
         return CricketPlayer::updateOrCreate($attributes, $values);
+    }
+
+    public function updateFantasyPoints(CricketPlayer $cricketPlayer, CricketPlayerDto $cricketPlayerDto): bool
+    {
+        return $cricketPlayer->update(
+            [
+                'total_fantasy_points' => $cricketPlayerDto->totalFantasyPoints,
+                'total_fantasy_points_per_game' => $cricketPlayerDto->totalFantasyPointsPerGame,
+            ]
+        );
     }
 }
