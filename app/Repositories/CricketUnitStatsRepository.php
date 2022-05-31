@@ -19,4 +19,16 @@ class CricketUnitStatsRepository
     {
         return CricketUnitStats::updateOrCreate($attributes, $values);
     }
+
+    public function getRealGameUnitStatsByUnitId(int $unitId): Collection
+    {
+        return CricketUnitStats::query()
+            ->where(['unit_id' => $unitId])
+            ->havingNotNull('game_schedule_id')
+            ->join('cricket_game_schedule', function ($join) {
+                $join->on('cricket_unit_stats.game_schedule_id', '=', 'cricket_game_schedule.id')
+                    ->where('is_fake', '=', '0')
+                ;
+            })->get();
+    }
 }

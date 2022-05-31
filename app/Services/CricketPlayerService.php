@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Dto\CricketPlayerDto;
 use App\Models\CricketPlayer;
 use App\Repositories\CricketPlayerRepository;
+use Illuminate\Database\Eloquent\Collection;
 
 class CricketPlayerService
 {
@@ -24,5 +25,10 @@ class CricketPlayerService
             'photo' => $cricketPlayerDto->photo,
             'injury_status' => $cricketPlayerDto->injuryStatus->name,
         ]);
+    }
+
+    public function getCricketPlayers(): Collection
+    {
+        return $this->cricketPlayerRepository->getList();
     }
 }
