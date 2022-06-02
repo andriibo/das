@@ -54,13 +54,13 @@ class CricketPlayer extends Model
 {
     use HasFactory;
 
-    public static $minSalary = 4000;
-    public static $maxSalary = 11000;
+    public const MIN_SALARY = 4000;
+    public const MAX_SALARY = 11000;
 
     /**
      * Salary for players that have NULL fantasy points.
      */
-    public static $noDataSalary = 1000;
+    public const NO_DATA_SALARY = 1000;
 
     protected $table = 'cricket_player';
 

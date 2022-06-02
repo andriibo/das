@@ -6,7 +6,6 @@ use App\Enums\SportIdEnum;
 use App\Mappers\CricketGameLogMapper;
 use App\Models\CricketUnitStats;
 use App\Repositories\ActionPointRepository;
-use App\Repositories\CricketUnitRepository;
 use App\Repositories\CricketUnitStatsRepository;
 use App\Services\CricketGameLogService;
 use Carbon\Carbon;
@@ -44,7 +43,6 @@ class CricketGameLogCommand extends Command
 
     private function handleUnitStats(CricketUnitStats $cricketUnitStats, array $actionPoints): void
     {
-        $cricketUnitRepository = new CricketUnitRepository();
         foreach ($cricketUnitStats->stats as $key => $value) {
             if ($value === '') {
                 continue;

@@ -9,15 +9,14 @@ use App\Services\CricketPlayerService;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 
-class CricketCalcPlayersSalariesCommand extends Command
+class CricketPlayerSalaryCommand extends Command
 {
-    protected $signature = 'cricket:calc-players-salaries';
+    protected $signature = 'cricket:player-salary';
 
-    protected $description = 'Calculate players Salaries';
+    protected $description = 'Calculate cricket players salaries';
 
-    public function handle(
-        CricketPlayerService $cricketPlayerService
-    ): void {
+    public function handle(CricketPlayerService $cricketPlayerService): void
+    {
         $this->info(Carbon::now() . ": Command {$this->signature} started");
         $minAndMaxFantasyPoints = $cricketPlayerService->getMinAndMaxFantasyPoints();
         $playersWithCalculatedFantasyPoints = $cricketPlayerService->getPlayersWithCalculatedFantasyPoints();
@@ -33,7 +32,7 @@ class CricketCalcPlayersSalariesCommand extends Command
         $playerService = resolve(CricketPlayerService::class);
 
         $rate = ($player->total_fantasy_points - $MinAndMaxDto->min) / ($MinAndMaxDto->max - $MinAndMaxDto->min);
-        $autoSalary = round($rate * (CricketPlayer::$maxSalary - CricketPlayer::$minSalary) + CricketPlayer::$minSalary, -2);
+        $autoSalary = round($rate * (CricketPlayer::MAX_SALARY - CricketPlayer::MIN_SALARY) + CricketPlayer::MIN_SALARY, -2);
 
         $playerDto = new CricketPlayerDto();
 

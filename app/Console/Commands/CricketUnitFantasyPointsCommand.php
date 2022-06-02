@@ -10,11 +10,11 @@ use App\Services\CricketUnitStatsService;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 
-class CricketCalcTotalUnitStatsCommand extends Command
+class CricketUnitFantasyPointsCommand extends Command
 {
-    protected $signature = 'cricket:calc-total-unit-stats';
+    protected $signature = 'cricket:unit-fantasy-points';
 
-    protected $description = 'Calculate total unit stats';
+    protected $description = 'Calculate fantasy points for cricket units';
 
     public function handle(CricketUnitService $cricketUnitService): void
     {

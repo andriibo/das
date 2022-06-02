@@ -6,7 +6,6 @@ use App\Dto\CricketPlayerDto;
 use App\Dto\MinAndMaxFantasyPointsDto;
 use App\Models\CricketPlayer;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class CricketPlayerRepository
 {
@@ -16,14 +15,6 @@ class CricketPlayerRepository
     public function getList(): Collection
     {
         return CricketPlayer::all();
-    }
-
-    /**
-     * @throws ModelNotFoundException
-     */
-    public function getByFeedId(string $feedId): CricketPlayer
-    {
-        return CricketPlayer::whereFeedId($feedId)->firstOrFail();
     }
 
     public function updateOrCreate(array $attributes, array $values = []): CricketPlayer
@@ -68,8 +59,9 @@ class CricketPlayerRepository
     public function updateSalaryIfNoFantasyPointsAndSalariesMatch(): void
     {
         CricketPlayer::query()
-            ->whereRaw('total_fantasy_points IS NULL AND salary <=> auto_salary')
-            ->update(['salary' => CricketPlayer::$noDataSalary])
+            ->whereNull('total_fantasy_points')
+            ->where('salary', '<=>', 'auto_salary')
+            ->update(['salary' => CricketPlayer::NO_DATA_SALARY])
         ;
     }
 
@@ -77,7 +69,7 @@ class CricketPlayerRepository
     {
         CricketPlayer::query()
             ->whereNull('total_fantasy_points')
-            ->update(['salary' => CricketPlayer::$noDataSalary])
+            ->update(['salary' => CricketPlayer::NO_DATA_SALARY])
         ;
     }
 }

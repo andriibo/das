@@ -32,7 +32,7 @@ use Illuminate\Support\Carbon;
  * @method static Builder|CricketUnitStats whereCreatedAt($value)
  * @method static Builder|CricketUnitStats whereGameScheduleId($value)
  * @method static Builder|CricketUnitStats whereId($value)
- * @method static Builder|CricketUnitStats whereRawStats($value)
+ * @method static Builder|CricketUnitStats whereStats($value)
  * @method static Builder|CricketUnitStats whereTeamId($value)
  * @method static Builder|CricketUnitStats whereUnitId($value)
  * @method static Builder|CricketUnitStats whereUpdatedAt($value)

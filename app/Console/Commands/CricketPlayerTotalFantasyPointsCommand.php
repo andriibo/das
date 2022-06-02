@@ -16,11 +16,11 @@ use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Collection;
 
-class CricketCalcPlayerFantasyPointsCommand extends Command
+class CricketPlayerTotalFantasyPointsCommand extends Command
 {
-    protected $signature = 'cricket:calc-total-fantasy-points';
+    protected $signature = 'cricket:player-total-fantasy-points';
 
-    protected $description = 'Calculate total unit stats';
+    protected $description = 'Calculate total fantasy points and total fantasy points per game for cricket player';
 
     public function handle(
         CricketPlayerService $cricketPlayerService,
@@ -37,6 +37,7 @@ class CricketCalcPlayerFantasyPointsCommand extends Command
 
     private function updatePlayerFantasyPoints(CricketPlayer $player, array $actionPoints): void
     {
+        /* @var $cricketPlayerService CricketPlayerService */
         $cricketPlayerService = resolve(CricketPlayerService::class);
 
         $playerDto = new CricketPlayerDto();
