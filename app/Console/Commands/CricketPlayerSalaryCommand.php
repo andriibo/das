@@ -2,8 +2,8 @@
 
 namespace App\Console\Commands;
 
-use App\Dto\CricketPlayerDto;
 use App\Dto\MinAndMaxFantasyPointsDto;
+use App\Mappers\CricketPlayerMapper;
 use App\Models\CricketPlayer;
 use App\Services\CricketPlayerService;
 use Carbon\Carbon;
@@ -36,11 +36,17 @@ class CricketPlayerSalaryCommand extends Command
 
         $rate = ($player->total_fantasy_points - $MinAndMaxDto->min) / ($MinAndMaxDto->max - $MinAndMaxDto->min);
         $autoSalary = round($rate * (CricketPlayer::MAX_SALARY - CricketPlayer::MIN_SALARY) + CricketPlayer::MIN_SALARY, -2);
+        $salary = $player->salary == $player->auto_salary ? $autoSalary : $player->salary;
 
-        $playerDto = new CricketPlayerDto();
-        $playerDto->salary = $player->salary == $player->auto_salary ? $autoSalary : $player->salary;
-        $playerDto->autoSalary = $autoSalary;
+        $cricketPlayerMapper = new CricketPlayerMapper();
+        $cricketPlayerDto = $cricketPlayerMapper->map([
+            'id' => $player->feed_id,
+            'name' => $player->first_name,
+            'photo' => $player->photo,
+            'salary' => $salary,
+            'auto_salary' => $autoSalary,
+        ]);
 
-        $cricketPlayerService->storeCricketPlayer($playerDto);
+        $cricketPlayerService->storeCricketPlayer($cricketPlayerDto);
     }
 }
