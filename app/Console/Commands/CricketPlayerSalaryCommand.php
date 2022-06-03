@@ -24,7 +24,9 @@ class CricketPlayerSalaryCommand extends Command
         foreach ($playersWithCalculatedFantasyPoints as $player) {
             $this->updateSalary($minAndMaxFantasyPoints, $player);
         }
+
         $cricketPlayerService->updatePlayersSalariesWithNoFantasyPoints();
+        $this->info(Carbon::now() . ": Command {$this->signature} finished");
     }
 
     private function updateSalary(MinAndMaxFantasyPointsDto $MinAndMaxDto, CricketPlayer $player): void
