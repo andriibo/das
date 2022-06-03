@@ -49,8 +49,7 @@ class CricketPlayerRepository
     public function updateSalaryIfNoFantasyPointsAndSalariesMatch(): void
     {
         CricketPlayer::query()
-            ->whereNull('total_fantasy_points')
-            ->where('salary', '<=>', 'auto_salary')
+            ->whereRaw('total_fantasy_points IS NULL AND salary <=> auto_salary')
             ->update(['salary' => CricketPlayer::NO_DATA_SALARY])
         ;
     }
