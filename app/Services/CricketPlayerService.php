@@ -25,6 +25,8 @@ class CricketPlayerService
             'last_name' => $cricketPlayerDto->lastName,
             'photo' => $cricketPlayerDto->photo,
             'injury_status' => $cricketPlayerDto->injuryStatus->name,
+            'salary' => $cricketPlayerDto->salary,
+            'auto_salary' => $cricketPlayerDto->autoSalary,
         ]);
     }
 
@@ -46,11 +48,6 @@ class CricketPlayerService
     public function getPlayersWithCalculatedFantasyPoints(): Collection
     {
         return $this->cricketPlayerRepository->getPlayersWithCalculatedFantasyPoints();
-    }
-
-    public function updatePlayerSalaries(CricketPlayerDto $playerDto, CricketPlayer $player): void
-    {
-        $this->cricketPlayerRepository->updateSalaries($playerDto, $player);
     }
 
     public function updatePlayersSalariesWithNoFantasyPoints(): void

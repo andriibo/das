@@ -4,7 +4,6 @@ namespace App\Dto;
 
 class MinAndMaxFantasyPointsDto
 {
-    public float $min;
-
-    public float $max;
+    public ?float $min;
+    public ?float $max;
 }

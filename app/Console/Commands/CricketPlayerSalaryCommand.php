@@ -22,14 +22,15 @@ class CricketPlayerSalaryCommand extends Command
         $playersWithCalculatedFantasyPoints = $cricketPlayerService->getPlayersWithCalculatedFantasyPoints();
 
         foreach ($playersWithCalculatedFantasyPoints as $player) {
-            $this->updateSalaries($minAndMaxFantasyPoints, $player);
+            $this->updateSalary($minAndMaxFantasyPoints, $player);
         }
         $cricketPlayerService->updatePlayersSalariesWithNoFantasyPoints();
     }
 
-    private function updateSalaries(MinAndMaxFantasyPointsDto $MinAndMaxDto, CricketPlayer $player): void
+    private function updateSalary(MinAndMaxFantasyPointsDto $MinAndMaxDto, CricketPlayer $player): void
     {
-        $playerService = resolve(CricketPlayerService::class);
+        /** @var CricketPlayerService $cricketPlayerService */
+        $cricketPlayerService = resolve(CricketPlayerService::class);
 
         $rate = ($player->total_fantasy_points - $MinAndMaxDto->min) / ($MinAndMaxDto->max - $MinAndMaxDto->min);
         $autoSalary = round($rate * (CricketPlayer::MAX_SALARY - CricketPlayer::MIN_SALARY) + CricketPlayer::MIN_SALARY, -2);
@@ -38,6 +39,6 @@ class CricketPlayerSalaryCommand extends Command
         $playerDto->salary = $player->salary == $player->auto_salary ? $autoSalary : $player->salary;
         $playerDto->autoSalary = $autoSalary;
 
-        $playerService->updatePlayerSalaries($playerDto, $player);
+        $cricketPlayerService->storeCricketPlayer($playerDto);
     }
 }

@@ -46,16 +46,6 @@ class CricketPlayerRepository
         return CricketPlayer::query()->whereNotNull('total_fantasy_points')->get();
     }
 
-    public function updateSalaries(CricketPlayerDto $playerDto, CricketPlayer $player): bool
-    {
-        return $player->update(
-            [
-                'salary' => $playerDto->salary,
-                'auto_salary' => $playerDto->autoSalary,
-            ]
-        );
-    }
-
     public function updateSalaryIfNoFantasyPointsAndSalariesMatch(): void
     {
         CricketPlayer::query()
