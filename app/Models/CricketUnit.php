@@ -21,8 +21,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property null|string                   $position
  * @property null|string                   $salary
  * @property null|string                   $auto_salary
- * @property null|string                   $total_fantasy_points
- * @property null|string                   $total_fantasy_points_per_game
+ * @property null|string                   $fantasy_points
+ * @property null|string                   $fantasy_points_per_game
  * @property CricketPlayer                 $player
  * @property CricketTeam                   $team
  * @property Collection|CricketUnitStats[] $unitStats
@@ -38,8 +38,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static Builder|CricketUnit wherePlayerId($value)
  * @method static Builder|CricketUnit whereSalary($value)
  * @method static Builder|CricketUnit whereTeamId($value)
- * @method static Builder|CricketUnit whereTotalFantasyPoints($value)
- * @method static Builder|CricketUnit whereTotalFantasyPointsPerGame($value)
+ * @method static Builder|CricketUnit whereFantasyPoints($value)
+ * @method static Builder|CricketUnit whereFantasyPointsPerGame($value)
  * @mixin Eloquent
  */
 class CricketUnit extends Model
@@ -56,8 +56,8 @@ class CricketUnit extends Model
         'position',
         'salary',
         'auto_salary',
-        'total_fantasy_points',
-        'total_fantasy_points_per_game',
+        'fantasy_points',
+        'fantasy_points_per_game',
     ];
 
     protected $dispatchesEvents = ['saved' => CricketUnitSavedEvent::class];
@@ -75,5 +75,10 @@ class CricketUnit extends Model
     public function unitStats(): HasMany
     {
         return $this->hasMany(CricketUnitStats::class, 'unit_id', 'id');
+    }
+
+    public function totalUnitStats(): ?CricketUnitStats
+    {
+        return $this->unitStats->whereNull('game_schedule_id')->first();
     }
 }

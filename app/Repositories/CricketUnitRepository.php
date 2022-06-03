@@ -2,7 +2,6 @@
 
 namespace App\Repositories;
 
-use App\Dto\CricketUnitDto;
 use App\Models\CricketUnit;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -35,15 +34,5 @@ class CricketUnitRepository
     public function updateOrCreate(array $attributes, array $values = []): CricketUnit
     {
         return CricketUnit::updateOrCreate($attributes, $values);
-    }
-
-    public function updateFantasyPoints(CricketUnit $cricketUnit, CricketUnitDto $cricketUnitDto): bool
-    {
-        return $cricketUnit->update(
-            [
-                'total_fantasy_points' => $cricketUnitDto->totalFantasyPoints,
-                'total_fantasy_points_per_game' => $cricketUnitDto->totalFantasyPointsPerGame,
-            ]
-        );
     }
 }

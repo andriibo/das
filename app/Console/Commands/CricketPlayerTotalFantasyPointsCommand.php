@@ -47,7 +47,7 @@ class CricketPlayerTotalFantasyPointsCommand extends Command
             $gamesCount = 0;
             foreach ($player->cricketUnits as $cricketUnit) {
                 $unitDto = $this->updateUnitFantasyPoints($cricketUnit, $actionPoints);
-                $playerDto->totalFantasyPoints += $unitDto->totalFantasyPoints;
+                $playerDto->totalFantasyPoints += $unitDto->fantasyPoints;
                 $gamesCount += $cricketUnit->unitStats()->count();
             }
             if ($gamesCount > 0) {
@@ -60,13 +60,15 @@ class CricketPlayerTotalFantasyPointsCommand extends Command
 
     private function updateUnitFantasyPoints(CricketUnit $cricketUnit, array $actionPoints): CricketUnitDto
     {
+        /* @var $cricketUnitStatsService CricketUnitStatsService */
+        /* @var $cricketUnitService CricketUnitService */
         $cricketUnitStatsService = resolve(CricketUnitStatsService::class);
         $cricketUnitService = resolve(CricketUnitService::class);
 
         $unitStats = $cricketUnitStatsService->getRealGameUnitStatsByUnitId($cricketUnit->id);
         $cricketUnitDto = $this->calcFantasyPoints($unitStats, $actionPoints, $cricketUnit);
 
-        $cricketUnitService->updateFantasyPoints($cricketUnit, $cricketUnitDto);
+        $cricketUnitService->storeCricketUnit($cricketUnitDto);
 
         return $cricketUnitDto;
     }
@@ -78,18 +80,18 @@ class CricketPlayerTotalFantasyPointsCommand extends Command
     ): CricketUnitDto {
         $unitDto = new CricketUnitDto();
         $unitDto->id = $cricketUnit->id;
-        $unitDto->totalFantasyPoints = 0;
-        $unitDto->totalFantasyPointsPerGame = 0;
+        $unitDto->fantasyPoints = 0;
+        $unitDto->fantasyPointsPerGame = 0;
         if (count($unitStats) && $cricketUnit->position) {
             /** @var CricketUnitStats $unitStat */
             foreach ($unitStats as $unitStat) {
-                $unitDto->totalFantasyPoints += UnitStatsHelper::calcFantasyPointsForStats(
+                $unitDto->fantasyPoints += UnitStatsHelper::calcFantasyPointsForStats(
                     $unitStat->stats,
                     $actionPoints,
                     $cricketUnit->position
                 );
             }
-            $unitDto->totalFantasyPointsPerGame = $unitDto->totalFantasyPoints / count($unitStats);
+            $unitDto->fantasyPointsPerGame = $unitDto->fantasyPoints / $unitStats->count();
         }
 
         return $unitDto;

@@ -12,6 +12,6 @@ class CricketUnitDto
     public ?PositionEnum $position;
     public float $salary;
     public float $autoSalary;
-    public float $totalFantasyPoints;
-    public float $totalFantasyPointsPerGame;
+    public float $fantasyPoints;
+    public float $fantasyPointsPerGame;
 }
