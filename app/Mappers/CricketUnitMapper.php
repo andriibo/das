@@ -14,6 +14,8 @@ class CricketUnitMapper
         $cricketTeamPlayerDto->teamId = $data['team_id'];
         $cricketTeamPlayerDto->playerId = $data['player_id'];
         $cricketTeamPlayerDto->position = PositionEnum::tryFrom($data['position']);
+        $cricketTeamPlayerDto->fantasyPoints = $data['fantasy_points'] ?? null;
+        $cricketTeamPlayerDto->fantasyPointsPerGame = $data['fantasy_points_per_game'] ?? null;
 
         return $cricketTeamPlayerDto;
     }
