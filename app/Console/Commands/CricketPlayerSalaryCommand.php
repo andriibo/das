@@ -29,12 +29,12 @@ class CricketPlayerSalaryCommand extends Command
         $this->info(Carbon::now() . ": Command {$this->signature} finished");
     }
 
-    private function updateSalary(MinAndMaxFantasyPointsDto $MinAndMaxDto, CricketPlayer $player): void
+    private function updateSalary(MinAndMaxFantasyPointsDto $minAndMaxDto, CricketPlayer $player): void
     {
         /** @var CricketPlayerService $cricketPlayerService */
         $cricketPlayerService = resolve(CricketPlayerService::class);
 
-        $rate = ($player->total_fantasy_points - $MinAndMaxDto->min) / ($MinAndMaxDto->max - $MinAndMaxDto->min);
+        $rate = ($player->total_fantasy_points - $minAndMaxDto->min) / ($minAndMaxDto->max - $minAndMaxDto->min);
         $autoSalary = round($rate * (CricketPlayer::MAX_SALARY - CricketPlayer::MIN_SALARY) + CricketPlayer::MIN_SALARY, -2);
         $salary = $player->salary == $player->auto_salary ? $autoSalary : $player->salary;
 
