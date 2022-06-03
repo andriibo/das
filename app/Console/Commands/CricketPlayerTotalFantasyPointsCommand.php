@@ -82,7 +82,7 @@ class CricketPlayerTotalFantasyPointsCommand extends Command
         $unitDto->id = $cricketUnit->id;
         $unitDto->fantasyPoints = 0;
         $unitDto->fantasyPointsPerGame = 0;
-        if (count($unitStats) && $cricketUnit->position) {
+        if ($unitStats->isNotEmpty() && $cricketUnit->position) {
             /** @var CricketUnitStats $unitStat */
             foreach ($unitStats as $unitStat) {
                 $unitDto->fantasyPoints += UnitStatsHelper::calcFantasyPointsForStats(

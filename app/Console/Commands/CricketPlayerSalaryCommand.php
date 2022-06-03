@@ -35,12 +35,7 @@ class CricketPlayerSalaryCommand extends Command
         $autoSalary = round($rate * (CricketPlayer::MAX_SALARY - CricketPlayer::MIN_SALARY) + CricketPlayer::MIN_SALARY, -2);
 
         $playerDto = new CricketPlayerDto();
-
-        if ($player->salary == $player->auto_salary) {
-            $playerDto->salary = $autoSalary;
-        } else {
-            $playerDto->salary = $player->salary;
-        }
+        $playerDto->salary = $player->salary == $player->auto_salary ? $autoSalary : $player->salary;
         $playerDto->autoSalary = $autoSalary;
 
         $playerService->updatePlayerSalaries($playerDto, $player);
