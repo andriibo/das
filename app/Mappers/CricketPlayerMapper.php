@@ -12,11 +12,10 @@ class CricketPlayerMapper
     {
         $cricketPlayerDto = new CricketPlayerDto();
 
-        $name = isset($data['name']) ? html_entity_decode($data['name'], ENT_QUOTES | ENT_HTML5) : '';
         $cricketPlayerDto->feedType = FeedTypeEnum::goalserve;
         $cricketPlayerDto->feedId = $data['id'];
-        $cricketPlayerDto->firstName = $name;
-        $cricketPlayerDto->lastName = $name;
+        $cricketPlayerDto->firstName = $data['name'] ?? '';
+        $cricketPlayerDto->lastName = $data['name'] ?? '';
         $cricketPlayerDto->photo = $data['photo'] ?? null;
         $cricketPlayerDto->injuryStatus = InjuryStatusEnum::normal;
         $cricketPlayerDto->salary = $data['salary'] ?? null;
