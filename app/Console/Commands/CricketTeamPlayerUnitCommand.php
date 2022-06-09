@@ -62,7 +62,7 @@ class CricketTeamPlayerUnitCommand extends Command
                 continue;
             }
 
-            $this->attachPlayerToTeam($cricketPlayer, $cricketTeam->id, $player['role']);
+            $this->parseCricketUnit($cricketPlayer, $cricketTeam->id, $player['role']);
         }
     }
 
@@ -95,7 +95,7 @@ class CricketTeamPlayerUnitCommand extends Command
         }
     }
 
-    private function attachPlayerToTeam(CricketPlayer $cricketPlayer, int $teamId, string $position): void
+    private function parseCricketUnit(CricketPlayer $cricketPlayer, int $teamId, string $position): void
     {
         $cricketUnitMapper = new CricketUnitMapper();
         /* @var $cricketUnitService CricketUnitService */
