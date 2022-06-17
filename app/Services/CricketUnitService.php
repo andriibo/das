@@ -5,7 +5,6 @@ namespace App\Services;
 use App\Dto\CricketUnitDto;
 use App\Models\CricketUnit;
 use App\Repositories\CricketUnitRepository;
-use Illuminate\Database\Eloquent\Collection;
 
 class CricketUnitService
 {
@@ -24,10 +23,5 @@ class CricketUnitService
             'fantasy_points' => $cricketUnitDto->fantasyPoints,
             'fantasy_points_per_game' => $cricketUnitDto->fantasyPointsPerGame,
         ]);
-    }
-
-    public function getCricketUnits(): Collection
-    {
-        return $this->cricketUnitRepository->getList();
     }
 }

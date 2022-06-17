@@ -12,7 +12,10 @@ class CricketUnitStatsRepository
      */
     public function getList(): Collection
     {
-        return CricketUnitStats::all();
+        return CricketUnitStats::query()
+            ->whereNotNull('game_schedule_id')
+            ->get()
+        ;
     }
 
     public function updateOrCreate(array $attributes, array $values = []): CricketUnitStats

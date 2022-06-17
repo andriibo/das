@@ -5,7 +5,7 @@ namespace App\Console\Commands;
 use App\Helpers\ArrayHelper;
 use App\Mappers\CricketUnitStatsMapper;
 use App\Models\CricketUnit;
-use App\Services\CricketUnitService;
+use App\Repositories\CricketUnitRepository;
 use App\Services\CricketUnitStatsService;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
@@ -16,10 +16,10 @@ class CricketUnitStatsTotalCommand extends Command
 
     protected $description = 'Calculate total cricket unit stats';
 
-    public function handle(CricketUnitService $cricketUnitService): void
+    public function handle(CricketUnitRepository $cricketUnitRepository): void
     {
         $this->info(Carbon::now() . ": Command {$this->signature} started");
-        $cricketUnits = $cricketUnitService->getCricketUnits();
+        $cricketUnits = $cricketUnitRepository->getList();
 
         /** @var CricketUnit $cricketUnit */
         foreach ($cricketUnits as $cricketUnit) {
@@ -41,6 +41,8 @@ class CricketUnitStatsTotalCommand extends Command
 
     private function saveTotalUnitStats(CricketUnit $cricketUnit, array $statsTotal): void
     {
+        /* @var $cricketUnitStatsService CricketUnitStatsService
+        * @var $cricketUnitStatsMapper CricketUnitStatsMapper */
         $cricketUnitStatsService = resolve(CricketUnitStatsService::class);
         $cricketUnitStatsMapper = resolve(CricketUnitStatsMapper::class);
         $cricketUnitStatsDto = $cricketUnitStatsMapper->map([
