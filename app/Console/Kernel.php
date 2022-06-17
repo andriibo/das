@@ -2,6 +2,11 @@
 
 namespace App\Console;
 
+use App\Console\Commands\CricketGameScheduleCommand;
+use App\Console\Commands\CricketPlayerSalaryCommand;
+use App\Console\Commands\CricketTeamPlayerUnitCommand;
+use App\Console\Commands\CricketUnitPlayerFantasyPointsCommand;
+use App\Console\Commands\CricketUnitStatsTotalCommand;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -12,7 +17,12 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        $schedule->command(CricketTeamPlayerUnitCommand::class)->dailyAt('00:00');
+        $schedule->command(CricketGameScheduleCommand::class)->dailyAt('00:00');
+
+        $schedule->command(CricketUnitStatsTotalCommand::class)->twiceDaily();
+        $schedule->command(CricketUnitPlayerFantasyPointsCommand::class)->twiceDaily();
+        $schedule->command(CricketPlayerSalaryCommand::class)->twiceDaily();
     }
 
     /**

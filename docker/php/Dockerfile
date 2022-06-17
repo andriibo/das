@@ -17,8 +17,13 @@ RUN yes | pecl install xdebug
 RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
 RUN docker-php-ext-enable xdebug
 
-COPY ./php.ini $PHP_INI_DIR
+COPY php.ini $PHP_INI_DIR
+
+COPY start.sh /usr/local/bin/start
+
+RUN chown -R www-data:www-data /var/www/html \
+    && chmod u+x /usr/local/bin/start
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-CMD bash -c "composer install && php artisan serve --host=0.0.0.0 --port=8000"
+CMD ["bash", "-c", "composer install && php artisan serve --host=0.0.0.0 --port=8000; /usr/local/bin/start"]
