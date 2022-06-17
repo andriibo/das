@@ -88,15 +88,15 @@ class CricketTeamPlayerUnitCommand extends Command
     {
         /* @var $cricketGoalserveService CricketGoalserveService */
         $cricketGoalserveService = resolve(CricketGoalserveService::class);
+        $leagueId = $league->params['league_id'];
+        $teams = $cricketGoalserveService->getGoalserveCricketTeams($leagueId);
 
-        try {
-            $leagueId = $league->params['league_id'];
-            $teams = $cricketGoalserveService->getGoalserveCricketTeams($leagueId);
-            foreach ($teams as $team) {
+        foreach ($teams as $team) {
+            try {
                 $this->parseCricketTeam($team, $league->id);
+            } catch (\Throwable $exception) {
+                $this->error($exception->getMessage());
             }
-        } catch (\Throwable $exception) {
-            $this->error($exception->getMessage());
         }
     }
 
