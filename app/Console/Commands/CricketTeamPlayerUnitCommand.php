@@ -15,6 +15,7 @@ use App\Services\CricketTeamService;
 use App\Services\CricketUnitService;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Storage;
 
 class CricketTeamPlayerUnitCommand extends Command
 {
@@ -60,6 +61,10 @@ class CricketTeamPlayerUnitCommand extends Command
             $cricketPlayer = $this->parseCricketPlayer($player);
             if (!$cricketPlayer) {
                 continue;
+            }
+
+            if (is_null($cricketPlayer->photo)) {
+                $this->uploadPhoto($cricketPlayer);
             }
 
             $this->parseCricketUnit($cricketPlayer, $cricketTeam->id, $player['role']);
@@ -108,5 +113,24 @@ class CricketTeamPlayerUnitCommand extends Command
         ]);
 
         $cricketUnitService->storeCricketUnit($cricketUnitDto);
+    }
+
+    private function uploadPhoto(CricketPlayer $cricketPlayer): void
+    {
+        /* @var $cricketGoalserveService CricketGoalserveService */
+        $cricketGoalserveService = resolve(CricketGoalserveService::class);
+        $data = $cricketGoalserveService->getGoalserveCricketPlayer($cricketPlayer->feed_id);
+
+        if (!$data['image']) {
+            return;
+        }
+
+        $name = $cricketPlayer->feed_id . md5(time() . rand(0, 1000)) . '.jpg';
+        $filePath = 'cricket/players/' . $name;
+
+        if (Storage::disk('s3')->put($filePath, base64_decode($data['image']))) {
+            $cricketPlayer->photo = $filePath;
+            $cricketPlayer->save();
+        }
     }
 }

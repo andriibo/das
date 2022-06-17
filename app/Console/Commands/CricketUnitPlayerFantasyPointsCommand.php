@@ -9,6 +9,7 @@ use App\Mappers\CricketUnitMapper;
 use App\Models\CricketPlayer;
 use App\Models\CricketUnit;
 use App\Models\CricketUnitStats;
+use App\Repositories\CricketPlayerRepository;
 use App\Services\ActionPointsService;
 use App\Services\CricketPlayerService;
 use App\Services\CricketUnitService;
@@ -17,18 +18,18 @@ use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Collection;
 
-class CricketPlayerTotalFantasyPointsCommand extends Command
+class CricketUnitPlayerFantasyPointsCommand extends Command
 {
-    protected $signature = 'cricket:player-total-fantasy-points';
+    protected $signature = 'cricket:unit-player-fantasy-points';
 
-    protected $description = 'Calculate total fantasy points and total fantasy points per game for cricket player';
+    protected $description = 'Calculate fantasy points for cricket unit and player';
 
     public function handle(
-        CricketPlayerService $cricketPlayerService,
+        CricketPlayerRepository $cricketPlayerRepository,
         ActionPointsService $actionPointsService
     ): void {
         $this->info(Carbon::now() . ": Command {$this->signature} started");
-        $cricketPlayers = $cricketPlayerService->getCricketPlayers();
+        $cricketPlayers = $cricketPlayerRepository->getList();
         $actionPoints = $actionPointsService->getMappedActionPoints();
 
         foreach ($cricketPlayers as $cricketPlayer) {
