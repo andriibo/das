@@ -13,23 +13,10 @@ use Illuminate\Console\Command;
 
 class CricketGameLogCommand extends Command
 {
-    /**
-     * The name and signature of the console command.
-     *
-     * @var string
-     */
     protected $signature = 'cricket:game-log';
 
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
     protected $description = 'Get game log from unit stats';
 
-    /**
-     * Execute the console command.
-     */
     public function handle(CricketUnitStatsRepository $cricketUnitStatsRepository, ActionPointRepository $actionPointRepository): void
     {
         $this->info(Carbon::now() . ": Command {$this->signature} started");

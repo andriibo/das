@@ -12,23 +12,10 @@ use Illuminate\Console\Command;
 
 class CricketUnitStatsCommand extends Command
 {
-    /**
-     * The name and signature of the console command.
-     *
-     * @var string
-     */
     protected $signature = 'cricket:unit-stats';
 
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
     protected $description = 'Get unit stats from game stats';
 
-    /**
-     * Execute the console command.
-     */
     public function handle(CricketGameStatsRepository $cricketGameStatsRepository): void
     {
         $this->info(Carbon::now() . ": Command {$this->signature} started");

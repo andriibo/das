@@ -12,23 +12,10 @@ use Illuminate\Console\Command;
 
 class CricketGameStatsCommand extends Command
 {
-    /**
-     * The name and signature of the console command.
-     *
-     * @var string
-     */
     protected $signature = 'cricket:game-stats';
 
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
     protected $description = 'Get game stats for sport Cricket from Goalserve';
 
-    /**
-     * Execute the console command.
-     */
     public function handle(CricketGameScheduleService $cricketGameScheduleService): void
     {
         $this->info(Carbon::now() . ": Command {$this->signature} started");

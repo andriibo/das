@@ -23,7 +23,6 @@ class CricketPlayerService
         ], [
             'first_name' => $cricketPlayerDto->firstName,
             'last_name' => $cricketPlayerDto->lastName,
-            'photo' => $cricketPlayerDto->photo,
             'injury_status' => $cricketPlayerDto->injuryStatus->name,
             'salary' => $cricketPlayerDto->salary,
             'auto_salary' => $cricketPlayerDto->autoSalary,
