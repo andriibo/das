@@ -14,7 +14,7 @@ class CricketRecentlyEnabledLeagueCommand extends Command
 {
     protected $signature = 'cricket:recently-enabled-league';
 
-    protected $description = 'Run commands for recently enabled leagues';
+    protected $description = 'Run recently enabled leagues';
 
     public function handle(
         LeagueRepository $leagueRepository,
