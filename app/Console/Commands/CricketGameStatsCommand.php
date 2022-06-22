@@ -14,8 +14,10 @@ class CricketGameStatsCommand extends Command
 
     protected $description = 'Get cricket game stats for running contests';
 
-    public function handle(LeagueRepository $leagueRepository, CreateCricketGameStatsService $createGameStatsService): void
-    {
+    public function handle(
+        LeagueRepository $leagueRepository,
+        CreateCricketGameStatsService $createGameStatsService
+    ): void {
         $this->info(Carbon::now() . ": Command {$this->signature} started");
         $leagues = $leagueRepository->getListBySportId(SportIdEnum::cricket);
         foreach ($leagues as $league) {
