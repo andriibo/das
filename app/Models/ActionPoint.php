@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int         $id
  * @property string      $name
  * @property int         $sport_id
- * @property string      $values
+ * @property array       $values
  * @property int         $sort_order
  * @property int         $is_enabled
  * @property null|string $title
@@ -53,5 +53,9 @@ class ActionPoint extends Model
         'title',
         'alias',
         'game_log_template',
+    ];
+
+    protected $casts = [
+        'values' => 'array',
     ];
 }

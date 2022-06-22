@@ -3,11 +3,11 @@
 namespace Database\Factories;
 
 use App\Enums\FeedTypeEnum;
-use App\Models\CricketTeam;
+use App\Models\Cricket\CricketTeam;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\CricketTeam>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Cricket\CricketTeam>
  */
 class CricketTeamFactory extends Factory
 {

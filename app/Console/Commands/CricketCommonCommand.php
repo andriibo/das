@@ -4,8 +4,8 @@ namespace App\Console\Commands;
 
 use App\Enums\SportIdEnum;
 use App\Repositories\LeagueRepository;
-use App\Services\CreateCricketGameSchedulesService;
-use App\Services\CreateCricketTeamsPlayersUnitsService;
+use App\Services\Cricket\CreateCricketGameSchedulesService;
+use App\Services\Cricket\CreateCricketTeamsPlayersUnitsService;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 

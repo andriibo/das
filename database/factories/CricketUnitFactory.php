@@ -3,11 +3,11 @@
 namespace Database\Factories;
 
 use App\Enums\CricketUnit\PositionEnum;
-use App\Models\CricketUnit;
+use App\Models\Cricket\CricketUnit;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\CricketUnit>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Cricket\CricketUnit>
  */
 class CricketUnitFactory extends Factory
 {

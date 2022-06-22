@@ -9,11 +9,11 @@ use App\Enums\CricketGameSchedule\IsSalaryAvailableEnum;
 use App\Enums\CricketGameSchedule\StatusEnum;
 use App\Enums\CricketGameSchedule\TypeEnum;
 use App\Enums\FeedTypeEnum;
-use App\Models\CricketGameSchedule;
+use App\Models\Cricket\CricketGameSchedule;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\CricketGameSchedule>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Cricket\CricketGameSchedule>
  */
 class CricketGameScheduleFactory extends Factory
 {

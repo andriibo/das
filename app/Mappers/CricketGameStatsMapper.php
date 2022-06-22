@@ -3,7 +3,7 @@
 namespace App\Mappers;
 
 use App\Dto\CricketGameStatsDto;
-use App\Repositories\CricketGameScheduleRepository;
+use App\Repositories\Cricket\CricketGameScheduleRepository;
 
 class CricketGameStatsMapper
 {

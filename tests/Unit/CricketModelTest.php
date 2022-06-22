@@ -3,13 +3,13 @@
 namespace Tests\Unit;
 
 use App\Models\ActionPoint;
-use App\Models\CricketGameLog;
-use App\Models\CricketGameSchedule;
-use App\Models\CricketGameStats;
-use App\Models\CricketPlayer;
-use App\Models\CricketTeam;
-use App\Models\CricketUnit;
-use App\Models\CricketUnitStats;
+use App\Models\Cricket\CricketGameLog;
+use App\Models\Cricket\CricketGameSchedule;
+use App\Models\Cricket\CricketGameStats;
+use App\Models\Cricket\CricketPlayer;
+use App\Models\Cricket\CricketTeam;
+use App\Models\Cricket\CricketUnit;
+use App\Models\Cricket\CricketUnitStats;
 use App\Models\League;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
