@@ -3,6 +3,7 @@
 namespace App\Console;
 
 use App\Console\Commands\CricketCommonCommand;
+use App\Console\Commands\CricketGameStatsCommand;
 use App\Console\Commands\CricketPlayerSalaryCommand;
 use App\Console\Commands\CricketRecentlyEnabledLeagueCommand;
 use App\Console\Commands\CricketUnitPlayerFantasyPointsCommand;
@@ -24,6 +25,8 @@ class Kernel extends ConsoleKernel
         $schedule->command(CricketPlayerSalaryCommand::class)->twiceDaily();
 
         $schedule->command(CricketRecentlyEnabledLeagueCommand::class)->everyThirtyMinutes();
+
+        $schedule->command(CricketGameStatsCommand::class)->everyMinute();
     }
 
     /**

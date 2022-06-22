@@ -4,7 +4,7 @@ namespace App\Mappers;
 
 use App\Dto\CricketUnitStatsDto;
 use App\Enums\CricketUnit\CricketUnitStatActionEnum;
-use App\Repositories\CricketUnitRepository;
+use App\Repositories\Cricket\CricketUnitRepository;
 
 class CricketUnitStatsMapper
 {

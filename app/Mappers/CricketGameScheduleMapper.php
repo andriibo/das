@@ -9,7 +9,7 @@ use App\Enums\CricketGameSchedule\IsSalaryAvailableEnum;
 use App\Enums\CricketGameSchedule\StatusEnum;
 use App\Enums\CricketGameSchedule\TypeEnum;
 use App\Enums\FeedTypeEnum;
-use App\Repositories\CricketTeamRepository;
+use App\Repositories\Cricket\CricketTeamRepository;
 
 class CricketGameScheduleMapper
 {

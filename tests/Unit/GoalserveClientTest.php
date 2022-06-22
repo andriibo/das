@@ -3,7 +3,7 @@
 namespace Tests\Unit;
 
 use App\Clients\GoalserveClient;
-use App\Services\CricketGoalserveService;
+use App\Services\Cricket\CricketGoalserveService;
 use Illuminate\Support\Facades\File;
 use Tests\TestCase;
 

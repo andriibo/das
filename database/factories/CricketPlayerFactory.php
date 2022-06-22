@@ -4,11 +4,11 @@ namespace Database\Factories;
 
 use App\Enums\CricketPlayer\InjuryStatusEnum;
 use App\Enums\FeedTypeEnum;
-use App\Models\CricketPlayer;
+use App\Models\Cricket\CricketPlayer;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\CricketPlayer>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Cricket\CricketPlayer>
  */
 class CricketPlayerFactory extends Factory
 {

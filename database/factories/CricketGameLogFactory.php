@@ -2,11 +2,11 @@
 
 namespace Database\Factories;
 
-use App\Models\CricketGameLog;
+use App\Models\Cricket\CricketGameLog;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\CricketPlayer>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Cricket\CricketPlayer>
  */
 class CricketGameLogFactory extends Factory
 {
