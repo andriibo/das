@@ -53,6 +53,10 @@ class CreateCricketUnitStatsService
         $actionPointRepository = new ActionPointRepository();
         $actionPoints = $actionPointRepository->getListBySportId(SportIdEnum::cricket)->toArray();
         foreach ($players as $player) {
+            if (!is_array($player)) {
+                continue;
+            }
+
             try {
                 $stats = $this->getFormattedStats($player, $actionPoints);
                 $cricketUnitStatsDto = $this->cricketUnitStatsMapper->map([
