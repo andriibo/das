@@ -4,7 +4,7 @@ namespace App\Repositories\Cricket;
 
 use App\Enums\CricketGameSchedule\IsFakeEnum;
 use App\Models\Cricket\CricketUnitStats;
-use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Query\JoinClause;
 use Illuminate\Support\Collection;
 
 class CricketUnitStatsRepository
@@ -33,7 +33,7 @@ class CricketUnitStatsRepository
         return CricketUnitStats::query()
             ->where(['unit_id' => $unitId])
             ->havingNotNull('game_schedule_id')
-            ->join('cricket_game_schedule', function (Builder $join) {
+            ->join('cricket_game_schedule', function (JoinClause $join) {
                 $join
                     ->on('cricket_unit_stats.game_schedule_id', '=', 'cricket_game_schedule.id')
                     ->where('is_fake', IsFakeEnum::no)

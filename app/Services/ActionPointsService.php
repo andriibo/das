@@ -14,9 +14,7 @@ class ActionPointsService
     public function getMappedActionPoints(): array
     {
         return $this->actionPointRepository->getListBySportId(SportIdEnum::cricket)->mapWithKeys(function ($item, $key) {
-            $values = json_decode($item['values'], true);
-
-            return [$item['name'] => $values];
+            return [$item['name'] => $item->values];
         })->toArray();
     }
 }

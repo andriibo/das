@@ -7,21 +7,21 @@ use App\Helpers\UnitStatsHelper;
 use App\Mappers\CricketUnitMapper;
 use App\Models\Cricket\CricketUnit;
 use App\Models\Cricket\CricketUnitStats;
+use App\Repositories\Cricket\CricketUnitStatsRepository;
 use App\Services\Cricket\CricketUnitService;
-use App\Services\Cricket\CricketUnitStatsService;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Collection;
 
 class UpdateCricketUnitFantasyPoints
 {
     public function __construct(
-        private readonly CricketUnitStatsService $cricketUnitStatsService,
+        private readonly CricketUnitStatsRepository $cricketUnitStatsRepository,
         private readonly CricketUnitService $cricketUnitService
     ) {
     }
 
     public function handle(CricketUnit $cricketUnit, array $actionPoints)
     {
-        $unitStats = $this->cricketUnitStatsService->getRealGameUnitStatsByUnitId($cricketUnit->id);
+        $unitStats = $this->cricketUnitStatsRepository->getRealGameUnitStatsByUnitId($cricketUnit->id);
         $cricketUnitDto = $this->calcFantasyPoints($unitStats, $actionPoints, $cricketUnit);
 
         $this->cricketUnitService->storeCricketUnit($cricketUnitDto);
