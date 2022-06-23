@@ -57,15 +57,17 @@ class CricketGoalserveService
     /**
      * @throws CricketGoalserveServiceException
      */
-    public function getGoalserveGameStats(string $date, string $feedId): array
+    public function getGoalserveGameStats(string $date, int $leagueFeedId, string $gameScheduleFeedId): array
     {
         try {
             $data = $this->goalserveClient->getGameStats($date);
-
             if (isset($data['scores']['category']) && is_array($data['scores']['category'])) {
-                foreach ($data['scores']['category'] as $gameStat) {
-                    if ($gameStat['match']['id'] === $feedId) {
-                        return $gameStat;
+                foreach ($data['scores']['category'] as $league) {
+                    if ($league['id'] != $leagueFeedId) {
+                        continue;
+                    }
+                    if ($league['match']['id'] === $gameScheduleFeedId) {
+                        return $league;
                     }
                 }
             }

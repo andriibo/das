@@ -29,6 +29,7 @@ class CreateCricketGameStatsService
         $contestRepository = new ContestRepository();
         $cricketGameLogRepository = new CricketGameLogRepository();
         $runningContests = $contestRepository->getRunningContests($league->id);
+        $leagueFeedId = $league->params['league_id'];
         $gamesLoaded = $gamesConfirmed = [];
         foreach ($runningContests as $contest) {
             $lastGameLogId = 0;
@@ -38,13 +39,13 @@ class CreateCricketGameStatsService
             }
             $liveGames = $contest->liveCricketGameSchedules()->whereNotIn('id', $gamesLoaded)->get();
             foreach ($liveGames as $liveGame) {
-                $this->parseGameStats($liveGame);
+                $this->parseGameStats($liveGame, $leagueFeedId);
                 $gamesLoaded[] = $liveGame->id;
             }
             $unconfirmedGames = $contest->unconfirmedCricketGameSchedules()->whereNotIn('id', $gamesLoaded)->get();
             foreach ($unconfirmedGames as $unconfirmedGame) {
                 if ($unconfirmedGame->has_final_box && $unconfirmedGame->updated_at < date('Y-m-d H:i:s', time() - CricketGameScheduleConst::CONFIRM_STATS_DELAY)) {
-                    $this->confirmGameStats($unconfirmedGame);
+                    $this->confirmGameStats($unconfirmedGame, $leagueFeedId);
                     $gamesLoaded[] = $unconfirmedGame->id;
                     $gamesConfirmed[] = $unconfirmedGame->id;
                 }
@@ -56,9 +57,9 @@ class CreateCricketGameStatsService
         }
     }
 
-    private function confirmGameStats(CricketGameSchedule $cricketGameSchedule): void
+    private function confirmGameStats(CricketGameSchedule $cricketGameSchedule, int $leagueFeedId): void
     {
-        $this->parseGameStats($cricketGameSchedule);
+        $this->parseGameStats($cricketGameSchedule, $leagueFeedId);
 
         if ($cricketGameSchedule->has_final_box == HasFinalBoxEnum::no->value) {
             throw new \Exception('Trying to confirm unfinished Game Schedule');
@@ -68,11 +69,11 @@ class CreateCricketGameStatsService
         $cricketGameSchedule->save();
     }
 
-    private function parseGameStats(CricketGameSchedule $cricketGameSchedule): void
+    private function parseGameStats(CricketGameSchedule $cricketGameSchedule, int $leagueFeedId): void
     {
         try {
             $formattedDate = $this->getFormattedDate($cricketGameSchedule->game_date);
-            $data = $this->cricketGoalserveService->getGoalserveGameStats($formattedDate, $cricketGameSchedule->feed_id);
+            $data = $this->cricketGoalserveService->getGoalserveGameStats($formattedDate, $leagueFeedId, $cricketGameSchedule->feed_id);
 
             if (empty($data)) {
                 Log::channel('stderr')->error("No data for date {$formattedDate} and feed_id {$cricketGameSchedule->feed_id}");
