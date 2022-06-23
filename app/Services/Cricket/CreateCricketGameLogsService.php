@@ -15,7 +15,7 @@ class CreateCricketGameLogsService
     public function handle(CricketUnitStats $cricketUnitStats, array $actionPoints)
     {
         foreach ($cricketUnitStats->stats as $key => $value) {
-            if ($value === '') {
+            if (!$value) {
                 continue;
             }
             $foundKey = array_search($key, array_column($actionPoints, 'name'));
