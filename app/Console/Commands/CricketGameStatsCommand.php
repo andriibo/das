@@ -16,12 +16,12 @@ class CricketGameStatsCommand extends Command
 
     public function handle(
         LeagueRepository $leagueRepository,
-        CreateCricketGameStatsService $createGameStatsService
+        CreateCricketGameStatsService $createCricketGameStatsService
     ): void {
         $this->info(Carbon::now() . ": Command {$this->signature} started");
         $leagues = $leagueRepository->getListBySportId(SportIdEnum::cricket);
         foreach ($leagues as $league) {
-            $createGameStatsService->handle($league);
+            $createCricketGameStatsService->handle($league);
         }
         $this->info(Carbon::now() . ": Command {$this->signature} finished");
     }
