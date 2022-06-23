@@ -16,7 +16,8 @@ class GoalserveClientTest extends TestCase
     private int $leagueId = 1015;
     private int $playerId = 669855;
     private string $gameDate = '01.04.2022';
-    private string $gameFeedId = '13071977374';
+    private string $gameScheduleFeedId = '13071977374';
+    private string $leagueFeedId = '1015';
 
     public function testGoalserveGetCricketTeams(): void
     {
@@ -117,7 +118,7 @@ class GoalserveClientTest extends TestCase
 
         /* @var $cricketGoalserveService CricketGoalserveService */
         $cricketGoalserveService = new CricketGoalserveService($mockGoalserveClient);
-        $response = $cricketGoalserveService->getGoalserveGameStats($this->gameDate, $this->gameFeedId);
+        $response = $cricketGoalserveService->getGoalserveGameStats($this->gameDate, $this->leagueFeedId, $this->gameScheduleFeedId);
 
         $this->assertIsNotObject($response);
         $this->assertIsArray($response);

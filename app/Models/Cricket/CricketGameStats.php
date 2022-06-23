@@ -4,7 +4,7 @@ namespace App\Models\Cricket;
 
 use App\Events\Cricket\CricketGameStatsSavedEvent;
 use Barryvdh\LaravelIdeHelper\Eloquent;
-use Database\Factories\CricketGameStatsFactory;
+use Database\Factories\Cricket\CricketGameStatsFactory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;

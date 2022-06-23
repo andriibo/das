@@ -1,21 +1,21 @@
 <?php
 
-namespace Database\Factories;
+namespace Database\Factories\Cricket;
 
-use App\Models\Cricket\CricketGameLog;
+use App\Models\Cricket\CricketGameStats;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Cricket\CricketPlayer>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Cricket\CricketTeam>
  */
-class CricketGameLogFactory extends Factory
+class CricketGameStatsFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = CricketGameLog::class;
+    protected $model = CricketGameStats::class;
 
     /**
      * The number of models that should be generated.
@@ -32,7 +32,7 @@ class CricketGameLogFactory extends Factory
     public function definition()
     {
         return [
-            'value' => $this->faker->randomFloat(),
+            'raw_stats' => [],
         ];
     }
 }

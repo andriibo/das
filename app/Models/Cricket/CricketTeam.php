@@ -5,7 +5,7 @@ namespace App\Models\Cricket;
 use App\Events\Cricket\CricketTeamSavedEvent;
 use App\Models\League;
 use Barryvdh\LaravelIdeHelper\Eloquent;
-use Database\Factories\CricketTeamFactory;
+use Database\Factories\Cricket\CricketTeamFactory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

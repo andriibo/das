@@ -1,6 +1,6 @@
 <?php
 
-namespace Database\Factories;
+namespace Database\Factories\Cricket;
 
 use App\Enums\CricketGameSchedule\HasFinalBoxEnum;
 use App\Enums\CricketGameSchedule\IsDataConfirmedEnum;

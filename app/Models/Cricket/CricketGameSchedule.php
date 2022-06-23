@@ -5,7 +5,7 @@ namespace App\Models\Cricket;
 use App\Events\Cricket\CricketGameScheduleSavedEvent;
 use App\Models\League;
 use Barryvdh\LaravelIdeHelper\Eloquent;
-use Database\Factories\CricketGameScheduleFactory;
+use Database\Factories\Cricket\CricketGameScheduleFactory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;

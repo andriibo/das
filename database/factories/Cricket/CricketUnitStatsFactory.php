@@ -1,22 +1,21 @@
 <?php
 
-namespace Database\Factories;
+namespace Database\Factories\Cricket;
 
-use App\Enums\FeedTypeEnum;
-use App\Models\Cricket\CricketTeam;
+use App\Models\Cricket\CricketUnitStats;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Cricket\CricketTeam>
  */
-class CricketTeamFactory extends Factory
+class CricketUnitStatsFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = CricketTeam::class;
+    protected $model = CricketUnitStats::class;
 
     /**
      * The number of models that should be generated.
@@ -33,11 +32,7 @@ class CricketTeamFactory extends Factory
     public function definition()
     {
         return [
-            'feed_id' => $this->faker->text(100),
-            'name' => $this->faker->company,
-            'nickname' => $this->faker->text(50),
-            'alias' => $this->faker->text(30),
-            'feed_type' => $this->faker->randomElement(FeedTypeEnum::names()),
+            'stats' => [],
         ];
     }
 }

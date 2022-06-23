@@ -1,6 +1,6 @@
 <?php
 
-namespace Database\Factories;
+namespace Database\Factories\Cricket;
 
 use App\Enums\CricketPlayer\InjuryStatusEnum;
 use App\Enums\FeedTypeEnum;

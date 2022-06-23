@@ -5,7 +5,7 @@ namespace App\Models\Cricket;
 use App\Events\Cricket\CricketGameLogSavedEvent;
 use App\Models\ActionPoint;
 use Barryvdh\LaravelIdeHelper\Eloquent;
-use Database\Factories\CricketGameLogFactory;
+use Database\Factories\Cricket\CricketGameLogFactory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;

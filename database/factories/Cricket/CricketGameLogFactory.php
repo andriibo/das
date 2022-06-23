@@ -1,22 +1,21 @@
 <?php
 
-namespace Database\Factories;
+namespace Database\Factories\Cricket;
 
-use App\Enums\CricketUnit\PositionEnum;
-use App\Models\Cricket\CricketUnit;
+use App\Models\Cricket\CricketGameLog;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Cricket\CricketUnit>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Cricket\CricketPlayer>
  */
-class CricketUnitFactory extends Factory
+class CricketGameLogFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = CricketUnit::class;
+    protected $model = CricketGameLog::class;
 
     /**
      * The number of models that should be generated.
@@ -33,7 +32,7 @@ class CricketUnitFactory extends Factory
     public function definition()
     {
         return [
-            'position' => $this->faker->randomElement(PositionEnum::values()),
+            'value' => $this->faker->randomFloat(),
         ];
     }
 }
