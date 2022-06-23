@@ -53,15 +53,36 @@ class CreateCricketUnitStatsService
         $actionPointRepository = new ActionPointRepository();
         $actionPoints = $actionPointRepository->getListBySportId(SportIdEnum::cricket)->toArray();
         foreach ($players as $player) {
-            $cricketUnitStatsDto = $this->cricketUnitStatsMapper->map([
-                'game_id' => $gameScheduleId,
-                'player_id' => $player['profileid'],
-                'team_id' => $teamId,
-                'stats' => $player,
-            ]);
-            $cricketUnitStats = $this->cricketUnitStatsService->storeCricketUnitStats($cricketUnitStatsDto);
-            $this->createCricketGameLogsService->handle($cricketUnitStats, $actionPoints);
+            try {
+                $stats = $this->getFormattedStats($player, $actionPoints);
+                $cricketUnitStatsDto = $this->cricketUnitStatsMapper->map([
+                    'game_id' => $gameScheduleId,
+                    'player_id' => $player['profileid'],
+                    'team_id' => $teamId,
+                    'stats' => $stats,
+                ]);
+                $cricketUnitStats = $this->cricketUnitStatsService->storeCricketUnitStats($cricketUnitStatsDto);
+                $this->createCricketGameLogsService->handle($cricketUnitStats, $actionPoints);
+            } catch (\Throwable $exception) {
+                Log::channel('stderr')->error($exception->getMessage());
+            }
         }
+    }
+
+    private function getFormattedStats(array $stats, array $actionPoints): array
+    {
+        $formattedStats = [];
+        foreach ($stats as $stat => $value) {
+            $foundKey = array_search($stat, array_column($actionPoints, 'name'));
+            if ($foundKey === false) {
+                continue;
+            }
+            if ($value) {
+                $formattedStats[$stat] = (float) $value;
+            }
+        }
+
+        return $formattedStats;
     }
 
     private function parseInning(array $inning, int $gameScheduleId, int $teamId): void

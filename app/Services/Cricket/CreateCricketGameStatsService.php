@@ -74,7 +74,6 @@ class CreateCricketGameStatsService
         try {
             $formattedDate = $this->getFormattedDate($cricketGameSchedule->game_date);
             $data = $this->cricketGoalserveService->getGoalserveGameStats($formattedDate, $leagueFeedId, $cricketGameSchedule->feed_id);
-
             if (empty($data)) {
                 Log::channel('stderr')->error("No data for date {$formattedDate} and feed_id {$cricketGameSchedule->feed_id}");
 
