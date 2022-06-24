@@ -2,6 +2,10 @@
 
 namespace App\Services;
 
+use App\Events\ContestUnitsUpdatedEvent;
+use App\Events\ContestUsersUpdatedEvent;
+use App\Events\GameLogsUpdatedEvent;
+use App\Events\GameSchedulesUpdatedEvent;
 use App\Helpers\ContestUnitHelper;
 use App\Models\Contests\Contest;
 use App\Models\Contests\ContestUser;
@@ -24,6 +28,7 @@ class CalculateContestService
         }
         $this->calculateTeamScores($contest->contestUsers);
         $this->calculateUserPlaces($contest);
+        $this->sendPushEvents($contest);
     }
 
     /**
@@ -50,5 +55,13 @@ class CalculateContestService
             $contestUser->place = $place;
             $contestUser->save();
         }
+    }
+
+    private function sendPushEvents(Contest $contest)
+    {
+        event(new GameLogsUpdatedEvent($contest));
+        event(new ContestUnitsUpdatedEvent($contest));
+        event(new ContestUsersUpdatedEvent($contest));
+        event(new GameSchedulesUpdatedEvent($contest));
     }
 }
