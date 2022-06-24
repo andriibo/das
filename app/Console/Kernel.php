@@ -6,6 +6,7 @@ use App\Console\Commands\CricketCommonCommand;
 use App\Console\Commands\CricketPlayerSalaryCommand;
 use App\Console\Commands\CricketRecentlyEnabledLeagueCommand;
 use App\Console\Commands\CricketStatsCommand;
+use App\Console\Commands\CricketUnconfirmedGameSchedulesCommand;
 use App\Console\Commands\CricketUnitPlayerFantasyPointsCommand;
 use App\Console\Commands\CricketUnitStatsTotalCommand;
 use Illuminate\Console\Scheduling\Schedule;
@@ -25,6 +26,8 @@ class Kernel extends ConsoleKernel
         $schedule->command(CricketPlayerSalaryCommand::class)->twiceDaily();
 
         $schedule->command(CricketRecentlyEnabledLeagueCommand::class)->everyThirtyMinutes();
+
+        $schedule->command(CricketUnconfirmedGameSchedulesCommand::class)->hourly();
 
         $schedule->command(CricketStatsCommand::class)->everyMinute();
     }

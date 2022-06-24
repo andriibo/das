@@ -6,7 +6,7 @@ use App\Mappers\CricketGameStatsMapper;
 use App\Models\Cricket\CricketGameSchedule;
 use Illuminate\Support\Facades\Log;
 
-class CreateGameStatsService
+class CreateCricketGameStatsService
 {
     public function __construct(
         private readonly CricketGoalserveService $cricketGoalserveService,

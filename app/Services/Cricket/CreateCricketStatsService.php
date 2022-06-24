@@ -12,7 +12,7 @@ class CreateCricketStatsService
 {
     public function __construct(
         private readonly CalculateContestService $calculateContestService,
-        private readonly CreateGameStatsService $createGameStatsService,
+        private readonly CreateCricketGameStatsService $createCricketGameStatsService,
         private readonly ConfirmCricketGameStatsService $confirmCricketGameStatsService
     ) {
     }
@@ -28,12 +28,12 @@ class CreateCricketStatsService
             $lastGameLogId = $lastGameLog?->id ?? 0;
             $liveGames = $contest->liveCricketGameSchedules()->whereNotIn('id', $gamesLoaded)->get();
             foreach ($liveGames as $liveGame) {
-                $this->createGameStatsService->handle($liveGame);
+                $this->createCricketGameStatsService->handle($liveGame);
                 $gamesLoaded[] = $liveGame->id;
             }
             $unconfirmedGames = $contest->unconfirmedCricketGameSchedules()->whereNotIn('id', $gamesLoaded)->get();
             foreach ($unconfirmedGames as $unconfirmedGame) {
-                if ($unconfirmedGame->has_final_box && $unconfirmedGame->updated_at < date('Y-m-d H:i:s', time() - CricketGameScheduleConst::CONFIRM_STATS_DELAY)) {
+                if ($unconfirmedGame->hasFinalBox() && $unconfirmedGame->updated_at < date('Y-m-d H:i:s', time() - CricketGameScheduleConst::CONFIRM_STATS_DELAY)) {
                     $this->confirmCricketGameStatsService->handle($unconfirmedGame);
                     $gamesLoaded[] = $unconfirmedGame->id;
                     $gamesConfirmed[] = $unconfirmedGame->id;

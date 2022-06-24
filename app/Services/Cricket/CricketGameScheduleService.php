@@ -4,7 +4,6 @@ namespace App\Services\Cricket;
 
 use App\Const\CricketGameScheduleConst;
 use App\Dto\CricketGameScheduleDto;
-use App\Enums\CricketGameSchedule\HasFinalBoxEnum;
 use App\Enums\CricketGameSchedule\IsDataConfirmedEnum;
 use App\Models\Cricket\CricketGameSchedule;
 use App\Repositories\Cricket\CricketGameScheduleRepository;
@@ -49,8 +48,8 @@ class CricketGameScheduleService
     {
         $gameConfirmTime = strtotime($cricketGameSchedule->updated_at) + CricketGameScheduleConst::CONFIRM_STATS_DELAY;
         if (
-            $cricketGameSchedule->has_final_box == HasFinalBoxEnum::yes->value
-            && $cricketGameSchedule->is_data_confirmed == IsDataConfirmedEnum::no->value
+            $cricketGameSchedule->hasFinalBox()
+            && !$cricketGameSchedule->isDataConfirmed()
             && $gameConfirmTime < time()
         ) {
             $cricketGameSchedule->is_data_confirmed = IsDataConfirmedEnum::yes->value;
