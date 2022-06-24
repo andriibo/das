@@ -6,7 +6,7 @@ use App\Dto\CricketPlayerDto;
 use App\Dto\MinAndMaxFantasyPointsDto;
 use App\Models\Cricket\CricketPlayer;
 use App\Repositories\Cricket\CricketPlayerRepository;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Collection;
 
 class CricketPlayerService
 {
@@ -39,6 +39,9 @@ class CricketPlayerService
         return $this->cricketPlayerRepository->getMinAndMaxFantasyPoints();
     }
 
+    /**
+     * @return Collection|CricketPlayer[]
+     */
     public function getPlayersWithCalculatedFantasyPoints(): Collection
     {
         return $this->cricketPlayerRepository->getPlayersWithCalculatedFantasyPoints();

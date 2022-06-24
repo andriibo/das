@@ -42,4 +42,16 @@ class CricketUnitStatsRepository
             ->get()
         ;
     }
+
+    /**
+     * @return Collection|CricketUnitStats[]
+     */
+    public function getByParams(int $unitId, array $gameScheduleIds): Collection
+    {
+        return CricketUnitStats::query()
+            ->where('unit_id', $unitId)
+            ->whereIn('game_schedule_id', $gameScheduleIds)
+            ->get()
+            ;
+    }
 }
