@@ -13,8 +13,10 @@ class CricketPlayerSalaryCommand extends Command
 
     protected $description = 'Calculate cricket players salaries';
 
-    public function handle(CricketPlayerService $cricketPlayerService, UpdateCricketPlayerSalaryService $updateCricketPlayerSalaryService): void
-    {
+    public function handle(
+        CricketPlayerService $cricketPlayerService,
+        UpdateCricketPlayerSalaryService $updateCricketPlayerSalaryService
+    ): void {
         $this->info(Carbon::now() . ": Command {$this->signature} started");
         $minAndMaxFantasyPoints = $cricketPlayerService->getMinAndMaxFantasyPoints();
         $playersWithCalculatedFantasyPoints = $cricketPlayerService->getPlayersWithCalculatedFantasyPoints();

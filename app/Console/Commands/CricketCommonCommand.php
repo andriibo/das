@@ -19,7 +19,7 @@ class CricketCommonCommand extends Command
         LeagueRepository $leagueRepository,
         CreateCricketTeamsPlayersUnitsService $createCricketTeamsPlayersUnitsService,
         CreateCricketGameSchedulesService $createCricketGameScheduleService
-    ) {
+    ): void {
         $this->info(Carbon::now() . ": Command {$this->signature} started");
         $leagues = $leagueRepository->getListBySportId(SportIdEnum::cricket);
         foreach ($leagues as $league) {

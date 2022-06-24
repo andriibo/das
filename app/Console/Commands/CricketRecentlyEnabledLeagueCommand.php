@@ -25,7 +25,7 @@ class CricketRecentlyEnabledLeagueCommand extends Command
         CreateCricketGameSchedulesService $createCricketGameSchedulesService,
         CreateCricketStatsService $createCricketStatsService,
         ConfirmHistoricalCricketGameSchedulesService $confirmHistoricalCricketGameSchedulesService
-    ) {
+    ): void {
         $this->info(Carbon::now() . ": Command {$this->signature} started");
         $leagues = $leagueRepository->getRecentlyEnabledListBySportId(SportIdEnum::cricket);
         foreach ($leagues as $league) {

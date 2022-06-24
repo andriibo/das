@@ -24,11 +24,8 @@ class CreateCricketStatsService
         $runningContests = $contestRepository->getRunningContests($league->id);
         $gamesLoaded = $gamesConfirmed = [];
         foreach ($runningContests as $contest) {
-            $lastGameLogId = 0;
             $lastGameLog = $cricketGameLogRepository->getLastGameLogByContestId($contest->id);
-            if ($lastGameLog) {
-                $lastGameLogId = $lastGameLog->id;
-            }
+            $lastGameLogId = $lastGameLog?->id ?? 0;
             $liveGames = $contest->liveCricketGameSchedules()->whereNotIn('id', $gamesLoaded)->get();
             foreach ($liveGames as $liveGame) {
                 $this->createGameStatsService->handle($liveGame);
@@ -42,10 +39,19 @@ class CreateCricketStatsService
                     $gamesConfirmed[] = $unconfirmedGame->id;
                 }
             }
-            $lastGameLog = $cricketGameLogRepository->getLastGameLogByContestId($contest->id);
-            if ($lastGameLog && $lastGameLog->id > $lastGameLogId && !empty($gamesConfirmed)) {
+            if ($this->hasNewGameLogs($contest->id, $lastGameLogId, $cricketGameLogRepository) && !empty($gamesConfirmed)) {
                 $this->calculateContestService->handle($contest);
             }
         }
+    }
+
+    private function hasNewGameLogs(int $contestId, int $lastGameLogId, CricketGameLogRepository $cricketGameLogRepository): bool
+    {
+        $gameLog = $cricketGameLogRepository->getLastGameLogByContestId($contestId);
+        if ($gameLog && $gameLog->id > $lastGameLogId) {
+            return true;
+        }
+
+        return false;
     }
 }
