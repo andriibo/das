@@ -13,7 +13,7 @@ class UpdateCricketPlayerSalaryService
     {
     }
 
-    public function handle(MinAndMaxFantasyPointsDto $minAndMaxDto, CricketPlayer $player)
+    public function handle(MinAndMaxFantasyPointsDto $minAndMaxDto, CricketPlayer $player): void
     {
         $rate = ($player->total_fantasy_points - $minAndMaxDto->min) / ($minAndMaxDto->max - $minAndMaxDto->min);
         $autoSalary = round($rate * (CricketPlayer::MAX_SALARY - CricketPlayer::MIN_SALARY) + CricketPlayer::MIN_SALARY, -2);
