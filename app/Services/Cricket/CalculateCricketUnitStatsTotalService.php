@@ -17,10 +17,8 @@ class CalculateCricketUnitStatsTotalService
     public function handle(CricketUnit $cricketUnit): void
     {
         $statsTotal = [];
-        foreach ($cricketUnit->unitStats as $unitStat) {
-            if ($unitStat->game_schedule_id !== null) {
-                $statsTotal = ArrayHelper::sum($statsTotal, $unitStat->stats);
-            }
+        foreach ($cricketUnit->unitStats()->whereNotNull('game_schedule_id')->get() as $unitStat) {
+            $statsTotal = ArrayHelper::sum($statsTotal, $unitStat->stats);
         }
         $this->saveTotalUnitStats($cricketUnit, $statsTotal);
     }

@@ -24,7 +24,7 @@ class UpdateCricketPlayerFantasyPointsService
             foreach ($cricketPlayer->cricketUnits as $cricketUnit) {
                 $cricketUnitDto = $this->updateCricketUnitFantasyPoints->handle($cricketUnit, $actionPoints);
                 $playerDto->totalFantasyPoints += $cricketUnitDto->fantasyPoints;
-                $gamesCount += $cricketUnit->unitStats()->count();
+                $gamesCount += $cricketUnit->unitStats()->whereNotNull('game_schedule_id')->count();
             }
             if ($gamesCount > 0) {
                 $playerDto->totalFantasyPointsPerGame = $playerDto->totalFantasyPoints / $gamesCount;
