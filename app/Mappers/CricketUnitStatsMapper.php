@@ -34,7 +34,7 @@ class CricketUnitStatsMapper
         $mappedStats = [];
         foreach ($stats as $key => $stat) {
             if (CricketUnitStatActionEnum::tryFrom($key)) {
-                $mappedStats[$key] = $stat;
+                $mappedStats[$key] = round($stat, 2);
             }
         }
 
