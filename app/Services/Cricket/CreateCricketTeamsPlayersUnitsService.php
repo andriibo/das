@@ -41,8 +41,12 @@ class CreateCricketTeamsPlayersUnitsService
             return;
         }
         foreach ($data['player'] as $player) {
-            $cricketPlayer = $this->createCricketPlayerService->handle($player);
-            $this->createCricketUnitService->handle($cricketPlayer, $cricketTeam->id, $player['role']);
+            try {
+                $cricketPlayer = $this->createCricketPlayerService->handle($player);
+                $this->createCricketUnitService->handle($cricketPlayer, $cricketTeam->id, $player['role']);
+            } catch (\Throwable $exception) {
+                Log::channel('stderr')->error($exception->getMessage());
+            }
         }
     }
 }
