@@ -15,6 +15,12 @@ class NodejsClient
     private const USER_BALANCE_ENDPOINT = '/users/%s/balance';
     private const USER_TRANSACTION_ENDPOINT = '/users/%s/transaction';
 
+    private const CONTESTS_UPDATED_EVENT = 'contests-updated';
+    private const CONTEST_GAME_LOGS_UPDATED_EVENT = 'game-logs-updated';
+    private const CONTEST_PLAYERS_UPDATED_EVENT = 'contest-players-updated';
+    private const USER_BALANCE_UPDATED_EVENT = 'user-balance-updated';
+    private const USER_TRANSACTIONS_UPDATED_EVENT = 'user-transactions-updated';
+
     private ?string $apiUrl;
     private Client $client;
 
@@ -27,31 +33,56 @@ class NodejsClient
     public function sendContestUpdatePush(array $data): void
     {
         $url = $this->apiUrl . self::CONTESTS_ENDPOINT;
-        $this->sendRequest($url, $data);
-    }
+        $formParams = [
+            'type' => self::CONTESTS_UPDATED_EVENT,
+            'payload' => $data,
+        ];
 
-    public function sendGameLogsUpdatePush(array $data, int $contestId): void
-    {
-        $url = sprintf($this->apiUrl . self::CONTEST_GAME_LOGS_ENDPOINT, $contestId);
-        $this->sendRequest($url, $data);
-    }
-
-    public function sendUserBalanceUpdatePush(array $data, int $userId): void
-    {
-        $url = sprintf($this->apiUrl . self::USER_BALANCE_ENDPOINT, $userId);
-        $this->sendRequest($url, $data);
-    }
-
-    public function sendUserTransactionCreatedPush(array $data, int $userId): void
-    {
-        $url = sprintf($this->apiUrl . self::USER_TRANSACTION_ENDPOINT, $userId);
-        $this->sendRequest($url, $data);
+        $this->sendRequest($url, $formParams);
     }
 
     public function sendContestUnitsUpdatePush(array $data, int $contestId): void
     {
         $url = sprintf($this->apiUrl . self::CONTEST_PLAYERS_ENDPOINT, $contestId);
-        $this->sendRequest($url, $data);
+        $formParams = [
+            'type' => self::CONTEST_PLAYERS_UPDATED_EVENT,
+            'payload' => $data,
+        ];
+
+        $this->sendRequest($url, $formParams);
+    }
+
+    public function sendGameLogsUpdatePush(array $data, int $contestId): void
+    {
+        $url = sprintf($this->apiUrl . self::CONTEST_GAME_LOGS_ENDPOINT, $contestId);
+        $formParams = [
+            'type' => self::CONTEST_GAME_LOGS_UPDATED_EVENT,
+            'payload' => $data,
+        ];
+
+        $this->sendRequest($url, $formParams);
+    }
+
+    public function sendUserBalanceUpdatePush(array $data, int $userId): void
+    {
+        $url = sprintf($this->apiUrl . self::USER_BALANCE_ENDPOINT, $userId);
+        $formParams = [
+            'type' => self::USER_BALANCE_UPDATED_EVENT,
+            'payload' => $data,
+        ];
+
+        $this->sendRequest($url, $formParams);
+    }
+
+    public function sendUserTransactionCreatedPush(array $data, int $userId): void
+    {
+        $url = sprintf($this->apiUrl . self::USER_TRANSACTION_ENDPOINT, $userId);
+        $formParams = [
+            'type' => self::USER_TRANSACTIONS_UPDATED_EVENT,
+            'payload' => $data,
+        ];
+
+        $this->sendRequest($url, $formParams);
     }
 
     /**
