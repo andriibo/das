@@ -9,7 +9,7 @@ use GuzzleHttp\RequestOptions;
 
 class NodejsClient
 {
-    private const CONTEST_ENDPOINT = '/contest';
+    private const CONTESTS_ENDPOINT = '/contests';
     private const CONTEST_GAME_LOGS_ENDPOINT = '/contests/%s/game-logs';
     private const CONTEST_PLAYERS_ENDPOINT = '/contests/%s/players';
     private const USER_BALANCE_ENDPOINT = '/users/%s/balance';
@@ -26,7 +26,7 @@ class NodejsClient
 
     public function sendContestUpdatePush(array $data): void
     {
-        $url = $this->apiUrl . self::CONTEST_ENDPOINT;
+        $url = $this->apiUrl . self::CONTESTS_ENDPOINT;
         $this->sendRequest($url, $data);
     }
 
