@@ -3,12 +3,12 @@
 namespace App\Listeners;
 
 use App\Clients\NodejsClient;
-use App\Events\ContestUsersUpdatedEvent;
-use App\Jobs\PushContestUsersUpdatedJob;
+use App\Events\ContestUpdatedEvent;
+use App\Jobs\PushContestUpdatedJob;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
-class ContestUsersUpdatedListener implements ShouldQueue
+class ContestUpdatedListener implements ShouldQueue
 {
     use InteractsWithQueue;
 
@@ -16,8 +16,8 @@ class ContestUsersUpdatedListener implements ShouldQueue
     {
     }
 
-    public function handle(ContestUsersUpdatedEvent $event): void
+    public function handle(ContestUpdatedEvent $event): void
     {
-        PushContestUsersUpdatedJob::dispatch($event->contest);
+        PushContestUpdatedJob::dispatch($event->contest);
     }
 }

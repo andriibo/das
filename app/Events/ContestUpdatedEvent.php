@@ -5,7 +5,7 @@ namespace App\Events;
 use App\Models\Contests\Contest;
 use Illuminate\Foundation\Events\Dispatchable;
 
-class ContestUsersUpdatedEvent
+class ContestUpdatedEvent
 {
     use Dispatchable;
 

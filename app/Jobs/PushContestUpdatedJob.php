@@ -3,14 +3,14 @@
 namespace App\Jobs;
 
 use App\Clients\NodejsClient;
-use App\Http\Resources\ContestUserResource;
+use App\Http\Resources\ContestDetailsResource;
 use App\Models\Contests\Contest;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 
-class PushContestUsersUpdatedJob implements ShouldQueue
+class PushContestUpdatedJob implements ShouldQueue
 {
     use Dispatchable;
     use InteractsWithQueue;
@@ -23,9 +23,9 @@ class PushContestUsersUpdatedJob implements ShouldQueue
     public function handle(): void
     {
         try {
-            $collection = ContestUserResource::collection($this->contest->contestUsers);
+            $resource = new ContestDetailsResource($this->contest);
             $nodejsClient = new NodejsClient();
-            $nodejsClient->sendContestUsersUpdatePush($collection->jsonSerialize(), $this->contest->id);
+            $nodejsClient->sendContestUpdatePush($resource->jsonSerialize());
         } catch (\Throwable $e) {
             throw $e;
         }
