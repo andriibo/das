@@ -3,6 +3,7 @@
 namespace App\Clients;
 
 use App\Exceptions\GoalserveClientException;
+use App\Repositories\FeedConfigRepository;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 
@@ -10,12 +11,11 @@ class GoalserveClient
 {
     private string $apiUrl = 'https://www.goalserve.com';
     private Client $client;
-    private ?string $apiKey;
+    private static ?string $apiKey = null;
 
-    public function __construct()
+    public function __construct(private readonly FeedConfigRepository $feedConfigRepository)
     {
         $this->client = new Client();
-        $this->apiKey = config('goalserve.api_key');
     }
 
     public function getCricketTeams(int $leagueId): array
@@ -48,7 +48,8 @@ class GoalserveClient
 
     private function sendRequest(string $url, string $method = 'GET', array $options = []): array
     {
-        $endpoint = "{$this->apiUrl}/getfeed/{$this->apiKey}/{$url}";
+        $apiKey = $this->getGoalServeApiKey();
+        $endpoint = "{$this->apiUrl}/getfeed/{$apiKey}/{$url}";
 
         try {
             $response = $this->client->request($method, $endpoint, $options);
@@ -62,5 +63,15 @@ class GoalserveClient
         } catch (ClientException $clientException) {
             throw new GoalserveClientException($clientException->getMessage(), $clientException->getCode());
         }
+    }
+
+    private function getGoalServeApiKey(): string
+    {
+        if (is_null($this::$apiKey)) {
+            $feedConfig = $this->feedConfigRepository->getGoalserveConfig();
+            $this::$apiKey = $feedConfig->params['accessKey'];
+        }
+
+        return $this::$apiKey;
     }
 }
