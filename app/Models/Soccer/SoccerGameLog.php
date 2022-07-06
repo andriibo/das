@@ -16,7 +16,7 @@ use Illuminate\Support\Carbon;
  * @property int                $id
  * @property int                $game_id
  * @property int                $unit_id
- * @property int                $action_id
+ * @property int                $action_point_id
  * @property string             $value
  * @property null|Carbon        $created_at
  * @property null|Carbon        $updated_at
@@ -27,7 +27,7 @@ use Illuminate\Support\Carbon;
  * @method static Builder|SoccerGameLog newModelQuery()
  * @method static Builder|SoccerGameLog newQuery()
  * @method static Builder|SoccerGameLog query()
- * @method static Builder|SoccerGameLog whereActionId($value)
+ * @method static Builder|SoccerGameLog whereActionPointId($value)
  * @method static Builder|SoccerGameLog whereCreatedAt($value)
  * @method static Builder|SoccerGameLog whereGameId($value)
  * @method static Builder|SoccerGameLog whereId($value)
