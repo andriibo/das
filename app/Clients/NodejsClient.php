@@ -16,7 +16,7 @@ class NodejsClient
     private const USER_TRANSACTION_ENDPOINT = '/users/%s/transaction';
 
     private const CONTESTS_UPDATED_TYPE = 'contests-updated';
-    private const CONTEST_GAME_LOGS_UPDATED_TYPE = 'game-logs-updated';
+    private const CONTEST_GAME_LOGS_UPDATED_TYPE = 'contest-game-logs-updated';
     private const CONTEST_PLAYERS_UPDATED_TYPE = 'contest-players-updated';
     private const USER_BALANCE_UPDATED_TYPE = 'user-balance-updated';
     private const USER_TRANSACTIONS_UPDATED_TYPE = 'user-transactions-updated';
