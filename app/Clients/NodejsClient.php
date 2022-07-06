@@ -13,7 +13,7 @@ class NodejsClient
     private const CONTEST_GAME_LOGS_ENDPOINT = '/contests/%s/game-logs';
     private const CONTEST_PLAYERS_ENDPOINT = '/contests/%s/players';
     private const USER_BALANCE_ENDPOINT = '/users/%s/balance';
-    private const USER_TRANSACTION_ENDPOINT = '/users/%s/transaction';
+    private const USER_TRANSACTIONS_ENDPOINT = '/users/%s/transactions';
 
     private const CONTESTS_UPDATED_TYPE = 'contests-updated';
     private const CONTEST_GAME_LOGS_UPDATED_TYPE = 'contest-game-logs-updated';
@@ -76,7 +76,7 @@ class NodejsClient
 
     public function sendUserTransactionCreatedPush(array $data, int $userId): void
     {
-        $url = sprintf($this->apiUrl . self::USER_TRANSACTION_ENDPOINT, $userId);
+        $url = sprintf($this->apiUrl . self::USER_TRANSACTIONS_ENDPOINT, $userId);
         $formParams = [
             'type' => self::USER_TRANSACTIONS_UPDATED_TYPE,
             'payload' => $data,
