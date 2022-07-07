@@ -15,11 +15,11 @@ class NodejsClient
     private const USER_BALANCE_ENDPOINT = '/users/%s/balance';
     private const USER_TRANSACTIONS_ENDPOINT = '/users/%s/transactions';
 
-    private const CONTESTS_UPDATED_TYPE = 'contests-updated';
-    private const CONTEST_GAME_LOGS_UPDATED_TYPE = 'contest-game-logs-updated';
-    private const CONTEST_PLAYERS_UPDATED_TYPE = 'contest-players-updated';
-    private const USER_BALANCE_UPDATED_TYPE = 'user-balance-updated';
-    private const USER_TRANSACTIONS_UPDATED_TYPE = 'user-transactions-updated';
+    private const CONTESTS_UPDATED_TYPE = 'contestsUpdated';
+    private const CONTEST_GAME_LOGS_UPDATED_TYPE = 'contestGameLogsUpdated';
+    private const CONTEST_PLAYERS_UPDATED_TYPE = 'contestPlayersUpdated';
+    private const USER_BALANCE_UPDATED_TYPE = 'userBalanceUpdated';
+    private const USER_TRANSACTIONS_UPDATED_TYPE = 'userTransactionsUpdated';
 
     private ?string $apiUrl;
     private Client $client;
