@@ -8,6 +8,7 @@ use App\Services\Cricket\CreateCricketGameSchedulesService;
 use App\Services\Cricket\CreateCricketTeamsPlayersUnitsService;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
 
 class CricketCommonCommand extends Command
 {
@@ -23,6 +24,12 @@ class CricketCommonCommand extends Command
         $this->info(Carbon::now() . ": Command {$this->signature} started");
         $leagues = $leagueRepository->getListBySportId(SportIdEnum::cricket);
         foreach ($leagues as $league) {
+            if (!$league->isExistLeagueIdParam()) {
+                Log::channel('stderr')->error("At league id {$league->id} doesn't exist league_id param.");
+
+                continue;
+            }
+
             $createCricketTeamsPlayersUnitsService->handle($league);
             $createCricketGameScheduleService->handle($league);
         }
