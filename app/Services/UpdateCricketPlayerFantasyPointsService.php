@@ -4,12 +4,14 @@ namespace App\Services;
 
 use App\Dto\CricketPlayerDto;
 use App\Models\Cricket\CricketPlayer;
+use App\Repositories\Cricket\CricketUnitStatsRepository;
 use App\Services\Cricket\CricketPlayerService;
 
 class UpdateCricketPlayerFantasyPointsService
 {
     public function __construct(
         private readonly UpdateCricketUnitFantasyPoints $updateCricketUnitFantasyPoints,
+        private readonly CricketUnitStatsRepository $cricketUnitStatsRepository,
         private readonly CricketPlayerService $cricketPlayerService
     ) {
     }
@@ -24,7 +26,7 @@ class UpdateCricketPlayerFantasyPointsService
             foreach ($cricketPlayer->cricketUnits as $cricketUnit) {
                 $cricketUnitDto = $this->updateCricketUnitFantasyPoints->handle($cricketUnit, $actionPoints);
                 $playerDto->totalFantasyPoints += $cricketUnitDto->fantasyPoints;
-                $gamesCount += $cricketUnit->unitStats()->whereNotNull('game_schedule_id')->count();
+                $gamesCount += $this->cricketUnitStatsRepository->getRealGameUnitStatsByUnitId($cricketUnit->id)->count();
             }
             if ($gamesCount > 0) {
                 $playerDto->totalFantasyPointsPerGame = $playerDto->totalFantasyPoints / $gamesCount;
