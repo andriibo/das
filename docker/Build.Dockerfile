@@ -13,7 +13,8 @@ RUN apt-get update && apt-get install -y \
     unzip \
     supervisor
 
-COPY supervisord.conf /etc/supervisor/supervisord.conf
+RUN docker-php-ext-install pdo_mysql
+RUN docker-php-ext-enable pdo_mysql
 
 RUN docker-php-ext-configure intl \
     && docker-php-ext-install \
@@ -22,6 +23,7 @@ RUN docker-php-ext-configure intl \
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
+COPY supervisord.conf /etc/supervisor/supervisord.conf
 COPY start.sh /etc/cron.d/crontab
 
 RUN usermod --non-unique --uid 1000 www-data \
