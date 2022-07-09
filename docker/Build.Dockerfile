@@ -19,7 +19,8 @@ RUN docker-php-ext-enable pdo_mysql
 RUN docker-php-ext-configure intl \
     && docker-php-ext-install \
     intl \
-    gettext
+    gettext \
+    gd
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
