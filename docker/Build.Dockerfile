@@ -33,4 +33,4 @@ RUN touch /var/log/cron.log
 
 EXPOSE 9000
 
-CMD ['/usr/bin/supervisord']
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/supervisord.conf"]
