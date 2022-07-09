@@ -13,9 +13,6 @@ RUN apt-get update && apt-get install -y \
     unzip \
     supervisor
 
-RUN mkdir -p /var/log/supervisor \
-    && mkdir -p /var/log/php \
-
 COPY supervisord.conf /etc/supervisor/supervisord.conf
 
 RUN docker-php-ext-configure intl \
