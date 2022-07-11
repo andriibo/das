@@ -27,9 +27,23 @@ class CricketGameScheduleRepository
     /**
      * @throws ModelNotFoundException
      */
-    public function getByFeedId(string $feedId): CricketGameSchedule
+    public function getNotFakeByFeedId(string $feedId): CricketGameSchedule
     {
-        return CricketGameSchedule::whereFeedId($feedId)->firstOrFail();
+        return CricketGameSchedule::whereFeedId($feedId)
+            ->where('is_fake', IsFakeEnum::no)
+            ->firstOrFail()
+        ;
+    }
+
+    /**
+     * @return Collection|CricketGameSchedule[]
+     */
+    public function getByFeedIdAndLeague(string $feedId, int $leagueId): Collection
+    {
+        return CricketGameSchedule::whereFeedId($feedId)
+            ->where('league_id', $leagueId)
+            ->get()
+        ;
     }
 
     /**
