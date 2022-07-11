@@ -12,6 +12,7 @@ use App\Services\Cricket\CreateCricketStatsService;
 use App\Services\Cricket\CreateCricketTeamsPlayersUnitsService;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
 
 class CricketRecentlyEnabledLeagueCommand extends Command
 {
@@ -29,6 +30,12 @@ class CricketRecentlyEnabledLeagueCommand extends Command
         $this->info(Carbon::now() . ": Command {$this->signature} started");
         $leagues = $leagueRepository->getRecentlyEnabledListBySportId(SportIdEnum::cricket);
         foreach ($leagues as $league) {
+            if (!$league->isExistLeagueIdParam()) {
+                Log::channel('stderr')->error("League ID {$league->id} doesn't have league_id in the params.");
+
+                continue;
+            }
+
             $createCricketTeamsPlayersUnitsService->handle($league);
             $createCricketGameSchedulesService->handle($league);
             $createCricketStatsService->handle($league);
