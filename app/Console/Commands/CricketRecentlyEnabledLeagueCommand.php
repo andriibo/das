@@ -31,7 +31,7 @@ class CricketRecentlyEnabledLeagueCommand extends Command
         $leagues = $leagueRepository->getRecentlyEnabledListBySportId(SportIdEnum::cricket);
         foreach ($leagues as $league) {
             if (!$league->isExistLeagueIdParam()) {
-                Log::channel('stderr')->error("At league id {$league->id} doesn't exist league_id param.");
+                Log::channel('stderr')->error("League ID {$league->id} doesn't have league_id in the params.");
 
                 continue;
             }
