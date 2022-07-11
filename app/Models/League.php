@@ -74,4 +74,9 @@ class League extends Model
     {
         return $this->hasMany(CricketTeam::class, 'league_id');
     }
+
+    public function isExistLeagueIdParam(): bool
+    {
+        return isset($this->params['league_id']) && $this->params['league_id'] !== '';
+    }
 }
