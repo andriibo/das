@@ -631,10 +631,13 @@
             "source": {
                 "type": "git",
                 "url": "https://bitbucket.org/WicketGamingTeam/sportconfig.git",
-                "reference": "fd624d337ca8e02eb11806062a7d99f2c78d641a"
+                "reference": "492e326b757e598bed142564e0ca5a83e7252016"
             },
             "require": {
                 "php": ">=7.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.5.10"
             },
             "type": "project",
             "autoload": {
@@ -646,7 +649,7 @@
             "keywords": [
                 "dfs"
             ],
-            "time": "2022-07-11T08:38:59+00:00"
+            "time": "2022-07-11T09:17:13+00:00"
         },
         {
             "name": "fruitcake/php-cors",
