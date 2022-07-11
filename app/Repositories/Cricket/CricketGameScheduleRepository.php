@@ -38,7 +38,7 @@ class CricketGameScheduleRepository
     /**
      * @return Collection|CricketGameSchedule[]
      */
-    public function getByFeedIdAndLeague(string $feedId, int $leagueId): Collection
+    public function getByFeedIdAndLeagueId(string $feedId, int $leagueId): Collection
     {
         return CricketGameSchedule::whereFeedId($feedId)
             ->where('league_id', $leagueId)
