@@ -2,10 +2,12 @@
 
 namespace App\Repositories\Cricket;
 
+use App\Enums\Contests\StatusEnum;
 use App\Enums\CricketGameSchedule\HasFinalBoxEnum;
 use App\Enums\CricketGameSchedule\IsFakeEnum;
 use App\Enums\SportIdEnum;
 use App\Models\Cricket\CricketGameSchedule;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Collection;
 
@@ -38,10 +40,13 @@ class CricketGameScheduleRepository
     /**
      * @return Collection|CricketGameSchedule[]
      */
-    public function getByFeedIdAndLeagueId(string $feedId, int $leagueId): Collection
+    public function getActiveByFeedIdAndLeagueId(string $feedId, int $leagueId): Collection
     {
         return CricketGameSchedule::whereFeedId($feedId)
             ->where('league_id', $leagueId)
+            ->whereHas('contestGames.contest', function (Builder $query) {
+                $query->whereNotIn('status', [StatusEnum::closed->value, StatusEnum::cancelled->value]);
+            })
             ->get()
         ;
     }

@@ -20,7 +20,7 @@ class CricketGameScheduleService
      */
     public function storeCricketGameSchedules(CricketGameScheduleDto $cricketGameScheduleDto): array
     {
-        $cricketGameSchedules = $this->cricketGameScheduleRepository->getByFeedIdAndLeagueId(
+        $cricketGameSchedules = $this->cricketGameScheduleRepository->getActiveByFeedIdAndLeagueId(
             $cricketGameScheduleDto->feedId,
             $cricketGameScheduleDto->leagueId
         );
