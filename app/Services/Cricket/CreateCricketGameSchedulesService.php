@@ -32,8 +32,8 @@ class CreateCricketGameSchedulesService
     {
         try {
             $cricketGameScheduleDto = $this->cricketGameScheduleMapper->map($data, $leagueId);
-            $cricketGameSchedules = $this->cricketGameScheduleService->storeCricketGameSchedule($cricketGameScheduleDto);
-            $this->cricketGameScheduleService->updateDataConfirmed($cricketGameSchedules);
+            $cricketGameSchedules = $this->cricketGameScheduleService->storeCricketGameSchedules($cricketGameScheduleDto);
+            $this->cricketGameScheduleService->confirmGameSchedules($cricketGameSchedules);
         } catch (\Throwable $exception) {
             Log::channel('stderr')->error($exception->getMessage());
         }

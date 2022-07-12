@@ -16,9 +16,9 @@ class CricketGameScheduleService
     }
 
     /**
-     * @return array|CricketGameSchedule[]
+     * @return CricketGameSchedule[]
      */
-    public function storeCricketGameSchedule(CricketGameScheduleDto $cricketGameScheduleDto): array
+    public function storeCricketGameSchedules(CricketGameScheduleDto $cricketGameScheduleDto): array
     {
         $cricketGameSchedules = $this->cricketGameScheduleRepository->getByFeedIdAndLeagueId(
             $cricketGameScheduleDto->feedId,
@@ -59,9 +59,9 @@ class CricketGameScheduleService
     }
 
     /**
-     * @param array|CricketGameSchedule[] $cricketGameSchedules
+     * @param $cricketGameSchedules CricketGameSchedule[]
      */
-    public function updateDataConfirmed(array $cricketGameSchedules): void
+    public function confirmGameSchedules(array $cricketGameSchedules): void
     {
         foreach ($cricketGameSchedules as $cricketGameSchedule) {
             $gameConfirmTime = strtotime($cricketGameSchedule->updated_at) + CricketGameScheduleConst::CONFIRM_STATS_DELAY;
