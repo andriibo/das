@@ -97,6 +97,6 @@ class CreateCricketUnitStatsService
 
     private function getTeamId(string $team, int $homeTeamId, int $awayTeamId): int
     {
-        return $team === 'localteam' ? $homeTeamId : $awayTeamId;
+        return $team === 'localteam' ? $awayTeamId : $homeTeamId;
     }
 }
