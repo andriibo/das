@@ -7,14 +7,16 @@ use App\Mappers\CricketUnitStatsMapper;
 use App\Models\Cricket\CricketGameStats;
 use App\Repositories\ActionPointRepository;
 use App\Repositories\Cricket\CricketTeamRepository;
+use App\Repositories\Cricket\CricketUnitStatsRepository;
 use Illuminate\Support\Facades\Log;
 
 class CreateCricketUnitStatsService
 {
     public function __construct(
         private readonly CreateCricketGameLogsService $createCricketGameLogsService,
-        private readonly CricketUnitStatsService $cricketUnitStatsService,
-        private readonly CricketUnitStatsMapper $cricketUnitStatsMapper
+        private readonly StoreCricketUnitStatsService $storeCricketUnitStatsService,
+        private readonly CricketUnitStatsMapper $cricketUnitStatsMapper,
+        private readonly CricketUnitStatsRepository $cricketUnitStatsRepository
     ) {
     }
 
@@ -65,8 +67,10 @@ class CreateCricketUnitStatsService
                     'team_id' => $teamId,
                     'stats' => $stats,
                 ]);
-                $cricketUnitStats = $this->cricketUnitStatsService->storeCricketUnitStats($cricketUnitStatsDto);
-                $this->createCricketGameLogsService->handle($cricketUnitStats, $actionPoints);
+                $cricketUnitStats = $this->cricketUnitStatsRepository->getUnitStats($cricketUnitStatsDto->gameScheduleId, $cricketUnitStatsDto->unitId, $cricketUnitStatsDto->teamId);
+                $snapshot = !is_null($cricketUnitStats) ? $cricketUnitStats->stats : [];
+                $cricketUnitStats = $this->storeCricketUnitStatsService->handle($cricketUnitStatsDto);
+                $this->createCricketGameLogsService->handle($cricketUnitStats, $snapshot, $actionPoints);
             } catch (\Throwable $exception) {
                 Log::channel('stderr')->error($exception->getMessage());
             }

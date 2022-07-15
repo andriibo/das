@@ -10,7 +10,7 @@ use App\Repositories\Cricket\CricketUnitStatsRepository;
 class CalculateCricketUnitStatsTotalService
 {
     public function __construct(
-        private readonly CricketUnitStatsService $cricketUnitStatsService,
+        private readonly StoreCricketUnitStatsService $storeCricketUnitStatsService,
         private readonly CricketUnitStatsRepository $cricketUnitStatsRepository,
         private readonly CricketUnitStatsMapper $cricketUnitStatsMapper
     ) {
@@ -36,6 +36,6 @@ class CalculateCricketUnitStatsTotalService
             'stats' => $statsTotal,
         ]);
 
-        $this->cricketUnitStatsService->storeCricketUnitStats($cricketUnitStatsDto);
+        $this->storeCricketUnitStatsService->handle($cricketUnitStatsDto);
     }
 }
