@@ -6,14 +6,14 @@ use App\Dto\CricketUnitStatsDto;
 use App\Models\Cricket\CricketUnitStats;
 use App\Repositories\Cricket\CricketUnitStatsRepository;
 
-class CricketUnitStatsService
+class StoreCricketUnitStatsService
 {
     public function __construct(
         private readonly CricketUnitStatsRepository $cricketUnitStatsRepository
     ) {
     }
 
-    public function storeCricketUnitStats(CricketUnitStatsDto $cricketUnitStatsDto): CricketUnitStats
+    public function handle(CricketUnitStatsDto $cricketUnitStatsDto): CricketUnitStats
     {
         return $this->cricketUnitStatsRepository->updateOrCreate([
             'game_schedule_id' => $cricketUnitStatsDto->gameScheduleId,

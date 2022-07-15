@@ -16,4 +16,17 @@ class UnitStatsHelper
 
         return round($score, 2);
     }
+
+    /**
+     * Get difference between array values.
+     */
+    public static function delta(array $ar1, array $ar2): array
+    {
+        $delta = [];
+        foreach ($ar1 as $key => $value) {
+            $delta[$key] = isset($ar2[$key]) ? $value - $ar2[$key] : $value;
+        }
+
+        return $delta;
+    }
 }
