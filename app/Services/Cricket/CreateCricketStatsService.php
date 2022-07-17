@@ -24,14 +24,13 @@ class CreateCricketStatsService
         $runningContests = $contestRepository->getRunningContests($league->id);
         $gamesLoaded = $gamesConfirmed = [];
         foreach ($runningContests as $contest) {
-            $lastGameLog = $cricketGameLogRepository->getLastGameLogByContestId($contest->id);
-            $lastGameLogId = $lastGameLog?->id ?? 0;
-            $liveGames = $contest->liveCricketGameSchedules()->whereNotIn('id', $gamesLoaded)->get();
+            $lastGameLogId = $cricketGameLogRepository->getLastGameLogByContestId($contest->id)?->id ?? 0;
+            $liveGames = $contest->liveCricketGameSchedules()->wherePivotNotIn('id', $gamesLoaded)->get();
             foreach ($liveGames as $liveGame) {
                 $this->createCricketGameStatsService->handle($liveGame);
                 $gamesLoaded[] = $liveGame->id;
             }
-            $unconfirmedGames = $contest->unconfirmedCricketGameSchedules()->whereNotIn('id', $gamesLoaded)->get();
+            $unconfirmedGames = $contest->unconfirmedCricketGameSchedules()->wherePivotNotIn('cricket_game_schedule.id', $gamesLoaded)->get();
             foreach ($unconfirmedGames as $unconfirmedGame) {
                 if ($unconfirmedGame->hasFinalBox() && $unconfirmedGame->updated_at < date('Y-m-d H:i:s', time() - CricketGameScheduleConst::CONFIRM_STATS_DELAY)) {
                     $this->confirmCricketGameStatsService->handle($unconfirmedGame);
@@ -48,10 +47,7 @@ class CreateCricketStatsService
     private function hasNewGameLogs(int $contestId, int $lastGameLogId, CricketGameLogRepository $cricketGameLogRepository): bool
     {
         $gameLog = $cricketGameLogRepository->getLastGameLogByContestId($contestId);
-        if ($gameLog && $gameLog->id > $lastGameLogId) {
-            return true;
-        }
 
-        return false;
+        return $gameLog && $gameLog->id > $lastGameLogId;
     }
 }

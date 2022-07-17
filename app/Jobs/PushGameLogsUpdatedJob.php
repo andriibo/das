@@ -27,7 +27,7 @@ class PushGameLogsUpdatedJob implements ShouldQueue
             /* @var $gameLogService GameLogService */
             $gameLogService = resolve(GameLogService::class);
             $gameLogs = $gameLogService->getGameLogs($this->contest);
-            $collection = GameLogResource::collection($gameLogs);
+            $collection = GameLogResource::customCollection($gameLogs, $this->contest->id);
             $nodejsClient = new NodejsClient();
             $nodejsClient->sendGameLogsUpdatePush($collection->jsonSerialize(), $this->contest->id);
         } catch (\Throwable $e) {
