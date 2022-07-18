@@ -18,7 +18,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property int                           $id
  * @property int                           $team_id
  * @property int                           $player_id
- * @property null|string                   $position
+ * @property string                        $position
  * @property null|string                   $salary
  * @property null|string                   $auto_salary
  * @property null|string                   $fantasy_points
