@@ -43,7 +43,15 @@ class CreateCricketTeamsPlayersUnitsService
         foreach ($data['player'] as $player) {
             try {
                 $cricketPlayer = $this->createCricketPlayerService->handle($player);
-                $this->createCricketUnitService->handle($cricketPlayer, $cricketTeam->id, $player['role']);
+                $position = $player['role'];
+
+                if (!$position) {
+                    Log::channel('stderr')->info("Role for player id {$player['name']} does not exist.");
+
+                    continue;
+                }
+
+                $this->createCricketUnitService->handle($cricketPlayer, $cricketTeam->id, $position);
             } catch (\Throwable $exception) {
                 Log::channel('stderr')->error($exception->getMessage());
             }
