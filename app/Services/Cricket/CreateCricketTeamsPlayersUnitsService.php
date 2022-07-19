@@ -3,6 +3,7 @@
 namespace App\Services\Cricket;
 
 use App\Mappers\CricketTeamMapper;
+use App\Mappers\CricketUnitMapper;
 use App\Models\League;
 use Illuminate\Support\Facades\Log;
 
@@ -11,6 +12,7 @@ class CreateCricketTeamsPlayersUnitsService
     public function __construct(
         private readonly CricketTeamService $cricketTeamService,
         private readonly CreateCricketPlayerService $createCricketPlayerService,
+        private readonly CricketUnitMapper $cricketUnitMapper,
         private readonly CreateCricketUnitService $createCricketUnitService
     ) {
     }
@@ -43,7 +45,21 @@ class CreateCricketTeamsPlayersUnitsService
         foreach ($data['player'] as $player) {
             try {
                 $cricketPlayer = $this->createCricketPlayerService->handle($player);
-                $this->createCricketUnitService->handle($cricketPlayer, $cricketTeam->id, $player['role']);
+                $position = $player['role'];
+
+                if (!$position) {
+                    Log::channel('stderr')->info("Role for player id {$player['name']} does not exist.");
+
+                    continue;
+                }
+
+                $cricketUnitDto = $this->cricketUnitMapper->map([
+                    'player_id' => $cricketPlayer->id,
+                    'team_id' => $cricketTeam->id,
+                    'position' => $position,
+                ]);
+
+                $this->createCricketUnitService->handle($cricketUnitDto);
             } catch (\Throwable $exception) {
                 Log::channel('stderr')->error($exception->getMessage());
             }
