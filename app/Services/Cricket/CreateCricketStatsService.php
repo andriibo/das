@@ -2,7 +2,7 @@
 
 namespace App\Services\Cricket;
 
-use App\Const\CricketGameScheduleConst;
+use App\Helpers\CricketGameScheduleHelper;
 use App\Models\League;
 use App\Repositories\ContestRepository;
 use App\Repositories\Cricket\CricketGameLogRepository;
@@ -13,7 +13,7 @@ class CreateCricketStatsService
     public function __construct(
         private readonly CalculateContestService $calculateContestService,
         private readonly CreateCricketGameStatsService $createCricketGameStatsService,
-        private readonly ConfirmCricketGameStatsService $confirmCricketGameStatsService
+        private readonly ConfirmCricketGameScheduleService $confirmCricketGameScheduleService
     ) {
     }
 
@@ -32,8 +32,9 @@ class CreateCricketStatsService
             }
             $unconfirmedGames = $contest->unconfirmedCricketGameSchedules()->wherePivotNotIn('cricket_game_schedule.id', $gamesLoaded)->get();
             foreach ($unconfirmedGames as $unconfirmedGame) {
-                if ($unconfirmedGame->hasFinalBox() && $unconfirmedGame->updated_at < date('Y-m-d H:i:s', time() - CricketGameScheduleConst::CONFIRM_STATS_DELAY)) {
-                    $this->confirmCricketGameStatsService->handle($unconfirmedGame);
+                if (CricketGameScheduleHelper::canConfirmData($unconfirmedGame)) {
+                    $this->createCricketGameStatsService->handle($unconfirmedGame);
+                    $this->confirmCricketGameScheduleService->handle($unconfirmedGame);
                     $gamesLoaded[] = $unconfirmedGame->id;
                     $gamesConfirmed[] = $unconfirmedGame->id;
                 }

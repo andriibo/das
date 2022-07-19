@@ -4,6 +4,7 @@ namespace App\Repositories\Cricket;
 
 use App\Enums\Contests\StatusEnum;
 use App\Enums\CricketGameSchedule\HasFinalBoxEnum;
+use App\Enums\CricketGameSchedule\IsDataConfirmedEnum;
 use App\Enums\CricketGameSchedule\IsFakeEnum;
 use App\Enums\SportIdEnum;
 use App\Models\Cricket\CricketGameSchedule;
@@ -62,6 +63,21 @@ class CricketGameScheduleRepository
     public function updateOrCreate(array $attributes, array $values = []): CricketGameSchedule
     {
         return CricketGameSchedule::updateOrCreate($attributes, $values);
+    }
+
+    /**
+     * @return Collection|CricketGameSchedule[]
+     */
+    public function getUnconfirmed(int $leagueId): Collection
+    {
+        return CricketGameSchedule::query()
+            ->where('league_id', $leagueId)
+            ->where('game_date', '<', date('Y-m-d H:i:s'))
+            ->where('is_fake', IsFakeEnum::no)
+            ->where('is_data_confirmed', IsDataConfirmedEnum::no)
+            ->orderByDesc('game_date')
+            ->get()
+            ;
     }
 
     /**
