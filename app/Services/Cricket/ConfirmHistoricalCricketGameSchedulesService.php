@@ -8,7 +8,8 @@ class ConfirmHistoricalCricketGameSchedulesService
 {
     public function __construct(
         private readonly CricketGameScheduleRepository $cricketGameScheduleRepository,
-        private readonly ConfirmCricketGameStatsService $confirmCricketGameStatsService
+        private readonly CreateCricketGameStatsService $createCricketGameStatsService,
+        private readonly ConfirmCricketGameScheduleService $confirmCricketGameScheduleService
     ) {
     }
 
@@ -17,8 +18,9 @@ class ConfirmHistoricalCricketGameSchedulesService
         $cricketGameSchedules = $this->cricketGameScheduleRepository->getHistorical($leagueId);
 
         foreach ($cricketGameSchedules as $cricketGameSchedule) {
-            if ($cricketGameSchedule->has_final_box == 1) {
-                $this->confirmCricketGameStatsService->handle($cricketGameSchedule);
+            if ($cricketGameSchedule->hasFinalBox()) {
+                $this->createCricketGameStatsService->handle($cricketGameSchedule);
+                $this->confirmCricketGameScheduleService->handle($cricketGameSchedule);
             }
         }
     }

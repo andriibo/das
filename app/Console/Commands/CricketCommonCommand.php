@@ -19,7 +19,7 @@ class CricketCommonCommand extends Command
     public function handle(
         LeagueRepository $leagueRepository,
         CreateCricketTeamsPlayersUnitsService $createCricketTeamsPlayersUnitsService,
-        CreateCricketGameSchedulesService $createCricketGameScheduleService
+        CreateCricketGameSchedulesService $createCricketGameSchedulesService
     ): void {
         $this->info(Carbon::now() . ": Command {$this->signature} started");
         $leagues = $leagueRepository->getListBySportId(SportIdEnum::cricket);
@@ -31,7 +31,7 @@ class CricketCommonCommand extends Command
             }
 
             $createCricketTeamsPlayersUnitsService->handle($league);
-            $createCricketGameScheduleService->handle($league);
+            $createCricketGameSchedulesService->handle($league);
         }
         $this->info(Carbon::now() . ": Command {$this->signature} finished");
     }

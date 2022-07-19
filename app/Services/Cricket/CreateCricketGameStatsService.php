@@ -2,6 +2,8 @@
 
 namespace App\Services\Cricket;
 
+use App\Enums\CricketGameSchedule\HasFinalBoxEnum;
+use App\Helpers\CricketGameScheduleHelper;
 use App\Mappers\CricketGameStatsMapper;
 use App\Models\Cricket\CricketGameSchedule;
 use App\Repositories\Cricket\CricketGameScheduleRepository;
@@ -34,6 +36,10 @@ class CreateCricketGameStatsService
             $cricketGameStatsDto = $this->cricketGameStatsMapper->map($data, $cricketGameSchedule->id);
             $cricketGameStats = $this->cricketGameStatsService->storeCricketGameStats($cricketGameStatsDto);
             $this->createCricketUnitStatsService->handle($cricketGameStats);
+            if (!$cricketGameSchedule->hasFinalBox() && CricketGameScheduleHelper::isStatusLive($cricketGameSchedule->status)) {
+                $cricketGameSchedule->has_final_box = HasFinalBoxEnum::yes;
+                $cricketGameSchedule->save();
+            }
         } catch (\Throwable $exception) {
             Log::channel('stderr')->error($exception->getMessage());
         }
