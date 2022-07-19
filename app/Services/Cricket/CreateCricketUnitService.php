@@ -2,25 +2,26 @@
 
 namespace App\Services\Cricket;
 
-use App\Mappers\CricketUnitMapper;
-use App\Models\Cricket\CricketPlayer;
+use App\Dto\CricketUnitDto;
+use App\Models\Cricket\CricketUnit;
+use App\Repositories\Cricket\CricketUnitRepository;
 
 class CreateCricketUnitService
 {
-    public function __construct(private readonly CricketUnitService $cricketUnitService)
-    {
+    public function __construct(
+        private readonly CricketUnitRepository $cricketUnitRepository
+    ) {
     }
 
-    public function handle(CricketPlayer $cricketPlayer, int $teamId, string $position): void
+    public function handle(CricketUnitDto $cricketUnitDto): CricketUnit
     {
-        $cricketUnitMapper = new CricketUnitMapper();
-
-        $cricketUnitDto = $cricketUnitMapper->map([
-            'player_id' => $cricketPlayer->id,
-            'team_id' => $teamId,
-            'position' => $position,
+        return $this->cricketUnitRepository->updateOrCreate([
+            'player_id' => $cricketUnitDto->playerId,
+            'team_id' => $cricketUnitDto->teamId,
+            'position' => $cricketUnitDto->position->value,
+        ], [
+            'fantasy_points' => $cricketUnitDto->fantasyPoints,
+            'fantasy_points_per_game' => $cricketUnitDto->fantasyPointsPerGame,
         ]);
-
-        $this->cricketUnitService->storeCricketUnit($cricketUnitDto);
     }
 }

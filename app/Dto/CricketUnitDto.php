@@ -9,7 +9,7 @@ class CricketUnitDto
     public ?int $id;
     public int $teamId;
     public int $playerId;
-    public ?PositionEnum $position;
+    public PositionEnum $position;
     public float $salary;
     public float $autoSalary;
     public ?float $fantasyPoints;
