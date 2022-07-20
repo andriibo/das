@@ -13,7 +13,8 @@ class CreateCricketTeamsPlayersUnitsService
         private readonly CricketTeamService $cricketTeamService,
         private readonly CreateCricketPlayerService $createCricketPlayerService,
         private readonly CricketUnitMapper $cricketUnitMapper,
-        private readonly CreateCricketUnitService $createCricketUnitService
+        private readonly CreateCricketUnitService $createCricketUnitService,
+        private readonly UpdateCricketUnitStatusService $updateCricketUnitStatusService
     ) {
     }
 
@@ -38,6 +39,7 @@ class CreateCricketTeamsPlayersUnitsService
         $cricketTeamMapper = new CricketTeamMapper();
         $cricketTeamDto = $cricketTeamMapper->map($data, $leagueId);
         $cricketTeam = $this->cricketTeamService->storeCricketTeam($cricketTeamDto);
+        $existCricketUnitIds = [];
 
         if (!$cricketTeam) {
             return;
@@ -59,10 +61,13 @@ class CreateCricketTeamsPlayersUnitsService
                     'position' => $position,
                 ]);
 
-                $this->createCricketUnitService->handle($cricketUnitDto);
+                $cricketUnit = $this->createCricketUnitService->handle($cricketUnitDto);
+                $existCricketUnitIds[] = $cricketUnit->id;
             } catch (\Throwable $exception) {
                 Log::channel('stderr')->error($exception->getMessage());
             }
         }
+
+        $this->updateCricketUnitStatusService->handle($cricketTeam->id, $existCricketUnitIds);
     }
 }

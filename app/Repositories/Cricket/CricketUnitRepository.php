@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Cricket;
 
+use App\Enums\CricketUnit\IsActiveEnum;
 use App\Models\Cricket\CricketUnit;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -33,6 +34,21 @@ class CricketUnitRepository
 
     public function updateOrCreate(array $attributes, array $values = []): CricketUnit
     {
-        return CricketUnit::updateOrCreate($attributes, $values);
+        return CricketUnit::query()->updateOrCreate($attributes, $values);
+    }
+
+    public function setNotActiveByTeamId(int $teamId): void
+    {
+        CricketUnit::whereTeamId($teamId)->update(['is_active' => IsActiveEnum::no->value]);
+    }
+
+    /**
+     * @param int[] $cricketUnitIds
+     */
+    public function setActiveByIds(array $cricketUnitIds): void
+    {
+        CricketUnit::query()->whereIn('id', $cricketUnitIds)
+            ->update(['is_active' => IsActiveEnum::yes->value])
+        ;
     }
 }
