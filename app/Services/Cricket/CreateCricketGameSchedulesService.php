@@ -38,17 +38,15 @@ class CreateCricketGameSchedulesService
             'type' => $cricketGameScheduleDto->type->value,
         ];
 
+        if ($cricketGameSchedules->isEmpty() && CricketGameScheduleHelper::isPostponed($cricketGameScheduleDto->status->value)) {
+            return [];
+        }
+
         if ($cricketGameSchedules->isEmpty()) {
             $cricketGameSchedule = $this->cricketGameScheduleRepository->updateOrCreate([
                 'feed_id' => $cricketGameScheduleDto->feedId,
                 'league_id' => $cricketGameScheduleDto->leagueId,
             ], array_merge($updateData, ['is_fake' => $cricketGameScheduleDto->isFake->value]));
-
-            if (CricketGameScheduleHelper::isPostponed($cricketGameSchedule->status)) {
-                $cricketGameSchedule->delete();
-
-                return [];
-            }
 
             $this->confirmCricketGameScheduleService->handle($cricketGameSchedule);
 
