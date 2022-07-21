@@ -4,6 +4,7 @@ namespace App\Services\Cricket;
 
 use App\Enums\CricketGameSchedule\HasFinalBoxEnum;
 use App\Helpers\CricketGameScheduleHelper;
+use App\Mappers\CricketGameScheduleMapper;
 use App\Mappers\CricketGameStatsMapper;
 use App\Models\Cricket\CricketGameSchedule;
 use App\Repositories\Cricket\CricketGameScheduleRepository;
@@ -16,7 +17,9 @@ class CreateCricketGameStatsService
         private readonly CricketGameStatsMapper $cricketGameStatsMapper,
         private readonly CricketGameStatsService $cricketGameStatsService,
         private readonly CreateCricketUnitStatsService $createCricketUnitStatsService,
-        private readonly CricketGameScheduleRepository $cricketGameScheduleRepository
+        private readonly CricketGameScheduleRepository $cricketGameScheduleRepository,
+        private readonly CreateCricketGameScheduleService $createCricketGameScheduleService,
+        private readonly CricketGameScheduleMapper $cricketGameScheduleMapper,
     ) {
     }
 
@@ -27,6 +30,8 @@ class CreateCricketGameStatsService
             $gameDate = $this->getGameDate($cricketGameSchedule);
             $formattedDate = $this->getFormattedDate($gameDate);
             $data = $this->cricketGoalserveService->getGoalserveGameStats($formattedDate, $leagueFeedId, $cricketGameSchedule->feed_id);
+            $cricketGameScheduleDto = $this->cricketGameScheduleMapper->map($data['match'], $cricketGameSchedule->league_id);
+            $cricketGameSchedule = $this->createCricketGameScheduleService->handle($cricketGameScheduleDto);
             if (empty($data)) {
                 Log::channel('stderr')->error("No data for date {$formattedDate} and feed_id {$cricketGameSchedule->feed_id}");
 
