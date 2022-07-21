@@ -43,6 +43,9 @@ class CreateCricketGameLogsService
                     'value' => $reverse ? -$value : $value,
                 ]);
 
+                if ($cricketGameLogDto->value === 0) {
+                    continue;
+                }
                 $this->cricketGameLogService->storeCricketGameLog($cricketGameLogDto);
             } catch (\Throwable $exception) {
                 Log::channel('stderr')->error($exception->getMessage());
