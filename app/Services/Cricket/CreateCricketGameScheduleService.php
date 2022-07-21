@@ -17,6 +17,7 @@ class CreateCricketGameScheduleService
         return $this->cricketGameScheduleRepository->updateOrCreate([
             'feed_id' => $cricketGameScheduleDto->feedId,
             'league_id' => $cricketGameScheduleDto->leagueId,
+            'is_fake' => $cricketGameScheduleDto->isFake->value,
         ], [
             'home_team_id' => $cricketGameScheduleDto->homeTeamId,
             'away_team_id' => $cricketGameScheduleDto->awayTeamId,

@@ -12,7 +12,8 @@ class CreateCricketGameSchedulesService
         private readonly CricketGoalserveService $cricketGoalserveService,
         private readonly CricketGameScheduleMapper $cricketGameScheduleMapper,
         private readonly ConfirmCricketGameScheduleService $confirmCricketGameScheduleService,
-        private readonly CreateCricketGameScheduleService $createCricketGameScheduleService
+        private readonly CreateCricketGameScheduleService $createCricketGameScheduleService,
+        private readonly UpdateCricketFakeGameSchedulesService $updateCricketFakeGameSchedulesService
     ) {
     }
 
@@ -24,6 +25,7 @@ class CreateCricketGameSchedulesService
             foreach ($matches as $match) {
                 $cricketGameScheduleDto = $this->cricketGameScheduleMapper->map($match, $league->id);
                 $cricketGameSchedule = $this->createCricketGameScheduleService->handle($cricketGameScheduleDto);
+                $this->updateCricketFakeGameSchedulesService->handle($cricketGameScheduleDto);
                 $this->confirmCricketGameScheduleService->handle($cricketGameSchedule);
             }
         } catch (\Throwable $exception) {

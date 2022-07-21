@@ -55,6 +55,19 @@ class CricketGameScheduleRepository
     /**
      * @return Collection|CricketGameSchedule[]
      */
+    public function getFakeCricketGameSchedules(int $feedId, int $leagueId): Collection
+    {
+        return CricketGameSchedule::query()
+            ->where('feed_id', $feedId)
+            ->where('league_id', $leagueId)
+            ->where('is_fake', IsFakeEnum::yes)
+            ->get()
+            ;
+    }
+
+    /**
+     * @return Collection|CricketGameSchedule[]
+     */
     public function getList(): Collection
     {
         return CricketGameSchedule::all();
