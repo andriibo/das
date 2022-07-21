@@ -21,6 +21,7 @@ use Illuminate\Support\Carbon;
  * @property int                        $home_team_id
  * @property int                        $away_team_id
  * @property string                     $game_date
+ * @property null|string                $status
  * @property int                        $has_final_box
  * @property int                        $is_data_confirmed
  * @property int                        $home_team_score
@@ -74,6 +75,7 @@ class SoccerGameSchedule extends Model
         'game_date',
         'has_final_box',
         'is_data_confirmed',
+        'status',
         'home_team_score',
         'away_team_score',
         'is_fake',
