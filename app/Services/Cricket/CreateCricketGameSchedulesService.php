@@ -3,22 +3,36 @@
 namespace App\Services\Cricket;
 
 use App\Dto\CricketGameScheduleDto;
-use App\Helpers\CricketGameScheduleHelper;
-use App\Models\Cricket\CricketGameSchedule;
+use App\Mappers\CricketGameScheduleMapper;
+use App\Models\League;
 use App\Repositories\Cricket\CricketGameScheduleRepository;
+use Illuminate\Support\Facades\Log;
 
 class CreateCricketGameSchedulesService
 {
     public function __construct(
+        private readonly CricketGoalserveService $cricketGoalserveService,
+        private readonly CricketGameScheduleMapper $cricketGameScheduleMapper,
         private readonly ConfirmCricketGameScheduleService $confirmCricketGameScheduleService,
         private readonly CricketGameScheduleRepository $cricketGameScheduleRepository
     ) {
     }
 
-    /**
-     * @return CricketGameSchedule[]
-     */
-    public function handle(CricketGameScheduleDto $cricketGameScheduleDto): array
+    public function handle(League $league): void
+    {
+        try {
+            $leagueId = $league->params['league_id'];
+            $matches = $this->cricketGoalserveService->getGoalserveCricketMatches($leagueId);
+            foreach ($matches as $match) {
+                $cricketGameScheduleDto = $this->cricketGameScheduleMapper->map($match, $leagueId);
+                $this->parseMatch($cricketGameScheduleDto);
+            }
+        } catch (\Throwable $exception) {
+            Log::channel('stderr')->error($exception->getMessage());
+        }
+    }
+
+    private function parseMatch(CricketGameScheduleDto $cricketGameScheduleDto): void
     {
         $cricketGameSchedules = $this->cricketGameScheduleRepository->getActiveByFeedIdAndLeagueId(
             $cricketGameScheduleDto->feedId,
@@ -38,19 +52,14 @@ class CreateCricketGameSchedulesService
             'type' => $cricketGameScheduleDto->type->value,
         ];
 
-        if ($cricketGameSchedules->isEmpty() && CricketGameScheduleHelper::isPostponed($cricketGameScheduleDto->status->value)) {
-            return [];
-        }
-
         if ($cricketGameSchedules->isEmpty()) {
             $cricketGameSchedule = $this->cricketGameScheduleRepository->updateOrCreate([
                 'feed_id' => $cricketGameScheduleDto->feedId,
                 'league_id' => $cricketGameScheduleDto->leagueId,
             ], array_merge($updateData, ['is_fake' => $cricketGameScheduleDto->isFake->value]));
-
             $this->confirmCricketGameScheduleService->handle($cricketGameSchedule);
 
-            return [$cricketGameSchedule];
+            return;
         }
 
         foreach ($cricketGameSchedules as $cricketGameSchedule) {
@@ -60,16 +69,7 @@ class CreateCricketGameSchedulesService
                 'league_id' => $cricketGameScheduleDto->leagueId,
             ], array_merge($updateData, ['is_fake' => $cricketGameSchedule->is_fake]));
 
-            if (CricketGameScheduleHelper::isPostponed($cricketGameSchedule->status)) {
-                $cricketGameSchedule->delete();
-
-                continue;
-            }
-
             $this->confirmCricketGameScheduleService->handle($cricketGameSchedule);
-            $updatedCricketGameSchedule[] = $cricketGameSchedule;
         }
-
-        return $updatedCricketGameSchedule;
     }
 }

@@ -34,11 +34,6 @@ class CricketGameScheduleHelper
         ]);
     }
 
-    public static function isPostponed(?string $status): bool
-    {
-        return $status == CricketGameScheduleStatus::stumps->value;
-    }
-
     public static function canConfirmData(CricketGameSchedule $cricketGameSchedule): bool
     {
         if (!$cricketGameSchedule->hasFinalBox() || $cricketGameSchedule->isDataConfirmed()) {
