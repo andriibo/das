@@ -8,7 +8,7 @@ use App\Models\Cricket\CricketPlayer;
 
 class UpdateCricketPlayerSalaryService
 {
-    public function __construct(private readonly CricketPlayerService $cricketPlayerService)
+    public function __construct(private readonly StoreCricketPlayerService $cricketPlayerService)
     {
     }
 
@@ -27,6 +27,6 @@ class UpdateCricketPlayerSalaryService
             'auto_salary' => $autoSalary,
         ]);
 
-        $this->cricketPlayerService->storeCricketPlayer($cricketPlayerDto);
+        $this->cricketPlayerService->handle($cricketPlayerDto);
     }
 }

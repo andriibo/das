@@ -6,7 +6,7 @@ use App\Models\ActionPoint;
 use App\Repositories\ActionPointRepository;
 use Illuminate\Support\Collection;
 
-class GetContestActionPointService
+class GetContestActionPointsService
 {
     private static Collection $actionPoints;
 

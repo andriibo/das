@@ -8,14 +8,14 @@ use App\Models\Cricket\CricketPlayer;
 use App\Repositories\Cricket\CricketPlayerRepository;
 use Illuminate\Support\Collection;
 
-class CricketPlayerService
+class StoreCricketPlayerService
 {
     public function __construct(
         private readonly CricketPlayerRepository $cricketPlayerRepository
     ) {
     }
 
-    public function storeCricketPlayer(CricketPlayerDto $cricketPlayerDto): CricketPlayer
+    public function handle(CricketPlayerDto $cricketPlayerDto): CricketPlayer
     {
         return $this->cricketPlayerRepository->updateOrCreate([
             'feed_id' => $cricketPlayerDto->feedId,

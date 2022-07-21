@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Storage;
 
 class CreateCricketPlayerService
 {
-    public function __construct(private readonly CricketPlayerService $cricketPlayerService)
+    public function __construct(private readonly StoreCricketPlayerService $cricketPlayerService)
     {
     }
 
@@ -22,7 +22,7 @@ class CreateCricketPlayerService
             'name' => $data['id'],
         ]);
 
-        $cricketPlayer = $this->cricketPlayerService->storeCricketPlayer($cricketPlayerDto);
+        $cricketPlayer = $this->cricketPlayerService->handle($cricketPlayerDto);
         if (is_null($cricketPlayer->photo)) {
             $this->uploadPhoto($cricketPlayer);
         }

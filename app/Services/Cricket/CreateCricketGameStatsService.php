@@ -15,7 +15,7 @@ class CreateCricketGameStatsService
     public function __construct(
         private readonly CricketGoalserveService $cricketGoalserveService,
         private readonly CricketGameStatsMapper $cricketGameStatsMapper,
-        private readonly CricketGameStatsService $cricketGameStatsService,
+        private readonly StoreCricketGameStatsService $storeCricketGameStatsService,
         private readonly CreateCricketUnitStatsService $createCricketUnitStatsService,
         private readonly CricketGameScheduleRepository $cricketGameScheduleRepository,
         private readonly CreateCricketGameScheduleService $createCricketGameScheduleService,
@@ -39,7 +39,7 @@ class CreateCricketGameStatsService
             }
 
             $cricketGameStatsDto = $this->cricketGameStatsMapper->map($data, $cricketGameSchedule->id);
-            $cricketGameStats = $this->cricketGameStatsService->storeCricketGameStats($cricketGameStatsDto);
+            $cricketGameStats = $this->storeCricketGameStatsService->handle($cricketGameStatsDto);
             $this->createCricketUnitStatsService->handle($cricketGameStats);
             if (!$cricketGameSchedule->hasFinalBox() && CricketGameScheduleHelper::isStatusLive($cricketGameSchedule->status)) {
                 $cricketGameSchedule->has_final_box = HasFinalBoxEnum::yes;

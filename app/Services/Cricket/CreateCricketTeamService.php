@@ -6,14 +6,14 @@ use App\Dto\CricketTeamDto;
 use App\Models\Cricket\CricketTeam;
 use App\Repositories\Cricket\CricketTeamRepository;
 
-class CricketTeamService
+class CreateCricketTeamService
 {
     public function __construct(
         private readonly CricketTeamRepository $cricketTeamRepository
     ) {
     }
 
-    public function storeCricketTeam(CricketTeamDto $cricketTeamDto): CricketTeam
+    public function handle(CricketTeamDto $cricketTeamDto): CricketTeam
     {
         return $this->cricketTeamRepository->updateOrCreate([
             'feed_id' => $cricketTeamDto->feedId,

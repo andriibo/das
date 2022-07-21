@@ -5,7 +5,7 @@ namespace App\Jobs;
 use App\Clients\NodejsClient;
 use App\Http\Resources\GameLogResource;
 use App\Models\Contests\Contest;
-use App\Services\GameLogService;
+use App\Services\GetGameLogsService;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -24,9 +24,9 @@ class PushGameLogsUpdatedJob implements ShouldQueue
     public function handle(): void
     {
         try {
-            /* @var $gameLogService GameLogService */
-            $gameLogService = resolve(GameLogService::class);
-            $gameLogs = $gameLogService->getGameLogs($this->contest);
+            /* @var $getGameLogsService GetGameLogsService */
+            $getGameLogsService = resolve(GetGameLogsService::class);
+            $gameLogs = $getGameLogsService->handle($this->contest);
             $collection = GameLogResource::customCollection($gameLogs, $this->contest->id);
             $nodejsClient = new NodejsClient();
             $nodejsClient->sendGameLogsUpdatePush($collection->jsonSerialize(), $this->contest->id);

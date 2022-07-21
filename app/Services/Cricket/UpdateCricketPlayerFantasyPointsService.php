@@ -11,7 +11,7 @@ class UpdateCricketPlayerFantasyPointsService
     public function __construct(
         private readonly UpdateCricketUnitFantasyPoints $updateCricketUnitFantasyPoints,
         private readonly CricketUnitStatsRepository $cricketUnitStatsRepository,
-        private readonly CricketPlayerService $cricketPlayerService
+        private readonly StoreCricketPlayerService $cricketPlayerService
     ) {
     }
 

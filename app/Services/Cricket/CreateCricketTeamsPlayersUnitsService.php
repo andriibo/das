@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Log;
 class CreateCricketTeamsPlayersUnitsService
 {
     public function __construct(
-        private readonly CricketTeamService $cricketTeamService,
+        private readonly CreateCricketTeamService $createCricketTeamService,
         private readonly CreateCricketPlayerService $createCricketPlayerService,
         private readonly CricketUnitMapper $cricketUnitMapper,
         private readonly CreateCricketUnitService $createCricketUnitService,
@@ -38,7 +38,7 @@ class CreateCricketTeamsPlayersUnitsService
     {
         $cricketTeamMapper = new CricketTeamMapper();
         $cricketTeamDto = $cricketTeamMapper->map($data, $leagueId);
-        $cricketTeam = $this->cricketTeamService->storeCricketTeam($cricketTeamDto);
+        $cricketTeam = $this->createCricketTeamService->handle($cricketTeamDto);
         $existCricketUnitIds = [];
 
         if (!$cricketTeam) {

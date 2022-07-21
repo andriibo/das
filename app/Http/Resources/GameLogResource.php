@@ -3,7 +3,7 @@
 namespace App\Http\Resources;
 
 use App\Helpers\ActionPointHelper;
-use App\Services\GetContestActionPointService;
+use App\Services\GetContestActionPointsService;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -13,9 +13,9 @@ class GameLogResource extends JsonResource
 
     public function toArray($request): array
     {
-        /* @var $getContestActionPointService GetContestActionPointService */
-        $getContestActionPointService = resolve(GetContestActionPointService::class);
-        $actionPoint = $getContestActionPointService->handle(self::$contestId, $this->action_point_id);
+        /* @var $getContestActionPointsService GetContestActionPointsService */
+        $getContestActionPointsService = resolve(GetContestActionPointsService::class);
+        $actionPoint = $getContestActionPointsService->handle(self::$contestId, $this->action_point_id);
 
         return [
             'playerId' => $this->unit_id,

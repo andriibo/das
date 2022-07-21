@@ -2,14 +2,14 @@
 
 namespace App\Services;
 
-use App\Exceptions\GameLogServiceException;
+use App\Exceptions\GetGameLogsServiceException;
 use App\Models\Contests\Contest;
 use App\Repositories\Cricket\CricketGameLogRepository;
 use App\Repositories\Soccer\SoccerGameLogRepository;
 use Illuminate\Http\Response;
 use Illuminate\Support\Collection;
 
-class GameLogService
+class GetGameLogsService
 {
     public function __construct(
         private readonly CricketGameLogRepository $cricketGameLogRepository,
@@ -18,9 +18,9 @@ class GameLogService
     }
 
     /**
-     * @throws GameLogServiceException
+     * @throws GetGameLogsServiceException
      */
-    public function getGameLogs(Contest $contest): Collection
+    public function handle(Contest $contest): Collection
     {
         if ($contest->isSportSoccer()) {
             return $this->soccerGameLogRepository->getGameLogsByContestId($contest->id);
@@ -30,6 +30,6 @@ class GameLogService
             return $this->cricketGameLogRepository->getGameLogsByContestId($contest->id);
         }
 
-        throw new GameLogServiceException('Could not find game logs for this sport', Response::HTTP_NOT_FOUND);
+        throw new GetGameLogsServiceException('Could not find game logs for this sport', Response::HTTP_NOT_FOUND);
     }
 }
