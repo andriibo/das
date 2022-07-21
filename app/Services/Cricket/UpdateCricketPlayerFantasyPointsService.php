@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Cricket;
 
 use App\Dto\CricketPlayerDto;
 use App\Models\Cricket\CricketPlayer;
 use App\Repositories\Cricket\CricketUnitStatsRepository;
-use App\Services\Cricket\CricketPlayerService;
 
 class UpdateCricketPlayerFantasyPointsService
 {

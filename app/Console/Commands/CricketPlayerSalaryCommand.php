@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Services\Cricket\CricketPlayerService;
-use App\Services\UpdateCricketPlayerSalaryService;
+use App\Services\Cricket\UpdateCricketPlayerSalaryService;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 

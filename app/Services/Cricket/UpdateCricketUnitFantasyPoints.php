@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Cricket;
 
 use App\Dto\CricketUnitDto;
 use App\Helpers\UnitStatsHelper;
@@ -8,7 +8,6 @@ use App\Mappers\CricketUnitMapper;
 use App\Models\Cricket\CricketUnit;
 use App\Models\Cricket\CricketUnitStats;
 use App\Repositories\Cricket\CricketUnitStatsRepository;
-use App\Services\Cricket\CreateCricketUnitService;
 use Illuminate\Support\Collection;
 
 class UpdateCricketUnitFantasyPoints

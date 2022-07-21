@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Cricket;
 
 use App\Dto\MinAndMaxFantasyPointsDto;
 use App\Mappers\CricketPlayerMapper;
 use App\Models\Cricket\CricketPlayer;
-use App\Services\Cricket\CricketPlayerService;
 
 class UpdateCricketPlayerSalaryService
 {
