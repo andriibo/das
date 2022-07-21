@@ -24,7 +24,7 @@ class UnconfirmedGameSchedulesService
 
             if (!$cricketGameSchedule->hasFinalBox()) {
                 $this->createCricketGameStatsService->handle($cricketGameSchedule);
-            } elseif (CricketGameScheduleHelper::canConfirmData($cricketGameSchedule->updated_at)) {
+            } elseif (CricketGameScheduleHelper::canConfirmData($cricketGameSchedule)) {
                 $this->createCricketGameStatsService->handle($cricketGameSchedule);
                 $this->confirmCricketGameScheduleService->handle($cricketGameSchedule);
             }
