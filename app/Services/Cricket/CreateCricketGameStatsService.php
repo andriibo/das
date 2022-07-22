@@ -69,7 +69,7 @@ class CreateCricketGameStatsService
         $cricketGameSchedule->away_team_score = $cricketGameScheduleDto->awayTeamScore;
         $cricketGameSchedule->status = $cricketGameScheduleDto->status;
         $cricketGameSchedule->type = $cricketGameScheduleDto->type;
-        if (!$cricketGameSchedule->hasFinalBox() && CricketGameScheduleHelper::isStatusLive($cricketGameSchedule->status)) {
+        if (!$cricketGameSchedule->hasFinalBox() && CricketGameScheduleHelper::isStatusLive($cricketGameScheduleDto->status->value)) {
             $cricketGameSchedule->has_final_box = HasFinalBoxEnum::yes;
             $cricketGameSchedule->save();
         }
