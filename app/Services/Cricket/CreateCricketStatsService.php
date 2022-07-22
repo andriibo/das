@@ -25,7 +25,7 @@ class CreateCricketStatsService
         $gamesLoaded = $gamesConfirmed = [];
         foreach ($runningContests as $contest) {
             $lastGameLogId = $cricketGameLogRepository->getLastGameLogByContestId($contest->id)?->id ?? 0;
-            $liveGames = $contest->liveCricketGameSchedules()->wherePivotNotIn('id', $gamesLoaded)->get();
+            $liveGames = $contest->liveCricketGameSchedules()->wherePivotNotIn('cricket_game_schedule.id', $gamesLoaded)->get();
             foreach ($liveGames as $liveGame) {
                 $this->createCricketGameStatsService->handle($liveGame);
                 $gamesLoaded[] = $liveGame->id;
