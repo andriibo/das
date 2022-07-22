@@ -3,6 +3,7 @@
 namespace App\Services\Cricket;
 
 use App\Enums\CricketGameSchedule\HasFinalBoxEnum;
+use App\Enums\CricketGameSchedule\IsFakeEnum;
 use App\Helpers\CricketGameScheduleHelper;
 use App\Mappers\CricketGameScheduleMapper;
 use App\Mappers\CricketGameStatsMapper;
@@ -31,6 +32,7 @@ class CreateCricketGameStatsService
             $formattedDate = $this->getFormattedDate($gameDate);
             $data = $this->cricketGoalserveService->getGoalserveGameStats($formattedDate, $leagueFeedId, $cricketGameSchedule->feed_id);
             $cricketGameScheduleDto = $this->cricketGameScheduleMapper->map($data['match'], $cricketGameSchedule->league_id);
+            $cricketGameScheduleDto->isFake = IsFakeEnum::tryFrom($cricketGameSchedule->is_fake);
             $cricketGameSchedule = $this->createCricketGameScheduleService->handle($cricketGameScheduleDto);
             if (empty($data)) {
                 Log::channel('stderr')->error("No data for date {$formattedDate} and feed_id {$cricketGameSchedule->feed_id}");
@@ -59,7 +61,7 @@ class CreateCricketGameStatsService
 
     private function getGameDate(CricketGameSchedule $cricketGameSchedule): string
     {
-        if ($cricketGameSchedule->is_fake) {
+        if ($cricketGameSchedule->isFake()) {
             $notFakeCricketGameSchedule = $this->cricketGameScheduleRepository->getNotFakeByFeedId($cricketGameSchedule->feed_id);
 
             return $notFakeCricketGameSchedule->game_date;

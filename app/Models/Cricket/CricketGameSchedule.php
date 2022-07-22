@@ -4,6 +4,7 @@ namespace App\Models\Cricket;
 
 use App\Enums\CricketGameSchedule\HasFinalBoxEnum;
 use App\Enums\CricketGameSchedule\IsDataConfirmedEnum;
+use App\Enums\CricketGameSchedule\IsFakeEnum;
 use App\Events\Cricket\CricketGameScheduleSavedEvent;
 use App\Models\Contests\ContestGame;
 use App\Models\League;
@@ -119,5 +120,10 @@ class CricketGameSchedule extends Model
     public function isDataConfirmed(): bool
     {
         return $this->is_data_confirmed == IsDataConfirmedEnum::yes->value;
+    }
+
+    public function isFake(): bool
+    {
+        return $this->is_fake == IsFakeEnum::yes->value;
     }
 }
