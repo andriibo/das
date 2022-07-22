@@ -2,8 +2,8 @@
 
 namespace App\Services\Cricket;
 
+use App\Dto\CricketGameScheduleDto;
 use App\Enums\CricketGameSchedule\HasFinalBoxEnum;
-use App\Enums\CricketGameSchedule\IsFakeEnum;
 use App\Helpers\CricketGameScheduleHelper;
 use App\Mappers\CricketGameScheduleMapper;
 use App\Mappers\CricketGameStatsMapper;
@@ -19,7 +19,6 @@ class CreateCricketGameStatsService
         private readonly StoreCricketGameStatsService $storeCricketGameStatsService,
         private readonly CreateCricketUnitStatsService $createCricketUnitStatsService,
         private readonly CricketGameScheduleRepository $cricketGameScheduleRepository,
-        private readonly CreateCricketGameScheduleService $createCricketGameScheduleService,
         private readonly CricketGameScheduleMapper $cricketGameScheduleMapper,
     ) {
     }
@@ -31,15 +30,13 @@ class CreateCricketGameStatsService
             $gameDate = $this->getGameDate($cricketGameSchedule);
             $formattedDate = $this->getFormattedDate($gameDate);
             $data = $this->cricketGoalserveService->getGoalserveGameStats($formattedDate, $leagueFeedId, $cricketGameSchedule->feed_id);
-            $cricketGameScheduleDto = $this->cricketGameScheduleMapper->map($data['match'], $cricketGameSchedule->league_id);
-            $cricketGameScheduleDto->isFake = IsFakeEnum::tryFrom($cricketGameSchedule->is_fake);
-            $cricketGameSchedule = $this->createCricketGameScheduleService->handle($cricketGameScheduleDto);
             if (empty($data)) {
                 Log::channel('stderr')->error("No data for date {$formattedDate} and feed_id {$cricketGameSchedule->feed_id}");
 
                 return;
             }
-
+            $cricketGameScheduleDto = $this->cricketGameScheduleMapper->map($data['match'], $cricketGameSchedule->league_id);
+            $cricketGameSchedule = $this->updateCricketGameSchedule($cricketGameSchedule, $cricketGameScheduleDto);
             $cricketGameStatsDto = $this->cricketGameStatsMapper->map($data, $cricketGameSchedule->id);
             $cricketGameStats = $this->storeCricketGameStatsService->handle($cricketGameStatsDto);
             $this->createCricketUnitStatsService->handle($cricketGameStats);
@@ -68,5 +65,16 @@ class CreateCricketGameStatsService
         }
 
         return $cricketGameSchedule->game_date;
+    }
+
+    private function updateCricketGameSchedule(CricketGameSchedule $cricketGameSchedule, CricketGameScheduleDto $cricketGameScheduleDto): CricketGameSchedule
+    {
+        $cricketGameSchedule->home_team_score = $cricketGameScheduleDto->homeTeamScore;
+        $cricketGameSchedule->away_team_score = $cricketGameScheduleDto->awayTeamScore;
+        $cricketGameSchedule->status = $cricketGameScheduleDto->status;
+        $cricketGameSchedule->type = $cricketGameScheduleDto->type;
+        $cricketGameSchedule->save();
+
+        return $cricketGameSchedule;
     }
 }
