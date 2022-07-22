@@ -40,10 +40,6 @@ class CreateCricketGameStatsService
             $cricketGameStatsDto = $this->cricketGameStatsMapper->map($data, $cricketGameSchedule->id);
             $cricketGameStats = $this->storeCricketGameStatsService->handle($cricketGameStatsDto);
             $this->createCricketUnitStatsService->handle($cricketGameStats);
-            if (!$cricketGameSchedule->hasFinalBox() && CricketGameScheduleHelper::isStatusLive($cricketGameSchedule->status)) {
-                $cricketGameSchedule->has_final_box = HasFinalBoxEnum::yes;
-                $cricketGameSchedule->save();
-            }
         } catch (\Throwable $exception) {
             Log::channel('stderr')->error($exception->getMessage());
         }
@@ -73,7 +69,10 @@ class CreateCricketGameStatsService
         $cricketGameSchedule->away_team_score = $cricketGameScheduleDto->awayTeamScore;
         $cricketGameSchedule->status = $cricketGameScheduleDto->status;
         $cricketGameSchedule->type = $cricketGameScheduleDto->type;
-        $cricketGameSchedule->save();
+        if (!$cricketGameSchedule->hasFinalBox() && CricketGameScheduleHelper::isStatusLive($cricketGameSchedule->status)) {
+            $cricketGameSchedule->has_final_box = HasFinalBoxEnum::yes;
+            $cricketGameSchedule->save();
+        }
 
         return $cricketGameSchedule;
     }
