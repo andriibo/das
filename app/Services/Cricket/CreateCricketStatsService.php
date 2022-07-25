@@ -39,9 +39,10 @@ class CreateCricketStatsService
                     $gamesConfirmed[] = $unconfirmedGame->id;
                 }
             }
-            if ($this->hasNewGameLogs($contest->id, $lastGameLogId, $cricketGameLogRepository) && !empty($gamesConfirmed)) {
-                $this->calculateContestService->handle($contest);
+            if (!$this->hasNewGameLogs($contest->id, $lastGameLogId, $cricketGameLogRepository) && empty($gamesConfirmed)) {
+                continue;
             }
+            $this->calculateContestService->handle($contest);
         }
     }
 
