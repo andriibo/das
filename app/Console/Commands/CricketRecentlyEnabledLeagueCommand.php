@@ -36,11 +36,15 @@ class CricketRecentlyEnabledLeagueCommand extends Command
                 continue;
             }
 
-            $createCricketTeamsPlayersUnitsService->handle($league);
-            $createCricketGameSchedulesService->handle($league);
-            $createCricketStatsService->handle($league);
-            $confirmHistoricalCricketGameSchedulesService->handle($league->id);
-            $this->recentlyEnableLeague($league);
+            try {
+                $createCricketTeamsPlayersUnitsService->handle($league);
+                $createCricketGameSchedulesService->handle($league);
+                $createCricketStatsService->handle($league);
+                $confirmHistoricalCricketGameSchedulesService->handle($league->id);
+                $this->recentlyEnableLeague($league);
+            } catch (\Throwable $exception) {
+                Log::channel('stderr')->error($exception->getMessage());
+            }
         }
         $this->info(Carbon::now() . ": Command {$this->signature} finished");
     }
