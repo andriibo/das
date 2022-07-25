@@ -13,18 +13,18 @@ class CreateCricketStatsService
     public function __construct(
         private readonly CalculateContestService $calculateContestService,
         private readonly CreateCricketGameStatsService $createCricketGameStatsService,
-        private readonly ConfirmCricketGameScheduleService $confirmCricketGameScheduleService
+        private readonly ConfirmCricketGameScheduleService $confirmCricketGameScheduleService,
+        private readonly ContestRepository $contestRepository,
+        private readonly CricketGameLogRepository $cricketGameLogRepository
     ) {
     }
 
     public function handle(League $league)
     {
-        $contestRepository = new ContestRepository();
-        $cricketGameLogRepository = new CricketGameLogRepository();
-        $runningContests = $contestRepository->getRunningContests($league->id);
+        $runningContests = $this->contestRepository->getRunningContests($league->id);
         $gamesLoaded = $gamesConfirmed = [];
         foreach ($runningContests as $contest) {
-            $lastGameLogId = $cricketGameLogRepository->getLastGameLogByContestId($contest->id)?->id ?? 0;
+            $lastGameLogId = $this->cricketGameLogRepository->getLastGameLogByContestId($contest->id)?->id ?? 0;
             $liveGames = $contest->liveCricketGameSchedules()->wherePivotNotIn('cricket_game_schedule.id', $gamesLoaded)->get();
             foreach ($liveGames as $liveGame) {
                 $this->createCricketGameStatsService->handle($liveGame);
@@ -39,16 +39,16 @@ class CreateCricketStatsService
                     $gamesConfirmed[] = $unconfirmedGame->id;
                 }
             }
-            if (!$this->hasNewGameLogs($contest->id, $lastGameLogId, $cricketGameLogRepository) && empty($gamesConfirmed)) {
+            if (!$this->hasNewGameLogs($contest->id, $lastGameLogId) && empty($gamesConfirmed)) {
                 continue;
             }
             $this->calculateContestService->handle($contest);
         }
     }
 
-    private function hasNewGameLogs(int $contestId, int $lastGameLogId, CricketGameLogRepository $cricketGameLogRepository): bool
+    private function hasNewGameLogs(int $contestId, int $lastGameLogId): bool
     {
-        $gameLog = $cricketGameLogRepository->getLastGameLogByContestId($contestId);
+        $gameLog = $this->cricketGameLogRepository->getLastGameLogByContestId($contestId);
 
         return $gameLog && $gameLog->id > $lastGameLogId;
     }
