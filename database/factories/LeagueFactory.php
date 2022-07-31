@@ -2,9 +2,9 @@
 
 namespace Database\Factories;
 
-use App\Enums\LeagueIsEnabledEnum;
+use App\Enums\IsEnabledEnum;
 use App\Enums\LeagueRecentlyEnabledEnum;
-use App\Enums\LeagueSportIdEnum;
+use App\Enums\SportIdEnum;
 use App\Models\League;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -38,8 +38,8 @@ class LeagueFactory extends Factory
             'alias' => $this->faker->unique()->text(5),
             'name' => $this->faker->title,
             'season' => $this->faker->year(),
-            'sport_id' => $this->faker->randomElement(LeagueSportIdEnum::values()),
-            'is_enabled' => $this->faker->randomElement(LeagueIsEnabledEnum::values()),
+            'sport_id' => $this->faker->randomElement(SportIdEnum::values()),
+            'is_enabled' => $this->faker->randomElement(IsEnabledEnum::values()),
             'date_updated' => $this->faker->dateTime(),
             'order' => 0,
             'config_id' => 1,

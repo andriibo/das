@@ -3,7 +3,7 @@
 namespace App\Mappers;
 
 use App\Dto\CricketUnitDto;
-use App\Enums\CricketUnitPositionEnum;
+use App\Enums\CricketUnit\PositionEnum;
 
 class CricketUnitMapper
 {
@@ -11,9 +11,11 @@ class CricketUnitMapper
     {
         $cricketTeamPlayerDto = new CricketUnitDto();
 
-        $cricketTeamPlayerDto->cricketTeamId = $data['team_id'];
-        $cricketTeamPlayerDto->cricketPlayerId = $data['player_id'];
-        $cricketTeamPlayerDto->position = CricketUnitPositionEnum::tryFrom($data['position']);
+        $cricketTeamPlayerDto->teamId = $data['team_id'];
+        $cricketTeamPlayerDto->playerId = $data['player_id'];
+        $cricketTeamPlayerDto->position = PositionEnum::tryFrom($data['position']);
+        $cricketTeamPlayerDto->fantasyPoints = $data['fantasy_points'] ?? null;
+        $cricketTeamPlayerDto->fantasyPointsPerGame = $data['fantasy_points_per_game'] ?? null;
 
         return $cricketTeamPlayerDto;
     }

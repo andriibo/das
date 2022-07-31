@@ -3,9 +3,8 @@
 namespace App\Mappers;
 
 use App\Dto\CricketPlayerDto;
-use App\Enums\CricketFeedTypeEnum;
-use App\Enums\CricketPlayerInjuryStatusEnum;
-use App\Enums\CricketPlayerSportEnum;
+use App\Enums\CricketPlayer\InjuryStatusEnum;
+use App\Enums\FeedTypeEnum;
 
 class CricketPlayerMapper
 {
@@ -13,13 +12,15 @@ class CricketPlayerMapper
     {
         $cricketPlayerDto = new CricketPlayerDto();
 
-        $cricketPlayerDto->feedType = CricketFeedTypeEnum::goalserve;
+        $name = isset($data['name']) ? html_entity_decode($data['name'], ENT_QUOTES | ENT_HTML5) : '';
+        $cricketPlayerDto->feedType = FeedTypeEnum::goalserve;
         $cricketPlayerDto->feedId = $data['id'];
-        $cricketPlayerDto->sport = CricketPlayerSportEnum::cricket;
-        $cricketPlayerDto->firstName = $data['name'] ?? '';
-        $cricketPlayerDto->lastName = $data['name'] ?? '';
+        $cricketPlayerDto->firstName = $name;
+        $cricketPlayerDto->lastName = $name;
         $cricketPlayerDto->photo = $data['photo'] ?? null;
-        $cricketPlayerDto->injuryStatus = CricketPlayerInjuryStatusEnum::normal;
+        $cricketPlayerDto->injuryStatus = InjuryStatusEnum::normal;
+        $cricketPlayerDto->salary = $data['salary'] ?? null;
+        $cricketPlayerDto->autoSalary = $data['auto_salary'] ?? null;
 
         return $cricketPlayerDto;
     }

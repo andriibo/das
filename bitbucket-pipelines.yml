@@ -5,51 +5,52 @@ definitions:
     - step: &deploy
         name: deploy
         script:
-          - pipe: atlassian/ssh-run:0.2.8
+          - pipe: atlassian/ssh-run:0.4.0
             variables:
               SSH_USER: $USER
-              SERVER: $SERVER
+              SERVER: $AWS_SERVER
+              MODE: 'command'
               COMMAND:
                 >-
-                cd /var/www/dfs/das &&
+                cd /var/www/${WORK_DIR:=dfs}/das &&
                 git fetch --prune &&
                 git checkout $BITBUCKET_BRANCH &&
                 git pull &&
-                docker-compose exec -T app composer install &&
-                docker-compose exec -T app composer check-build &&
-                docker-compose exec -T app php artisan down &&
-                docker-compose exec -T app php artisan cache:clear &&
-                docker-compose exec -T app php artisan config:cache &&
-                docker-compose exec -T app php artisan route:cache &&
-                docker-compose exec -T app php artisan migrate &&
-                docker-compose exec -T app php artisan up &&
-                docker-compose exec -T app php artisan test
+                cd ../docker &&
+                docker-compose exec -T das composer install &&
+                docker-compose exec -T das composer check-build &&
+                docker-compose exec -T das php artisan down &&
+                docker-compose exec -T das php artisan cache:clear &&
+                docker-compose exec -T das php artisan config:cache &&
+                docker-compose exec -T das php artisan route:cache &&
+                docker-compose exec -T das php artisan migrate &&
+                docker-compose exec -T das php artisan up &&
+                docker-compose exec -T das php artisan test
 pipelines:
-  pull-requests:
-    '**':
-      - step:
-          <<: *deploy
-          deployment: development
-          name: deploy to development
   custom:
-    deploy-to-dev:
+    deploy-to-dev-aws:
       - step:
           <<: *deploy
-          deployment: development
-          name: deploy to development
+          deployment: aws_development
+          name: deploy to aws development
+    deploy-to-stage-aws:
+      - step:
+          <<: *deploy
+          deployment: aws_stage
+          name: deploy to aws stage
   branches:
     develop:
       - step:
           <<: *deploy
-          deployment: development
-          name: deploy to dev server
+          deployment: aws_development
+          name: deploy to aws development
     master:
       - step:
           <<: *deploy
-          deployment: development
-          name: deploy to dev server
+          deployment: aws_development
+          name: deploy to aws development
     '{release/*}':
       - step:
           <<: *deploy
-          deployment: development
-          name: deploy to dev server
+          deployment: aws_development
+          name: deploy to aws development

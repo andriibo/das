@@ -9,8 +9,9 @@
         "archtechx/enums": "^0.2.0",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^9.2",
-        "laravel/sanctum": "^2.14.1",
-        "laravel/tinker": "^2.7"
+        "laravel/tinker": "^2.7",
+        "league/flysystem-aws-s3-v3": "^3.0",
+        "fantasysports/sportconfig": "1.0.3"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.12",
@@ -25,6 +26,12 @@
         "spatie/laravel-ignition": "^1.0",
         "vimeo/psalm": "^4.22"
     },
+    "repositories": [
+        {
+            "type": "git",
+            "url":  "https://bitbucket.org/WicketGamingTeam/sportconfig.git"
+        }
+    ],
     "autoload": {
         "psr-4": {
             "App\\": "app/",
@@ -52,7 +59,7 @@
             "@php artisan key:generate --ansi"
         ],
         "check-build": [
-            "psalm",
+            "psalm --no-cache",
             "php-cs-fixer fix --dry-run --verbose --using-cache=no --config=.php_cs.php"
         ]
     },
@@ -63,7 +70,7 @@
         "hooks": {
             "pre-commit": [
                 "php-cs-fixer fix --verbose --config=.php_cs.php",
-                "psalm"
+                "psalm --no-cache"
             ]
         },
         "grumphp": {

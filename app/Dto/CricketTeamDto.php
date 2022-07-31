@@ -2,7 +2,7 @@
 
 namespace App\Dto;
 
-use App\Enums\CricketFeedTypeEnum;
+use App\Enums\FeedTypeEnum;
 
 class CricketTeamDto
 {
@@ -14,5 +14,5 @@ class CricketTeamDto
     public string $alias;
     public ?int $countryId;
     public ?string $logo;
-    public CricketFeedTypeEnum $feedType;
+    public FeedTypeEnum $feedType;
 }

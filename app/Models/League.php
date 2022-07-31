@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Cricket\CricketTeam;
 use Barryvdh\LaravelIdeHelper\Eloquent;
 use Database\Factories\LeagueFactory;
 use Illuminate\Database\Eloquent\Builder;
@@ -72,5 +73,10 @@ class League extends Model
     public function cricketTeams(): HasMany
     {
         return $this->hasMany(CricketTeam::class, 'league_id');
+    }
+
+    public function isExistLeagueIdParam(): bool
+    {
+        return isset($this->params['league_id']) && $this->params['league_id'] !== '';
     }
 }

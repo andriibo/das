@@ -2,6 +2,13 @@
 
 namespace App\Console;
 
+use App\Console\Commands\CricketCommonCommand;
+use App\Console\Commands\CricketPlayerSalaryCommand;
+use App\Console\Commands\CricketRecentlyEnabledLeagueCommand;
+use App\Console\Commands\CricketStatsCommand;
+use App\Console\Commands\CricketUnconfirmedGameSchedulesCommand;
+use App\Console\Commands\CricketUnitPlayerFantasyPointsCommand;
+use App\Console\Commands\CricketUnitStatsTotalCommand;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -12,7 +19,19 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        $schedule->command('queue:work', ['--max-time' => 300])->withoutOverlapping();
+
+        $schedule->command(CricketCommonCommand::class)->dailyAt('00:00');
+
+        $schedule->command(CricketUnitStatsTotalCommand::class)->twiceDaily();
+        $schedule->command(CricketUnitPlayerFantasyPointsCommand::class)->twiceDaily();
+        $schedule->command(CricketPlayerSalaryCommand::class)->twiceDaily();
+
+        $schedule->command(CricketRecentlyEnabledLeagueCommand::class)->everyThirtyMinutes();
+
+        $schedule->command(CricketUnconfirmedGameSchedulesCommand::class)->hourly();
+
+        $schedule->command(CricketStatsCommand::class)->everyMinute();
     }
 
     /**

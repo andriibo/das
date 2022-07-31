@@ -2,16 +2,19 @@
 
 namespace App\Mappers;
 
-use App\Const\CricketGameScheduleConst;
 use App\Dto\CricketGameScheduleDto;
-use App\Enums\CricketFeedTypeEnum;
-use App\Enums\CricketGameScheduleStatusEnum;
-use App\Enums\CricketGameScheduleTypeEnum;
-use App\Services\CricketTeamService;
+use App\Enums\CricketGameSchedule\HasFinalBoxEnum;
+use App\Enums\CricketGameSchedule\IsFakeEnum;
+use App\Enums\CricketGameSchedule\IsSalaryAvailableEnum;
+use App\Enums\CricketGameSchedule\StatusEnum;
+use App\Enums\CricketGameSchedule\TypeEnum;
+use App\Enums\FeedTypeEnum;
+use App\Helpers\CricketGameScheduleHelper;
+use App\Repositories\Cricket\CricketTeamRepository;
 
 class CricketGameScheduleMapper
 {
-    public function __construct(private readonly CricketTeamService $cricketTeamService)
+    public function __construct(private readonly CricketTeamRepository $cricketTeamRepository)
     {
     }
 
@@ -21,26 +24,24 @@ class CricketGameScheduleMapper
 
         $cricketGameScheduleDto->feedId = $data['id'];
         $cricketGameScheduleDto->leagueId = $leagueId;
-        $cricketGameScheduleDto->homeCricketTeamId = $this->getCricketTeamIdByFeedId($data['localteam']['id']);
-        $cricketGameScheduleDto->awayCricketTeamId = $this->getCricketTeamIdByFeedId($data['visitorteam']['id']);
+        $cricketGameScheduleDto->homeTeamId = $this->getCricketTeamIdByFeedId($data['localteam']['id']);
+        $cricketGameScheduleDto->awayTeamId = $this->getCricketTeamIdByFeedId($data['visitorteam']['id']);
         $cricketGameScheduleDto->gameDate = $this->generateGameDate($data['date'], $data['time']);
-        $cricketGameScheduleDto->hasFinalBox = CricketGameScheduleConst::HAS_FINAL_BOX;
-        $cricketGameScheduleDto->isDataConfirmed = CricketGameScheduleConst::IS_DATA_CONFIRMED;
-        $cricketGameScheduleDto->homeCricketTeamScore = $data['localteam']['totalscore'];
-        $cricketGameScheduleDto->awayCricketTeamScore = $data['visitorteam']['totalscore'];
-        $cricketGameScheduleDto->dateUpdated = null;
-        $cricketGameScheduleDto->isFake = CricketGameScheduleConst::IS_NOT_FAKE;
-        $cricketGameScheduleDto->isSalaryAvailable = CricketGameScheduleConst::IS_NOT_SALARY_AVAILABLE;
-        $cricketGameScheduleDto->feedType = CricketFeedTypeEnum::goalserve;
-        $cricketGameScheduleDto->status = CricketGameScheduleStatusEnum::tryFrom($data['status']);
-        $cricketGameScheduleDto->type = CricketGameScheduleTypeEnum::tryFrom($data['type']);
+        $cricketGameScheduleDto->hasFinalBox = $this->hasFinalBox($data['status']);
+        $cricketGameScheduleDto->homeTeamScore = $data['localteam']['totalscore'];
+        $cricketGameScheduleDto->awayTeamScore = $data['visitorteam']['totalscore'];
+        $cricketGameScheduleDto->isFake = IsFakeEnum::no;
+        $cricketGameScheduleDto->isSalaryAvailable = IsSalaryAvailableEnum::no;
+        $cricketGameScheduleDto->feedType = FeedTypeEnum::goalserve;
+        $cricketGameScheduleDto->status = StatusEnum::tryFrom($data['status']);
+        $cricketGameScheduleDto->type = TypeEnum::tryFrom($data['type']);
 
         return $cricketGameScheduleDto;
     }
 
     private function getCricketTeamIdByFeedId(string $feedId): int
     {
-        return $this->cricketTeamService->getCricketTeamByFeedId($feedId)->id;
+        return $this->cricketTeamRepository->getByFeedId($feedId)->id;
     }
 
     private function generateGameDate(string $date, string $time): string
@@ -50,5 +51,12 @@ class CricketGameScheduleMapper
         $dateTime->setTime($hours ?? 0, $minutes ?? 0);
 
         return $dateTime->format('Y-m-d H:i:s');
+    }
+
+    private function hasFinalBox(string $status): HasFinalBoxEnum
+    {
+        return CricketGameScheduleHelper::isStatusLive($status)
+            ? HasFinalBoxEnum::yes
+            : HasFinalBoxEnum::no;
     }
 }

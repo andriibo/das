@@ -13,10 +13,9 @@ class EndpointTest extends TestCase
     /**
      * A basic test example.
      */
-    public function testTheApplicationReturnsASuccessfulResponse()
+    public function testTheApplicationReturnsASuccessfulResponse(): void
     {
         $response = $this->get('/');
-
-        $response->assertStatus(200);
+        $response->assertOk();
     }
 }

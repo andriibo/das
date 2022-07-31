@@ -8,7 +8,7 @@ enum LeagueRecentlyEnabledEnum: int
 {
     use Values;
 
-    case recentlyNotEnabled = 0;
+    case no = 0;
 
-    case recentlyEnabled = 1;
+    case yes = 1;
 }
