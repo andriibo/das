@@ -4,11 +4,13 @@ namespace App\Services\Cricket;
 
 use App\Clients\GoalserveClient;
 use App\Exceptions\CricketGoalserveServiceException;
+use App\Services\SendSlackNotificationService;
 
 class CricketGoalserveService
 {
     public function __construct(
         private readonly GoalserveClient $goalserveClient,
+        private readonly SendSlackNotificationService $sendSlackNotificationService,
     ) {
     }
 
@@ -22,7 +24,10 @@ class CricketGoalserveService
 
             return $data['squads']['category']['team'] ?? [];
         } catch (\Throwable $exception) {
-            throw new CricketGoalserveServiceException($exception->getMessage(), $exception->getCode());
+            $message = $exception->getMessage();
+            $this->sendSlackNotificationService->handle($message, __METHOD__, ['leagueId' => $leagueId]);
+
+            throw new CricketGoalserveServiceException($message, $exception->getCode());
         }
     }
 
@@ -36,7 +41,10 @@ class CricketGoalserveService
 
             return $data['players']['player'] ?? [];
         } catch (\Throwable $exception) {
-            throw new CricketGoalserveServiceException($exception->getMessage(), $exception->getCode());
+            $message = $exception->getMessage();
+            $this->sendSlackNotificationService->handle($message, __METHOD__, ['playerId' => $playerId]);
+
+            throw new CricketGoalserveServiceException($message, $exception->getCode());
         }
     }
 
@@ -50,7 +58,10 @@ class CricketGoalserveService
 
             return $data['fixtures']['category']['match'] ?? [];
         } catch (\Throwable $exception) {
-            throw new CricketGoalserveServiceException($exception->getMessage(), $exception->getCode());
+            $message = $exception->getMessage();
+            $this->sendSlackNotificationService->handle($message, __METHOD__, ['leagueId' => $leagueId]);
+
+            throw new CricketGoalserveServiceException($message, $exception->getCode());
         }
     }
 
@@ -74,7 +85,18 @@ class CricketGoalserveService
 
             return [];
         } catch (\Throwable $exception) {
-            throw new CricketGoalserveServiceException($exception->getMessage(), $exception->getCode());
+            $message = $exception->getMessage();
+            $this->sendSlackNotificationService->handle(
+                $message,
+                __METHOD__,
+                [
+                    'date' => $date,
+                    'leagueFeedId' => $leagueFeedId,
+                    'gameScheduleFeedId' => $gameScheduleFeedId,
+                ]
+            );
+
+            throw new CricketGoalserveServiceException($message, $exception->getCode());
         }
     }
 }

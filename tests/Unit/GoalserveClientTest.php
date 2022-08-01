@@ -4,6 +4,7 @@ namespace Tests\Unit;
 
 use App\Clients\GoalserveClient;
 use App\Services\Cricket\CricketGoalserveService;
+use App\Services\SendSlackNotificationService;
 use Illuminate\Support\Facades\File;
 use Tests\TestCase;
 
@@ -22,16 +23,19 @@ class GoalserveClientTest extends TestCase
     public function testGoalserveGetCricketTeams(): void
     {
         $mockGoalserveClient = $this->mock(GoalserveClient::class);
+        $mockSendSlackNotificationService = $this->mock(SendSlackNotificationService::class);
         $mockResponse = json_decode(File::get(base_path('tests/stubs/cricket.teams.json')), true);
         $mockGoalserveClient->shouldReceive('getCricketTeams')
             ->with($this->leagueId)
             ->andReturn($mockResponse)
         ;
+        $mockSendSlackNotificationService->shouldReceive('handle');
 
         $this->assertInstanceOf(GoalserveClient::class, $mockGoalserveClient);
+        $this->assertInstanceOf(SendSlackNotificationService::class, $mockSendSlackNotificationService);
 
         /* @var $cricketGoalserveService CricketGoalserveService */
-        $cricketGoalserveService = new CricketGoalserveService($mockGoalserveClient);
+        $cricketGoalserveService = new CricketGoalserveService($mockGoalserveClient, $mockSendSlackNotificationService);
         $response = $cricketGoalserveService->getGoalserveCricketTeams($this->leagueId);
 
         $this->assertIsNotObject($response);
@@ -52,16 +56,20 @@ class GoalserveClientTest extends TestCase
     public function testGoalserveGetCricketPlayer(): void
     {
         $mockGoalserveClient = $this->mock(GoalserveClient::class);
+        $mockSendSlackNotificationService = $this->mock(SendSlackNotificationService::class);
         $mockResponse = json_decode(File::get(base_path('tests/stubs/cricket.player.json')), true);
         $mockGoalserveClient->shouldReceive('getCricketPlayer')
             ->with($this->playerId)
             ->andReturn($mockResponse)
         ;
 
+        $mockSendSlackNotificationService->shouldReceive('handle');
+
         $this->assertInstanceOf(GoalserveClient::class, $mockGoalserveClient);
+        $this->assertInstanceOf(SendSlackNotificationService::class, $mockSendSlackNotificationService);
 
         /* @var $cricketGoalserveService CricketGoalserveService */
-        $cricketGoalserveService = new CricketGoalserveService($mockGoalserveClient);
+        $cricketGoalserveService = new CricketGoalserveService($mockGoalserveClient, $mockSendSlackNotificationService);
         $response = $cricketGoalserveService->getGoalserveCricketPlayer($this->playerId);
 
         $this->assertIsNotObject($response);
@@ -74,16 +82,20 @@ class GoalserveClientTest extends TestCase
     public function testGoalserveGetCricketMatches(): void
     {
         $mockGoalserveClient = $this->mock(GoalserveClient::class);
+        $mockSendSlackNotificationService = $this->mock(SendSlackNotificationService::class);
         $mockResponse = json_decode(File::get(base_path('tests/stubs/cricket.matches.json')), true);
         $mockGoalserveClient->shouldReceive('getCricketMatches')
             ->with($this->leagueId)
             ->andReturn($mockResponse)
         ;
 
+        $mockSendSlackNotificationService->shouldReceive('handle');
+
         $this->assertInstanceOf(GoalserveClient::class, $mockGoalserveClient);
+        $this->assertInstanceOf(SendSlackNotificationService::class, $mockSendSlackNotificationService);
 
         /* @var $cricketGoalserveService CricketGoalserveService */
-        $cricketGoalserveService = new CricketGoalserveService($mockGoalserveClient);
+        $cricketGoalserveService = new CricketGoalserveService($mockGoalserveClient, $mockSendSlackNotificationService);
         $response = $cricketGoalserveService->getGoalserveCricketMatches($this->leagueId);
 
         $this->assertIsNotObject($response);
@@ -108,16 +120,20 @@ class GoalserveClientTest extends TestCase
     public function testGoalserveGetGameStats(): void
     {
         $mockGoalserveClient = $this->mock(GoalserveClient::class);
+        $mockSendSlackNotificationService = $this->mock(SendSlackNotificationService::class);
         $mockResponse = json_decode(File::get(base_path('tests/stubs/cricket.game.stats.json')), true);
         $mockGoalserveClient->shouldReceive('getGameStats')
             ->with($this->gameDate)
             ->andReturn($mockResponse)
         ;
 
+        $mockSendSlackNotificationService->shouldReceive('handle');
+
         $this->assertInstanceOf(GoalserveClient::class, $mockGoalserveClient);
+        $this->assertInstanceOf(SendSlackNotificationService::class, $mockSendSlackNotificationService);
 
         /* @var $cricketGoalserveService CricketGoalserveService */
-        $cricketGoalserveService = new CricketGoalserveService($mockGoalserveClient);
+        $cricketGoalserveService = new CricketGoalserveService($mockGoalserveClient, $mockSendSlackNotificationService);
         $response = $cricketGoalserveService->getGoalserveGameStats($this->gameDate, $this->leagueFeedId, $this->gameScheduleFeedId);
 
         $this->assertIsNotObject($response);
