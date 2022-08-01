@@ -23,7 +23,6 @@ definitions:
                 docker-compose exec -T das php artisan cache:clear &&
                 docker-compose exec -T das php artisan config:cache &&
                 docker-compose exec -T das php artisan route:cache &&
-                docker-compose exec -T das php artisan migrate &&
                 docker-compose exec -T das php artisan up &&
                 docker-compose exec -T das php artisan test
 pipelines:
