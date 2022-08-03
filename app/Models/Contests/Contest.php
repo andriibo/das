@@ -8,6 +8,7 @@ use App\Enums\SportIdEnum;
 use App\Models\Cricket\CricketGameSchedule;
 use App\Models\League;
 use Barryvdh\LaravelIdeHelper\Eloquent;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -230,7 +231,7 @@ class Contest extends Model
             'contest_id',
             'game_id'
         )
-            ->where('game_date', '<=', date('Y-m-d H:i:s'))
+            ->where('game_date', '<=', Carbon::now())
             ->where('has_final_box', HasFinalBoxEnum::no)
             ->wherePivot('sport_id', SportIdEnum::cricket)
         ;
