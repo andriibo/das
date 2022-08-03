@@ -6,9 +6,8 @@ use Spatie\SlackAlerts\Facades\SlackAlert;
 
 class SendSlackNotificationService
 {
-    public function handle(string $message, string $method, array $params): void
+    public function handle(string $message, string $location): void
     {
-        $located = 'Called at ' . $method . ' with params - ' . http_build_query($params, '', ', ');
-        SlackAlert::message($located . '. ' . $message);
+        SlackAlert::message($location . '. ' . $message);
     }
 }
