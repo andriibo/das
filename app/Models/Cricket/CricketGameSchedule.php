@@ -109,7 +109,7 @@ class CricketGameSchedule extends Model
 
     public function contestGames(): HasMany
     {
-        return $this->hasMany(ContestGame::class, 'game_id');
+        return $this->hasMany(ContestGame::class, 'game_schedule_id');
     }
 
     public function hasFinalBox(): bool
