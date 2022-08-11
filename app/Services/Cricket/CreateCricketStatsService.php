@@ -22,9 +22,11 @@ class CreateCricketStatsService
     public function handle(League $league)
     {
         $runningContests = $this->contestRepository->getRunningContests($league->id);
-        $gamesLoaded = $gamesConfirmed = [];
+        $contestLastGameLogs = $gamesLoaded = $gamesConfirmed = [];
         foreach ($runningContests as $contest) {
-            $lastGameLogId = $this->cricketGameLogRepository->getLastGameLogByContestId($contest->id)?->id ?? 0;
+            $contestLastGameLogs[$contest->id] = $this->cricketGameLogRepository->getLastGameLogByContestId($contest->id)?->id ?? 0;
+        }
+        foreach ($runningContests as $contest) {
             $liveGames = $contest->liveCricketGameSchedules()->wherePivotNotIn('cricket_game_schedule.id', $gamesLoaded)->get();
             foreach ($liveGames as $liveGame) {
                 $this->createCricketGameStatsService->handle($liveGame);
@@ -39,6 +41,10 @@ class CreateCricketStatsService
                     $gamesConfirmed[] = $unconfirmedGame->id;
                 }
             }
+        }
+
+        foreach ($runningContests as $contest) {
+            $lastGameLogId = $contestLastGameLogs[$contest->id];
             if (!$this->hasNewGameLogs($contest->id, $lastGameLogId) && empty($gamesConfirmed)) {
                 continue;
             }
