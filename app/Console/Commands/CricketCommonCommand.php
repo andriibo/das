@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Enums\SportIdEnum;
-use App\Events\Cricket\CricketCommandSendExceptionEvent;
+use App\Events\SendExceptionEvent;
 use App\Repositories\LeagueRepository;
 use App\Services\Cricket\CreateCricketGameSchedulesService;
 use App\Services\Cricket\CreateCricketTeamsPlayersUnitsService;
@@ -35,7 +35,7 @@ class CricketCommonCommand extends Command
                 $createCricketTeamsPlayersUnitsService->handle($league);
                 $createCricketGameSchedulesService->handle($league);
             } catch (\Throwable $exception) {
-                event(new CricketCommandSendExceptionEvent($exception));
+                event(new SendExceptionEvent($exception));
             }
         }
         $this->info(Carbon::now() . ": Command {$this->signature} finished");

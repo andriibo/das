@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Events\Cricket;
+namespace App\Events;
 
 use Illuminate\Foundation\Events\Dispatchable;
 
-class CricketCommandSendExceptionEvent
+class SendExceptionEvent
 {
     use Dispatchable;
 

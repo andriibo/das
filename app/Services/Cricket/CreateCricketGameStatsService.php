@@ -4,7 +4,7 @@ namespace App\Services\Cricket;
 
 use App\Dto\CricketGameScheduleDto;
 use App\Enums\CricketGameSchedule\HasFinalBoxEnum;
-use App\Events\Cricket\CricketCommandSendExceptionEvent;
+use App\Events\SendExceptionEvent;
 use App\Helpers\CricketGameScheduleHelper;
 use App\Mappers\CricketGameScheduleMapper;
 use App\Mappers\CricketGameStatsMapper;
@@ -42,7 +42,7 @@ class CreateCricketGameStatsService
             $cricketGameStats = $this->storeCricketGameStatsService->handle($cricketGameStatsDto);
             $this->createCricketUnitStatsService->handle($cricketGameStats);
         } catch (\Throwable $exception) {
-            event(new CricketCommandSendExceptionEvent($exception));
+            event(new SendExceptionEvent($exception));
         }
     }
 
