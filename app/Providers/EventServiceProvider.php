@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Events\ContestUnitsUpdatedEvent;
+use App\Events\Cricket\CricketCommandSendExceptionEvent;
 use App\Events\Cricket\CricketGameLogSavedEvent;
 use App\Events\Cricket\CricketGameScheduleSavedEvent;
 use App\Events\Cricket\CricketGameStatsSavedEvent;
@@ -12,6 +13,7 @@ use App\Events\Cricket\CricketUnitSavedEvent;
 use App\Events\Cricket\CricketUnitStatsSavedEvent;
 use App\Events\GameLogsUpdatedEvent;
 use App\Listeners\ContestUnitsUpdatedListener;
+use App\Listeners\Cricket\CricketCommandSendExceptionListener;
 use App\Listeners\Cricket\CricketGameLogSavedListener;
 use App\Listeners\Cricket\CricketGameScheduleSavedListener;
 use App\Listeners\Cricket\CricketGameStatsSavedListener;
@@ -56,6 +58,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         GameLogsUpdatedEvent::class => [
             GameLogsUpdatedListener::class,
+        ],
+        CricketCommandSendExceptionEvent::class => [
+            CricketCommandSendExceptionListener::class,
         ],
     ];
 

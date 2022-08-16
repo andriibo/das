@@ -2,6 +2,7 @@
 
 namespace App\Services\Cricket;
 
+use App\Events\Cricket\CricketCommandSendExceptionEvent;
 use App\Mappers\CricketTeamMapper;
 use App\Mappers\CricketUnitMapper;
 use App\Models\League;
@@ -29,7 +30,7 @@ class CreateCricketTeamsPlayersUnitsService
             try {
                 $this->parseCricketTeam($team, $league->id);
             } catch (\Throwable $exception) {
-                Log::channel('stderr')->error($exception->getMessage());
+                event(new CricketCommandSendExceptionEvent($exception));
             }
         }
     }
@@ -64,7 +65,7 @@ class CreateCricketTeamsPlayersUnitsService
                 $cricketUnit = $this->createCricketUnitService->handle($cricketUnitDto);
                 $existCricketUnitIds[] = $cricketUnit->id;
             } catch (\Throwable $exception) {
-                Log::channel('stderr')->error($exception->getMessage());
+                event(new CricketCommandSendExceptionEvent($exception));
             }
         }
 

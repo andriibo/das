@@ -2,9 +2,9 @@
 
 namespace App\Services\Cricket;
 
+use App\Events\Cricket\CricketCommandSendExceptionEvent;
 use App\Mappers\CricketGameScheduleMapper;
 use App\Models\League;
-use Illuminate\Support\Facades\Log;
 
 class CreateCricketGameSchedulesService
 {
@@ -29,7 +29,7 @@ class CreateCricketGameSchedulesService
                 $this->confirmCricketGameScheduleService->handle($cricketGameSchedule);
             }
         } catch (\Throwable $exception) {
-            Log::channel('stderr')->error($exception->getMessage());
+            event(new CricketCommandSendExceptionEvent($exception));
         }
     }
 }
