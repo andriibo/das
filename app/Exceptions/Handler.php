@@ -2,7 +2,9 @@
 
 namespace App\Exceptions;
 
+use App\Events\Cricket\CricketCommandSendExceptionEvent;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Response;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -33,5 +35,12 @@ class Handler extends ExceptionHandler
     {
         $this->reportable(function (Throwable $e) {
         });
+    }
+
+    public function report(Throwable $e)
+    {
+        if ($e->getCode() === Response::HTTP_INTERNAL_SERVER_ERROR) {
+            event(new CricketCommandSendExceptionEvent($e));
+        }
     }
 }

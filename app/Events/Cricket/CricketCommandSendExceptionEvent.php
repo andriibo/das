@@ -8,7 +8,7 @@ class CricketCommandSendExceptionEvent
 {
     use Dispatchable;
 
-    public function __construct(public \Exception $exception)
+    public function __construct(public \Throwable $exception)
     {
     }
 }
