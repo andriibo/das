@@ -2,7 +2,7 @@
 
 namespace App\Services\Cricket;
 
-use App\Events\SendExceptionEvent;
+use App\Events\NotifyInSlackEvent;
 use App\Mappers\CricketGameScheduleMapper;
 use App\Models\League;
 
@@ -29,7 +29,7 @@ class CreateCricketGameSchedulesService
                 $this->confirmCricketGameScheduleService->handle($cricketGameSchedule);
             }
         } catch (\Throwable $exception) {
-            event(new SendExceptionEvent($exception));
+            event(new NotifyInSlackEvent($exception));
         }
     }
 }

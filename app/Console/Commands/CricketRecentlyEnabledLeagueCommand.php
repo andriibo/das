@@ -4,7 +4,7 @@ namespace App\Console\Commands;
 
 use App\Enums\LeagueRecentlyEnabledEnum;
 use App\Enums\SportIdEnum;
-use App\Events\SendExceptionEvent;
+use App\Events\NotifyInSlackEvent;
 use App\Models\League;
 use App\Repositories\LeagueRepository;
 use App\Services\Cricket\ConfirmHistoricalCricketGameSchedulesService;
@@ -44,7 +44,7 @@ class CricketRecentlyEnabledLeagueCommand extends Command
                 $confirmHistoricalCricketGameSchedulesService->handle($league->id);
                 $this->recentlyEnableLeague($league);
             } catch (\Throwable $exception) {
-                event(new SendExceptionEvent($exception));
+                event(new NotifyInSlackEvent($exception));
             }
         }
         $this->info(Carbon::now() . ": Command {$this->signature} finished");

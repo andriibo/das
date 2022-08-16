@@ -3,7 +3,7 @@
 namespace App\Services\Cricket;
 
 use App\Enums\SportIdEnum;
-use App\Events\SendExceptionEvent;
+use App\Events\NotifyInSlackEvent;
 use App\Mappers\CricketUnitStatsMapper;
 use App\Models\Cricket\CricketGameStats;
 use App\Repositories\ActionPointRepository;
@@ -47,7 +47,7 @@ class CreateCricketUnitStatsService
                 $this->parseInning($inning, $cricketGameStats->game_schedule_id, $teamId);
             }
         } catch (\Throwable $exception) {
-            event(new SendExceptionEvent($exception));
+            event(new NotifyInSlackEvent($exception));
         }
     }
 

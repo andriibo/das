@@ -8,7 +8,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 
-class SendExceptionToSlackJob implements ShouldQueue
+class NotifyInSlackJob implements ShouldQueue
 {
     use Dispatchable;
     use InteractsWithQueue;

@@ -2,7 +2,7 @@
 
 namespace App\Exceptions;
 
-use App\Events\SendExceptionEvent;
+use App\Events\NotifyInSlackEvent;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\Response;
 use Throwable;
@@ -40,7 +40,7 @@ class Handler extends ExceptionHandler
     public function report(Throwable $e)
     {
         if ($e->getCode() === Response::HTTP_INTERNAL_SERVER_ERROR) {
-            event(new SendExceptionEvent($e));
+            event(new NotifyInSlackEvent($e));
         }
     }
 }
