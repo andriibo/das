@@ -2,9 +2,9 @@
 
 namespace App\Exceptions;
 
-use App\Services\SendSlackNotificationService;
-use Illuminate\Contracts\Container\Container;
+use App\Events\NotifyInSlackEvent;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Response;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -28,13 +28,6 @@ class Handler extends ExceptionHandler
         'password_confirmation',
     ];
 
-    public function __construct(
-        Container $container,
-        private readonly SendSlackNotificationService $sendSlackNotificationService
-    ) {
-        parent::__construct($container);
-    }
-
     /**
      * Register the exception handling callbacks for the application.
      */
@@ -46,9 +39,8 @@ class Handler extends ExceptionHandler
 
     public function report(Throwable $e)
     {
-        if ($e instanceof CricketGoalserveServiceException) {
-            $location = $e->getFile() . ':' . $e->getLine();
-            $this->sendSlackNotificationService->handle($e->getMessage(), $location);
+        if ($e->getCode() === Response::HTTP_INTERNAL_SERVER_ERROR) {
+            event(new NotifyInSlackEvent($e));
         }
     }
 }
