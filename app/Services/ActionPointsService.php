@@ -13,7 +13,7 @@ class ActionPointsService
 
     public function getMappedActionPoints(): array
     {
-        return $this->actionPointRepository->getListBySportId(SportIdEnum::cricket)->mapWithKeys(function ($item, $key) {
+        return $this->actionPointRepository->getListBySportId(SportIdEnum::cricket)->mapWithKeys(function ($item) {
             return [$item['name'] => $item->values];
         })->toArray();
     }

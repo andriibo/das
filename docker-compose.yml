@@ -1,7 +1,7 @@
 version: "3.7"
 services:
   app:
-    build: ./docker/php
+    build: ./docker
     restart: always
     working_dir: /var/www/html
     command: cron -f

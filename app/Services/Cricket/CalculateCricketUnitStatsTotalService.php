@@ -5,11 +5,13 @@ namespace App\Services\Cricket;
 use App\Helpers\ArrayHelper;
 use App\Mappers\CricketUnitStatsMapper;
 use App\Models\Cricket\CricketUnit;
+use App\Repositories\Cricket\CricketUnitStatsRepository;
 
 class CalculateCricketUnitStatsTotalService
 {
     public function __construct(
-        private readonly CricketUnitStatsService $cricketUnitStatsService,
+        private readonly StoreCricketUnitStatsService $storeCricketUnitStatsService,
+        private readonly CricketUnitStatsRepository $cricketUnitStatsRepository,
         private readonly CricketUnitStatsMapper $cricketUnitStatsMapper
     ) {
     }
@@ -17,10 +19,10 @@ class CalculateCricketUnitStatsTotalService
     public function handle(CricketUnit $cricketUnit): void
     {
         $statsTotal = [];
-        foreach ($cricketUnit->unitStats as $unitStat) {
-            $statsTotal = ArrayHelper::sum($statsTotal, $unitStat->stats);
+        $cricketUnitStats = $this->cricketUnitStatsRepository->getRealGameUnitStatsByUnitId($cricketUnit->id);
+        foreach ($cricketUnitStats as $cricketUnitStat) {
+            $statsTotal = ArrayHelper::sum($statsTotal, $cricketUnitStat->stats);
         }
-
         $this->saveTotalUnitStats($cricketUnit, $statsTotal);
     }
 
@@ -34,6 +36,6 @@ class CalculateCricketUnitStatsTotalService
             'stats' => $statsTotal,
         ]);
 
-        $this->cricketUnitStatsService->storeCricketUnitStats($cricketUnitStatsDto);
+        $this->storeCricketUnitStatsService->handle($cricketUnitStatsDto);
     }
 }

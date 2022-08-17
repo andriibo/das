@@ -9,6 +9,7 @@ use App\Enums\CricketGameSchedule\IsSalaryAvailableEnum;
 use App\Enums\CricketGameSchedule\StatusEnum;
 use App\Enums\CricketGameSchedule\TypeEnum;
 use App\Enums\FeedTypeEnum;
+use App\Helpers\CricketGameScheduleHelper;
 use App\Repositories\Cricket\CricketTeamRepository;
 
 class CricketGameScheduleMapper
@@ -54,7 +55,7 @@ class CricketGameScheduleMapper
 
     private function hasFinalBox(string $status): HasFinalBoxEnum
     {
-        return StatusEnum::finished->value === $status
+        return CricketGameScheduleHelper::isStatusLive($status)
             ? HasFinalBoxEnum::yes
             : HasFinalBoxEnum::no;
     }

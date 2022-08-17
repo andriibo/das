@@ -2,8 +2,8 @@
 
 namespace App\Http\Resources;
 
-use App\Factories\SportConfigFactory;
 use App\Helpers\FileHelper;
+use FantasySports\SportConfig\Factories\SportConfigFactory;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ContestUnitResource extends JsonResource

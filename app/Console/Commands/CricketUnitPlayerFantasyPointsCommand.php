@@ -4,7 +4,7 @@ namespace App\Console\Commands;
 
 use App\Repositories\Cricket\CricketPlayerRepository;
 use App\Services\ActionPointsService;
-use App\Services\UpdateCricketPlayerFantasyPointsService;
+use App\Services\Cricket\UpdateCricketPlayerFantasyPointsService;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 
