@@ -16,7 +16,7 @@ class SoccerGameScheduleRepository
     public function getGameSchedulesByContestId(int $contestId): Collection
     {
         return SoccerGameSchedule::query()
-            ->join('contest_game', 'game_schedule.id', '=', 'contest_game.game_schedule_id')
+            ->join('contest_game', 'soccer_game_schedule.id', '=', 'contest_game.game_schedule_id')
             ->where('contest_game.contest_id', $contestId)
             ->where('contest_game.sport_id', SportIdEnum::soccer)
             ->get()
