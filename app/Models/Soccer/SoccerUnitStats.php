@@ -41,7 +41,7 @@ class SoccerUnitStats extends Model
 {
     use HasFactory;
 
-    protected $table = 'unit_stats';
+    protected $table = 'soccer_unit_stats';
 
     protected $fillable = [
         'game_id',
