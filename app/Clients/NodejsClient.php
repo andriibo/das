@@ -9,11 +9,17 @@ use GuzzleHttp\RequestOptions;
 
 class NodejsClient
 {
-    private const CONTEST_UPDATED = 'contest-update';
-    private const CONTEST_GAME_LOG_UPDATED = 'game-log-update';
-    private const CONTEST_GAMES_UPDATED = 'game-update';
-    private const CONTEST_USERS_UPDATED = 'users-update';
-    private const CONTEST_UNITS_UPDATED = 'units-update';
+    private const CONTESTS_ENDPOINT = '/contests';
+    private const CONTEST_GAME_LOGS_ENDPOINT = '/contests/%s/game-logs';
+    private const CONTEST_PLAYERS_ENDPOINT = '/contests/%s/players';
+    private const USER_BALANCE_ENDPOINT = '/users/%s/balance';
+    private const USER_TRANSACTIONS_ENDPOINT = '/users/%s/transactions';
+
+    private const CONTESTS_UPDATED_TYPE = 'contestsUpdated';
+    private const CONTEST_GAME_LOGS_UPDATED_TYPE = 'contestGameLogsUpdated';
+    private const CONTEST_PLAYERS_UPDATED_TYPE = 'contestPlayersUpdated';
+    private const USER_BALANCE_UPDATED_TYPE = 'userBalanceUpdated';
+    private const USER_TRANSACTIONS_UPDATED_TYPE = 'userTransactionsUpdated';
 
     private ?string $apiUrl;
     private Client $client;
@@ -26,20 +32,9 @@ class NodejsClient
 
     public function sendContestUpdatePush(array $data): void
     {
-        $url = $this->apiUrl . '/contest';
+        $url = $this->apiUrl . self::CONTESTS_ENDPOINT;
         $formParams = [
-            'type' => self::CONTEST_UPDATED,
-            'payload' => $data,
-        ];
-
-        $this->sendRequest($url, $formParams);
-    }
-
-    public function sendGameLogsUpdatePush(array $data, int $contestId): void
-    {
-        $url = $this->apiUrl . '/contest/' . $contestId;
-        $formParams = [
-            'type' => self::CONTEST_GAME_LOG_UPDATED,
+            'type' => self::CONTESTS_UPDATED_TYPE,
             'payload' => $data,
         ];
 
@@ -48,31 +43,42 @@ class NodejsClient
 
     public function sendContestUnitsUpdatePush(array $data, int $contestId): void
     {
-        $url = $this->apiUrl . '/contest/' . $contestId;
+        $url = sprintf($this->apiUrl . self::CONTEST_PLAYERS_ENDPOINT, $contestId);
         $formParams = [
-            'type' => self::CONTEST_UNITS_UPDATED,
+            'type' => self::CONTEST_PLAYERS_UPDATED_TYPE,
             'payload' => $data,
         ];
 
         $this->sendRequest($url, $formParams);
     }
 
-    public function sendContestUsersUpdatePush(array $data, int $contestId): void
+    public function sendGameLogsUpdatePush(array $data, int $contestId): void
     {
-        $url = $this->apiUrl . '/contest/' . $contestId;
+        $url = sprintf($this->apiUrl . self::CONTEST_GAME_LOGS_ENDPOINT, $contestId);
         $formParams = [
-            'type' => self::CONTEST_USERS_UPDATED,
+            'type' => self::CONTEST_GAME_LOGS_UPDATED_TYPE,
             'payload' => $data,
         ];
 
         $this->sendRequest($url, $formParams);
     }
 
-    public function sendGameSchedulesUpdatePush(array $data, int $contestId): void
+    public function sendUserBalanceUpdatePush(array $data, int $userId): void
     {
-        $url = $this->apiUrl . '/contest/' . $contestId;
+        $url = sprintf($this->apiUrl . self::USER_BALANCE_ENDPOINT, $userId);
         $formParams = [
-            'type' => self::CONTEST_GAMES_UPDATED,
+            'type' => self::USER_BALANCE_UPDATED_TYPE,
+            'payload' => $data,
+        ];
+
+        $this->sendRequest($url, $formParams);
+    }
+
+    public function sendUserTransactionCreatedPush(array $data, int $userId): void
+    {
+        $url = sprintf($this->apiUrl . self::USER_TRANSACTIONS_ENDPOINT, $userId);
+        $formParams = [
+            'type' => self::USER_TRANSACTIONS_UPDATED_TYPE,
             'payload' => $data,
         ];
 

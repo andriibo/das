@@ -19,6 +19,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
+        $schedule->command('queue:work', ['--max-time' => 300])->withoutOverlapping();
+
         $schedule->command(CricketCommonCommand::class)->dailyAt('00:00');
 
         $schedule->command(CricketUnitStatsTotalCommand::class)->twiceDaily();

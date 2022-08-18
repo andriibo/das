@@ -43,6 +43,16 @@ class CricketUnitStatsRepository
         ;
     }
 
+    public function getUnitStats(int $gameScheduleId, int $unitId, int $teamId): ?CricketUnitStats
+    {
+        return CricketUnitStats::query()
+            ->where(['game_schedule_id' => $gameScheduleId])
+            ->where(['unit_id' => $unitId])
+            ->where(['team_id' => $teamId])
+            ->first()
+            ;
+    }
+
     /**
      * @return Collection|CricketUnitStats[]
      */

@@ -10,8 +10,10 @@ class CreateCricketGameSchedulesService
 {
     public function __construct(
         private readonly CricketGoalserveService $cricketGoalserveService,
-        private readonly CricketGameScheduleService $cricketGameScheduleService,
-        private readonly CricketGameScheduleMapper $cricketGameScheduleMapper
+        private readonly CricketGameScheduleMapper $cricketGameScheduleMapper,
+        private readonly ConfirmCricketGameScheduleService $confirmCricketGameScheduleService,
+        private readonly CreateCricketGameScheduleService $createCricketGameScheduleService,
+        private readonly UpdateCricketFakeGameSchedulesService $updateCricketFakeGameSchedulesService
     ) {
     }
 
@@ -21,19 +23,11 @@ class CreateCricketGameSchedulesService
             $leagueId = $league->params['league_id'];
             $matches = $this->cricketGoalserveService->getGoalserveCricketMatches($leagueId);
             foreach ($matches as $match) {
-                $this->parseMatch($match, $league->id);
+                $cricketGameScheduleDto = $this->cricketGameScheduleMapper->map($match, $league->id);
+                $cricketGameSchedule = $this->createCricketGameScheduleService->handle($cricketGameScheduleDto);
+                $this->updateCricketFakeGameSchedulesService->handle($cricketGameScheduleDto);
+                $this->confirmCricketGameScheduleService->handle($cricketGameSchedule);
             }
-        } catch (\Throwable $exception) {
-            Log::channel('stderr')->error($exception->getMessage());
-        }
-    }
-
-    private function parseMatch(array $data, int $leagueId): void
-    {
-        try {
-            $cricketGameScheduleDto = $this->cricketGameScheduleMapper->map($data, $leagueId);
-            $cricketGameSchedule = $this->cricketGameScheduleService->storeCricketGameSchedule($cricketGameScheduleDto);
-            $this->cricketGameScheduleService->updateDataConfirmed($cricketGameSchedule);
         } catch (\Throwable $exception) {
             Log::channel('stderr')->error($exception->getMessage());
         }

@@ -12,6 +12,7 @@ use App\Services\Cricket\CreateCricketStatsService;
 use App\Services\Cricket\CreateCricketTeamsPlayersUnitsService;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
 
 class CricketRecentlyEnabledLeagueCommand extends Command
 {
@@ -29,11 +30,21 @@ class CricketRecentlyEnabledLeagueCommand extends Command
         $this->info(Carbon::now() . ": Command {$this->signature} started");
         $leagues = $leagueRepository->getRecentlyEnabledListBySportId(SportIdEnum::cricket);
         foreach ($leagues as $league) {
-            $createCricketTeamsPlayersUnitsService->handle($league);
-            $createCricketGameSchedulesService->handle($league);
-            $createCricketStatsService->handle($league);
-            $confirmHistoricalCricketGameSchedulesService->handle($league->id);
-            $this->recentlyEnableLeague($league);
+            if (!$league->isExistLeagueIdParam()) {
+                Log::channel('stderr')->error("League ID {$league->id} doesn't have league_id in the params.");
+
+                continue;
+            }
+
+            try {
+                $createCricketTeamsPlayersUnitsService->handle($league);
+                $createCricketGameSchedulesService->handle($league);
+                $createCricketStatsService->handle($league);
+                $confirmHistoricalCricketGameSchedulesService->handle($league->id);
+                $this->recentlyEnableLeague($league);
+            } catch (\Throwable $exception) {
+                Log::channel('stderr')->error($exception->getMessage());
+            }
         }
         $this->info(Carbon::now() . ": Command {$this->signature} finished");
     }
