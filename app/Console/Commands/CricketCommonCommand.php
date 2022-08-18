@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Enums\SportIdEnum;
+use App\Events\NotifyInSlackEvent;
 use App\Repositories\LeagueRepository;
 use App\Services\Cricket\CreateCricketGameSchedulesService;
 use App\Services\Cricket\CreateCricketTeamsPlayersUnitsService;
@@ -34,7 +35,7 @@ class CricketCommonCommand extends Command
                 $createCricketTeamsPlayersUnitsService->handle($league);
                 $createCricketGameSchedulesService->handle($league);
             } catch (\Throwable $exception) {
-                Log::channel('stderr')->error($exception->getMessage());
+                event(new NotifyInSlackEvent($exception));
             }
         }
         $this->info(Carbon::now() . ": Command {$this->signature} finished");
