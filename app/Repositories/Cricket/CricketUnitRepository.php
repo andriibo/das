@@ -13,6 +13,14 @@ class CricketUnitRepository
     /**
      * @throws ModelNotFoundException
      */
+    public function getUnitById(int $id): CricketUnit
+    {
+        return CricketUnit::findOrFail($id);
+    }
+
+    /**
+     * @throws ModelNotFoundException
+     */
     public function getByParams(int $playerFeedId, int $teamId): CricketUnit
     {
         return CricketUnit::query()
