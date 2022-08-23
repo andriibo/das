@@ -12,6 +12,7 @@ use App\Enums\FeedTypeEnum;
 use App\Exceptions\CricketGameScheduleException;
 use App\Helpers\CricketGameScheduleHelper;
 use App\Repositories\Cricket\CricketTeamRepository;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class CricketGameScheduleMapper
 {
@@ -46,9 +47,14 @@ class CricketGameScheduleMapper
         return $cricketGameScheduleDto;
     }
 
+    /* @throws CricketGameScheduleException */
     private function getCricketTeamIdByFeedId(string $feedId): int
     {
-        return $this->cricketTeamRepository->getByFeedId($feedId)->id;
+        try {
+            return $this->cricketTeamRepository->getByFeedId($feedId)->id;
+        } catch (ModelNotFoundException $e) {
+            throw new CricketGameScheduleException('Can\'t find cricket team by feed_id ' . $feedId);
+        }
     }
 
     private function generateGameDate(string $date, string $time): string

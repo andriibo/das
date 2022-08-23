@@ -14,7 +14,7 @@ enum PositionEnum: string
 
     case battingAllrounder = 'Batting Allrounder';
 
-    case wicketkeeperBatsman = 'Wicketkeeper batsman';
+    case wicketkeeperBatsman = 'Wicketkeeper Batsman';
 
     case bowlingAllrounder = 'Bowling Allrounder';
 }
