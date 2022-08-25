@@ -9,8 +9,10 @@ use App\Enums\CricketGameSchedule\IsSalaryAvailableEnum;
 use App\Enums\CricketGameSchedule\StatusEnum;
 use App\Enums\CricketGameSchedule\TypeEnum;
 use App\Enums\FeedTypeEnum;
+use App\Exceptions\CricketGameScheduleException;
 use App\Helpers\CricketGameScheduleHelper;
 use App\Repositories\Cricket\CricketTeamRepository;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class CricketGameScheduleMapper
 {
@@ -18,8 +20,14 @@ class CricketGameScheduleMapper
     {
     }
 
+    /* @throws CricketGameScheduleException */
     public function map(array $data, int $leagueId): CricketGameScheduleDto
     {
+        $status = StatusEnum::tryFrom($data['status']);
+        if (!$status) {
+            throw new CricketGameScheduleException('Invalid status in Game Schedule. ID game - ' . $data['id']);
+        }
+
         $cricketGameScheduleDto = new CricketGameScheduleDto();
 
         $cricketGameScheduleDto->feedId = $data['id'];
@@ -33,15 +41,20 @@ class CricketGameScheduleMapper
         $cricketGameScheduleDto->isFake = IsFakeEnum::no;
         $cricketGameScheduleDto->isSalaryAvailable = IsSalaryAvailableEnum::no;
         $cricketGameScheduleDto->feedType = FeedTypeEnum::goalserve;
-        $cricketGameScheduleDto->status = StatusEnum::tryFrom($data['status']);
+        $cricketGameScheduleDto->status = $status;
         $cricketGameScheduleDto->type = TypeEnum::tryFrom($data['type']);
 
         return $cricketGameScheduleDto;
     }
 
+    /* @throws CricketGameScheduleException */
     private function getCricketTeamIdByFeedId(string $feedId): int
     {
-        return $this->cricketTeamRepository->getByFeedId($feedId)->id;
+        try {
+            return $this->cricketTeamRepository->getByFeedId($feedId)->id;
+        } catch (ModelNotFoundException $e) {
+            throw new CricketGameScheduleException('Can\'t find cricket team by feed_id ' . $feedId);
+        }
     }
 
     private function generateGameDate(string $date, string $time): string

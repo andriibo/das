@@ -25,7 +25,7 @@ class CricketGameScheduleDto
     public IsFakeEnum $isFake;
     public IsSalaryAvailableEnum $isSalaryAvailable;
     public FeedTypeEnum $feedType;
-    public ?StatusEnum $status;
+    public StatusEnum $status;
     public TypeEnum $type;
     public ?string $createdAt;
     public ?string $updatedAt;
