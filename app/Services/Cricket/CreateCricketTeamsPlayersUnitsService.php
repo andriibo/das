@@ -42,7 +42,7 @@ class CreateCricketTeamsPlayersUnitsService
         $cricketTeam = $this->createCricketTeamService->handle($cricketTeamDto);
         $existCricketUnitIds = [];
 
-        if (!$cricketTeam) {
+        if (!$cricketTeam || !isset($data['player'])) {
             return;
         }
         foreach ($data['player'] as $player) {
