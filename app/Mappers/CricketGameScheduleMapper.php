@@ -23,11 +23,6 @@ class CricketGameScheduleMapper
     /* @throws CricketGameScheduleException */
     public function map(array $data, int $leagueId): CricketGameScheduleDto
     {
-        $status = StatusEnum::tryFrom($data['status']);
-        if (!$status) {
-            throw new CricketGameScheduleException('Invalid status in Game Schedule. ID game - ' . $data['id']);
-        }
-
         $cricketGameScheduleDto = new CricketGameScheduleDto();
 
         $cricketGameScheduleDto->feedId = $data['id'];
@@ -41,7 +36,7 @@ class CricketGameScheduleMapper
         $cricketGameScheduleDto->isFake = IsFakeEnum::no;
         $cricketGameScheduleDto->isSalaryAvailable = IsSalaryAvailableEnum::no;
         $cricketGameScheduleDto->feedType = FeedTypeEnum::goalserve;
-        $cricketGameScheduleDto->status = $status;
+        $cricketGameScheduleDto->status = StatusEnum::tryFrom($data['status']);
         $cricketGameScheduleDto->type = TypeEnum::tryFrom($data['type']);
 
         return $cricketGameScheduleDto;
