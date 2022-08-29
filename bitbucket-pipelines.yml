@@ -43,11 +43,6 @@ pipelines:
           <<: *deploy
           deployment: aws_development
           name: deploy to aws development
-    master:
-      - step:
-          <<: *deploy
-          deployment: aws_development
-          name: deploy to aws development
     '{release/*}':
       - step:
           <<: *deploy

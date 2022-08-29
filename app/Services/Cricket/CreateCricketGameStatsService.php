@@ -4,6 +4,7 @@ namespace App\Services\Cricket;
 
 use App\Dto\CricketGameScheduleDto;
 use App\Enums\CricketGameSchedule\HasFinalBoxEnum;
+use App\Events\NotifyInSlackEvent;
 use App\Helpers\CricketGameScheduleHelper;
 use App\Mappers\CricketGameScheduleMapper;
 use App\Mappers\CricketGameStatsMapper;
@@ -41,7 +42,7 @@ class CreateCricketGameStatsService
             $cricketGameStats = $this->storeCricketGameStatsService->handle($cricketGameStatsDto);
             $this->createCricketUnitStatsService->handle($cricketGameStats);
         } catch (\Throwable $exception) {
-            Log::channel('stderr')->error($exception->getMessage());
+            event(new NotifyInSlackEvent($exception));
         }
     }
 

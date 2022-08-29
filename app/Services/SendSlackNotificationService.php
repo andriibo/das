@@ -8,6 +8,12 @@ class SendSlackNotificationService
 {
     public function handle(string $message, string $location): void
     {
-        SlackAlert::message($location . '. ' . $message);
+        $notification = $this->getServiceName() . ': ' . $location . '. ' . $message;
+        SlackAlert::message($notification);
+    }
+
+    private function getServiceName(): string
+    {
+        return config('app.name');
     }
 }

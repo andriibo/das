@@ -21,7 +21,6 @@ use Illuminate\Support\Carbon;
  * @property null|string $username
  * @property string      $fullname
  * @property int         $status                0 - DELETED; 1 - NO_ACTIVE; 10 - ACTIVE;
- * @property null|int    $parent_affiliate_id   Refers to affiliate.id
  * @property Carbon      $updated_at
  * @property Carbon      $created_at
  * @property int         $is_deleted
@@ -59,7 +58,6 @@ use Illuminate\Support\Carbon;
  * @method static Builder|User whereIsEmailConfirmed($value)
  * @method static Builder|User whereIsSham($value)
  * @method static Builder|User whereLanguageId($value)
- * @method static Builder|User whereParentAffiliateId($value)
  * @method static Builder|User wherePassword($value)
  * @method static Builder|User whereReceiveNewsletters($value)
  * @method static Builder|User whereReceiveNotifications($value)
@@ -81,7 +79,6 @@ class User extends Model
         'access_token',
         'auth_key',
         'status',
-        'parent_affiliate_id',
         'is_deleted',
         'balance',
         'dob',

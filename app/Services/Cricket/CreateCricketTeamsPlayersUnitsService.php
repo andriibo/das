@@ -2,6 +2,7 @@
 
 namespace App\Services\Cricket;
 
+use App\Events\NotifyInSlackEvent;
 use App\Mappers\CricketTeamMapper;
 use App\Mappers\CricketUnitMapper;
 use App\Models\League;
@@ -29,7 +30,7 @@ class CreateCricketTeamsPlayersUnitsService
             try {
                 $this->parseCricketTeam($team, $league->id);
             } catch (\Throwable $exception) {
-                Log::channel('stderr')->error($exception->getMessage());
+                event(new NotifyInSlackEvent($exception));
             }
         }
     }
@@ -41,7 +42,7 @@ class CreateCricketTeamsPlayersUnitsService
         $cricketTeam = $this->createCricketTeamService->handle($cricketTeamDto);
         $existCricketUnitIds = [];
 
-        if (!$cricketTeam) {
+        if (!$cricketTeam || !isset($data['player'])) {
             return;
         }
         foreach ($data['player'] as $player) {
@@ -64,7 +65,7 @@ class CreateCricketTeamsPlayersUnitsService
                 $cricketUnit = $this->createCricketUnitService->handle($cricketUnitDto);
                 $existCricketUnitIds[] = $cricketUnit->id;
             } catch (\Throwable $exception) {
-                Log::channel('stderr')->error($exception->getMessage());
+                event(new NotifyInSlackEvent($exception));
             }
         }
 
