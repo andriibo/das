@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Mappers\Nodejs;
+namespace App\Mappers\Pusher;
 
 use App\Models\Contests\ContestUser;
 use App\Models\PrizePlace;
-use NodeJsClient\Dto\PrizePlaceDto;
+use Pusher\Dto\PrizePlaceDto;
 
 class PrizePlaceMapper
 {

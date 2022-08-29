@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Mappers\Nodejs;
+namespace App\Mappers\Pusher;
 
 use App\Models\ActionPoint;
-use NodeJsClient\Dto\ActionPointDto;
+use Pusher\Dto\ActionPointDto;
 
 class ActionPointMapper
 {

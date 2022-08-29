@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Mappers\Nodejs;
+namespace App\Mappers\Pusher;
 
 use App\Helpers\ActionPointHelper;
 use App\Models\Cricket\CricketGameLog;
 use App\Models\Soccer\SoccerGameLog;
 use App\Services\GetContestActionPointsService;
-use NodeJsClient\Dto\GameLogDto;
+use Pusher\Dto\GameLogDto;
 
 class GameLogMapper
 {

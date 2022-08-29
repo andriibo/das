@@ -2,7 +2,7 @@
 
 namespace App\Jobs;
 
-use App\Mappers\Nodejs\GameLogMapper;
+use App\Mappers\Pusher\GameLogMapper;
 use App\Models\Contests\Contest;
 use App\Models\Cricket\CricketGameLog;
 use App\Models\Soccer\SoccerGameLog;
@@ -11,7 +11,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
-use NodeJsClient\Services\SendGameLogsUpdateService;
+use Pusher\Services\SendGameLogsUpdateService;
 
 class PushGameLogsUpdatedJob implements ShouldQueue
 {

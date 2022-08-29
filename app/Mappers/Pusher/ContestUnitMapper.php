@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Mappers\Nodejs;
+namespace App\Mappers\Pusher;
 
 use App\Exceptions\UnitServiceException;
 use App\Helpers\FileHelper;
@@ -8,7 +8,7 @@ use App\Models\Contests\ContestUnit;
 use App\Services\UnitService;
 use FantasySports\SportConfig\Exceptions\SportConfigFactoryException;
 use FantasySports\SportConfig\Factories\SportConfigFactory;
-use NodeJsClient\Dto\ContestUnitDto;
+use Pusher\Dto\ContestUnitDto;
 
 class ContestUnitMapper
 {

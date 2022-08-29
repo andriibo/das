@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Mappers\Nodejs;
+namespace App\Mappers\Pusher;
 
 use App\Helpers\DateHelper;
 use App\Models\ActionPoint;
@@ -11,7 +11,7 @@ use App\Models\PrizePlace;
 use App\Models\Soccer\SoccerGameSchedule;
 use App\Services\ContestService;
 use App\Services\GameScheduleService;
-use NodeJsClient\Dto\ContestDto;
+use Pusher\Dto\ContestDto;
 
 class ContestMapper
 {
@@ -56,17 +56,17 @@ class ContestMapper
 
         $contestDto->league = $this->leagueMapper->map($contest->league);
 
-        array_map(function (ContestUser $contestUser) use (&$contestUsers) {
+        $contest->contestUsers->map(function (ContestUser $contestUser) use (&$contestUsers) {
             $contestUsers[] = $this->contestUserMapper->map($contestUser);
-        }, $contest->contestUsers);
+        });
 
         $contestDto->contestUsers = $contestUsers;
 
         $gameScheduleList = $this->gameScheduleService->getGameSchedules($contest);
 
-        array_map(function (CricketGameSchedule|SoccerGameSchedule $gameSchedule) use (&$gameSchedules) {
+        $gameScheduleList->map(function (CricketGameSchedule|SoccerGameSchedule $gameSchedule) use (&$gameSchedules) {
             $gameSchedules[] = $this->gameScheduleMapper->map($gameSchedule);
-        }, $gameScheduleList);
+        });
 
         $contestDto->games = $gameSchedules;
 
@@ -78,9 +78,9 @@ class ContestMapper
 
         $contestDto->prizes = $prizePlaces;
 
-        array_map(function (ActionPoint $actionPoint) use (&$scoring) {
+        $contest->actionPoints->map(function (ActionPoint $actionPoint) use (&$scoring) {
             $scoring[] = $this->actionPointMapper->map($actionPoint);
-        }, $contest->actionPoints);
+        });
 
         $contestDto->scoring = $scoring;
 

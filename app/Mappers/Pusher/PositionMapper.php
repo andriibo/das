@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Mappers\Nodejs;
+namespace App\Mappers\Pusher;
 
 use FantasySports\SportConfig\Classes\PositionConfig;
-use NodeJsClient\Dto\PositionDto;
+use Pusher\Dto\PositionDto;
 
 class PositionMapper
 {

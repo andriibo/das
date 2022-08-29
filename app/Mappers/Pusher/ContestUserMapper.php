@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Mappers\Nodejs;
+namespace App\Mappers\Pusher;
 
 use App\Helpers\DateHelper;
 use App\Helpers\FileHelper;
 use App\Models\Contests\ContestUser;
-use NodeJsClient\Dto\ContestUserDto;
+use Pusher\Dto\ContestUserDto;
 
 class ContestUserMapper
 {

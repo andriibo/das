@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Mappers\Nodejs;
+namespace App\Mappers\Pusher;
 
 use App\Models\League;
-use NodeJsClient\Dto\LeagueDto;
+use Pusher\Dto\LeagueDto;
 
 class LeagueMapper
 {

@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Mappers\Nodejs;
+namespace App\Mappers\Pusher;
 
 use App\Helpers\DateHelper;
 use App\Models\Cricket\CricketGameSchedule;
 use App\Models\Soccer\SoccerGameSchedule;
-use NodeJsClient\Dto\GameScheduleDto;
+use Pusher\Dto\GameScheduleDto;
 
 class GameScheduleMapper
 {

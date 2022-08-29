@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d7421d206725a10c239c8e8e9ec19610",
+    "content-hash": "50a37782217f600dd5b6ca02a6d776d8",
     "packages": [
         {
             "name": "archtechx/enums",
@@ -626,12 +626,33 @@
             "time": "2022-06-18T20:57:19+00:00"
         },
         {
+            "name": "fantasysports/pusher",
+            "version": "0.2",
+            "source": {
+                "type": "git",
+                "url": "https://bitbucket.org/WicketGamingTeam/pusher.git",
+                "reference": "f3efb2846482f8ad1afc7d21622db5e5ff878362"
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^7.2",
+                "php": ">=7.4.0"
+            },
+            "type": "project",
+            "autoload": {
+                "psr-4": {
+                    "Pusher\\": "src/"
+                }
+            },
+            "description": "Pusher for Fantasy Sports",
+            "time": "2022-08-29T07:34:01+00:00"
+        },
+        {
             "name": "fantasysports/sportconfig",
-            "version": "1.0.3",
+            "version": "1.0.4",
             "source": {
                 "type": "git",
                 "url": "https://bitbucket.org/WicketGamingTeam/sportconfig.git",
-                "reference": "8a75c8f436e7e40be3efdd9f9e40b29dcf427614"
+                "reference": "d48763e0fcaffb0f9ff96e14681285ced8fcdf0b"
             },
             "require": {
                 "php": ">=7.3.0"
@@ -649,7 +670,7 @@
             "keywords": [
                 "dfs"
             ],
-            "time": "2022-07-13T11:20:16+00:00"
+            "time": "2022-08-23T15:55:38+00:00"
         },
         {
             "name": "fruitcake/php-cors",

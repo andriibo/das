@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Mappers\Nodejs;
+namespace App\Mappers\Pusher;
 
 use App\Models\Cricket\CricketTeam;
 use App\Models\Soccer\SoccerTeam;
-use NodeJsClient\Dto\TeamDto;
+use Pusher\Dto\TeamDto;
 
 class TeamMapper
 {

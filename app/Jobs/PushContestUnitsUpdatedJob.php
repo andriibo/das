@@ -2,14 +2,14 @@
 
 namespace App\Jobs;
 
-use App\Mappers\Nodejs\ContestUnitMapper;
+use App\Mappers\Pusher\ContestUnitMapper;
 use App\Models\Contests\Contest;
 use App\Models\Contests\ContestUnit;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
-use NodeJsClient\Services\SendContestUnitsUpdatePushService;
+use Pusher\Services\SendContestUnitsUpdatePushService;
 
 class PushContestUnitsUpdatedJob implements ShouldQueue
 {
