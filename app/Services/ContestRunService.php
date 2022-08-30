@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Enums\Contests\StatusEnum;
-use App\Events\ContestUpdatedEvent;
 use App\Exceptions\GetGameSchedulesServiceException;
 use App\Models\Contests\Contest;
 use App\Repositories\ContestRepository;
@@ -37,8 +36,6 @@ class ContestRunService
         } else {
             return;
         }
-
-        event(new ContestUpdatedEvent($contest));
     }
 
     private function start(Contest $contest): void

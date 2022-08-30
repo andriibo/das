@@ -56,7 +56,7 @@ class CalculateContestService
         }
     }
 
-    private function sendPushEvents(Contest $contest)
+    private function sendPushEvents(Contest $contest): void
     {
         event(new ContestUpdatedEvent($contest));
         event(new GameLogsUpdatedEvent($contest));
