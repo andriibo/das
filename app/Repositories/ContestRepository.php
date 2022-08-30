@@ -37,10 +37,8 @@ class ContestRepository
             ;
     }
 
-    public function setStatusById(int $contestId, StatusEnum $status): bool
+    public function updateStatus(Contest $contest, StatusEnum $status): bool
     {
-        return Contest::query()->where('id', $contestId)
-            ->update(['status' => $status->value])
-        ;
+        return $contest->update(['status' => $status->value]);
     }
 }

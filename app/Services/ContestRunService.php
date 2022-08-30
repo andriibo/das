@@ -40,11 +40,11 @@ class ContestRunService
 
     private function start(Contest $contest): void
     {
-        $this->contestRepository->setStatusById($contest->id, StatusEnum::started);
+        $this->contestRepository->updateStatus($contest, StatusEnum::started);
     }
 
     private function finish(Contest $contest): void
     {
-        $this->contestRepository->setStatusById($contest->id, StatusEnum::finished);
+        $this->contestRepository->updateStatus($contest, StatusEnum::finished);
     }
 }

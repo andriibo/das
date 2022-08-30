@@ -19,17 +19,17 @@ class CreateCricketGameSchedulesService
 
     public function handle(League $league): void
     {
-        try {
-            $leagueId = $league->params['league_id'];
-            $matches = $this->cricketGoalserveService->getGoalserveCricketMatches($leagueId);
-            foreach ($matches as $match) {
-                $cricketGameScheduleDto = $this->cricketGameScheduleMapper->map($match, $league->id);
-                $cricketGameSchedule = $this->createCricketGameScheduleService->handle($cricketGameScheduleDto);
-                $this->updateCricketFakeGameSchedulesService->handle($cricketGameScheduleDto);
-                $this->confirmCricketGameScheduleService->handle($cricketGameSchedule);
-            }
-        } catch (\Throwable $exception) {
-            event(new NotifyInSlackEvent($exception));
+//        try {
+        $leagueId = $league->params['league_id'];
+        $matches = $this->cricketGoalserveService->getGoalserveCricketMatches($leagueId);
+        foreach ($matches as $match) {
+            $cricketGameScheduleDto = $this->cricketGameScheduleMapper->map($match, $league->id);
+            $cricketGameSchedule = $this->createCricketGameScheduleService->handle($cricketGameScheduleDto);
+            $this->updateCricketFakeGameSchedulesService->handle($cricketGameScheduleDto);
+            $this->confirmCricketGameScheduleService->handle($cricketGameSchedule);
         }
+//        } catch (\Throwable $exception) {
+//            event(new NotifyInSlackEvent($exception));
+//        }
     }
 }

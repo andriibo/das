@@ -4,14 +4,20 @@ namespace App\Services\Contest;
 
 use App\Enums\Contests\PrizeBankTypeEnum;
 use App\Exceptions\ContestAwardWinnersServiceException;
+use App\Helpers\NumericHelper;
 use App\Models\Contests\Contest;
 use App\Models\PrizePlace;
+use App\Repositories\ContestUserRepository;
+use App\Services\ContestUserWinService;
 use App\Specifications\ContestStatusAllowsAwards;
 
 class ContestAwardWinnersService
 {
-    public function __construct(private readonly ContestStatusAllowsAwards $contestStatusAllowsAwards)
-    {
+    public function __construct(
+        private readonly ContestStatusAllowsAwards $contestStatusAllowsAwards,
+        private readonly ContestUserRepository $contestUserRepository,
+        private readonly ContestUserWinService $contestUserWinService
+    ) {
     }
 
     /**
@@ -93,7 +99,23 @@ class ContestAwardWinnersService
         if (!isset($prizePlaces[0])) {
             throw new ContestAwardWinnersServiceException('Invalid prize config ' . $contest->id);
         }
-//        $winners = $this->getWinners(1);
-//        $this->award($winners, $prizePlaces[0]->prize);
+        $winners = $this->contestUserRepository->getContestWinners($contest->id, 1);
+        $this->award($winners, $prizePlaces[0]->prize);
+    }
+
+    /* @throws ContestAwardWinnersServiceException */
+    private function award($winners, $prize): void
+    {
+        $numWinners = count($winners);
+        if (!$numWinners) {
+            return;
+        }
+
+        $prize = NumericHelper::ffloor($prize / $numWinners, 2);
+        foreach ($winners as $winner) {
+            if (!$this->contestUserWinService->handle($winner, $prize)) {
+                throw new ContestAwardWinnersServiceException();
+            }
+        }
     }
 }

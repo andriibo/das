@@ -27,7 +27,7 @@ class ContestUnitHelper
 
         $score = 0;
         foreach ($unitStats as $unitStat) {
-            $score += CricketUnitHelper::calculateScore($gameUnit, $unitStat->stats, $actionPoints);
+            $score += UnitHelper::calculateScore($gameUnit, $unitStat->stats, $actionPoints);
         }
 
         return $score;

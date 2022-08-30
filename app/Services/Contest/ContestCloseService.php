@@ -24,7 +24,7 @@ class ContestCloseService
         DB::beginTransaction();
 
         try {
-            $this->contestRepository->setStatusById($contest->id, StatusEnum::closed);
+            $this->contestRepository->updateStatus($contest, StatusEnum::closed);
             $this->calculateContestService->handle($contest);
             $this->contestAwardWinnersService->handle($contest);
         } catch (Exception $e) {
