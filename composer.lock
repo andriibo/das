@@ -626,6 +626,27 @@
             "time": "2022-06-18T20:57:19+00:00"
         },
         {
+            "name": "fantasysports/pusher",
+            "version": "0.2",
+            "source": {
+                "type": "git",
+                "url": "https://bitbucket.org/WicketGamingTeam/pusher.git",
+                "reference": "f3efb2846482f8ad1afc7d21622db5e5ff878362"
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^7.2",
+                "php": ">=7.4.0"
+            },
+            "type": "project",
+            "autoload": {
+                "psr-4": {
+                    "Pusher\\": "src/"
+                }
+            },
+            "description": "Pusher for Fantasy Sports",
+            "time": "2022-08-29T07:34:01+00:00"
+        },
+        {
             "name": "fantasysports/sportconfig",
             "version": "1.0.5",
             "source": {
