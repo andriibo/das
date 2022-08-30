@@ -29,10 +29,7 @@ class ContestMapper
     public function map(Contest $contest): ContestDto
     {
         $contestDto = new ContestDto();
-        $contestUsers = [];
-        $gameSchedules = [];
-        $prizePlaces = [];
-        $scoring = [];
+        $contestUsers = $gameSchedules = $prizePlaces = $scoring = [];
 
         $contestDto->id = $contest->id;
         $contestDto->status = $contest->status;
