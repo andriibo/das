@@ -27,7 +27,7 @@ class CreateCricketGameScheduleService
             'away_team_score' => $cricketGameScheduleDto->awayTeamScore,
             'is_salary_available' => $cricketGameScheduleDto->isSalaryAvailable->value,
             'feed_type' => $cricketGameScheduleDto->feedType->name,
-            'status' => $cricketGameScheduleDto->status->value,
+            'status' => $cricketGameScheduleDto->status?->value,
             'type' => $cricketGameScheduleDto->type->value,
         ]);
     }
