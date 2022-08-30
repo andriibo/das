@@ -7,6 +7,7 @@ use App\Enums\CricketGameSchedule\IsDataConfirmedEnum;
 use App\Enums\SportIdEnum;
 use App\Models\Cricket\CricketGameSchedule;
 use App\Models\League;
+use App\Models\Soccer\SoccerGameSchedule;
 use Barryvdh\LaravelIdeHelper\Eloquent;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
@@ -75,7 +76,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property Collection|ContestUser[]         $contestUsers
  * @property null|int                         $contest_users_count
  * @property Collection|CricketGameSchedule[] $cricketGameSchedules
+ * @property Collection|SoccerGameSchedule[]  $soccerGameSchedules
  * @property null|int                         $cricket_game_schedules_count
+ * @property Collection|ContestGame[]         $contestGames
  *
  * @method static Builder|Contest newModelQuery()
  * @method static Builder|Contest newQuery()
@@ -211,6 +214,11 @@ class Contest extends Model
         return $this->hasMany(ContestUnit::class);
     }
 
+    public function contestGames(): HasMany
+    {
+        return $this->hasMany(ContestGame::class);
+    }
+
     public function cricketGameSchedules(): BelongsToMany
     {
         return $this->belongsToMany(
@@ -221,6 +229,18 @@ class Contest extends Model
         )
             ->wherePivot('sport_id', SportIdEnum::cricket)
         ;
+    }
+
+    public function soccerGameSchedules(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            SoccerGameSchedule::class,
+            (new ContestGame())->getTable(),
+            'contest_id',
+            'game_schedule_id'
+        )
+            ->wherePivot('sport_id', SportIdEnum::soccer)
+            ;
     }
 
     public function liveCricketGameSchedules(): BelongsToMany
