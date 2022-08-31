@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Contest;
 
 use App\Enums\UserTransactions\StatusEnum;
 use App\Enums\UserTransactions\TypeEnum;
@@ -9,6 +9,8 @@ use App\Exceptions\UpdateBalanceServiceException;
 use App\Models\Contests\ContestUser;
 use App\Repositories\ContestUserRepository;
 use App\Repositories\UserTransactionRepository;
+use App\Services\CancelUserTransactionService;
+use App\Services\UpdateBalanceService;
 
 class ContestUserWinService
 {

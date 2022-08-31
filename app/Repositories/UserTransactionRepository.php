@@ -34,6 +34,28 @@ class UserTransactionRepository
             ;
     }
 
+    public function getContestTerminatedTransactionByUserIdAndSubjectId(int $userId, int $subjectId): ?UserTransaction
+    {
+        return UserTransaction::query()
+            ->where('user_id', $userId)
+            ->where('type', TypeEnum::contestCancel->value)
+            ->where('status', StatusEnum::success->value)
+            ->where('subject_id', $subjectId)
+            ->first()
+            ;
+    }
+
+    public function getContestEnterTransactionByUserIdAndSubjectId(int $userId, int $subjectId): ?UserTransaction
+    {
+        return UserTransaction::query()
+            ->where('user_id', $userId)
+            ->where('type', TypeEnum::contestEnter->value)
+            ->where('status', StatusEnum::success->value)
+            ->where('subject_id', $subjectId)
+            ->first()
+            ;
+    }
+
     public function updateStatus(UserTransaction $userTransaction, StatusEnum $status): bool
     {
         return $userTransaction->update(['status' => $status->value]);

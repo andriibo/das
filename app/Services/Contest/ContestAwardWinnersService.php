@@ -8,7 +8,6 @@ use App\Helpers\NumericHelper;
 use App\Models\Contests\Contest;
 use App\Models\PrizePlace;
 use App\Repositories\ContestUserRepository;
-use App\Services\ContestUserWinService;
 use App\Specifications\ContestStatusAllowsAwards;
 
 class ContestAwardWinnersService
@@ -36,17 +35,17 @@ class ContestAwardWinnersService
                 break;
 
             case PrizeBankTypeEnum::topThree->value:
-//                $this->awardTopThree();
+                $this->awardTopThree($contest);
 
                 break;
 
             case PrizeBankTypeEnum::customPayout->value:
-//                $this->awardCustomPayout();
+                $this->awardCustomPayout($contest);
 
                 break;
 
             case PrizeBankTypeEnum::fiftyFifty->value:
-//                $this->award50();
+                $this->award50($contest);
 
                 break;
 
@@ -92,6 +91,17 @@ class ContestAwardWinnersService
         return $prizes;
     }
 
+    /* @throws ContestAwardWinnersServiceException */
+    protected function award50(Contest $contest): void
+    {
+        $prizePlaces = $this->normalizePrizePlaces($contest);
+        if (!isset($prizePlaces[0])) {
+            throw new ContestAwardWinnersServiceException('Invalid prize config ' . $contest->id);
+        }
+        $winners = $this->contestUserRepository->getContestWinners($contest->id, $prizePlaces[0]->places);
+        $this->award($winners, $prizePlaces[0]->prize);
+    }
+
     /*  @throws ContestAwardWinnersServiceException */
     private function awardWTA(Contest $contest): void
     {
@@ -104,7 +114,7 @@ class ContestAwardWinnersService
     }
 
     /* @throws ContestAwardWinnersServiceException */
-    private function award($winners, $prize): void
+    private function award(array $winners, float $prize): void
     {
         $numWinners = count($winners);
         if (!$numWinners) {
@@ -116,6 +126,57 @@ class ContestAwardWinnersService
             if (!$this->contestUserWinService->handle($winner, $prize)) {
                 throw new ContestAwardWinnersServiceException();
             }
+        }
+    }
+
+    /* @throws ContestAwardWinnersServiceException */
+    private function awardTopThree(Contest $contest): void
+    {
+        $prizePlaces = $this->expandPrizePlaces($contest);
+        $winners = $this->contestUserRepository->getContestWinners($contest->id, 3);
+        $groups = $winners->groupBy('place');
+
+        foreach ($groups as $winners) {
+            if (!$prizePlaces) {
+                break;
+            }
+            $prize = array_sum(array_splice($prizePlaces, 0, count($winners)));
+            $this->award($winners, $prize);
+        }
+    }
+
+    private function expandPrizePlaces(Contest $contest): array
+    {
+        $places = [];
+        $place = 1;
+        foreach ($this->normalizePrizePlaces($contest) as $prizePlace) {
+            $places = array_merge(
+                $places,
+                array_fill(
+                    $place,
+                    $prizePlace->places,
+                    NumericHelper::ffloor($prizePlace->prize / $prizePlace->places, 2)
+                )
+            );
+            $place += $prizePlace->places;
+        }
+
+        return $places;
+    }
+
+    /* @throws ContestAwardWinnersServiceException */
+    private function awardCustomPayout(Contest $contest): void
+    {
+        $prizePlaces = $this->expandPrizePlaces($contest);
+        $winners = $this->contestUserRepository->getContestWinners($contest->id, count($prizePlaces));
+        $groups = $winners->groupBy('place');
+
+        foreach ($groups as $winners) {
+            if (!$prizePlaces) {
+                break;
+            }
+            $prize = array_sum(array_splice($prizePlaces, 0, count($winners)));
+            $this->award($winners, $prize);
         }
     }
 }

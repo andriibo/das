@@ -4,7 +4,7 @@ namespace App\Console\Commands;
 
 use App\Events\NotifyInSlackEvent;
 use App\Repositories\ContestRepository;
-use App\Services\ContestRunService;
+use App\Services\Contest\ContestRunService;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 

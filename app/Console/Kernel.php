@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Console\Commands\ContestRunCommand;
 use App\Console\Commands\CricketCommonCommand;
 use App\Console\Commands\CricketPlayerSalaryCommand;
 use App\Console\Commands\CricketRecentlyEnabledLeagueCommand;
@@ -32,6 +33,8 @@ class Kernel extends ConsoleKernel
         $schedule->command(CricketUnconfirmedGameSchedulesCommand::class)->hourly();
 
         $schedule->command(CricketStatsCommand::class)->everyMinute();
+
+        $schedule->command(ContestRunCommand::class)->everyMinute();
     }
 
     /**

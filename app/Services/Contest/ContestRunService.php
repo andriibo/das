@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Contest;
 
 use App\Enums\Contests\StatusEnum;
 use App\Exceptions\GetGameSchedulesServiceException;
 use App\Models\Contests\Contest;
 use App\Repositories\ContestRepository;
-use App\Services\Contest\ContestCloseService;
+use App\Specifications\ContestCanBeCancelledSpecification;
 use App\Specifications\ContestCanBeClosedSpecification;
 use App\Specifications\ContestCanBeFinishedSpecification;
 use App\Specifications\ContestCanBeStartedSpecification;
@@ -18,11 +18,13 @@ class ContestRunService
         private readonly ContestCanBeFinishedSpecification $contestCanBeFinishedSpecification,
         private readonly ContestCanBeClosedSpecification $contestCanBeClosedSpecification,
         private readonly ContestCloseService $contestCloseService,
+        private readonly ContestCanBeCancelledSpecification $contestCanBeCancelledSpecification,
+        private readonly ContestCancelService $contestCancelService,
         private readonly ContestRepository $contestRepository
     ) {
     }
 
-    /*  @throws GetGameSchedulesServiceException */
+    /* @throws GetGameSchedulesServiceException */
     public function handle(Contest $contest): void
     {
         if ($this->contestCanBeStartedSpecification->isSatisfiedBy($contest)) {
@@ -31,10 +33,8 @@ class ContestRunService
             $this->finish($contest);
         } elseif ($this->contestCanBeClosedSpecification->isSatisfiedBy($contest)) {
             $this->contestCloseService->handle($contest);
-        } elseif ($contest->canBeCancelled()) {
-            $this->cancel($contest);
-        } else {
-            return;
+        } elseif ($this->contestCanBeCancelledSpecification->isSatisfiedBy($contest)) {
+            $this->contestCancelService->handle($contest);
         }
     }
 
