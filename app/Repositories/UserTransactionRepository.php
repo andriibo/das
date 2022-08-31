@@ -18,6 +18,11 @@ class UserTransactionRepository
         return UserTransaction::findOrFail($userTransactionId);
     }
 
+    public function create(array $attributes): UserTransaction
+    {
+        return UserTransaction::query()->create($attributes);
+    }
+
     public function getContestWinTransactionByUserIdAndSubjectId(int $userId, int $subjectId): ?UserTransaction
     {
         return UserTransaction::query()
