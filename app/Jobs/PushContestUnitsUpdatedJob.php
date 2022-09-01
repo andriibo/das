@@ -2,13 +2,14 @@
 
 namespace App\Jobs;
 
-use App\Clients\NodejsClient;
-use App\Http\Resources\ContestUnitResource;
+use App\Mappers\Pusher\ContestUnitMapper;
 use App\Models\Contests\Contest;
+use App\Models\Contests\ContestUnit;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
+use Pusher\Services\SendContestUnitsUpdatePushService;
 
 class PushContestUnitsUpdatedJob implements ShouldQueue
 {
@@ -22,12 +23,15 @@ class PushContestUnitsUpdatedJob implements ShouldQueue
 
     public function handle(): void
     {
-        try {
-            $collection = ContestUnitResource::collection($this->contest->contestUnits);
-            $nodejsClient = new NodejsClient();
-            $nodejsClient->sendContestUnitsUpdatePush($collection->jsonSerialize(), $this->contest->id);
-        } catch (\Throwable $e) {
-            throw $e;
-        }
+        /* @var ContestUnitMapper $contestUnitMapper */
+        $contestUnitMapper = resolve(ContestUnitMapper::class);
+        /* @var SendContestUnitsUpdatePushService $sendContestUnitsUpdatePushService */
+        $sendContestUnitsUpdatePushService = resolve(SendContestUnitsUpdatePushService::class);
+
+        $contestUnitsList = $this->contest->contestUnits->map(function (ContestUnit $contestUnit) use ($contestUnitMapper) {
+            return $contestUnitMapper->map($contestUnit);
+        });
+
+        $sendContestUnitsUpdatePushService->handle($contestUnitsList->toArray(), $this->contest->id);
     }
 }

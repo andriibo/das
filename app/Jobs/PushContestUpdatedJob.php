@@ -2,13 +2,13 @@
 
 namespace App\Jobs;
 
-use App\Clients\NodejsClient;
-use App\Http\Resources\ContestDetailsResource;
+use App\Mappers\Pusher\ContestMapper;
 use App\Models\Contests\Contest;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
+use Pusher\Services\SendContestUpdatePushService;
 
 class PushContestUpdatedJob implements ShouldQueue
 {
@@ -22,12 +22,13 @@ class PushContestUpdatedJob implements ShouldQueue
 
     public function handle(): void
     {
-        try {
-            $resource = new ContestDetailsResource($this->contest);
-            $nodejsClient = new NodejsClient();
-            $nodejsClient->sendContestUpdatePush($resource->jsonSerialize());
-        } catch (\Throwable $e) {
-            throw $e;
-        }
+        /* @var ContestMapper $contestMapper */
+        $contestMapper = resolve(ContestMapper::class);
+        /* @var SendContestUpdatePushService $sendContestUpdatePushService */
+        $sendContestUpdatePushService = resolve(SendContestUpdatePushService::class);
+
+        $contestDto = $contestMapper->map($this->contest);
+
+        $sendContestUpdatePushService->handle($contestDto);
     }
 }

@@ -12,7 +12,7 @@ enum TypeEnum: string
 
     case odi = 'ODI';
 
-    case test = 'Test';
+    case test = 'TEST';
 
-    case firstClass = 'First-class';
+    case firstClass = 'FIRST-CLASS';
 }
