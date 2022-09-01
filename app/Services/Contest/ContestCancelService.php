@@ -3,6 +3,7 @@
 namespace App\Services\Contest;
 
 use App\Enums\Contests\StatusEnum;
+use App\Exceptions\ContestCancelServiceException;
 use App\Models\Contests\Contest;
 use App\Repositories\ContestRepository;
 use Exception;
@@ -16,7 +17,7 @@ class ContestCancelService
     ) {
     }
 
-    /*  @throws Exception */
+    /*  @throws ContestCancelServiceException */
     public function handle(Contest $contest): void
     {
         DB::beginTransaction();
@@ -30,7 +31,7 @@ class ContestCancelService
         } catch (Exception $e) {
             DB::rollback();
 
-            throw new Exception($e->getMessage());
+            throw new ContestCancelServiceException($e->getMessage());
         }
     }
 }

@@ -2,13 +2,13 @@
 
 namespace App\Jobs;
 
-use App\Clients\NodejsClient;
-use App\Http\Resources\Transactions\TransactionResource;
+use App\Mappers\Pusher\UserTransactionMapper;
 use App\Models\UserTransaction;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
+use Pusher\Services\SendUserTransactionCreatedPushService;
 
 class PushUserTransactionCreatedJob implements ShouldQueue
 {
@@ -22,12 +22,13 @@ class PushUserTransactionCreatedJob implements ShouldQueue
 
     public function handle(): void
     {
-        try {
-            $resource = new TransactionResource($this->userTransaction);
-            $nodejsClient = new NodejsClient();
-            $nodejsClient->sendUserTransactionCreatedPush($resource->jsonSerialize(), $this->userTransaction->user_id);
-        } catch (\Throwable $e) {
-            throw $e;
-        }
+        /* @var UserTransactionMapper $userTransactionMapper */
+        $userTransactionMapper = resolve(UserTransactionMapper::class);
+        /* @var SendUserTransactionCreatedPushService $sendUserTransactionCreatedPushService */
+        $sendUserTransactionCreatedPushService = resolve(SendUserTransactionCreatedPushService::class);
+
+        $userTransactionDto = $userTransactionMapper->map($this->userTransaction);
+
+        $sendUserTransactionCreatedPushService->handle($userTransactionDto, $this->userTransaction->user_id);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Services\Contest;
 
 use App\Enums\Contests\StatusEnum;
+use App\Exceptions\ContestCloseServiceException;
 use App\Models\Contests\Contest;
 use App\Repositories\ContestRepository;
 use App\Services\CalculateContestService;
@@ -18,7 +19,7 @@ class ContestCloseService
     ) {
     }
 
-    /*  @throws Exception */
+    /*  @throws ContestCloseServiceException */
     public function handle(Contest $contest): void
     {
         DB::beginTransaction();
@@ -30,7 +31,7 @@ class ContestCloseService
         } catch (Exception $e) {
             DB::rollback();
 
-            throw new Exception($e->getMessage());
+            throw new ContestCloseServiceException($e->getMessage());
         }
     }
 }
