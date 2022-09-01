@@ -8,12 +8,12 @@ use App\Helpers\NumericHelper;
 use App\Models\Contests\Contest;
 use App\Models\PrizePlace;
 use App\Repositories\ContestUserRepository;
-use App\Specifications\ContestStatusAllowsAwards;
+use App\Specifications\ContestStatusAllowsAwardsSpecification;
 
 class ContestAwardWinnersService
 {
     public function __construct(
-        private readonly ContestStatusAllowsAwards $contestStatusAllowsAwards,
+        private readonly ContestStatusAllowsAwardsSpecification $contestStatusAllowsAwardsSpecification,
         private readonly ContestUserRepository $contestUserRepository,
         private readonly ContestUserWinService $contestUserWinService
     ) {
@@ -24,7 +24,7 @@ class ContestAwardWinnersService
      */
     public function handle(Contest $contest): void
     {
-        if (!$this->contestStatusAllowsAwards->isSatisfiedBy($contest)) {
+        if (!$this->contestStatusAllowsAwardsSpecification->isSatisfiedBy($contest)) {
             throw new ContestAwardWinnersServiceException('Contest status does not allow awards');
         }
 

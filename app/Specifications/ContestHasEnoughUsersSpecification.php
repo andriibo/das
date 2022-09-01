@@ -4,7 +4,7 @@ namespace App\Specifications;
 
 use App\Models\Contests\Contest;
 
-class ContestHasEnoughUsers
+class ContestHasEnoughUsersSpecification
 {
     public function isSatisfiedBy(Contest $contest): bool
     {

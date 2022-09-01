@@ -6,7 +6,7 @@ use App\Enums\CricketGameSchedule\StatusEnum;
 use App\Helpers\GameStatusHelper;
 use App\Models\Contests\Contest;
 
-class AllContestGamesAreFinalized
+class AllContestGamesAreFinalizedSpecification
 {
     public function isSatisfiedBy(Contest $contest): bool
     {
@@ -15,7 +15,7 @@ class AllContestGamesAreFinalized
                 if (GameStatusHelper::isPostponed($gameSchedule->status)) {
                     continue;
                 }
-                if ($gameSchedule->is_data_confirmed == 0) {
+                if (!$gameSchedule->isDataConfirmed()) {
                     return false;
                 }
             }
@@ -26,7 +26,7 @@ class AllContestGamesAreFinalized
                 if ($gameSchedule->status === StatusEnum::stumps->value) {
                     continue;
                 }
-                if ($gameSchedule->is_data_confirmed == 0) {
+                if (!$gameSchedule->isDataConfirmed()) {
                     return false;
                 }
             }

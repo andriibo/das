@@ -4,10 +4,10 @@ namespace App\Specifications;
 
 use App\Models\Contests\Contest;
 
-class TimeToEndContest
+class TimeToStartContestSpecification
 {
     public function isSatisfiedBy(Contest $contest): bool
     {
-        return time() >= strtotime($contest->end_date);
+        return time() >= strtotime($contest->start_date);
     }
 }

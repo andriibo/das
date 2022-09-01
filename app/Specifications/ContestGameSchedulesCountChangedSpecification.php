@@ -6,7 +6,7 @@ use App\Exceptions\GetGameSchedulesServiceException;
 use App\Models\Contests\Contest;
 use App\Services\GetGameSchedulesService;
 
-class ContestGameScheduleDidNotChange
+class ContestGameSchedulesCountChangedSpecification
 {
     public function __construct(private readonly GetGameSchedulesService $getGameSchedulesService)
     {

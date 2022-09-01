@@ -8,22 +8,22 @@ use App\Models\Contests\Contest;
 class ContestCanBeFinishedSpecification
 {
     public function __construct(
-        private readonly ContestStatusAllowsFinish $contestStatusAllowsFinish,
-        private readonly AllContestGamesHaveFinalBox $allContestGamesHaveFinalBox,
-        private readonly ContestGameScheduleDidNotChange $contestGameScheduleDidNotChange
+        private readonly ContestStatusAllowsFinishSpecification $contestStatusAllowsFinishSpecification,
+        private readonly AllContestGamesHaveFinalBoxSpecification $allContestGamesHaveFinalBoxSpecification,
+        private readonly ContestGameSchedulesCountChangedSpecification $contestGameSchedulesCountChangedSpecification
     ) {
     }
 
     /* @throws GetGameSchedulesServiceException */
     public function isSatisfiedBy(Contest $contest): bool
     {
-        if (!$this->contestStatusAllowsFinish->isSatisfiedBy($contest)) {
+        if (!$this->contestStatusAllowsFinishSpecification->isSatisfiedBy($contest)) {
             return false;
         }
-        if (!$this->allContestGamesHaveFinalBox->isSatisfiedBy($contest)) {
+        if (!$this->allContestGamesHaveFinalBoxSpecification->isSatisfiedBy($contest)) {
             return false;
         }
-        if (!$this->contestGameScheduleDidNotChange->isSatisfiedBy($contest)) {
+        if (!$this->contestGameSchedulesCountChangedSpecification->isSatisfiedBy($contest)) {
             return false;
         }
 

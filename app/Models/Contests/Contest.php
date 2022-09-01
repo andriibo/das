@@ -2,6 +2,7 @@
 
 namespace App\Models\Contests;
 
+use App\Enums\Contests\SuspendedEnum;
 use App\Enums\CricketGameSchedule\HasFinalBoxEnum;
 use App\Enums\CricketGameSchedule\IsDataConfirmedEnum;
 use App\Enums\SportIdEnum;
@@ -197,6 +198,11 @@ class Contest extends Model
     public function isSportCricket(): bool
     {
         return $this->league?->sport_id == SportIdEnum::cricket->value;
+    }
+
+    public function isSuspended(): bool
+    {
+        return $this->suspended === SuspendedEnum::yes->value;
     }
 
     public function league(): BelongsTo

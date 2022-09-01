@@ -2,6 +2,7 @@
 
 namespace App\Models\Soccer;
 
+use App\Enums\CricketGameSchedule\IsDataConfirmedEnum;
 use App\Models\League;
 use Barryvdh\LaravelIdeHelper\Eloquent;
 use Illuminate\Database\Eloquent\Builder;
@@ -103,5 +104,10 @@ class SoccerGameSchedule extends Model
     public function gameLogs(): HasMany
     {
         return $this->hasMany(SoccerGameLog::class);
+    }
+
+    public function isDataConfirmed(): bool
+    {
+        return $this->is_data_confirmed == IsDataConfirmedEnum::yes->value;
     }
 }

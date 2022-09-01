@@ -8,32 +8,31 @@ use App\Models\Contests\Contest;
 class ContestCanBeCancelledSpecification
 {
     public function __construct(
-        private readonly ContestIsSuspended $contestIsSuspended,
-        private readonly TimeToStartContest $timeToStartContest,
-        private readonly TimeToEndContest $timeToEndContest,
-        private readonly ContestGameScheduleDidNotChange $contestGameScheduleDidNotChange,
-        private readonly ContestStatusAllowsStart $contestStatusAllowsStart,
-        private readonly ContestHasEnoughUsers $contestHasEnoughUsers
+        private readonly TimeToStartContestSpecification $timeToStartContestSpecification,
+        private readonly TimeToEndContestSpecification $timeToEndContestSpecification,
+        private readonly ContestGameSchedulesCountChangedSpecification $contestGameSchedulesCountChangedSpecification,
+        private readonly ContestStatusAllowsStartSpecification $contestStatusAllowsStartSpecification,
+        private readonly ContestHasEnoughUsersSpecification $contestHasEnoughUsersSpecification
     ) {
     }
 
     /* @throws GetGameSchedulesServiceException */
     public function isSatisfiedBy(Contest $contest): bool
     {
-        if ($this->contestIsSuspended->isSatisfiedBy($contest)
-            && $this->timeToStartContest->isSatisfiedBy($contest)
-            && $this->timeToEndContest->isSatisfiedBy($contest)) {
+        if ($contest->isSuspended()
+            && $this->timeToStartContestSpecification->isSatisfiedBy($contest)
+            && $this->timeToEndContestSpecification->isSatisfiedBy($contest)) {
             return true;
         }
-        if ($this->contestIsSuspended->isSatisfiedBy($contest)) {
+        if ($contest->isSuspended()) {
             return false;
         }
-        if (!$this->contestGameScheduleDidNotChange->isSatisfiedBy($contest)) {
+        if (!$this->contestGameSchedulesCountChangedSpecification->isSatisfiedBy($contest)) {
             return true;
         }
-        if ($this->contestStatusAllowsStart->isSatisfiedBy($contest)
-            && $this->timeToStartContest->isSatisfiedBy($contest)
-            && !$this->contestHasEnoughUsers->isSatisfiedBy($contest)) {
+        if ($this->contestStatusAllowsStartSpecification->isSatisfiedBy($contest)
+            && $this->timeToStartContestSpecification->isSatisfiedBy($contest)
+            && !$this->contestHasEnoughUsersSpecification->isSatisfiedBy($contest)) {
             return true;
         }
 

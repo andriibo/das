@@ -8,26 +8,26 @@ use App\Models\Contests\Contest;
 class ContestCanBeStartedSpecification
 {
     public function __construct(
-        private readonly ContestStatusAllowsStart $contestStatusAllowsStart,
-        private readonly TimeToStartContest $timeToStartContest,
-        private readonly ContestHasEnoughUsers $contestHasEnoughUsers,
-        private readonly ContestGameScheduleDidNotChange $contestGameScheduleDidNotChange
+        private readonly ContestStatusAllowsStartSpecification $contestStatusAllowsStartSpecification,
+        private readonly TimeToStartContestSpecification $timeToStartContestSpecification,
+        private readonly ContestHasEnoughUsersSpecification $contestHasEnoughUsersSpecification,
+        private readonly ContestGameSchedulesCountChangedSpecification $contestGameSchedulesCountChangedSpecification
     ) {
     }
 
     /* @throws GetGameSchedulesServiceException */
     public function isSatisfiedBy(Contest $contest): bool
     {
-        if (!$this->contestStatusAllowsStart->isSatisfiedBy($contest)) {
+        if (!$this->contestStatusAllowsStartSpecification->isSatisfiedBy($contest)) {
             return false;
         }
-        if (!$this->timeToStartContest->isSatisfiedBy($contest)) {
+        if (!$this->timeToStartContestSpecification->isSatisfiedBy($contest)) {
             return false;
         }
-        if (!$this->contestHasEnoughUsers->isSatisfiedBy($contest)) {
+        if (!$this->contestHasEnoughUsersSpecification->isSatisfiedBy($contest)) {
             return false;
         }
-        if (!$this->contestGameScheduleDidNotChange->isSatisfiedBy($contest)) {
+        if (!$this->contestGameSchedulesCountChangedSpecification->isSatisfiedBy($contest)) {
             return false;
         }
 

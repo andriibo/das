@@ -6,7 +6,7 @@ use App\Enums\CricketGameSchedule\StatusEnum;
 use App\Helpers\GameStatusHelper;
 use App\Models\Contests\Contest;
 
-class AllContestGamesHaveFinalBox
+class AllContestGamesHaveFinalBoxSpecification
 {
     public function isSatisfiedBy(Contest $contest): bool
     {
@@ -15,7 +15,7 @@ class AllContestGamesHaveFinalBox
                 if (GameStatusHelper::isPostponed($gameSchedule->status)) {
                     continue;
                 }
-                if ($gameSchedule->has_final_box == 0) {
+                if (!$gameSchedule->hasFinalBox()) {
                     return false;
                 }
             }
@@ -26,7 +26,7 @@ class AllContestGamesHaveFinalBox
                 if ($gameSchedule->status === StatusEnum::stumps->value) {
                     continue;
                 }
-                if ($gameSchedule->has_final_box == 0) {
+                if (!$gameSchedule->hasFinalBox()) {
                     return false;
                 }
             }
