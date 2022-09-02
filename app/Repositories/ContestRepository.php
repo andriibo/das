@@ -21,4 +21,24 @@ class ContestRepository
             ->get()
         ;
     }
+
+    /**
+     * @return Collection|Contest[]
+     */
+    public function getActiveContests(): Collection
+    {
+        return Contest::query()
+            ->whereIn('status', [
+                StatusEnum::ready,
+                StatusEnum::started,
+                StatusEnum::finished,
+            ])
+            ->get()
+            ;
+    }
+
+    public function updateStatus(Contest $contest, StatusEnum $status): bool
+    {
+        return $contest->update(['status' => $status->value]);
+    }
 }

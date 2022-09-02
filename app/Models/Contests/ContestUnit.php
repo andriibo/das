@@ -4,6 +4,7 @@ namespace App\Models\Contests;
 
 use App\Enums\SportIdEnum;
 use App\Models\Cricket\CricketUnit;
+use App\Models\Soccer\SoccerUnit;
 use Barryvdh\LaravelIdeHelper\Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -27,6 +28,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property int              $sport_id                1 - Soccer; 2 - Football, 3 - Cricket
  * @property Contest          $contest
  * @property null|CricketUnit $cricketUnit
+ * @property null|SoccerUnit  $soccerUnit
  *
  * @method static Builder|ContestUnit newModelQuery()
  * @method static Builder|ContestUnit newQuery()
@@ -86,6 +88,14 @@ class ContestUnit extends Model
     {
         return $this->belongsTo(
             CricketUnit::class,
+            'unit_id',
+        );
+    }
+
+    public function soccerUnit(): BelongsTo
+    {
+        return $this->belongsTo(
+            SoccerUnit::class,
             'unit_id',
         );
     }

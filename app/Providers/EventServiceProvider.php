@@ -12,6 +12,7 @@ use App\Events\Cricket\CricketUnitSavedEvent;
 use App\Events\Cricket\CricketUnitStatsSavedEvent;
 use App\Events\GameLogsUpdatedEvent;
 use App\Events\NotifyInSlackEvent;
+use App\Events\UserBalanceUpdatedEvent;
 use App\Listeners\ContestUnitsUpdatedListener;
 use App\Listeners\Cricket\CricketGameLogSavedListener;
 use App\Listeners\Cricket\CricketGameScheduleSavedListener;
@@ -22,6 +23,7 @@ use App\Listeners\Cricket\CricketUnitSavedListener;
 use App\Listeners\Cricket\CricketUnitStatsSavedListener;
 use App\Listeners\GameLogsUpdatedListener;
 use App\Listeners\NotifyInSlackListener;
+use App\Listeners\UserBalanceUpdatedListener;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider
@@ -61,6 +63,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         NotifyInSlackEvent::class => [
             NotifyInSlackListener::class,
+        ],
+        UserBalanceUpdatedEvent::class => [
+            UserBalanceUpdatedListener::class,
         ],
     ];
 
