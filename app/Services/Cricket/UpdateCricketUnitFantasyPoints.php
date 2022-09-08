@@ -14,7 +14,8 @@ class UpdateCricketUnitFantasyPoints
 {
     public function __construct(
         private readonly CricketUnitStatsRepository $cricketUnitStatsRepository,
-        private readonly CreateCricketUnitService $cricketUnitService
+        private readonly CreateCricketUnitService $cricketUnitService,
+        private readonly CricketUnitMapper $cricketUnitMapper
     ) {
     }
 
@@ -43,9 +44,7 @@ class UpdateCricketUnitFantasyPoints
             $fantasyPointsPerGame = $fantasyPoints / $unitStats->count();
         }
 
-        $cricketUnitMapper = new CricketUnitMapper();
-
-        return $cricketUnitMapper->map([
+        return $this->cricketUnitMapper->map([
             'player_id' => $cricketUnit->player_id,
             'team_id' => $cricketUnit->team_id,
             'position' => $cricketUnit->position,
