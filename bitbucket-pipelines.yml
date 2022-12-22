@@ -8,7 +8,7 @@ definitions:
           - pipe: atlassian/ssh-run:0.4.0
             variables:
               SSH_USER: $USER
-              SERVER: $AWS_SERVER
+              SERVER: $SERVER
               MODE: 'command'
               COMMAND:
                 >-
@@ -27,29 +27,29 @@ definitions:
                 docker-compose exec -T das php artisan test
 pipelines:
   custom:
-    deploy-to-dev-aws:
+    deploy-to-dev:
       - step:
           <<: *deploy
-          deployment: aws_development
-          name: deploy to aws development
-    deploy-to-stage-aws:
+          deployment: development
+          name: deploy to dev
+    deploy-to-stage:
       - step:
           <<: *deploy
-          deployment: aws_stage
-          name: deploy to aws stage
+          deployment: stage
+          name: deploy to stage
   branches:
     develop:
       - step:
           <<: *deploy
-          deployment: aws_development
-          name: deploy to aws development
+          deployment: development
+          name: deploy to dev
     master:
       - step:
           <<: *deploy
-          deployment: aws_development
-          name: deploy to aws development
+          deployment: development
+          name: deploy to dev
     '{release/*}':
       - step:
           <<: *deploy
-          deployment: aws_development
-          name: deploy to aws development
+          deployment: development
+          name: deploy to dev
