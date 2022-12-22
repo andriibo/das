@@ -52,4 +52,4 @@ pipelines:
       - step:
           <<: *deploy
           deployment: development
-          name: deploy to dev
+          name: deploy to dev1
