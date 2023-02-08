@@ -30,7 +30,7 @@
     "repositories": [
         {
             "type": "git",
-            "url":  "https://bitbucket.org/abnk/dfs-sportconfig.git"
+            "url":  "https://bitbucket.org/abnk/sportconfig.git"
         }
     ],
     "autoload": {
